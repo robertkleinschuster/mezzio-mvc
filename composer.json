@@ -1,19 +1,29 @@
 {
-    "name": "mezzio/mezzio-{component}",
+    "name": "mezzio/mezzio-mvc",
     "description": "",
     "license": "BSD-3-Clause",
     "keywords": [
         "mezzio"
     ],
     "support": {
-        "docs": "https://docs.mezzio.dev/mezzio-{component}/",
-        "issues": "https://github.com/mezzio/mezzio-{component}/issues",
-        "source": "https://github.com/mezzio/mezzio-{component}",
-        "rss": "https://github.com/mezzio/mezzio-{component}/releases.atom",
+        "docs": "https://docs.mezzio.dev/mezzio-mvc/",
+        "issues": "https://github.com/mezzio/mezzio-mvc/issues",
+        "source": "https://github.com/mezzio/mezzio-mvc",
+        "rss": "https://github.com/mezzio/mezzio-mvc/releases.atom",
         "forum": "https://discourse.laminas.dev/"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/niceshops/nice-beans"
+        }
+    ],
     "require": {
-        "php": "^7.4"
+        "php": "^7.3",
+        "mezzio/mezzio": "^3.2.1",
+        "mezzio/mezzio-helpers": "^5.3",
+        "laminas/laminas-diactoros": "^2.3.0",
+        "niceshops/nice-beans": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.5 || ^8.1",

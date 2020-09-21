@@ -1,3 +1,3 @@
-# mezzio-{component}
+# mezzio-mvc
 
 This component provides ...
