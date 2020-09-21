@@ -36,7 +36,6 @@ class ControllerFactory
         $controller = $this->container->get($this->getControllerClass($code));
         $controller->setRequest($request);
         $controller->setResponse($response);
-        $controller->setContainer($request->getAttribute(TemplateVariableContainer::class));
         return $controller;
     }
 
