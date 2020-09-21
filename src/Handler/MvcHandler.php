@@ -92,7 +92,7 @@ class MvcHandler implements RequestHandlerInterface
         if ($stream->isWritable()) {
             $stream->write(
                 $this->renderer->render(
-                    "{$this->config['mvc_template_folder']}::mvc/$controllerCode/$actionCode",
+                    "{$this->config['mvc_template_folder']}::$controllerCode/$actionCode",
                     $controller->getModel()->getTemplateData()->toArray()
                 )
             );
