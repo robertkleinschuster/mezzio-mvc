@@ -45,7 +45,7 @@ class ConfigProvider
     {
         return [
             'paths' => [
-                'view'    => [__DIR__ . '/../src/View/templates'],
+               # 'view'    => [__DIR__ . '/../src/View/templates'],
             ],
         ];
     }
