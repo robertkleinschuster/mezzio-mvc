@@ -27,6 +27,16 @@ class Injector
     private $script;
 
     /**
+     * Injector constructor.
+     */
+    public function __construct()
+    {
+        $this->html = [];
+        $this->template = [];
+        $this->script = [];
+    }
+
+    /**
      * @param string $html
      * @param string $selector
      * @param string $position
