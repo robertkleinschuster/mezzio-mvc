@@ -13,12 +13,16 @@ class ViewRenderer
      */
     private $templateRenderer;
 
+    private $templateFolder;
+
     /**
      * ViewRenderer constructor.
      * @param TemplateRendererInterface $templateRenderer
+     * @param string $templateFolder
      */
-    public function __construct(TemplateRendererInterface $templateRenderer)
+    public function __construct(TemplateRendererInterface $templateRenderer, string $templateFolder)
     {
+        $this->templateFolder = $templateFolder;
         $this->templateRenderer = $templateRenderer;
     }
 
@@ -38,12 +42,13 @@ class ViewRenderer
     public function render(View $view): string
     {
         return $this->getTemplateRenderer()->render(
-            $view->getTemplate(),
+            $this->templateFolder . '::' . $view->getTemplate(),
             [
                 'layout' => $view->getLayout(),
                 'title' => $view->getTitle(),
                 'components' => $view->getComponentList(),
-                'model' => $view->getViewModel()
+                'model' => $view->getViewModel(),
+                'templateFolder' => $this->templateFolder
             ]
         );
     }

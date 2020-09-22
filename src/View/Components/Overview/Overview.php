@@ -11,6 +11,6 @@ class Overview extends AbstractComponent
 
     public function getTemplate(): string
     {
-        return 'view::components/overview/overview';
+        return 'components/overview/overview';
     }
 }

@@ -122,6 +122,6 @@ class View implements OptionAwareInterface
      */
     public function getTemplate(): string
     {
-        return 'view::view';
+        return 'view';
     }
 }

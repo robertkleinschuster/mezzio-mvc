@@ -22,7 +22,8 @@ class ConfigProvider
             'mvc' => [
                 'controllers' => [],
                 'models' => [],
-                'mvc_template_folder' => 'mvc'
+                'mvc_template_folder' => 'mvc',
+                'view_template_folder' => 'view'
             ],
         ];
     }

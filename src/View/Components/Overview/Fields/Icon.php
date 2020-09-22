@@ -10,6 +10,6 @@ class Icon extends AbstractField
 {
     public function getTemplate()
     {
-        return 'view::components/overview/fields/icon';
+        return 'components/overview/fields/icon';
     }
 }

@@ -10,6 +10,6 @@ class Text extends AbstractField
 {
     public function getTemplate()
     {
-        return 'view::components/overview/fields/text';
+        return 'components/overview/fields/text';
     }
 }

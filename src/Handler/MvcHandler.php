@@ -95,7 +95,7 @@ class MvcHandler implements RequestHandlerInterface
         $templateData = $controller->getModel()->getTemplateData();
 
         if ($controller->hasView()) {
-            $viewRenderer = new ViewRenderer($this->renderer);
+            $viewRenderer = new ViewRenderer($this->renderer, $this->config['view_template_folder']);
             $view = $controller->getView();
             $templateData->setFromArray($view->getViewModel()->getTemplateData()->toArray());
             $view->getViewModel()->getTemplateData()->setFromArray($templateData->toArray());

@@ -11,6 +11,6 @@ class Number extends AbstractField
 
     public function getTemplate()
     {
-        return 'view::components/detail/fields/number';
+        return 'components/detail/fields/number';
     }
 }

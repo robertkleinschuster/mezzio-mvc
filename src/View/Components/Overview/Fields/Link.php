@@ -10,6 +10,6 @@ class Link extends AbstractField
 {
     public function getTemplate()
     {
-        return 'view::components/overview/fields/link';
+        return 'components/overview/fields/link';
     }
 }

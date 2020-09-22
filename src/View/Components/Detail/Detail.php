@@ -10,6 +10,6 @@ class Detail extends AbstractComponent
 {
     public function getTemplate(): string
     {
-        return 'view::components/detail/detail';
+        return 'components/detail/detail';
     }
 }
