@@ -49,6 +49,8 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
     {
         $this->setMode(self::MODE_HTML);
         $this->setStatusCode(200);
+        $this->setHeaders([]);
+        $this->setBody('');
     }
 
     /**
