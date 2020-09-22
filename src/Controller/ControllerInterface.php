@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\Controller;
 
 use Mezzio\Mvc\Model\ModelInterface;
+use Mezzio\Mvc\View\View;
 
 interface ControllerInterface
 {
@@ -54,4 +55,19 @@ interface ControllerInterface
      * @return mixed
      */
     public function setModel(ModelInterface $model);
+
+    /**
+     * @return View
+     */
+    public function getView(): View;
+
+    /**
+     * @param View $view
+     */
+    public function setView(View $view);
+
+    /**
+     * @return bool
+     */
+    public function hasView(): bool;
 }

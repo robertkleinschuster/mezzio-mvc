@@ -9,6 +9,7 @@ use Mezzio\Mvc\Exception\MvcException;
 use Mezzio\Mvc\Factory\ControllerFactory;
 use Mezzio\Mvc\Factory\ModelFactory;
 use Mezzio\Mvc\Factory\ServerResponseFactory;
+use Mezzio\Mvc\View\ViewRenderer;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -65,6 +66,7 @@ class MvcHandler implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      * @throws MvcException
+     * @throws \NiceshopsDev\Bean\BeanException
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
@@ -90,12 +92,21 @@ class MvcHandler implements RequestHandlerInterface
         $controller->{$actionCode . $controller->getActionSuffix()}();
 
         $controllerResponse = $controller->getControllerResponse();
+        $templateData = $controller->getModel()->getTemplateData();
 
-        $templateData = $controller->getModel()->getTemplateData()->toArray();
-        $renderedOutput = $this->renderer->render(
-            "{$this->config['mvc_template_folder']}::$controllerCode/$actionCode",
-            $templateData
-        );
+        if ($controller->hasView()) {
+            $viewRenderer = new ViewRenderer($this->renderer);
+            $view = $controller->getView();
+            $templateData->setFromArray($view->getViewModel()->getTemplateData()->toArray());
+            $view->getViewModel()->getTemplateData()->setFromArray($templateData->toArray());
+            $renderedOutput = $viewRenderer->render($view);
+        } else {
+            $renderedOutput = $this->renderer->render(
+                "{$this->config['mvc_template_folder']}::$controllerCode/$actionCode",
+                $templateData->toArray()
+            );
+        }
+
         $controllerResponse->setBody($renderedOutput);
 
         return (new ServerResponseFactory())($controller->getControllerResponse());

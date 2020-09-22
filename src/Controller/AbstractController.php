@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\Controller;
 
 use Mezzio\Mvc\Model\ModelInterface;
+use Mezzio\Mvc\View\View;
 use NiceshopsDev\Bean\BeanException;
 
 abstract class AbstractController implements ControllerInterface
@@ -29,6 +30,11 @@ abstract class AbstractController implements ControllerInterface
      * @var ControllerResponse
      */
     private $responseProperties;
+
+    /**
+     * @var View
+     */
+    private $view;
 
     /**
      * @return ControllerRequest
@@ -102,6 +108,30 @@ abstract class AbstractController implements ControllerInterface
     {
         $this->actionSuffix = $actionSuffix;
         return $this;
+    }
+
+    /**
+     * @return View
+     */
+    public function getView(): View
+    {
+        return $this->view;
+    }
+
+    /**
+     * @param View $view
+     */
+    public function setView(View $view): void
+    {
+        $this->view = $view;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasView(): bool
+    {
+        return null !== $this->view;
     }
 
     /**

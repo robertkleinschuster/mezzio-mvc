@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\View;
 
+use Mezzio\Mvc\Bean\TemplateDataBean;
+
 class ViewModel implements ViewModelInterface
 {
 
     private $menu;
     private $title;
     private $footer;
+
+    /**
+     * @var TemplateDataBean
+     */
+    private $templateData;
 
     /**
      * @return mixed
@@ -58,4 +65,18 @@ class ViewModel implements ViewModelInterface
     {
         $this->footer = $footer;
     }
+
+    /**
+     * @return TemplateDataBean
+     */
+    public function getTemplateData(): TemplateDataBean
+    {
+        if (null == $this->templateData) {
+            $this->templateData = new TemplateDataBean();
+        }
+        return $this->templateData;
+    }
+
+
+
 }
