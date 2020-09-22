@@ -1,0 +1,5 @@
+<form method="post">
+    <?php foreach ($fields as $field): ?>
+        <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'value' => $model->getDetail()[$field->getKey()]]) ?>
+    <?php endforeach ?>
+</form>
