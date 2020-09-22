@@ -35,4 +35,22 @@ class ComponentModel implements ComponentModelInterface
     {
         return $this->detailData;
     }
+
+    /**
+     * @param array $overviewData
+     */
+    public function setOverviewData(array $overviewData): void
+    {
+        $this->overviewData = $overviewData;
+    }
+
+    /**
+     * @param array $detailData
+     */
+    public function setDetailData(array $detailData): void
+    {
+        $this->detailData = $detailData;
+    }
+
+
 }
