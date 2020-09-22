@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 
 namespace Mezzio\Mvc\Controller;
 
@@ -54,5 +54,4 @@ interface ControllerInterface
      * @return mixed
      */
     public function setModel(ModelInterface $model);
-
 }

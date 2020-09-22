@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Mezzio\Mvc\Factory;
-
 
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;

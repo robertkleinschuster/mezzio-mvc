@@ -1,10 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mezzio\Mvc\Bean;
 
+use ArrayIterator;
 use NiceshopsDev\Bean\AbstractBaseBean;
 use NiceshopsDev\Bean\BeanException;
+use Traversable;
 
 class TemplateDataBean extends AbstractBaseBean
 {
@@ -13,11 +16,11 @@ class TemplateDataBean extends AbstractBaseBean
 
 
     /**
-     * @return \ArrayIterator|\Traversable
+     * @return ArrayIterator|Traversable
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->toArray());
+        return new ArrayIterator($this->toArray());
     }
 
     /**

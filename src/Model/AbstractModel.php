@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\Model;
 
-
 use Mezzio\Mvc\Bean\TemplateDataBean;
 
 abstract class AbstractModel implements ModelInterface
@@ -24,5 +23,4 @@ abstract class AbstractModel implements ModelInterface
         }
         return $this->templateData;
     }
-
 }

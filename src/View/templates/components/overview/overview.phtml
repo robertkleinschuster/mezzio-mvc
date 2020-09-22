@@ -1,0 +1,22 @@
+<section>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <?php foreach ($fields as $key => $field): ?>
+                <td><?= $field->getName() ?></td>
+            <?php endforeach ?>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($model->getOverview() as $row): ?>
+            <tr>
+                <?php foreach ($fields as $field): ?>
+                    <td><?php $this->insert($field->getTemplate(), ['field' => $field, 'value' => $row[$field->getKey()]]) ?></td>
+                <?php endforeach ?>
+            </tr>
+        <?php endforeach ?>
+        </tbody>
+    </table>
+
+</section>

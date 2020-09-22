@@ -1,0 +1,4 @@
+<?php $this->layout($layout, ['title' => $title]) ?>
+<?php foreach ($components as $component): ?>
+    <?php $this->insert($component->getTemplate(), ['fields' => $component->getFieldList(), 'model' => $component->getComponentModel()]) ?>
+<?php endforeach ?>

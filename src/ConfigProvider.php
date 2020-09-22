@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mezzio\Mvc;
@@ -17,6 +18,7 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
+            'templates'    => $this->getTemplates(),
             'mvc' => [
                 'controllers' => [],
                 'models' => [],
@@ -32,6 +34,18 @@ class ConfigProvider
                 MvcHandler::class => MvcHandlerFactory::class,
                 ControllerFactory::class => ControllerFactoryFactory::class,
                 ModelFactory::class => ModelFactoryFactory::class,
+            ],
+        ];
+    }
+
+    /**
+     * Returns the templates configuration
+     */
+    public function getTemplates(): array
+    {
+        return [
+            'paths' => [
+                'view'    => [__DIR__ . '/../src/View/templates'],
             ],
         ];
     }

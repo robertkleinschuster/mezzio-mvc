@@ -100,5 +100,4 @@ class MvcHandler implements RequestHandlerInterface
 
         return (new ServerResponseFactory())($controller->getControllerResponse());
     }
-
 }

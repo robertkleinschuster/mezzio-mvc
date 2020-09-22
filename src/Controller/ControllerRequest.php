@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mezzio\Mvc\Controller;
-
 
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
@@ -47,6 +47,4 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     {
         return $this->serverRequest;
     }
-
-
 }
