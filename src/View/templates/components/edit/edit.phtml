@@ -1,5 +1,7 @@
 <form method="post">
-    <?php foreach ($fields as $field): ?>
-        <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'value' => $model->getDetail()[$field->getKey()]]) ?>
-    <?php endforeach ?>
+    <div class="form-group">
+        <?php foreach ($fields as $field): ?>
+            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'value' => $model->getEdit($field->getKey())]) ?>
+        <?php endforeach ?>
+    </div>
 </form>

@@ -17,12 +17,18 @@ class ComponentModel implements ComponentModelInterface
     private $detailData;
 
     /**
+     * @var array
+     */
+    private $editData;
+
+    /**
      * ComponentModel constructor.
      */
     public function __construct()
     {
         $this->overviewData = [];
         $this->detailData = [];
+        $this->editData = [];
     }
 
 
@@ -31,10 +37,16 @@ class ComponentModel implements ComponentModelInterface
         return $this->overviewData;
     }
 
-    public function getDetail()
+    public function getDetail(string $key)
     {
-        return $this->detailData;
+        return $this->detailData[$key];
     }
+
+    public function getEdit(string $key)
+    {
+        return $this->editData[$key];
+    }
+
 
     /**
      * @param array $overviewData
@@ -52,5 +64,12 @@ class ComponentModel implements ComponentModelInterface
         $this->detailData = $detailData;
     }
 
+    /**
+     * @param array $editData
+     */
+    public function setEditData(array $editData): void
+    {
+        $this->editData = $editData;
+    }
 
 }

@@ -1,5 +1,4 @@
 <section>
-
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -11,10 +10,9 @@
         <tbody>
             <tr>
                 <?php foreach ($fields as $field): ?>
-                    <td><?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'value' => $model->getDetail()[$field->getKey()]]) ?></td>
+                    <td><?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'value' => $model->getDetail($field->getKey())]) ?></td>
                 <?php endforeach ?>
             </tr>
         </tbody>
     </table>
-
 </section>
