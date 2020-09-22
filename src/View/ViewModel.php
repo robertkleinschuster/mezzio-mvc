@@ -10,8 +10,10 @@ class ViewModel implements ViewModelInterface
 {
 
     private $menu;
+    private $brand;
     private $title;
     private $footer;
+
 
     /**
      * @var TemplateDataBean
@@ -27,12 +29,47 @@ class ViewModel implements ViewModelInterface
     }
 
     /**
+     * @return mixed
+     */
+    public function hasMenu()
+    {
+        return $this->menu !== null;
+    }
+
+    /**
      * @param mixed $menu
      */
     public function setMenu($menu): void
     {
         $this->menu = $menu;
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function getBrand()
+    {
+        return $this->brand;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function hasBrand()
+    {
+        return $this->brand !== null;
+    }
+
+    /**
+     * @param mixed $brand
+     */
+    public function setBrand($brand): void
+    {
+        $this->brand = $brand;
+    }
+
 
     /**
      * @return mixed
