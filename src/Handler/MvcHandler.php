@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\Handler;
 
 use Mezzio\Mvc\Controller\ControllerInterface;
+use Mezzio\Mvc\Exception\MvcException;
 use Mezzio\Mvc\Factory\ControllerFactory;
-use Laminas\Diactoros\Stream;
 use Mezzio\Mvc\Factory\ModelFactory;
+use Mezzio\Mvc\Factory\ServerResponseFactory;
+use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -62,21 +64,19 @@ class MvcHandler implements RequestHandlerInterface
     /**
      * @param ServerRequestInterface $request
      * @return ResponseInterface
+     * @throws MvcException
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $stream = new Stream('php://temp', 'wb+');
-        $response = new HtmlResponse($stream);
         $controllerCode = $request->getAttribute(self::CONTROLLER_ATTRIBUTE);
         $actionCode = $request->getAttribute(self::ACTION_ATTRIBUTE);
 
         /**
-         * @var ControllerInterface $controller
+         * @var ControllerInterface|OptionAwareInterface $controller
          */
         $controller = ($this->controllerFactory)(
             $request->getAttribute(self::CONTROLLER_ATTRIBUTE),
-            $request,
-            $response
+            $request
         );
         $model = ($this->modelFactory)($request->getAttribute(self::CONTROLLER_ATTRIBUTE));
         $controller->setModel($model);
@@ -86,21 +86,19 @@ class MvcHandler implements RequestHandlerInterface
                 404
             );
         }
+
         $controller->{$actionCode . $controller->getActionSuffix()}();
 
+        $controllerResponse = $controller->getControllerResponse();
 
-        if ($stream->isWritable()) {
-            $stream->write(
-                $this->renderer->render(
-                    "{$this->config['mvc_template_folder']}::$controllerCode/$actionCode",
-                    $controller->getModel()->getTemplateData()->toArray()
-                )
-            );
-        }
-        if ($stream->isSeekable()) {
-            $stream->rewind();
-        }
-        return $controller->getResponse();
+        $templateData = $controller->getModel()->getTemplateData()->toArray();
+        $renderedOutput = $this->renderer->render(
+            "{$this->config['mvc_template_folder']}::$controllerCode/$actionCode",
+            $templateData
+        );
+        $controllerResponse->setBody($renderedOutput);
+
+        return (new ServerResponseFactory())($controller->getControllerResponse());
     }
 
 }

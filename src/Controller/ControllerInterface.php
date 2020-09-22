@@ -4,13 +4,33 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\Controller;
 
-use Mezzio\Helper\Template\TemplateVariableContainer;
 use Mezzio\Mvc\Model\ModelInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 
 interface ControllerInterface
 {
+
+    /**
+     * @return ControllerRequest
+     */
+    public function getControllerRequest(): ControllerRequest;
+
+    /**
+     * @param ControllerRequest $requestProperties
+     * @return $this
+     */
+    public function setControllerRequest(ControllerRequest $requestProperties);
+
+    /**
+     * @return ControllerResponse
+     */
+    public function getControllerResponse(): ControllerResponse;
+
+    /**
+     * @param ControllerResponse $responseProperties
+     * @return $this
+     */
+    public function setControllerResponse(ControllerResponse $responseProperties);
+
 
     /**
      * @return string
@@ -23,25 +43,6 @@ interface ControllerInterface
      */
     public function setActionSuffix(string $actionSuffix);
 
-    /**
-     * @return ServerRequestInterface
-     */
-    public function getRequest(): ServerRequestInterface;
-
-    /**
-     * @param ServerRequestInterface $request
-     */
-    public function setRequest(ServerRequestInterface $request);
-
-    /**
-     * @return ResponseInterface
-     */
-    public function getResponse(): ResponseInterface;
-
-    /**
-     * @param ResponseInterface $response
-     */
-    public function setResponse(ResponseInterface $response);
 
     /**
      * @return ModelInterface

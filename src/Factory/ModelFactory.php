@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\Factory;
 
 
+use Mezzio\Mvc\Exception\MvcException;
 use Psr\Container\ContainerInterface;
 
 class ModelFactory
@@ -38,9 +39,13 @@ class ModelFactory
     /**
      * @param string $code
      * @return string
+     * @throws MvcException
      */
     protected function getModelClass(string $code) : string
     {
+        if (null === $this->config['models'][$code]) {
+            throw new MvcException("No model class found for code '$code'. Check your mvc configuration.");
+        }
         return $this->config['models'][$code];
     }
 }

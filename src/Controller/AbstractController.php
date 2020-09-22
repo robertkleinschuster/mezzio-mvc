@@ -6,23 +6,14 @@ namespace Mezzio\Mvc\Controller;
 
 use Mezzio\Mvc\Model\ModelInterface;
 use NiceshopsDev\Bean\BeanException;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 
 abstract class AbstractController implements ControllerInterface
 {
 
+    /**
+     * @var string
+     */
     private $actionSuffix = 'Action';
-
-    /**
-     * @var ServerRequestInterface
-     */
-    private $request;
-
-    /**
-     * @var ResponseInterface
-     */
-    private $response;
 
     /**
      * @var ModelInterface
@@ -30,40 +21,52 @@ abstract class AbstractController implements ControllerInterface
     private $model;
 
     /**
-     * @return ServerRequestInterface
+     * @var ControllerRequest
      */
-    public function getRequest(): ServerRequestInterface
+    private $requestProperties;
+
+    /**
+     * @var ControllerResponse
+     */
+    private $responseProperties;
+
+    /**
+     * @return ControllerRequest
+     */
+    public function getControllerRequest(): ControllerRequest
     {
-        return $this->request;
+        return $this->requestProperties;
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @return AbstractController
+     * @param ControllerRequest $requestProperties
+     * @return $this|AbstractController
      */
-    public function setRequest(ServerRequestInterface $request)
+    public function setControllerRequest(ControllerRequest $requestProperties)
     {
-        $this->request = $request;
+        $this->requestProperties = $requestProperties;
         return $this;
     }
 
     /**
-     * @return ResponseInterface
+     * @return ControllerResponse
      */
-    public function getResponse(): ResponseInterface
+    public function getControllerResponse(): ControllerResponse
     {
-        return $this->response;
+        return $this->responseProperties;
     }
 
     /**
-     * @param ResponseInterface $response
-     * @return AbstractController
+     * @param ControllerResponse $responseProperties
+     * @return $this|AbstractController
      */
-    public function setResponse(ResponseInterface $response)
+    public function setControllerResponse(ControllerResponse $responseProperties)
     {
-        $this->response = $response;
+        $this->responseProperties = $responseProperties;
         return $this;
     }
+
+    /**
 
     /**
      * @return ModelInterface
