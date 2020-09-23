@@ -73,8 +73,8 @@ abstract class AbstractController implements ControllerInterface
     }
 
     /**
-
-    /**
+     *
+     * /**
      * @return ModelInterface
      */
     public function getModel(): ModelInterface

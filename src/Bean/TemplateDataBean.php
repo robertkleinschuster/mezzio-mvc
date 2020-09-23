@@ -73,9 +73,9 @@ class TemplateDataBean extends AbstractBaseBean
     /**
      * NOTE: To implement bean specific data serialization logic use AbstractBean::getDataForSerialization
      *
-     * @see AbstractBean::getDataForSerialization()
      * @return array
      * @throws BeanException
+     * @see AbstractBean::getDataForSerialization()
      */
     public function getSerializeData(): array
     {
@@ -84,12 +84,13 @@ class TemplateDataBean extends AbstractBaseBean
             self::SERIALIZE_DATA_TYPE_KEY => $this->getDataTypeDataForSerialization(),
         ];
     }
+
     /**
      * @return array
      */
     protected function getDataTypeDataForSerialization(): array
     {
-        $arrDataType =  $this->getDataType_List();
+        $arrDataType = $this->getDataType_List();
 
         foreach ($arrDataType as $key => $dataType) {
             if (is_array($dataType) && !empty($dataType[0]) && $dataType[0] === $this) {
@@ -127,12 +128,12 @@ class TemplateDataBean extends AbstractBaseBean
     /**
      * NOTE: To implement bean specific data deserialization logic use AbstractBean::setDataFromSerialization
      *
-     * @see AbstractBean::setDataFromSerialization()
-     *
      * @param array $data
      *
      * @return $this
      * @throws BeanException
+     * @see AbstractBean::setDataFromSerialization()
+     *
      */
     public function setSerializeData(array $data)
     {

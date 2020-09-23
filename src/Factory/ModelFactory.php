@@ -26,7 +26,6 @@ class ModelFactory
 
     /**
      * @param string $code
-
      * @return mixed
      */
     public function __invoke(string $code)

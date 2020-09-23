@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\Handler;
 
+use Laminas\Diactoros\Response\HtmlResponse;
 use Mezzio\Mvc\Controller\ControllerInterface;
 use Mezzio\Mvc\Exception\MvcException;
 use Mezzio\Mvc\Factory\ControllerFactory;
 use Mezzio\Mvc\Factory\ModelFactory;
 use Mezzio\Mvc\Factory\ServerResponseFactory;
 use Mezzio\Mvc\View\ViewRenderer;
+use Mezzio\Template\TemplateRendererInterface;
+use NiceshopsDev\Bean\BeanException;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Laminas\Diactoros\Response\HtmlResponse;
-use Mezzio\Template\TemplateRendererInterface;
 
 class MvcHandler implements RequestHandlerInterface
 {
@@ -55,7 +56,8 @@ class MvcHandler implements RequestHandlerInterface
         ControllerFactory $controllerFactory,
         ModelFactory $modelFactory,
         array $config = []
-    ) {
+    )
+    {
         $this->renderer = $renderer;
         $this->controllerFactory = $controllerFactory;
         $this->modelFactory = $modelFactory;
@@ -66,13 +68,15 @@ class MvcHandler implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      * @throws MvcException
-     * @throws \NiceshopsDev\Bean\BeanException
+     * @throws BeanException
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $controllerCode = $request->getAttribute(self::CONTROLLER_ATTRIBUTE);
         $actionCode = $request->getAttribute(self::ACTION_ATTRIBUTE);
-
+        $mvcTemplateFolder = $this->config['mvc']['template_folder'];
+        $mvc404Template = $this->config['mvc']['template_404'];
+        $viewTemplateFolder = $this->config['view']['template_folder'];
         /**
          * @var ControllerInterface|OptionAwareInterface $controller
          */
@@ -84,7 +88,7 @@ class MvcHandler implements RequestHandlerInterface
         $controller->setModel($model);
         if (!method_exists($controller, $actionCode . $controller->getActionSuffix())) {
             return new HtmlResponse(
-                $this->renderer->render($this->config['mvc_template_folder'] . '::error/404', []),
+                $this->renderer->render("$mvcTemplateFolder::$mvc404Template", []),
                 404
             );
         }
@@ -95,14 +99,14 @@ class MvcHandler implements RequestHandlerInterface
         $templateData = $controller->getModel()->getTemplateData();
 
         if ($controller->hasView()) {
-            $viewRenderer = new ViewRenderer($this->renderer, $this->config['view_template_folder']);
+            $viewRenderer = new ViewRenderer($this->renderer, $viewTemplateFolder);
             $view = $controller->getView();
             $templateData->setFromArray($view->getViewModel()->getTemplateData()->toArray());
             $view->getViewModel()->getTemplateData()->setFromArray($templateData->toArray());
             $renderedOutput = $viewRenderer->render($view);
         } else {
             $renderedOutput = $this->renderer->render(
-                "{$this->config['mvc_template_folder']}::$controllerCode/$actionCode",
+                "$mvcTemplateFolder::$controllerCode/$actionCode",
                 $templateData->toArray()
             );
         }

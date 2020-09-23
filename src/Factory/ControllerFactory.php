@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\Factory;
 
 use Laminas\Diactoros\Response\HtmlResponse;
-use Mezzio\Helper\Template\TemplateVariableContainer;
 use Mezzio\Mvc\Controller\AbstractController;
 use Mezzio\Mvc\Controller\ControllerRequest;
 use Mezzio\Mvc\Controller\ControllerResponse;

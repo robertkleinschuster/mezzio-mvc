@@ -5,14 +5,20 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\View;
 
 use Mezzio\Mvc\Bean\TemplateDataBean;
+use Mezzio\Mvc\View\Navigation\Navigation;
 
 class ViewModel implements ViewModelInterface
 {
 
-    private $menu;
-    private $brand;
+    /**
+     * @var string
+     */
     private $title;
-    private $footer;
+
+    /**
+     * @var Navigation
+     */
+    private $navigation;
 
 
     /**
@@ -20,61 +26,11 @@ class ViewModel implements ViewModelInterface
      */
     private $templateData;
 
-    /**
-     * @return mixed
-     */
-    public function getMenu()
-    {
-        return $this->menu;
-    }
 
     /**
      * @return mixed
      */
-    public function hasMenu()
-    {
-        return $this->menu !== null;
-    }
-
-    /**
-     * @param mixed $menu
-     */
-    public function setMenu($menu): void
-    {
-        $this->menu = $menu;
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getBrand()
-    {
-        return $this->brand;
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function hasBrand()
-    {
-        return $this->brand !== null;
-    }
-
-    /**
-     * @param mixed $brand
-     */
-    public function setBrand($brand): void
-    {
-        $this->brand = $brand;
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -88,19 +44,27 @@ class ViewModel implements ViewModelInterface
     }
 
     /**
-     * @return mixed
+     * @return Navigation
      */
-    public function getFooter()
+    public function getNavigation(): Navigation
     {
-        return $this->footer;
+        return $this->navigation;
     }
 
     /**
-     * @param mixed $footer
+     * @return bool
      */
-    public function setFooter($footer): void
+    public function hasNavigation(): bool
     {
-        $this->footer = $footer;
+        return $this->navigation !== null;
+    }
+
+    /**
+     * @param Navigation $navigation
+     */
+    public function setNavigation(Navigation $navigation): void
+    {
+        $this->navigation = $navigation;
     }
 
     /**
@@ -114,6 +78,12 @@ class ViewModel implements ViewModelInterface
         return $this->templateData;
     }
 
-
+    /**
+     * @return bool
+     */
+    public function hasToolbar(): bool
+    {
+        return false;
+    }
 
 }

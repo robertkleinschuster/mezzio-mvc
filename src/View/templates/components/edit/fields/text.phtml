@@ -1,3 +1,6 @@
-<label for="<?= $field->getKey()?>"><?= $field->getName()?></label>
-<input class="form-control" name="<?= $field->getKey()?>" id="<?= $field->getKey()?>" type="text" value="<?=$value?>"/>
-<small id="<?= $field->getKey()?>__hint" class="form-text text-muted"><?= $field->getHint()?></small>
+<div class="form-group">
+    <label for="<?= $field->getKey() ?>"><?= $field->getName() ?></label>
+    <input class="form-control" name="<?= $field->getKey() ?>" id="<?= $field->getKey() ?>" type="text"
+           value="<?= $value ?>"/>
+    <small id="<?= $field->getKey() ?>__hint" class="form-text text-muted"><?= $field->getHint() ?></small>
+</div>

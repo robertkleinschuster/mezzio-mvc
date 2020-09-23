@@ -1,0 +1,9 @@
+<div class="form-group">
+    <label for="<?= $field->getKey() ?>"><?= $field->getName() ?></label>
+    <select class="form-control" id="<?= $field->getKey() ?>" name="<?= $field->getKey() ?>"
+            size="<?= $field->getSize() ?>" <?= $field->isMultiple() ? 'multiple' : '' ?>>
+        <?php foreach ($field->getOptions() as $value => $name): ?>
+            <option value="<?= $value ?>"><?= $name ?></option>
+        <?php endforeach; ?>
+    </select>
+</div>

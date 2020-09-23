@@ -18,12 +18,16 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'templates'    => $this->getTemplates(),
+            'templates' => $this->getTemplates(),
             'mvc' => [
                 'controllers' => [],
                 'models' => [],
-                'mvc_template_folder' => 'mvc',
-                'view_template_folder' => 'view'
+                'template_folder' => 'mvc',
+                'template_404' => 'error/404',
+                'view' => [
+                    'template_folder' => 'view',
+                    'default_layout' => 'dashboard'
+                ],
             ],
         ];
     }
@@ -31,7 +35,7 @@ class ConfigProvider
     protected function getDependencies()
     {
         return [
-            'factories'  => [
+            'factories' => [
                 MvcHandler::class => MvcHandlerFactory::class,
                 ControllerFactory::class => ControllerFactoryFactory::class,
                 ModelFactory::class => ModelFactoryFactory::class,
@@ -46,7 +50,7 @@ class ConfigProvider
     {
         return [
             'paths' => [
-                'view'    => [__DIR__ . '/../src/View/templates'],
+                'view' => [__DIR__ . '/../src/View/templates'],
             ],
         ];
     }

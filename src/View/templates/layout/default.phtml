@@ -33,41 +33,6 @@
     <?= $this->section('stylesheets') ?>
 </head>
 <body class="app">
-<header class="app-header">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <?php if ($model->hasMenu()): ?>
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse"
-                            aria-controls="#navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                <?php endif ?>
-                <?php if ($model->hasBrand()): ?>
-
-                    <!-- Brand -->
-                    <a class="navbar-brand" href="<?= $model->getBrand()['link'] ?>">
-                        <img src="<?= $model->getBrand()['icon'] ?>" alt="<?= $model->getBrand()['name'] ?>"
-                             height="<?= $model->getBrand()['height'] ?>"/>
-                    </a>
-                <?php endif ?>
-
-            </div>
-            <!-- Links -->
-            <?php if ($model->hasMenu()): ?>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav mr-auto">
-                        <?php foreach ($model->getMenu() as $item): ?>
-                            <li class="nav-item">
-                                <a href="<?= $item['link'] ?>" target="_self" class="nav-link"><?= $item['name'] ?></a>
-                            </li>
-                        <?php endforeach ?>
-                    </ul>
-                </div>
-            <?php endif ?>
-        </div>
-    </nav>
-</header>
 
 <h1><?= $title ?></h1>
 

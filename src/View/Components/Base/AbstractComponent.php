@@ -27,6 +27,7 @@ abstract class AbstractComponent
     /**
      * AbstractComponent constructor.
      * @param string $title
+     * @param ComponentModelInterface $componentModel
      */
     public function __construct(string $title, ComponentModelInterface $componentModel)
     {
@@ -50,7 +51,6 @@ abstract class AbstractComponent
     {
         $this->componentModel = $componentModel;
     }
-
 
 
     /**
@@ -82,7 +82,7 @@ abstract class AbstractComponent
      */
     public function getTitle(): string
     {
-        return $this->title;
+        return $this->title ?? '';
     }
 
     /**
