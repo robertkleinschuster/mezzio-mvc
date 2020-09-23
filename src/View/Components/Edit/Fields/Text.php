@@ -27,9 +27,10 @@ class Text extends AbstractField
     /**
      * @param string $hint
      */
-    public function setHint(string $hint): void
+    public function setHint(string $hint): self
     {
         $this->hint = $hint;
+        return $this;
     }
 
 

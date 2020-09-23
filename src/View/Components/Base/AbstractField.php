@@ -44,9 +44,10 @@ abstract class AbstractField
     /**
      * @param mixed $value
      */
-    public function setValue($value): void
+    public function setValue($value): self
     {
         $this->value = $value;
+        return $this;
     }
 
     /**
@@ -68,9 +69,10 @@ abstract class AbstractField
     /**
      * @param mixed $name
      */
-    public function setName($name): void
+    public function setName($name): self
     {
         $this->name = $name;
+        return $this;
     }
 
     /**
@@ -84,9 +86,10 @@ abstract class AbstractField
     /**
      * @param mixed $key
      */
-    public function setKey($key): void
+    public function setKey($key): self
     {
         $this->key = $key;
+        return $this;
     }
 
     /**

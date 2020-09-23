@@ -7,6 +7,7 @@ namespace Mezzio\Mvc\View\Components\Edit;
 use Mezzio\Mvc\View\Components\Base\AbstractComponent;
 use Mezzio\Mvc\View\Components\Edit\Fields\Button;
 use Mezzio\Mvc\View\Components\Edit\Fields\Checkbox;
+use Mezzio\Mvc\View\Components\Edit\Fields\Select;
 use Mezzio\Mvc\View\Components\Edit\Fields\Text;
 
 class Edit extends AbstractComponent
@@ -51,4 +52,17 @@ class Edit extends AbstractComponent
         $this->addField($checkbox);
         return $checkbox;
     }
+
+    /**
+     * @param string $name
+     * @param string $key
+     * @return Select
+     */
+    public function addSelect(string $name, string $key): Select
+    {
+        $select = new Select($name, $key);
+        $this->addField($select);
+        return $select;
+    }
+
 }

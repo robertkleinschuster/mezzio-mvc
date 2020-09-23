@@ -68,9 +68,10 @@ class Button extends AbstractField
     /**
      * @param mixed $type
      */
-    public function setType($type): void
+    public function setType($type): self
     {
         $this->type = $type;
+        return $this;
     }
 
     /**
@@ -84,9 +85,10 @@ class Button extends AbstractField
     /**
      * @param bool $outline
      */
-    public function setOutline(bool $outline): void
+    public function setOutline(bool $outline): self
     {
         $this->outline = $outline;
+        return $this;
     }
 
     /**
@@ -108,9 +110,10 @@ class Button extends AbstractField
     /**
      * @param string $size
      */
-    public function setSize(string $size): void
+    public function setSize(string $size): self
     {
         $this->size = $size;
+        return $this;
     }
 
     /**
@@ -124,9 +127,10 @@ class Button extends AbstractField
     /**
      * @param bool $disabled
      */
-    public function setDisabled(bool $disabled): void
+    public function setDisabled(bool $disabled): self
     {
         $this->disabled = $disabled;
+        return $this;
     }
 
     /**
@@ -140,9 +144,10 @@ class Button extends AbstractField
     /**
      * @param string $style
      */
-    public function setStyle(string $style): void
+    public function setStyle(string $style): self
     {
         $this->style = $style;
+        return $this;
     }
 
     /**

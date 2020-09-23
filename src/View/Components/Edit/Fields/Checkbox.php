@@ -32,9 +32,10 @@ class Checkbox extends AbstractField
     /**
      * @param string $hint
      */
-    public function setHint(string $hint): void
+    public function setHint(string $hint): self
     {
         $this->hint = $hint;
+        return $this;
     }
 
     /**
@@ -48,8 +49,9 @@ class Checkbox extends AbstractField
     /**
      * @param bool $checked
      */
-    public function setChecked(bool $checked): void
+    public function setChecked(bool $checked): self
     {
         $this->checked = $checked;
+        return $this;
     }
 }

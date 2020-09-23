@@ -47,9 +47,10 @@ abstract class AbstractComponent
     /**
      * @param ComponentModelInterface $componentModel
      */
-    public function setComponentModel(ComponentModelInterface $componentModel): void
+    public function setComponentModel(ComponentModelInterface $componentModel): self
     {
         $this->componentModel = $componentModel;
+        return $this;
     }
 
 
@@ -64,17 +65,19 @@ abstract class AbstractComponent
     /**
      * @param AbstractField[] $field_List
      */
-    public function setFieldList(array $field_List): void
+    public function setFieldList(array $field_List): self
     {
         $this->field_List = $field_List;
+        return $this;
     }
 
     /**
      * @param AbstractField $field
      */
-    public function addField(AbstractField $field)
+    public function addField(AbstractField $field): self
     {
         $this->field_List[] = $field;
+        return $this;
     }
 
     /**
@@ -88,9 +91,10 @@ abstract class AbstractComponent
     /**
      * @param string $title
      */
-    public function setTitle(string $title): void
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+        return $this;
     }
 
 

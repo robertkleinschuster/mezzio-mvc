@@ -33,9 +33,10 @@ class Select extends AbstractField
      * @param string $name
      * @param string $value
      */
-    public function addOption(string $name, string $value)
+    public function addOption(string $name, string $value): self
     {
         $this->options[$value] = $name;
+        return $this;
     }
 
     /**
@@ -49,9 +50,10 @@ class Select extends AbstractField
     /**
      * @param array $options
      */
-    public function setOptions(array $options): void
+    public function setOptions(array $options): self
     {
         $this->options = $options;
+        return $this;
     }
 
     /**
@@ -65,9 +67,10 @@ class Select extends AbstractField
     /**
      * @param int $size
      */
-    public function setSize(int $size): void
+    public function setSize(int $size): self
     {
         $this->size = $size;
+        return $this;
     }
 
     /**
@@ -81,10 +84,9 @@ class Select extends AbstractField
     /**
      * @param bool $multiple
      */
-    public function setMultiple(bool $multiple): void
+    public function setMultiple(bool $multiple): self
     {
         $this->multiple = $multiple;
+        return $this;
     }
-
-
 }

@@ -1,2 +1,1 @@
-<button type="<?= $field->getType() ?>"
-        class="<?= $field->getClass() ?>" <?= $field->isDisabled() ? 'disabled' : '' ?>><?= $field->getValue() ?></button>
+<button type="<?= $field->getType() ?>" class="<?= $field->getClass() ?>" value="<?= $field->getValue() ?>" <?= $field->isDisabled() ? 'disabled' : '' ?>><?= $field->getName() ?></button>
