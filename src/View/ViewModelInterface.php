@@ -11,7 +11,7 @@ interface ViewModelInterface
 {
     public function getTitle(): string;
 
-    public function getNavigation(): Navigation;
+    public function getNavigationList(): array;
 
     public function hasNavigation(): bool;
 

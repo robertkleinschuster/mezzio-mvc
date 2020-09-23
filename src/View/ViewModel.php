@@ -16,9 +16,9 @@ class ViewModel implements ViewModelInterface
     private $title;
 
     /**
-     * @var Navigation
+     * @var Navigation[]
      */
-    private $navigation;
+    private $navigation_List;
 
 
     /**
@@ -44,11 +44,11 @@ class ViewModel implements ViewModelInterface
     }
 
     /**
-     * @return Navigation
+     * @return Navigation[]
      */
-    public function getNavigation(): Navigation
+    public function getNavigationList(): array
     {
-        return $this->navigation;
+        return $this->navigation_List;
     }
 
     /**
@@ -56,15 +56,15 @@ class ViewModel implements ViewModelInterface
      */
     public function hasNavigation(): bool
     {
-        return $this->navigation !== null;
+        return is_array($this->navigation_List) && count($this->navigation_List) > 0;
     }
 
     /**
      * @param Navigation $navigation
      */
-    public function setNavigation(Navigation $navigation): void
+    public function addNavigation(Navigation $navigation): void
     {
-        $this->navigation = $navigation;
+        $this->navigation_List[] = $navigation;
     }
 
     /**
