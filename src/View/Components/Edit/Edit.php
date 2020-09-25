@@ -67,6 +67,18 @@ class Edit extends AbstractComponent
     /**
      * @param string $name
      * @param string $key
+     * @return Fields\Text
+     */
+    public function addText(string $name, string $key): Fields\Text
+    {
+        $text = new Fields\Text($name, $key);
+        $this->addField($text);
+        return $text;
+    }
+
+    /**
+     * @param string $name
+     * @param string $key
      * @return Fields\Textarea
      */
     public function addTextarea(string $name, string $key): Fields\Textarea
