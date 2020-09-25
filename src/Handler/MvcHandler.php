@@ -121,6 +121,6 @@ class MvcHandler implements RequestHandlerInterface
      */
     public static function getRoute(): string
     {
-        return '/' . self::CONTROLLER_ATTRIBUTE . '/' . self::ACTION_ATTRIBUTE;
+        return '/{' . self::CONTROLLER_ATTRIBUTE . '}/{' . self::ACTION_ATTRIBUTE . '}';
     }
 }
