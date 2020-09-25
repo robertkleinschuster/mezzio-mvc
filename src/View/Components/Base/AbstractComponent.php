@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\View\Components\Base;
 
 use Mezzio\Mvc\View\ComponentModelInterface;
+use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
+use NiceshopsDev\NiceCore\Option\OptionTrait;
 
-abstract class AbstractComponent
+abstract class AbstractComponent implements OptionAwareInterface
 {
+    use OptionTrait;
 
     /**
      * @var string
@@ -37,22 +40,20 @@ abstract class AbstractComponent
     }
 
     /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title ?? '';
+    }
+
+    /**
      * @return ComponentModelInterface
      */
     public function getComponentModel(): ComponentModelInterface
     {
         return $this->componentModel;
     }
-
-    /**
-     * @param ComponentModelInterface $componentModel
-     */
-    public function setComponentModel(ComponentModelInterface $componentModel): self
-    {
-        $this->componentModel = $componentModel;
-        return $this;
-    }
-
 
     /**
      * @return AbstractField[]
@@ -63,18 +64,10 @@ abstract class AbstractComponent
     }
 
     /**
-     * @param AbstractField[] $field_List
-     */
-    public function setFieldList(array $field_List): self
-    {
-        $this->field_List = $field_List;
-        return $this;
-    }
-
-    /**
      * @param AbstractField $field
+     * @return $this
      */
-    public function addField(AbstractField $field): self
+    protected function addField(AbstractField $field): self
     {
         $this->field_List[] = $field;
         return $this;
@@ -83,23 +76,8 @@ abstract class AbstractComponent
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getTemplate(): string
     {
-        return $this->title ?? '';
+        return 'components/base/component';
     }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-        return $this;
-    }
-
-
-    /**
-     * @return string
-     */
-    abstract public function getTemplate(): string;
 }

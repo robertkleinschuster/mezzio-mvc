@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\View\Components\Overview;
 
 use Mezzio\Mvc\View\Components\Base\AbstractComponent;
-use Mezzio\Mvc\View\Components\Overview\Fields\Icon;
-use Mezzio\Mvc\View\Components\Overview\Fields\Link;
 
 class Overview extends AbstractComponent
 {
 
+    /**
+     * @return string
+     */
     public function getTemplate(): string
     {
         return 'components/overview/overview';
@@ -19,36 +20,35 @@ class Overview extends AbstractComponent
     /**
      * @param $name
      * @param $key
-     * @return Icon
+     * @return Fields\Badge
      */
-    public function addIcon(string $name, string $key): Icon
+    public function addBadge(string $name, string $key): Fields\Badge
     {
-        $icon = new Icon($name, $key);
-        $this->addField($icon);
-        return $icon;
+        $badge = new Fields\Badge($name, $key);
+        $this->addField($badge);
+        return $badge;
     }
 
     /**
      * @param $name
      * @param $key
-     * @return Link
+     * @return Fields\Link
      */
-    public function addLink(string $name, string $key): Link
+    public function addLink(string $name, string $key): Fields\Link
     {
-        $link = new Link($name, $key);
+        $link = new Fields\Link($name, $key);
         $this->addField($link);
         return $link;
     }
 
-
     /**
      * @param $name
      * @param $key
-     * @return \Mezzio\Mvc\View\Components\Overview\Fields\Number
+     * @return Fields\Number
      */
-    public function addNumber(string $name, string $key): \Mezzio\Mvc\View\Components\Overview\Fields\Number
+    public function addNumber(string $name, string $key): Fields\Number
     {
-        $number = new \Mezzio\Mvc\View\Components\Overview\Fields\Number($name, $key);
+        $number = new Fields\Number($name, $key);
         $this->addField($number);
         return $number;
     }
@@ -56,13 +56,36 @@ class Overview extends AbstractComponent
     /**
      * @param $name
      * @param $key
-     * @return \Mezzio\Mvc\View\Components\Overview\Fields\Text
+     * @return Fields\Progress
      */
-    public function addText(string $name, string $key): \Mezzio\Mvc\View\Components\Overview\Fields\Text
+    public function addProgress(string $name, string $key): Fields\Progress
     {
-        $text = new \Mezzio\Mvc\View\Components\Overview\Fields\Text($name, $key);
+        $progress = new Fields\Progress($name, $key);
+        $this->addField($progress);
+        return $progress;
+    }
+
+    /**
+     * @param $name
+     * @param $key
+     * @return Fields\Spinner
+     */
+    public function addSpinner(string $name, string $key): Fields\Spinner
+    {
+        $spinner = new Fields\Spinner($name, $key);
+        $this->addField($spinner);
+        return $spinner;
+    }
+
+    /**
+     * @param $name
+     * @param $key
+     * @return Fields\Text
+     */
+    public function addText(string $name, string $key): Fields\Text
+    {
+        $text = new Fields\Text($name, $key);
         $this->addField($text);
         return $text;
     }
-
 }

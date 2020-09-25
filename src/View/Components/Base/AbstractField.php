@@ -4,8 +4,23 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\View\Components\Base;
 
-abstract class AbstractField
+use Mezzio\Mvc\View\ComponentDataBean;
+use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
+use NiceshopsDev\NiceCore\Option\OptionTrait;
+
+abstract class AbstractField implements OptionAwareInterface
 {
+    use OptionTrait;
+
+    public const STYLE_PRIMARY = 'primary';
+    public const STYLE_SECONDARY = 'secondary';
+    public const STYLE_SUCCESS = 'success';
+    public const STYLE_DANGER = 'danger';
+    public const STYLE_WARNING = 'warning';
+    public const STYLE_INFO = 'info';
+    public const STYLE_LIGHT = 'light';
+    public const STYLE_DARK = 'dark';
+
     /**
      * @var string
      */
@@ -32,12 +47,37 @@ abstract class AbstractField
         $this->key = $key;
     }
 
+    /**
+     * @param string $input
+     * @param ComponentDataBean $bean
+     * @return string
+     */
+    protected function replacePlaceholders(string $input, ComponentDataBean $bean)
+    {
+        $output = $input;
+        foreach ($bean as $key => $item) {
+            $placeholder = "{{$key}}";
+            if (strpos($input, $placeholder) !== false) {
+                str_replace($placeholder, $item, $output);
+            }
+        }
+        return $output;
+    }
 
     /**
-     * @return mixed
+     * @param ComponentDataBean|null $bean
+     * @return string
      */
-    public function getValue()
+    public function getValue(?ComponentDataBean $bean = null)
     {
+        if (null !== $bean) {
+            if (!$this->hasValue()) {
+                $value = "{{$this->getKey()}}";
+            } else {
+                $value = $this->value;
+            }
+            return $this->replacePlaceholders($value, $bean);
+        }
         return $this->value;
     }
 
@@ -68,6 +108,7 @@ abstract class AbstractField
 
     /**
      * @param mixed $name
+     * @return $this
      */
     public function setName($name): self
     {
@@ -85,6 +126,7 @@ abstract class AbstractField
 
     /**
      * @param mixed $key
+     * @return $this
      */
     public function setKey($key): self
     {

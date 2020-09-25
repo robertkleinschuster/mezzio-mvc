@@ -1,0 +1,10 @@
+<div class="progress" <?= $field->hasHeight($data) ? "style=\"height: {$field->getHeight($data)}px;\"" : '' ?>>
+    <div
+            class="progress-bar progress-bar-striped <?= $field->hasStyle($data) ? 'bg-' . $field->getStyle($data) : '' ?>"
+            role="progressbar"
+            style="width: <?= $field->getValue($data) ?>%"
+            aria-valuenow="<?= $field->getValue($data) ?>"
+            aria-valuemin="0"
+            aria-valuemax="100">
+    </div>
+</div>

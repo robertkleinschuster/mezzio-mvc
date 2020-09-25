@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\View\Components\Edit;
 
 use Mezzio\Mvc\View\Components\Base\AbstractComponent;
-use Mezzio\Mvc\View\Components\Edit\Fields\Button;
-use Mezzio\Mvc\View\Components\Edit\Fields\Checkbox;
-use Mezzio\Mvc\View\Components\Edit\Fields\Select;
-use Mezzio\Mvc\View\Components\Edit\Fields\Text;
 
 class Edit extends AbstractComponent
 {
+    /**
+     * @return string
+     */
     public function getTemplate(): string
     {
         return 'components/edit/edit';
@@ -20,23 +19,11 @@ class Edit extends AbstractComponent
     /**
      * @param string $name
      * @param string $key
-     * @return Text
+     * @return Fields\Button
      */
-    public function addText(string $name, string $key): Text
+    public function addButton(string $name, string $key): Fields\Button
     {
-        $text = new Text($name, $key);
-        $this->addField($text);
-        return $text;
-    }
-
-    /**
-     * @param string $name
-     * @param string $key
-     * @return Button
-     */
-    public function addButton(string $name, string $key): Button
-    {
-        $button = new Button($name, $key);
+        $button = new Fields\Button($name, $key);
         $this->addField($button);
         return $button;
     }
@@ -44,11 +31,11 @@ class Edit extends AbstractComponent
     /**
      * @param string $name
      * @param string $key
-     * @return Checkbox
+     * @return Fields\Checkbox
      */
-    public function addCheckbox(string $name, string $key): Checkbox
+    public function addCheckbox(string $name, string $key): Fields\Checkbox
     {
-        $checkbox = new Checkbox($name, $key);
+        $checkbox = new Fields\Checkbox($name, $key);
         $this->addField($checkbox);
         return $checkbox;
     }
@@ -56,13 +43,36 @@ class Edit extends AbstractComponent
     /**
      * @param string $name
      * @param string $key
-     * @return Select
+     * @return Fields\RadioButtonGroup
      */
-    public function addSelect(string $name, string $key): Select
+    public function addRadioButtonGroup(string $name, string $key): Fields\RadioButtonGroup
     {
-        $select = new Select($name, $key);
+        $radioButtonGroup = new Fields\RadioButtonGroup($name, $key);
+        $this->addField($radioButtonGroup);
+        return $radioButtonGroup;
+    }
+
+    /**
+     * @param string $name
+     * @param string $key
+     * @return Fields\Select
+     */
+    public function addSelect(string $name, string $key): Fields\Select
+    {
+        $select = new Fields\Select($name, $key);
         $this->addField($select);
         return $select;
     }
 
+    /**
+     * @param string $name
+     * @param string $key
+     * @return Fields\Textarea
+     */
+    public function addTextarea(string $name, string $key): Fields\Textarea
+    {
+        $textarea = new Fields\Textarea($name, $key);
+        $this->addField($textarea);
+        return $textarea;
+    }
 }

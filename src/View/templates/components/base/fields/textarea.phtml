@@ -1,0 +1,9 @@
+<div class="form-group">
+    <label for="<?= $field->getKey($data) ?>"><?= $field->getName($data) ?></label>
+    <textarea class="form-control"
+              id="<?= $field->getKey($data) ?>"
+              name="<?= $field->getKey($data) ?>"
+        <?= $field->hasRows($data) ? " rows=\"{$field->getRows($data)}\"" : '' ?>>
+        <?=$field->getValue($data)?>
+    </textarea>
+</div>

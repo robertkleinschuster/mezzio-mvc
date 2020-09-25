@@ -1,0 +1,3 @@
+<a <?= $field->hasAction() ? " href=\"{$field->getAction($data)}\"" : '' ?> <?= $field->hasTarget() ? " target=\"{$field->getTarget()}\"" : '' ?>>
+    <?= $field->getValue($data) ?>
+</a>

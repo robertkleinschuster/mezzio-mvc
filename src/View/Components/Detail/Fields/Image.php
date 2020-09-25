@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\View\Components\Detail\Fields;
 
-use Mezzio\Mvc\View\Components\Base\Fields\AbstractText;
+use Mezzio\Mvc\View\Components\Base\Fields\AbstractImage;
 
-class Text extends AbstractText
+class Image extends AbstractImage
 {
 
 }

@@ -2,18 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Edit\Fields;
+namespace Mezzio\Mvc\View\Components\Base\Fields;
 
 use Mezzio\Mvc\View\Components\Base\AbstractField;
 
-class Text extends AbstractField
+abstract class AbstractCheckbox extends AbstractField
 {
+    /**
+     * @var string
+     */
+    private $hint;
 
-    private $hint = '';
-
+    /**
+     * @return string
+     */
     public function getTemplate()
     {
-        return 'components/edit/fields/text';
+        return 'components/base/fields/checkbox';
     }
 
     /**
@@ -26,6 +31,8 @@ class Text extends AbstractField
 
     /**
      * @param string $hint
+     *
+     * @return $this
      */
     public function setHint(string $hint): self
     {
@@ -33,5 +40,11 @@ class Text extends AbstractField
         return $this;
     }
 
-
+    /**
+     * @return bool
+     */
+    public function hasHint(): bool
+    {
+        return $this->hint !== null;
+    }
 }

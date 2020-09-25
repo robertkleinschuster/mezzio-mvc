@@ -1,5 +1,4 @@
-<section>
-
+<section class="overview">
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -9,14 +8,13 @@
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($model->getOverview() as $row): ?>
+        <?php foreach ($model->getComponentDataBeanList() as $bean): ?>
             <tr>
                 <?php foreach ($fields as $field): ?>
-                    <td><?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'value' => $row[$field->getKey()]]) ?></td>
+                    <td><?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?></td>
                 <?php endforeach ?>
             </tr>
         <?php endforeach ?>
         </tbody>
     </table>
-
 </section>

@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\View\Components\Overview\Fields;
 
-use Mezzio\Mvc\View\Components\Base\Fields\AbstractLink;
+use Mezzio\Mvc\View\Components\Base\Fields\AbstractBadge;
 
-class Link extends AbstractLink
+class Badge extends AbstractBadge
 {
-
-
 }

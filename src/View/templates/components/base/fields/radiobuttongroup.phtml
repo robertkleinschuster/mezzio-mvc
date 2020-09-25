@@ -1,0 +1,11 @@
+<?php foreach ($field->getSelectOptions($data) as $key => $value): ?>
+    <div class="form-check">
+        <input class="form-check-input"
+               type="radio"
+               name="<?= $field->getKey($data) ?>"
+               id="<?= $key ?>"
+               value="<?= $key ?>"
+            <?= $field->getValue($data) == $key ? ' checked' : '' ?>>
+        <label class="form-check-label" for="<?= $key ?>"><?= $value ?></label>
+    </div>
+<?php endforeach; ?>

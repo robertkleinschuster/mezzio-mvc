@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\View\Components\Overview\Fields;
 
-use Mezzio\Mvc\View\Components\Base\AbstractField;
+use Mezzio\Mvc\View\Components\Base\Fields\AbstractText;
 
-class Text extends AbstractField
+class Text extends AbstractText
 {
-    public function getTemplate()
-    {
-        return 'components/overview/fields/text';
-    }
+
 }

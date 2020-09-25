@@ -1,0 +1,10 @@
+<blockquote class="blockquote<?= $field->hasAlign() ? ' text-' . $field->getAlign() : '' ?>">
+    <p class="mb-0"><?= $field->getValue($data) ?></p>
+    <?php if ($field->hasFooter()): ?>
+        <footer class="blockquote-footer"><?= $field->getFooter($data) ?>
+            <?php if ($field->hasSource()): ?>
+                <cite title="<?= $field->getSource($data) ?>"><?= $field->getSource($data) ?></cite>
+            <?php endif; ?>
+        </footer>
+    <?php endif; ?>
+</blockquote>

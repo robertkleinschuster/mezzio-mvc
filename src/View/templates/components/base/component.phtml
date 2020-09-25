@@ -1,0 +1,5 @@
+<?php foreach ($model->getComponentDataBeanList() as $bean): ?>
+    <?php foreach ($fields as $field): ?>
+        <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
+    <?php endforeach ?>
+<?php endforeach ?>
