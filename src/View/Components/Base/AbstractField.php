@@ -58,7 +58,7 @@ abstract class AbstractField implements OptionAwareInterface
         foreach ($bean as $key => $item) {
             $placeholder = "{{$key}}";
             if (strpos($input, $placeholder) !== false) {
-                str_replace($placeholder, $item, $output);
+                $output = str_replace($placeholder, $item, $output);
             }
         }
         return $output;
