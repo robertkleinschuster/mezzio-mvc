@@ -49,6 +49,9 @@ class ViewRenderer
         $view->getViewModel()->getTemplateData()->setData('components', $view->getComponentList());
         $view->getViewModel()->getTemplateData()->setData('model', $view->getViewModel());
         $view->getViewModel()->getTemplateData()->setData('templateFolder', $this->templateFolder);
+        foreach ($view->getViewModel()->getTemplateData() as $key => $templateDatum) {
+            $this->getTemplateRenderer()->addDefaultParam(TemplateRendererInterface::TEMPLATE_ALL, $key, $templateDatum);
+        }
         return $this->getTemplateRenderer()->render(
             $this->templateFolder . '::' . $view->getTemplate(),
             $view->getViewModel()->getTemplateData()->toArray()
