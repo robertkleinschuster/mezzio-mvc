@@ -16,6 +16,6 @@ interface RequiredAwareInterface
      * @param bool $required
      * @return $this;
      */
-    public function setRequired(bool $required = true): self;
+    public function setRequired(bool $required = true);
 
 }
