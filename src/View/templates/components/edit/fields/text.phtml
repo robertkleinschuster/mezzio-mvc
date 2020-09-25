@@ -4,6 +4,7 @@
            class="form-control"
            id="<?= $field->getKey($data) ?>"
            name="<?= $field->getKey($data) ?>"
+           value="<?= $field->getValue($data) ?>"
            aria-describedby="<?= $field->getKey($data) ?>__hint"
         <?=$field->isRequired() ? ' required' : ''?>>
     <?php if ($field->hasHint($data)): ?>
