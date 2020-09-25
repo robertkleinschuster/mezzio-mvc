@@ -37,6 +37,14 @@ abstract class AbstractController implements ControllerInterface
     private $view;
 
     /**
+     *
+     */
+    public function init()
+    {
+    }
+
+
+    /**
      * @return ControllerRequest
      */
     public function getControllerRequest(): ControllerRequest
@@ -140,7 +148,7 @@ abstract class AbstractController implements ControllerInterface
      * @return AbstractController
      * @throws BeanException
      */
-    protected function assign(string $key, $value): self
+    protected function setTemplateVariable(string $key, $value): self
     {
         $this->getModel()->getTemplateData()->setData($key, $value);
         return $this;
