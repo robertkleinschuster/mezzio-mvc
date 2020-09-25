@@ -4,6 +4,8 @@ namespace Mezzio\Mvc\Factory;
 
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
+use Laminas\Diactoros\Response\RedirectResponse;
+use Laminas\Diactoros\UriFactory;
 use Mezzio\Mvc\Controller\ControllerResponse;
 use Mezzio\Mvc\Exception\MvcException;
 
@@ -11,7 +13,7 @@ class ServerResponseFactory
 {
     /**
      * @param ControllerResponse $controllerResponse
-     * @return HtmlResponse|JsonResponse
+     * @return HtmlResponse|JsonResponse|RedirectResponse
      * @throws MvcException
      */
     public function __invoke(ControllerResponse $controllerResponse)
@@ -30,6 +32,12 @@ class ServerResponseFactory
                     'inject' => $controllerResponse->getInjector()->toArray()
                 ];
                 return new JsonResponse($data, $controllerResponse->getStatusCode(), $controllerResponse->getHeaders());
+            case ControllerResponse::MODE_REDIRECT:
+                return new RedirectResponse(
+                    (new UriFactory())->createUri(
+                        $controllerResponse->getAttribute(ControllerResponse::ATTRIBUTE_REDIRECT)
+                    )
+                );
         }
         throw new MvcException('Invalid Mode set in ControlerResponse.');
     }

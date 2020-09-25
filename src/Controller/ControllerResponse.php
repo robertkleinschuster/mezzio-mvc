@@ -17,6 +17,9 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
 
     public const MODE_HTML = 'html';
     public const MODE_JSON = 'json';
+    public const MODE_REDIRECT = 'redirect';
+
+    public const ATTRIBUTE_REDIRECT = 'redirect';
 
     /**
      * @var string
@@ -182,5 +185,17 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
     {
         $this->validateInject();
         $this->getInjector()->addHtml($template, $selector, $position);
+    }
+
+    /**
+     * @param string $uri
+     * @return bool
+     * @throws \NiceshopsDev\NiceCore\Exception
+     */
+    public function setRedirect(string $uri): bool
+    {
+        $this->setMode(self::MODE_REDIRECT);
+        $this->setAttribute(self::ATTRIBUTE_REDIRECT, $uri);
+        return true;
     }
 }
