@@ -115,4 +115,12 @@ class MvcHandler implements RequestHandlerInterface
 
         return (new ServerResponseFactory())($controller->getControllerResponse());
     }
+
+    /**
+     * @return string
+     */
+    public static function getRoute(): string
+    {
+        return '/' . self::CONTROLLER_ATTRIBUTE . '/' . self::ACTION_ATTRIBUTE;
+    }
 }
