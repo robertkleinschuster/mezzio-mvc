@@ -85,21 +85,4 @@ class ViewModel implements ViewModelInterface
     {
         return false;
     }
-
-    /**
-     * @return string
-     */
-    public function getSignOutLink(): string
-    {
-        return '/';
-    }
-
-    /**
-     * @return string
-     */
-    public function getSignOutLabel(): string
-    {
-        return 'Sign Out';
-    }
-
 }

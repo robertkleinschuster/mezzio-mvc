@@ -20,6 +20,16 @@ class View implements OptionAwareInterface
     /**
      * @var string
      */
+    private $author;
+
+    /**
+     * @var string
+     */
+    private $description;
+
+    /**
+     * @var string
+     */
     private $layout;
 
     /**
@@ -88,17 +98,19 @@ class View implements OptionAwareInterface
     /**
      * @return mixed
      */
-    public function getLayout()
+    public function getLayout(): string
     {
-        return $this->layout;
+        return $this->layout ?? 'layout/default';
     }
 
     /**
-     * @param mixed $layout
+     * @param string $layout
+     * @return $this
      */
-    public function setLayout($layout): void
+    public function setLayout(string $layout): self
     {
         $this->layout = $layout;
+        return $this;
     }
 
     /**
@@ -115,6 +127,42 @@ class View implements OptionAwareInterface
     public function setTitle(string $title): void
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthor(): string
+    {
+        return $this->author ?? '';
+    }
+
+    /**
+     * @param string $author
+     * @return $this;
+     */
+    public function setAuthor(string $author): self
+    {
+        $this->author = $author;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description ?? '';
+    }
+
+    /**
+     * @param string $description
+     * @return $this;
+     */
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+        return $this;
     }
 
     /**
