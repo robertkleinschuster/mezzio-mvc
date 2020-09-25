@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\View\Components\Edit\Fields;
 
 use Mezzio\Mvc\View\Components\Base\Fields\AbstractText;
+use Mezzio\Mvc\View\Components\Base\Fields\RequiredAwareInterface;
+use Mezzio\Mvc\View\Components\Base\Fields\RequiredAwareTrait;
 
-class Text extends AbstractText
+class Text extends AbstractText implements RequiredAwareInterface
 {
+    use RequiredAwareTrait;
+
     public const TYPE_EMAIL = 'email';
     public const TYPE_PASSWORD = 'password';
     public const TYPE_NUMBER = 'number';
@@ -26,6 +30,9 @@ class Text extends AbstractText
      */
     private $type;
 
+    /**
+     * @return string
+     */
     public function getTemplate()
     {
         return 'components/edit/fields/text';

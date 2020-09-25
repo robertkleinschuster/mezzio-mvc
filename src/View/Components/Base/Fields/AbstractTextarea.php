@@ -6,8 +6,9 @@ namespace Mezzio\Mvc\View\Components\Base\Fields;
 
 use Mezzio\Mvc\View\Components\Base\AbstractField;
 
-abstract class AbstractTextarea extends AbstractField
+abstract class AbstractTextarea extends AbstractField implements RequiredAwareInterface
 {
+    use RequiredAwareTrait;
 
     /**
      * @var int

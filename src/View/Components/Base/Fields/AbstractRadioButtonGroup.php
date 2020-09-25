@@ -6,8 +6,9 @@ namespace Mezzio\Mvc\View\Components\Base\Fields;
 
 use Mezzio\Mvc\View\Components\Base\AbstractField;
 
-abstract class AbstractRadioButtonGroup extends AbstractField
+abstract class AbstractRadioButtonGroup extends AbstractField implements RequiredAwareInterface
 {
+    use RequiredAwareTrait;
 
     /**
      * @var array

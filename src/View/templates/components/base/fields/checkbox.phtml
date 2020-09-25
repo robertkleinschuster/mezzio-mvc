@@ -3,7 +3,8 @@
            id="<?= $field->getKey($data) ?>"
            name="<?= $field->getKey($data) ?>"
            value="<?= $field->getValue($data) ?>"
-        <?= $field->isChecked($data) ? 'checked' : '' ?>>
+        <?=$field->isRequired() ? ' required' : ''?>
+        <?= $field->isChecked($data) ? ' checked' : '' ?>>
     <label class="form-check-label" for="<?= $field->getKey($data) ?>"><?= $field->getName($data) ?></label>
     <?php if ($field->hasHint()): ?>
         <small id="<?= $field->getKey($data) ?>__hint"

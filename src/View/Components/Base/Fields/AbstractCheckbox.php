@@ -6,8 +6,10 @@ namespace Mezzio\Mvc\View\Components\Base\Fields;
 
 use Mezzio\Mvc\View\Components\Base\AbstractField;
 
-abstract class AbstractCheckbox extends AbstractField
+abstract class AbstractCheckbox extends AbstractField implements RequiredAwareInterface
 {
+    use RequiredAwareTrait;
+
     /**
      * @var string
      */

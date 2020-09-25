@@ -5,6 +5,7 @@
                name="<?= $field->getKey($data) ?>"
                id="<?= $key ?>"
                value="<?= $key ?>"
+            <?=$field->isRequired() ? ' required' : ''?>
             <?= $field->getValue($data) == $key ? ' checked' : '' ?>>
         <label class="form-check-label" for="<?= $key ?>"><?= $value ?></label>
     </div>

@@ -4,6 +4,7 @@
             id="<?= $field->getKey($data) ?>"
             name="<?= $field->getKey($data) ?>"
             size="<?= $field->getSize($data) ?>"
+        <?=$field->isRequired() ? ' required' : ''?>
         <?= $field->isMultiple($data) ? ' multiple' : '' ?>>
         <?php foreach ($field->getSelectOptions($data) as $value => $name): ?>
             <option
