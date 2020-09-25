@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\View\Components\Base\Fields;
 
+use Mezzio\Mvc\View\ComponentDataBean;
 use Mezzio\Mvc\View\Components\Base\AbstractField;
 
 abstract class AbstractLink extends AbstractField
@@ -61,14 +62,15 @@ abstract class AbstractLink extends AbstractField
     }
 
     /**
+     * @param ComponentDataBean|null $bean
      * @return string
      */
-    public function getAction(?array $data_Map = null): string
+    public function getAction(?ComponentDataBean $bean = null): string
     {
-        if (null === $data_Map) {
+        if (null === $bean) {
             return $this->action;
         } else {
-            return $this->replacePlaceholders($this->action, $data_Map);
+            return $this->replacePlaceholders($this->action, $bean);
         }
     }
 
