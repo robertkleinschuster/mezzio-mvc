@@ -21,6 +21,8 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
 
     public const ATTRIBUTE_REDIRECT = 'redirect';
 
+    public const OPTION_RENDER_RESPONSE = 'render_response';
+
     /**
      * @var string
      */
@@ -52,6 +54,7 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
     public function __construct()
     {
         $this->setMode(self::MODE_HTML);
+        $this->addOption(self::OPTION_RENDER_RESPONSE);
         $this->setStatusCode(200);
         $this->setHeaders([]);
         $this->setBody('');
@@ -89,7 +92,7 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
      */
     public function getBody(): string
     {
-        return $this->body;
+        return $this->body ?? '';
     }
 
     /**
@@ -196,6 +199,7 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
     {
         $this->setMode(self::MODE_REDIRECT);
         $this->setAttribute(self::ATTRIBUTE_REDIRECT, $uri);
+        $this->removeOption(self::OPTION_RENDER_RESPONSE);
         return true;
     }
 }

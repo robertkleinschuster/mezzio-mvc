@@ -6,6 +6,7 @@ namespace Mezzio\Mvc\Handler;
 
 use Laminas\Diactoros\Response\HtmlResponse;
 use Mezzio\Mvc\Controller\ControllerInterface;
+use Mezzio\Mvc\Controller\ControllerResponse;
 use Mezzio\Mvc\Exception\MvcException;
 use Mezzio\Mvc\Factory\ControllerFactory;
 use Mezzio\Mvc\Factory\ModelFactory;
@@ -98,20 +99,22 @@ class MvcHandler implements RequestHandlerInterface
         $controllerResponse = $controller->getControllerResponse();
         $templateData = $controller->getModel()->getTemplateData();
 
-        if ($controller->hasView()) {
-            $viewRenderer = new ViewRenderer($this->renderer, $viewTemplateFolder);
-            $view = $controller->getView();
-            $templateData->setFromArray($view->getViewModel()->getTemplateData()->toArray());
-            $view->getViewModel()->getTemplateData()->setFromArray($templateData->toArray());
-            $renderedOutput = $viewRenderer->render($view);
-        } else {
-            $renderedOutput = $this->renderer->render(
-                "$mvcTemplateFolder::$controllerCode/$actionCode",
-                $templateData->toArray()
-            );
+        if ($controllerResponse->hasOption(ControllerResponse::OPTION_RENDER_RESPONSE)) {
+            if ($controller->hasView()) {
+                $viewRenderer = new ViewRenderer($this->renderer, $viewTemplateFolder);
+                $view = $controller->getView();
+                $templateData->setFromArray($view->getViewModel()->getTemplateData()->toArray());
+                $view->getViewModel()->getTemplateData()->setFromArray($templateData->toArray());
+                $renderedOutput = $viewRenderer->render($view);
+            } else {
+                $renderedOutput = $this->renderer->render(
+                    "$mvcTemplateFolder::$controllerCode/$actionCode",
+                    $templateData->toArray()
+                );
+            }
+            $controllerResponse->setBody($renderedOutput);
         }
 
-        $controllerResponse->setBody($renderedOutput);
 
         return (new ServerResponseFactory())($controller->getControllerResponse());
     }
