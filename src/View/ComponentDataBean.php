@@ -6,7 +6,7 @@ use NiceshopsDev\Bean\AbstractBaseBean;
 use NiceshopsDev\Bean\BeanException;
 use Traversable;
 
-class ComponentDataBean extends AbstractBaseBean
+class ComponentDataBean extends AbstractBaseBean implements ComponentDataBeanInterface
 {
     private const SERIALIZE_DATA_TYPE_KEY = "arrDataType";
     private const SELF_REFERENCE_PLACEHOLDER = "__THIS__";

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\View\Components\Base;
 
-use Mezzio\Mvc\View\ComponentDataBean;
+use Mezzio\Mvc\View\ComponentDataBeanInterface;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use NiceshopsDev\NiceCore\Option\OptionTrait;
 
@@ -49,10 +49,10 @@ abstract class AbstractField implements OptionAwareInterface
 
     /**
      * @param string $input
-     * @param ComponentDataBean $bean
+     * @param ComponentDataBeanInterface $bean
      * @return string
      */
-    protected function replacePlaceholders(string $input, ComponentDataBean $bean)
+    protected function replacePlaceholders(string $input, ComponentDataBeanInterface $bean)
     {
         $output = $input;
         foreach ($bean as $key => $item) {
@@ -65,10 +65,10 @@ abstract class AbstractField implements OptionAwareInterface
     }
 
     /**
-     * @param ComponentDataBean|null $bean
+     * @param ComponentDataBeanInterface|null $bean
      * @return string
      */
-    public function getValue(?ComponentDataBean $bean = null)
+    public function getValue(?ComponentDataBeanInterface $bean = null)
     {
         if (null !== $bean) {
             if (!$this->hasValue()) {

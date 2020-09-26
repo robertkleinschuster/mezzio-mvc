@@ -8,7 +8,7 @@ class ComponentModel implements ComponentModelInterface
 {
 
     /**
-     * @var ComponentDataBean[]
+     * @var ComponentDataBeanInterface[]
      */
     private $componentDataBean_List;
 
@@ -21,17 +21,17 @@ class ComponentModel implements ComponentModelInterface
     }
 
     /**
-     * @param ComponentDataBean $componentDataBean
+     * @param ComponentDataBeanInterface $componentDataBean
      * @return $this
      */
-    public function addComponentDataBean(ComponentDataBean $componentDataBean): ComponentModelInterface
+    public function addComponentDataBean(ComponentDataBeanInterface $componentDataBean): ComponentModelInterface
     {
         $this->componentDataBean_List[] = $componentDataBean;
         return $this;
     }
 
     /**
-     * @return ComponentDataBean[]
+     * @return ComponentDataBeanInterface[]
      */
     public function getComponentDataBeanList(): array
     {
@@ -39,7 +39,7 @@ class ComponentModel implements ComponentModelInterface
     }
 
     /**
-     * @param ComponentDataBean[] $componentDataBean_List
+     * @param ComponentDataBeanInterface[] $componentDataBean_List
      * @return ComponentModel
      */
     public function setComponentDataBeanList(array $componentDataBean_List): ComponentModelInterface
@@ -49,11 +49,11 @@ class ComponentModel implements ComponentModelInterface
     }
 
     /**
-     * @param ComponentDataBean $componentDataBean
+     * @param ComponentDataBeanInterface $componentDataBean
      * @return $this|ComponentModelInterface
      * @throws ViewException
      */
-    public function setComponentDataBean(ComponentDataBean $componentDataBean): ComponentModelInterface
+    public function setComponentDataBean(ComponentDataBeanInterface $componentDataBean): ComponentModelInterface
     {
         if (count($this->componentDataBean_List) >= 1) {
             throw new ViewException(
@@ -66,10 +66,10 @@ class ComponentModel implements ComponentModelInterface
 
 
     /**
-     * @return ComponentDataBean
+     * @return ComponentDataBeanInterface
      * @throws ViewException
      */
-    public function getComponentDataBean(): ComponentDataBean
+    public function getComponentDataBean(): ComponentDataBeanInterface
     {
         if (count($this->componentDataBean_List) === 1) {
             return reset($this->componentDataBean_List);
