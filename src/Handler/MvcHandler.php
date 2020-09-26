@@ -101,8 +101,6 @@ class MvcHandler implements RequestHandlerInterface
 
         $controller->{$actionCode . $controller->getActionSuffix()}();
 
-        $controller->handleData();
-
         $controllerResponse = $controller->getControllerResponse();
         $templateData = $controller->getModel()->getTemplateData();
 

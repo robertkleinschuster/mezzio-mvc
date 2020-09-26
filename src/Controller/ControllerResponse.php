@@ -192,14 +192,31 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
 
     /**
      * @param string $uri
+     * @param array $id_Map
      * @return bool
      * @throws \NiceshopsDev\NiceCore\Exception
      */
-    public function setRedirect(string $uri): bool
+    public function setRedirect(string $uri, array $id_Map): bool
     {
         $this->setMode(self::MODE_REDIRECT);
-        $this->setAttribute(self::ATTRIBUTE_REDIRECT, $uri);
+        $this->setAttribute(
+            self::ATTRIBUTE_REDIRECT,
+            $uri . "?" .  ControllerInterface::VIEWID_ATTRIBUTE . "=" . $this->convertArray_To_ViewID($id_Map)
+        );
         $this->removeOption(self::OPTION_RENDER_RESPONSE);
         return true;
+    }
+
+    /**
+     * @param array $data_Map
+     * @return string
+     */
+    protected function convertArray_To_ViewID(array $data_Map): string
+    {
+        $result = [];
+        foreach ($data_Map as $key => $value) {
+            $result[] = "$key=$value";
+        }
+        return urlencode(implode(';', $result));
     }
 }

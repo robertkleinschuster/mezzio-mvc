@@ -9,6 +9,8 @@ use Mezzio\Mvc\View\View;
 
 interface ControllerInterface
 {
+    public const VIEWID_ATTRIBUTE = 'viewid';
+
 
     public function init();
 
