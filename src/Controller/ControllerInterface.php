@@ -14,6 +14,8 @@ interface ControllerInterface
 
     public function handleParamter();
 
+    public function handleData();
+
     /**
      * @return ControllerRequest
      */

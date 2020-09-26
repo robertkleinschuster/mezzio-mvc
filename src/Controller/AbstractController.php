@@ -50,6 +50,12 @@ abstract class AbstractController implements ControllerInterface
     }
 
 
+    public function handleData()
+    {
+
+    }
+
+
     /**
      * @return ControllerRequest
      */
