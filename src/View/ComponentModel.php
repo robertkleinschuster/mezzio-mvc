@@ -8,7 +8,7 @@ class ComponentModel implements ComponentModelInterface
 {
 
     /**
-     * @var ComponentDataBeanList
+     * @var ComponentDataBeanListInterface
      */
     private $componentDataBeanList;
 
@@ -31,19 +31,20 @@ class ComponentModel implements ComponentModelInterface
     }
 
     /**
-     * @return ComponentDataBeanList
+     * @return ComponentDataBeanListInterface
      */
-    public function getComponentDataBeanList(): ComponentDataBeanList
+    public function getComponentDataBeanList(): ComponentDataBeanListInterface
     {
         return $this->componentDataBeanList;
     }
 
     /**
-     * @param ComponentDataBeanList $componentDataBeanList
+     * @param ComponentDataBeanListInterface $componentDataBeanList
      * @return ComponentModel
      */
-    public function setComponentDataBeanList(ComponentDataBeanList $componentDataBeanList): ComponentModelInterface
-    {
+    public function setComponentDataBeanList(
+        ComponentDataBeanListInterface $componentDataBeanList
+    ): ComponentModelInterface {
         $this->componentDataBeanList = $componentDataBeanList;
         return $this;
     }
