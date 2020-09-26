@@ -41,6 +41,12 @@ abstract class AbstractController implements ControllerInterface
      */
     public function init()
     {
+
+    }
+
+    public function handleParamter()
+    {
+
     }
 
 

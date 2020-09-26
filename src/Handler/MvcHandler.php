@@ -85,8 +85,6 @@ class MvcHandler implements RequestHandlerInterface
             $request->getAttribute(self::CONTROLLER_ATTRIBUTE),
             $request
         );
-        $model = ($this->modelFactory)($request->getAttribute(self::CONTROLLER_ATTRIBUTE));
-        $controller->setModel($model);
         if (!method_exists($controller, $actionCode . $controller->getActionSuffix())) {
             return new HtmlResponse(
                 $this->renderer->render("$mvcTemplateFolder::$mvc404Template", []),
@@ -94,7 +92,12 @@ class MvcHandler implements RequestHandlerInterface
             );
         }
 
+        $model = ($this->modelFactory)($request->getAttribute(self::CONTROLLER_ATTRIBUTE));
+        $controller->setModel($model);
+
         $controller->init();
+
+        $controller->handleParamter();
 
         $controller->{$actionCode . $controller->getActionSuffix()}();
 
