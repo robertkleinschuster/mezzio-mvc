@@ -7,15 +7,15 @@ namespace Mezzio\Mvc\View;
 interface ComponentModelInterface
 {
     /**
-     * @return ComponentDataBeanInterface[]
+     * @return ComponentDataBeanList
      */
-    public function getComponentDataBeanList(): array;
+    public function getComponentDataBeanList(): ComponentDataBeanList;
 
     /**
-     * @param ComponentDataBeanInterface[] $componentDataBean_List
+     * @param ComponentDataBeanList $componentDataBeanList
      * @return ComponentModel
      */
-    public function setComponentDataBeanList(array $componentDataBean_List): self;
+    public function setComponentDataBeanList(ComponentDataBeanList $componentDataBeanList): self;
 
     /**
      * @param ComponentDataBeanInterface $componentDataBean

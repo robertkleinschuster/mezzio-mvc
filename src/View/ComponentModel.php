@@ -8,16 +8,16 @@ class ComponentModel implements ComponentModelInterface
 {
 
     /**
-     * @var ComponentDataBeanInterface[]
+     * @var ComponentDataBeanList
      */
-    private $componentDataBean_List;
+    private $componentDataBeanList;
 
     /**
      * ComponentModel constructor.
      */
     public function __construct()
     {
-        $this->componentDataBean_List = [];
+        $this->componentDataBeanList = new ComponentDataBeanList();
     }
 
     /**
@@ -26,25 +26,25 @@ class ComponentModel implements ComponentModelInterface
      */
     public function addComponentDataBean(ComponentDataBeanInterface $componentDataBean): ComponentModelInterface
     {
-        $this->componentDataBean_List[] = $componentDataBean;
+        $this->componentDataBeanList->addBean($componentDataBean);
         return $this;
     }
 
     /**
-     * @return ComponentDataBeanInterface[]
+     * @return ComponentDataBeanList
      */
-    public function getComponentDataBeanList(): array
+    public function getComponentDataBeanList(): ComponentDataBeanList
     {
-        return $this->componentDataBean_List;
+        return $this->componentDataBeanList;
     }
 
     /**
-     * @param ComponentDataBeanInterface[] $componentDataBean_List
+     * @param ComponentDataBeanList $componentDataBeanList
      * @return ComponentModel
      */
-    public function setComponentDataBeanList(array $componentDataBean_List): ComponentModelInterface
+    public function setComponentDataBeanList(ComponentDataBeanList $componentDataBeanList): ComponentModelInterface
     {
-        $this->componentDataBean_List = $componentDataBean_List;
+        $this->componentDataBeanList = $componentDataBeanList;
         return $this;
     }
 
@@ -52,30 +52,34 @@ class ComponentModel implements ComponentModelInterface
      * @param ComponentDataBeanInterface $componentDataBean
      * @return $this|ComponentModelInterface
      * @throws ViewException
+     * @throws \NiceshopsDev\Bean\BeanList\BeanListException
      */
     public function setComponentDataBean(ComponentDataBeanInterface $componentDataBean): ComponentModelInterface
     {
-        if (count($this->componentDataBean_List) >= 1) {
+        if ($this->getComponentDataBeanList()->count() >= 1) {
             throw new ViewException(
-                'Could not set bean in ComponentModel. Count: ' . count($this->componentDataBean_List)
+                'Could not set bean in ComponentModel. Count: ' . count($this->componentDataBeanList)
             );
         }
-        $this->componentDataBean_List[0] = $componentDataBean;
+        $this->componentDataBeanList->offsetSet(0, $componentDataBean);
         return $this;
     }
 
 
     /**
      * @return ComponentDataBeanInterface
-     * @throws ViewException
+     * @throws ViewException|\NiceshopsDev\Bean\BeanList\BeanListException
      */
     public function getComponentDataBean(): ComponentDataBeanInterface
     {
-        if (count($this->componentDataBean_List) === 1) {
-            return reset($this->componentDataBean_List);
+        if ($this->getComponentDataBeanList()->count() === 1) {
+            $bean = $this->getComponentDataBeanList()->offsetGet(0);
+            if ($bean instanceof ComponentDataBeanInterface) {
+                return $bean;
+            }
         }
         throw new ViewException(
-            'Could not get single bean from ComponentModel. Count: ' . count($this->componentDataBean_List)
+            'Could not get single bean from ComponentModel. Count: ' . count($this->componentDataBeanList)
         );
     }
 }

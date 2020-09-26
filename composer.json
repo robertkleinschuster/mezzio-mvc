@@ -15,7 +15,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/niceshops/nice-beans"
+            "url": "https://github.com/robertkleinschuster/nice-beans"
         }
     ],
     "require": {
