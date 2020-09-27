@@ -10,10 +10,19 @@
         <tbody>
         <?php foreach ($model->getComponentDataBeanList() as $bean): ?>
             <tr>
+                <?php $previousChapter = null?>
                 <?php foreach ($fields as $field): ?>
-                    <td>
+                    <?php if ($field->getChapter() == $previousChapter): ?>
                         <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
-                    </td>
+                    <?php elseif ($previousChapter == null): ?>
+                        <td>
+                            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
+                    <?php else: ?>
+                        </td>
+                        <td>
+                            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
+                    <?php endif;?>
+                    <?php $previousChapter = $field->getChapter()?>
                 <?php endforeach ?>
             </tr>
         <?php endforeach ?>

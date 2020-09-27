@@ -21,8 +21,6 @@ abstract class AbstractField implements OptionAwareInterface
     public const STYLE_LIGHT = 'light';
     public const STYLE_DARK = 'dark';
 
-    public const OPTION_APPEND = 'append';
-
     /**
      * @var string
      */
@@ -37,6 +35,11 @@ abstract class AbstractField implements OptionAwareInterface
      * @var string
      */
     private $value;
+
+    /**
+     * @var string
+     */
+    private $chapter;
 
     /**
      * AbstractField constructor.
@@ -139,6 +142,26 @@ abstract class AbstractField implements OptionAwareInterface
         $this->key = $key;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getChapter(): string
+    {
+        return $this->chapter ?? uniqid();
+    }
+
+    /**
+     * @param string $chapter
+     * @return AbstractField
+     */
+    public function setChapter(string $chapter)
+    {
+        $this->chapter = $chapter;
+        return $this;
+    }
+
+
 
     /**
      * @return string
