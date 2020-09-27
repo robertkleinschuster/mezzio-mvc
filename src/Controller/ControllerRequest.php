@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\Controller;
 
+use Mezzio\Mvc\Helper\ViewIdHelper;
 use Mezzio\Router\RouteResult;
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
@@ -48,7 +49,6 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
         }
     }
 
-
     /**
      * @return ServerRequestInterface
      */
@@ -64,4 +64,20 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     {
         return $this->routeResult;
     }
+
+    /**
+     * @return array
+     * @throws Exception
+     */
+    public function getViewIdMap(): array
+    {
+        $viewId = $this->getAttribute(ViewIdHelper::VIEWID_ATTRIBUTE);
+        if (null === $viewId) {
+            return (new ViewIdHelper())->parseViewId(urlencode($viewId));
+        } else {
+            return [];
+        }
+    }
+
+
 }
