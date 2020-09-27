@@ -1,7 +1,9 @@
 <div class="col">
     <div class="btn-toolbar mb-2">
         <?php foreach ($fields as $field): ?>
-                <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $model->getComponentDataBean()]) ?>
+        <div class="mr-1">
+            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $model->getComponentDataBean()]) ?>
+        </div>
         <?php endforeach ?>
     </div>
 </div>
