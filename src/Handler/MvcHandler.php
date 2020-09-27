@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\Handler;
 
-use Laminas\Diactoros\Response\HtmlResponse;
 use Mezzio\Mvc\Controller\ControllerInterface;
 use Mezzio\Mvc\Controller\ControllerResponse;
-use Mezzio\Mvc\Exception\MvcException;
+use Mezzio\Mvc\Exception\ActionException;
+use Mezzio\Mvc\Exception\ActionNotFoundException;
+use Mezzio\Mvc\Exception\ControllerException;
+use Mezzio\Mvc\Exception\ControllerNotFoundException;
 use Mezzio\Mvc\Factory\ControllerFactory;
 use Mezzio\Mvc\Factory\ServerResponseFactory;
 use Mezzio\Mvc\View\ViewRenderer;
 use Mezzio\Template\TemplateRendererInterface;
-use NiceshopsDev\Bean\BeanException;
-use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -58,8 +58,8 @@ class MvcHandler implements RequestHandlerInterface
     /**
      * @param ServerRequestInterface $request
      * @return ResponseInterface
-     * @throws MvcException
-     * @throws BeanException
+     * @throws \NiceshopsDev\NiceCore\Exception
+     * @throws ControllerNotFoundException
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
@@ -67,51 +67,71 @@ class MvcHandler implements RequestHandlerInterface
         $actionCode = $request->getAttribute(self::ACTION_ATTRIBUTE);
 
         $mvcTemplateFolder = $this->config['mvc']['template_folder'];
-        $mvc404Template = $this->config['mvc']['template_404'];
+        $errorController = $this->config['mvc']['error_controller'];
         $actionSuffix = $this->config['mvc']['action']['suffix'] ?? '';
         $actionPrefix = $this->config['mvc']['action']['prefix'] ?? '';
         $viewTemplateFolder = $this->config['mvc']['view']['template_folder'];
         $actionMethod = $actionPrefix . $actionCode . $actionSuffix;
-
-        /**
-         * @var ControllerInterface|OptionAwareInterface $controller
-         */
-        $controller = ($this->controllerFactory)($controllerCode, $request);
-
-        if (!method_exists($controller, $actionMethod)) {
-            return new HtmlResponse(
-                $this->renderer->render("$mvcTemplateFolder::$mvc404Template", []),
-                404
-            );
-        }
-
-        $controller->init();
-
-        $controller->{$actionMethod}();
-
-        $controller->post();
-
-        $controllerResponse = $controller->getControllerResponse();
-        $templateData = $controller->getModel()->getTemplateData();
-
-        if ($controllerResponse->hasOption(ControllerResponse::OPTION_RENDER_RESPONSE)) {
-            if ($controller->hasView()) {
-                $viewRenderer = new ViewRenderer($this->renderer, $viewTemplateFolder);
-                $view = $controller->getView();
-                $templateData->setFromArray($view->getViewModel()->getTemplateData()->toArray());
-                $view->getViewModel()->getTemplateData()->setFromArray($templateData->toArray());
-                $renderedOutput = $viewRenderer->render($view);
-            } else {
-                $renderedOutput = $this->renderer->render(
-                    "$mvcTemplateFolder::$controllerCode/$actionCode",
-                    $templateData->toArray()
-                );
+        try {
+            $controller = ($this->controllerFactory)($controllerCode, $request);
+            $controller->init();
+            $this->executeControllerAction($controller, $actionMethod);
+            $controller->end();
+            if ($controller->getControllerResponse()->hasOption(ControllerResponse::OPTION_RENDER_RESPONSE)) {
+                $templateData = $controller->getModel()->getTemplateData();
+                if ($controller->hasView()) {
+                    $viewRenderer = new ViewRenderer($this->renderer, $viewTemplateFolder);
+                    $view = $controller->getView();
+                    $view->getViewModel()->getTemplateData()->setFromArray($templateData->toArray());
+                    $renderedOutput = $viewRenderer->render($view);
+                } else {
+                    $renderedOutput = $this->renderer->render(
+                        "$mvcTemplateFolder::$controllerCode/$actionCode",
+                        $templateData->toArray()
+                    );
+                }
+                $controller->getControllerResponse()->setBody($renderedOutput);
             }
-            $controllerResponse->setBody($renderedOutput);
+        } catch (ActionException | ControllerException $exception) {
+            $this->getErrorController($controller, $errorController, $request)->error($exception);
+        } catch (ActionNotFoundException | ControllerNotFoundException $exception) {
+            $controller = $this->getErrorController($controller, $errorController, $request)->error($exception);
+            $controller->getControllerResponse()->setStatusCode(ControllerResponse::STATUS_NOT_FOUND);
+        } catch (\Exception $exception) {
+            $this->getErrorController($controller, $errorController, $request)->error($exception);
         }
-
-
         return (new ServerResponseFactory())($controller->getControllerResponse());
+    }
+
+    /**
+     * @param $controller
+     * @param $errorController
+     * @param $request
+     * @return ControllerInterface
+     * @throws ControllerNotFoundException
+     * @throws \NiceshopsDev\NiceCore\Exception
+     */
+    private function getErrorController($controller, $errorController, $request)
+    {
+        if (null === $controller) {
+            $controller = ($this->controllerFactory)($errorController, $request);
+        }
+        return $controller;
+    }
+
+    /**
+     * @param ControllerInterface $controller
+     * @param string $actionMethod
+     * @throws ActionException | ControllerException | ActionNotFoundException
+     */
+    protected function executeControllerAction(ControllerInterface $controller, string $actionMethod)
+    {
+        $methodBlacklist = get_class_methods(ControllerInterface::class);
+        if (method_exists($controller, $actionMethod) && !in_array($actionMethod, $methodBlacklist)) {
+            $controller->{$actionMethod}();
+        } else {
+            throw new ActionNotFoundException("Controller action $actionMethod not found.");
+        }
     }
 
     /**

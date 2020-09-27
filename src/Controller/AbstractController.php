@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\Controller;
 
-use Mezzio\Helper\UrlHelper;
-use Mezzio\Mvc\Handler\MvcHandler;
-use Mezzio\Mvc\Handler\ViewIdHelper;
+use Mezzio\Mvc\Helper\PathHelper;
 use Mezzio\Mvc\Model\ModelInterface;
 use Mezzio\Mvc\View\View;
 use NiceshopsDev\Bean\BeanException;
@@ -30,15 +28,9 @@ abstract class AbstractController implements ControllerInterface
     private $model;
 
     /**
-     * @var UrlHelper
+     * @var PathHelper
      */
-    private $urlHelper;
-
-    /**
-     * @var ViewIdHelper
-     *
-     */
-    private $viewIdHelper;
+    private $pathHelper;
 
     /**
      * @var View
@@ -50,38 +42,19 @@ abstract class AbstractController implements ControllerInterface
      * @param ControllerRequest $controllerRequest
      * @param ControllerResponse $controllerResponse
      * @param ModelInterface $model
-     * @param UrlHelper $urlHelper
-     * @param ViewIdHelper $viewIdHelper
+     * @param PathHelper $pathHelper
      */
     public function __construct(
         ControllerRequest $controllerRequest,
         ControllerResponse $controllerResponse,
         ModelInterface $model,
-        UrlHelper $urlHelper,
-        ViewIdHelper $viewIdHelper
+        PathHelper $pathHelper
     ) {
         $this->model = $model;
         $this->controllerRequest = $controllerRequest;
         $this->controllerResponse = $controllerResponse;
-        $this->urlHelper = $urlHelper;
-        $this->viewIdHelper = $viewIdHelper;
+        $this->pathHelper = $pathHelper;
     }
-
-
-    /**
-     *
-     */
-    public function init()
-    {
-
-    }
-
-
-    public function post()
-    {
-
-    }
-
 
     /**
      * @return ControllerRequest
@@ -100,22 +73,12 @@ abstract class AbstractController implements ControllerInterface
         return $this->controllerResponse;
     }
 
-
     /**
-     * @return UrlHelper
+     * @return PathHelper
      */
-    public function getUrlHelper(): UrlHelper
+    public function getPathHelper(): PathHelper
     {
-        return $this->urlHelper;
-    }
-
-
-    /**
-     * @return ViewIdHelper
-     */
-    public function getViewIdHelper(): ViewIdHelper
-    {
-        return $this->viewIdHelper;
+        return $this->pathHelper->reset();
     }
 
     /**
@@ -165,21 +128,5 @@ abstract class AbstractController implements ControllerInterface
     {
         $this->getModel()->getTemplateData()->setData($key, $value);
         return $this;
-    }
-
-    /**
-     * @param string $controller
-     * @param string $action
-     * @param array $params
-     * @return string|null
-     */
-    protected function getPath(string $action, ?string $controller = null, ?array $params = null): string
-    {
-        $routeParams = [];
-        $routeParams[MvcHandler::ACTION_ATTRIBUTE] = $action;
-        if (null !== $controller) {
-            $routeParams[MvcHandler::CONTROLLER_ATTRIBUTE] = $controller;
-        }
-        return $this->getUrlHelper()->generate(null, $routeParams, $params);
     }
 }

@@ -14,7 +14,7 @@ class ServerResponseFactory
     /**
      * @param ControllerResponse $controllerResponse
      * @return HtmlResponse|JsonResponse|RedirectResponse
-     * @throws MvcException
+     * @throws \NiceshopsDev\NiceCore\Exception
      */
     public function __invoke(ControllerResponse $controllerResponse)
     {
@@ -35,7 +35,7 @@ class ServerResponseFactory
             case ControllerResponse::MODE_REDIRECT:
                 return new RedirectResponse(
                     (new UriFactory())->createUri(
-                        $controllerResponse->getAttribute(ControllerResponse::ATTRIBUTE_REDIRECT)
+                        $controllerResponse->getAttribute(ControllerResponse::ATTRIBUTE_REDIRECT_URI)
                     )
                 );
         }

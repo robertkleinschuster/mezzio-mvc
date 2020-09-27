@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\Factory;
 
-use Laminas\Diactoros\Response\HtmlResponse;
 use Mezzio\Helper\UrlHelper;
 use Mezzio\Mvc\Controller\AbstractController;
+use Mezzio\Mvc\Controller\ControllerInterface;
 use Mezzio\Mvc\Controller\ControllerRequest;
 use Mezzio\Mvc\Controller\ControllerResponse;
-use Mezzio\Mvc\Exception\MvcException;
-use Mezzio\Mvc\Handler\ViewIdHelper;
-use Mezzio\Router\RouteResult;
+use Mezzio\Mvc\Exception\ControllerNotFoundException;
+use Mezzio\Mvc\Helper\PathHelper;
+use Mezzio\Mvc\Helper\ViewIdHelper;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -21,7 +21,6 @@ class ControllerFactory
      * @var ContainerInterface
      */
     private $container;
-
 
     /**
      * ControllerFactory constructor.
@@ -35,14 +34,13 @@ class ControllerFactory
     /**
      * @param string $code
      * @param ServerRequestInterface $request
-     * @return AbstractController
-     * @throws MvcException
+     * @return ControllerInterface
+     * @throws ControllerNotFoundException
      * @throws \NiceshopsDev\NiceCore\Exception
      */
-    public function __invoke(string $code, ServerRequestInterface $request)
+    public function __invoke(string $code, ServerRequestInterface $request): ControllerInterface
     {
         $config = $this->container->get('config');
-        $urlHelper = $this->container->get(UrlHelper::class);
         $class = $this->getControllerClass($config, $code);
 
         /**
@@ -51,8 +49,7 @@ class ControllerFactory
         $controller = new $class(
             new ControllerRequest($request),
             new ControllerResponse(),
-            $urlHelper,
-            new ViewIdHelper()
+            $this->container->get(PathHelper::class)
         );
         return $controller;
     }
@@ -61,12 +58,14 @@ class ControllerFactory
      * @param array $config
      * @param string $code
      * @return string
-     * @throws MvcException
+     * @throws ControllerNotFoundException
      */
     protected function getControllerClass(array $config, string $code): string
     {
         if (null === $config['mvc']['controllers'][$code]) {
-            throw new MvcException("No controller class found for code '$code'. Check your mvc configuration.");
+            throw new ControllerNotFoundException(
+                "No controller class found for code '$code'. Check your mvc configuration."
+            );
         }
         return $config['mvc']['controllers'][$code];
     }

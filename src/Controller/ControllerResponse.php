@@ -19,9 +19,12 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
     public const MODE_JSON = 'json';
     public const MODE_REDIRECT = 'redirect';
 
-    public const ATTRIBUTE_REDIRECT = 'redirect';
+    public const ATTRIBUTE_REDIRECT_URI = 'redirect_url';
 
     public const OPTION_RENDER_RESPONSE = 'render_response';
+
+    public const STATUS_NOT_FOUND = 404;
+    public const STATUS_FOUND = 200;
 
     /**
      * @var string
@@ -55,7 +58,7 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
     {
         $this->setMode(self::MODE_HTML);
         $this->addOption(self::OPTION_RENDER_RESPONSE);
-        $this->setStatusCode(200);
+        $this->setStatusCode(self::STATUS_FOUND);
         $this->setHeaders([]);
         $this->setBody('');
     }
@@ -198,7 +201,7 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
     public function setRedirect(string $uri): bool
     {
         $this->setMode(self::MODE_REDIRECT);
-        $this->setAttribute(self::ATTRIBUTE_REDIRECT, $uri);
+        $this->setAttribute(self::ATTRIBUTE_REDIRECT_URI, $uri);
         $this->removeOption(self::OPTION_RENDER_RESPONSE);
         return true;
     }

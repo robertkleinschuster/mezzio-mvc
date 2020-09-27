@@ -4,16 +4,28 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\Controller;
 
-use Mezzio\Helper\UrlHelper;
-use Mezzio\Mvc\Handler\ViewIdHelper;
+use Mezzio\Mvc\Helper\PathHelper;
 use Mezzio\Mvc\Model\ModelInterface;
 use Mezzio\Mvc\View\View;
 
 interface ControllerInterface
 {
+
+    /**
+     * @return mixed
+     */
     public function init();
 
-    public function post();
+    /**
+     * @return mixed
+     */
+    public function end();
+
+    /**
+     * @param \Exception $exception
+     * @return mixed
+     */
+    public function error(\Exception $exception);
 
     /**
      * @return ControllerRequest
@@ -26,15 +38,9 @@ interface ControllerInterface
     public function getControllerResponse(): ControllerResponse;
 
     /**
-     * @return UrlHelper
+     * @return PathHelper
      */
-    public function getUrlHelper(): UrlHelper;
-
-    /**
-     * @return ViewIdHelper
-     */
-    public function getViewIdHelper(): ViewIdHelper;
-
+    public function getPathHelper(): PathHelper;
 
     /**
      * @return ModelInterface
