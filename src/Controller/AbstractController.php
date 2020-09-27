@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\Controller;
 
+use Mezzio\Helper\UrlHelper;
+use Mezzio\Mvc\Handler\MvcHandler;
+use Mezzio\Mvc\Handler\ViewIdHelper;
 use Mezzio\Mvc\Model\ModelInterface;
 use Mezzio\Mvc\View\View;
 use NiceshopsDev\Bean\BeanException;
@@ -12,9 +15,14 @@ abstract class AbstractController implements ControllerInterface
 {
 
     /**
-     * @var string
+     * @var ControllerRequest
      */
-    private $actionSuffix = 'Action';
+    private $controllerRequest;
+
+    /**
+     * @var ControllerResponse
+     */
+    private $controllerResponse;
 
     /**
      * @var ModelInterface
@@ -22,19 +30,43 @@ abstract class AbstractController implements ControllerInterface
     private $model;
 
     /**
-     * @var ControllerRequest
+     * @var UrlHelper
      */
-    private $requestProperties;
+    private $urlHelper;
 
     /**
-     * @var ControllerResponse
+     * @var ViewIdHelper
+     *
      */
-    private $responseProperties;
+    private $viewIdHelper;
 
     /**
      * @var View
      */
     private $view;
+
+    /**
+     * AbstractController constructor.
+     * @param ControllerRequest $controllerRequest
+     * @param ControllerResponse $controllerResponse
+     * @param ModelInterface $model
+     * @param UrlHelper $urlHelper
+     * @param ViewIdHelper $viewIdHelper
+     */
+    public function __construct(
+        ControllerRequest $controllerRequest,
+        ControllerResponse $controllerResponse,
+        ModelInterface $model,
+        UrlHelper $urlHelper,
+        ViewIdHelper $viewIdHelper
+    ) {
+        $this->model = $model;
+        $this->controllerRequest = $controllerRequest;
+        $this->controllerResponse = $controllerResponse;
+        $this->urlHelper = $urlHelper;
+        $this->viewIdHelper = $viewIdHelper;
+    }
+
 
     /**
      *
@@ -44,13 +76,8 @@ abstract class AbstractController implements ControllerInterface
 
     }
 
-    public function handleParamter()
-    {
 
-    }
-
-
-    public function handleData()
+    public function post()
     {
 
     }
@@ -61,35 +88,34 @@ abstract class AbstractController implements ControllerInterface
      */
     public function getControllerRequest(): ControllerRequest
     {
-        return $this->requestProperties;
+        return $this->controllerRequest;
     }
 
-    /**
-     * @param ControllerRequest $requestProperties
-     * @return $this|AbstractController
-     */
-    public function setControllerRequest(ControllerRequest $requestProperties)
-    {
-        $this->requestProperties = $requestProperties;
-        return $this;
-    }
 
     /**
      * @return ControllerResponse
      */
     public function getControllerResponse(): ControllerResponse
     {
-        return $this->responseProperties;
+        return $this->controllerResponse;
     }
 
+
     /**
-     * @param ControllerResponse $responseProperties
-     * @return $this|AbstractController
+     * @return UrlHelper
      */
-    public function setControllerResponse(ControllerResponse $responseProperties)
+    public function getUrlHelper(): UrlHelper
     {
-        $this->responseProperties = $responseProperties;
-        return $this;
+        return $this->urlHelper;
+    }
+
+
+    /**
+     * @return ViewIdHelper
+     */
+    public function getViewIdHelper(): ViewIdHelper
+    {
+        return $this->viewIdHelper;
     }
 
     /**
@@ -102,33 +128,6 @@ abstract class AbstractController implements ControllerInterface
         return $this->model;
     }
 
-    /**
-     * @param ModelInterface $model
-     * @return AbstractController
-     */
-    public function setModel(ModelInterface $model)
-    {
-        $this->model = $model;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getActionSuffix(): string
-    {
-        return $this->actionSuffix;
-    }
-
-    /**
-     * @param string $actionSuffix
-     * @return AbstractController
-     */
-    public function setActionSuffix(string $actionSuffix)
-    {
-        $this->actionSuffix = $actionSuffix;
-        return $this;
-    }
 
     /**
      * @return View
@@ -140,10 +139,12 @@ abstract class AbstractController implements ControllerInterface
 
     /**
      * @param View $view
+     * @return AbstractController
      */
-    public function setView(View $view): void
+    protected function setView(View $view)
     {
         $this->view = $view;
+        return $this;
     }
 
     /**
@@ -160,9 +161,25 @@ abstract class AbstractController implements ControllerInterface
      * @return AbstractController
      * @throws BeanException
      */
-    protected function setTemplateVariable(string $key, $value): self
+    protected function setTemplateVariable(string $key, $value)
     {
         $this->getModel()->getTemplateData()->setData($key, $value);
         return $this;
+    }
+
+    /**
+     * @param string $controller
+     * @param string $action
+     * @param array $params
+     * @return string|null
+     */
+    protected function getPath(string $action, ?string $controller = null, ?array $params = null): string
+    {
+        $routeParams = [];
+        $routeParams[MvcHandler::ACTION_ATTRIBUTE] = $action;
+        if (null !== $controller) {
+            $routeParams[MvcHandler::CONTROLLER_ATTRIBUTE] = $controller;
+        }
+        return $this->getUrlHelper()->generate(null, $routeParams, $params);
     }
 }

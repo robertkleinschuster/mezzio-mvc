@@ -4,19 +4,16 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\Controller;
 
+use Mezzio\Helper\UrlHelper;
+use Mezzio\Mvc\Handler\ViewIdHelper;
 use Mezzio\Mvc\Model\ModelInterface;
 use Mezzio\Mvc\View\View;
 
 interface ControllerInterface
 {
-    public const VIEWID_ATTRIBUTE = 'viewid';
-
-
     public function init();
 
-    public function handleParamter();
-
-    public function handleData();
+    public function post();
 
     /**
      * @return ControllerRequest
@@ -24,33 +21,19 @@ interface ControllerInterface
     public function getControllerRequest(): ControllerRequest;
 
     /**
-     * @param ControllerRequest $requestProperties
-     * @return $this
-     */
-    public function setControllerRequest(ControllerRequest $requestProperties);
-
-    /**
      * @return ControllerResponse
      */
     public function getControllerResponse(): ControllerResponse;
 
     /**
-     * @param ControllerResponse $responseProperties
-     * @return $this
+     * @return UrlHelper
      */
-    public function setControllerResponse(ControllerResponse $responseProperties);
-
+    public function getUrlHelper(): UrlHelper;
 
     /**
-     * @return string
+     * @return ViewIdHelper
      */
-    public function getActionSuffix(): string;
-
-    /**
-     * @param string $actionSuffix
-     * @return AbstractController
-     */
-    public function setActionSuffix(string $actionSuffix);
+    public function getViewIdHelper(): ViewIdHelper;
 
 
     /**
@@ -59,20 +42,10 @@ interface ControllerInterface
     public function getModel(): ModelInterface;
 
     /**
-     * @param ModelInterface $model
-     * @return mixed
-     */
-    public function setModel(ModelInterface $model);
-
-    /**
      * @return View
      */
     public function getView(): View;
 
-    /**
-     * @param View $view
-     */
-    public function setView(View $view);
 
     /**
      * @return bool

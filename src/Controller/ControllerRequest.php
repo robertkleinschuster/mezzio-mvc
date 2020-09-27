@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\Controller;
 
+use Mezzio\Router\RouteResult;
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Exception;
@@ -23,9 +24,9 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     private $serverRequest;
 
     /**
-     * @var array
+     * @var RouteResult
      */
-    private $id_Map;
+    private $routeResult;
 
     /**
      * ControllerRequestProperties constructor.
@@ -35,7 +36,7 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public function __construct(ServerRequestInterface $serverRequest)
     {
         $this->serverRequest = $serverRequest;
-
+        $this->routeResult = $serverRequest->getAttribute(RouteResult::class);
         // POST Params
         foreach ($serverRequest->getParsedBody() as $key => $value) {
             $this->setAttribute($key, $value);
@@ -45,41 +46,6 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
         foreach ($serverRequest->getQueryParams() as $key => $value) {
             $this->setAttribute($key, $value);
         }
-
-        // View ID
-        $this->setIdMap($this->convertViewID_To_Array($this->getAttribute(ControllerInterface::VIEWID_ATTRIBUTE)));
-    }
-
-
-    /**
-     * @param string $viewID
-     * @return array
-     */
-    protected function convertViewID_To_Array(string $viewID): array
-    {
-        $result = [];
-        $key_List = explode(';', urlencode($viewID));
-        foreach ($key_List as $item) {
-            $split = explode('=', $item);
-            $result[$split[0]] = $split[1];
-        }
-        return $result;
-    }
-
-    /**
-     * @return array
-     */
-    public function getIdMap(): array
-    {
-        return $this->id_Map;
-    }
-
-    /**
-     * @param array $id_Map
-     */
-    public function setIdMap(array $id_Map): void
-    {
-        $this->id_Map = $id_Map;
     }
 
 
@@ -89,5 +55,13 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public function getServerRequest(): ServerRequestInterface
     {
         return $this->serverRequest;
+    }
+
+    /**
+     * @return RouteResult
+     */
+    public function getRouteResult(): RouteResult
+    {
+        return $this->routeResult;
     }
 }

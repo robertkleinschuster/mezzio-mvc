@@ -28,6 +28,10 @@ class ConfigProvider
                     'template_folder' => 'view',
                     'default_layout' => 'dashboard'
                 ],
+                'action' => [
+                    'prefix' => '',
+                    'suffix' => 'Action'
+                ],
             ],
         ];
     }

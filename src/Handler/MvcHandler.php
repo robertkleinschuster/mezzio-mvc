@@ -9,7 +9,6 @@ use Mezzio\Mvc\Controller\ControllerInterface;
 use Mezzio\Mvc\Controller\ControllerResponse;
 use Mezzio\Mvc\Exception\MvcException;
 use Mezzio\Mvc\Factory\ControllerFactory;
-use Mezzio\Mvc\Factory\ModelFactory;
 use Mezzio\Mvc\Factory\ServerResponseFactory;
 use Mezzio\Mvc\View\ViewRenderer;
 use Mezzio\Template\TemplateRendererInterface;
@@ -36,11 +35,6 @@ class MvcHandler implements RequestHandlerInterface
     private $controllerFactory;
 
     /**
-     * @var ModelFactory
-     */
-    private $modelFactory;
-
-    /**
      * @var array
      */
     private $config;
@@ -49,19 +43,15 @@ class MvcHandler implements RequestHandlerInterface
      * MvcHandler constructor.
      * @param TemplateRendererInterface $renderer
      * @param ControllerFactory $controllerFactory
-     * @param ModelFactory $modelFactory
      * @param array $config
      */
     public function __construct(
         TemplateRendererInterface $renderer,
         ControllerFactory $controllerFactory,
-        ModelFactory $modelFactory,
-        array $config = []
-    )
-    {
+        array $config
+    ) {
         $this->renderer = $renderer;
         $this->controllerFactory = $controllerFactory;
-        $this->modelFactory = $modelFactory;
         $this->config = $config;
     }
 
@@ -75,31 +65,31 @@ class MvcHandler implements RequestHandlerInterface
     {
         $controllerCode = $request->getAttribute(self::CONTROLLER_ATTRIBUTE);
         $actionCode = $request->getAttribute(self::ACTION_ATTRIBUTE);
+
         $mvcTemplateFolder = $this->config['mvc']['template_folder'];
         $mvc404Template = $this->config['mvc']['template_404'];
-        $viewTemplateFolder = $this->config['view']['template_folder'];
+        $actionSuffix = $this->config['mvc']['action']['suffix'] ?? '';
+        $actionPrefix = $this->config['mvc']['action']['prefix'] ?? '';
+        $viewTemplateFolder = $this->config['mvc']['view']['template_folder'];
+        $actionMethod = $actionPrefix . $actionCode . $actionSuffix;
+
         /**
          * @var ControllerInterface|OptionAwareInterface $controller
          */
-        $controller = ($this->controllerFactory)(
-            $request->getAttribute(self::CONTROLLER_ATTRIBUTE),
-            $request
-        );
-        if (!method_exists($controller, $actionCode . $controller->getActionSuffix())) {
+        $controller = ($this->controllerFactory)($controllerCode, $request);
+
+        if (!method_exists($controller, $actionMethod)) {
             return new HtmlResponse(
                 $this->renderer->render("$mvcTemplateFolder::$mvc404Template", []),
                 404
             );
         }
 
-        $model = ($this->modelFactory)($request->getAttribute(self::CONTROLLER_ATTRIBUTE));
-        $controller->setModel($model);
-
         $controller->init();
 
-        $controller->handleParamter();
+        $controller->{$actionMethod}();
 
-        $controller->{$actionCode . $controller->getActionSuffix()}();
+        $controller->post();
 
         $controllerResponse = $controller->getControllerResponse();
         $templateData = $controller->getModel()->getTemplateData();
