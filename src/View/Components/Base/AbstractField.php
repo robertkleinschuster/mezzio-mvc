@@ -21,6 +21,8 @@ abstract class AbstractField implements OptionAwareInterface
     public const STYLE_LIGHT = 'light';
     public const STYLE_DARK = 'dark';
 
+    public const OPTION_APPEND = 'append';
+
     /**
      * @var string
      */
