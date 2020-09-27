@@ -2,8 +2,25 @@
     <table class="table table-striped table-hover table-bordered table-sm">
         <thead class="bg-light">
         <tr>
+            <?php $previousChapter = null?>
+            <?php $index = 1?>
+            <?php $count = count($fields)?>
             <?php foreach ($fields as $key => $field): ?>
-                <td><?= $field->getName() ?></td>
+                <?php if ($field->getChapter() == $previousChapter): ?>
+                    <?= $field->getName() ?>
+                <?php elseif ($previousChapter == null): ?>
+                    <td>
+                    <?= $field->getName() ?>
+                <?php else: ?>
+                    </td>
+                    <td>
+                    <?= $field->getName() ?>
+                <?php endif;?>
+                <?php if ($index == $count): ?>
+                    </td>
+                <?php endif;?>
+                <?php $previousChapter = $field->getChapter()?>
+                <?php $index++;?>
             <?php endforeach ?>
         </tr>
         </thead>
