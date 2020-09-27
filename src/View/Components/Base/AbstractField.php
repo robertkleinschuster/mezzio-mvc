@@ -60,6 +60,10 @@ abstract class AbstractField implements OptionAwareInterface
             if (strpos($input, $placeholder) !== false) {
                 $output = str_replace($placeholder, $item, $output);
             }
+            $placeholderEncoded = urlencode($placeholder);
+            if (strpos($input, $placeholderEncoded) !== false) {
+                $output = str_replace($placeholderEncoded, $item, $output);
+            }
         }
         return $output;
     }

@@ -16,7 +16,7 @@ class ViewIdHelper
     public function parseViewId(string $viewID): array
     {
         $result = [];
-        $key_List = explode(';', urldecode($viewID));
+        $key_List = explode(';', $viewID);
         foreach ($key_List as $item) {
             $split = explode('=', $item);
             $result[$split[0]] = $split[1];
@@ -34,7 +34,7 @@ class ViewIdHelper
         foreach ($id_Map as $key => $value) {
             $result[] = "$key=$value";
         }
-        return urlencode(implode(';', $result));
+        return implode(';', $result);
     }
 
 
