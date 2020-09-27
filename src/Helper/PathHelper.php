@@ -262,7 +262,7 @@ class PathHelper
         } else {
             $routeName = null;
         }
-        if ($this->getViewIdMap()) {
+        if ($this->hasViewIdMap()) {
             if (null === $params) {
                 $params = [];
             }
