@@ -34,11 +34,11 @@
                     <?php if ($field->getChapter() == $previousChapter): ?>
                         <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
                     <?php elseif ($previousChapter == null): ?>
-                        <td <?= $field->hasWidth() ? 'class="w-' . $field->getWidth() . '"': ''?>>
+                        <td <?= $field->hasWidth() ? 'style="width: ' . $field->getWidth() . 'px"': ''?>>
                             <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
                     <?php else: ?>
                         </td>
-                        <td <?= $field->hasWidth() ? 'class=w-"' . $field->getWidth() . '"': ''?>>
+                        <td <?= $field->hasWidth() ? 'style="width: ' . $field->getWidth() . 'px"': ''?>>
                             <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
                     <?php endif;?>
                     <?php if ($index == $count): ?>
