@@ -146,6 +146,6 @@ class Detail extends AbstractComponent
     {
         $text = new Fields\Text($text, $key);
         $this->addField($text);
-        return $this;
+        return $text;
     }
 }
