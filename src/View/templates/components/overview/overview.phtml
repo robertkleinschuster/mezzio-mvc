@@ -11,14 +11,9 @@
         <?php foreach ($model->getComponentDataBeanList() as $bean): ?>
             <tr>
                 <?php foreach ($fields as $field): ?>
-                    <?php if ($field->hasOption(\Mezzio\Mvc\View\Components\Base\AbstractField::OPTION_APPEND)): ?>
-                        <td>
-                    <?php endif; ?>
-                    <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
-                    <?php if ($field->hasOption(\Mezzio\Mvc\View\Components\Base\AbstractField::OPTION_APPEND)): ?>
-
-                        </td>
-                    <?php endif; ?>
+                    <td>
+                        <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
+                    </td>
                 <?php endforeach ?>
             </tr>
         <?php endforeach ?>
