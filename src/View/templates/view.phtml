@@ -1,5 +1,9 @@
 <?php $this->layout($templateFolder . '::' . $layout, ['templateFolder' => $templateFolder, 'title' => $title, 'model' => $model]) ?>
 <?php foreach ($components as $component): ?>
     <h2><?= $component->getTitle() ?></h2>
-    <?php $this->insert($templateFolder . '::' . $component->getTemplate(), ['templateFolder' => $templateFolder, 'fields' => $component->getFieldList(), 'model' => $component->getComponentModel()]) ?>
+    <div class="container-fluid">
+        <div class="row row-cols-<?=$field->getCols()?>">
+            <?php $this->insert($templateFolder . '::' . $component->getTemplate(), ['templateFolder' => $templateFolder, 'fields' => $component->getFieldList(), 'model' => $component->getComponentModel()]) ?>
+        </div>
+    </div>
 <?php endforeach ?>

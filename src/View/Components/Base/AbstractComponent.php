@@ -28,6 +28,11 @@ abstract class AbstractComponent implements OptionAwareInterface
     private $componentModel;
 
     /**
+     * @var int
+     */
+    private $cols;
+
+    /**
      * AbstractComponent constructor.
      * @param string $title
      * @param ComponentModelInterface $componentModel
@@ -80,4 +85,22 @@ abstract class AbstractComponent implements OptionAwareInterface
     {
         return 'components/base/component';
     }
+
+    /**
+     * @return int
+     */
+    public function getCols(): int
+    {
+        return $this->cols ?? 1;
+    }
+
+    /**
+     * @param int $cols
+     */
+    public function setCols(int $cols): void
+    {
+        $this->cols = $cols;
+    }
+
+
 }

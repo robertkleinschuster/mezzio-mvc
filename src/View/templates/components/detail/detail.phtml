@@ -1,17 +1,14 @@
 <?php foreach ($model->getComponentDataBeanList() as $bean): ?>
-    <div class="jumbotron">
-        <?php foreach ($fields as $field): ?>
-            <div class="row">
-                <div class="col-sm mw-25">
-                    <?= $field->getName($data)?>
+            <?php foreach ($fields as $field): ?>
+                <div class="col">
+                    <div class="row p-1">
+                        <div class="col-sm-4 bg-secondary text-white">
+                            <?= $field->getName($data) ?>:
+                        </div>
+                        <div class="col-sm-8 bg-white border border-secondary">
+                            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm bg-white border-dark">
-                    <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
-                </div>
-            </div>
-        <?php endforeach ?>
-    </div>
+            <?php endforeach ?>
 <?php endforeach ?>
-
-
-
