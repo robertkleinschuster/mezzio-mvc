@@ -1,9 +1,9 @@
 <?php $this->layout($templateFolder . '::' . $layout, ['templateFolder' => $templateFolder, 'title' => $title, 'model' => $model]) ?>
-<div class="row row-cols-<?= $cols ?>">
+<div class="row-cols-<?= $cols ?>">
     <?php foreach ($components as $component): ?>
         <div class="col">
             <h2><?= $component->getTitle() ?></h2>
-                <div class="row row-cols-<?= $component->getCols() ?>">
+                <div class="row-cols-<?= $component->getCols() ?>">
                     <?php $this->insert($templateFolder . '::' . $component->getTemplate(), ['templateFolder' => $templateFolder, 'fields' => $component->getFieldList(), 'model' => $component->getComponentModel()]) ?>
                 </div>
         </div>
