@@ -11,6 +11,8 @@
         <?php foreach ($model->getComponentDataBeanList() as $bean): ?>
             <tr>
                 <?php $previousChapter = null?>
+                <?php $index = 1?>
+                <?php $count = count($fields)?>
                 <?php foreach ($fields as $field): ?>
                     <?php if ($field->getChapter() == $previousChapter): ?>
                         <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
@@ -22,7 +24,11 @@
                         <td>
                             <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
                     <?php endif;?>
+                    <?php if ($index == $count): ?>
+                        </td>
+                    <?php endif;?>
                     <?php $previousChapter = $field->getChapter()?>
+                    <?php $index++;?>
                 <?php endforeach ?>
             </tr>
         <?php endforeach ?>
