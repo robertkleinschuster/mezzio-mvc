@@ -63,8 +63,8 @@ class MvcHandler implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $controllerCode = $request->getAttribute(self::CONTROLLER_ATTRIBUTE);
-        $actionCode = $request->getAttribute(self::ACTION_ATTRIBUTE);
+        $controllerCode = $request->getAttribute(self::CONTROLLER_ATTRIBUTE) ?? 'index';
+        $actionCode = $request->getAttribute(self::ACTION_ATTRIBUTE) ?? 'index';
 
         $mvcTemplateFolder = $this->config['mvc']['template_folder'];
         $errorController = $this->config['mvc']['error_controller'];
@@ -139,6 +139,6 @@ class MvcHandler implements RequestHandlerInterface
      */
     public static function getRoute(): string
     {
-        return '/{' . self::CONTROLLER_ATTRIBUTE . '}/{' . self::ACTION_ATTRIBUTE . '}';
+        return '[/[{' . self::CONTROLLER_ATTRIBUTE . '}[/[{' . self::ACTION_ATTRIBUTE . '}[/]]]]]';
     }
 }
