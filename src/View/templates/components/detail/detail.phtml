@@ -1,0 +1,11 @@
+<?php foreach ($model->getComponentDataBeanList() as $bean): ?>
+    <div class="jumbotron">
+        <?php foreach ($fields as $field): ?>
+            <span><?= $field->getName($data)?></span>
+            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
+        <?php endforeach ?>
+    </div>
+<?php endforeach ?>
+
+
+
