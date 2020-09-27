@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\Factory;
 
-use Mezzio\Helper\UrlHelper;
 use Mezzio\Mvc\Controller\AbstractController;
 use Mezzio\Mvc\Controller\ControllerInterface;
 use Mezzio\Mvc\Controller\ControllerRequest;
 use Mezzio\Mvc\Controller\ControllerResponse;
 use Mezzio\Mvc\Exception\ControllerNotFoundException;
 use Mezzio\Mvc\Helper\PathHelper;
-use Mezzio\Mvc\Helper\ViewIdHelper;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class ControllerFactory
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+
+
+    private $config;
+
+    private $modelFactory;
+
+    private $pathHelper;
 
     /**
      * ControllerFactory constructor.
@@ -28,7 +29,9 @@ class ControllerFactory
      */
     public function __construct(ContainerInterface $container)
     {
-        $this->container = $container;
+        $this->config = $container->get('config');
+        $this->modelFactory = $container->get(ModelFactory::class);
+        $this->pathHelper = $container->get(PathHelper::class);
     }
 
     /**
@@ -40,18 +43,16 @@ class ControllerFactory
      */
     public function __invoke(string $code, ServerRequestInterface $request): ControllerInterface
     {
-        $config = $this->container->get('config');
-        $class = $this->getControllerClass($config, $code);
-
+        $class = $this->getControllerClass($this->config, $code);
         /**
          * @var AbstractController $controller
          */
-        $controller = new $class(
+        return new $class(
             new ControllerRequest($request),
             new ControllerResponse(),
-            $this->container->get(PathHelper::class)
+            ($this->modelFactory)($code),
+            $this->pathHelper
         );
-        return $controller;
     }
 
     /**
