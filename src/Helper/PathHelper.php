@@ -255,17 +255,14 @@ class PathHelper
         if ($this->hasParams()) {
             $params = $this->getParams();
         } else {
-            $params = null;
+            $params = [];
         }
         if ($this->hasRouteName()) {
             $routeName = $this->getRouteName();
         } else {
-            $routeName = null;
+            $routeName = [];
         }
         if ($this->hasViewIdMap()) {
-            if (null === $params) {
-                $params = [];
-            }
             $params[ViewIdHelper::VIEWID_ATTRIBUTE] = $this->getViewIdHelper()->generateViewId($this->getViewIdMap());
         }
         $path =  $this->getUrlHelper()->generate($routeName, $routeParams, $params);
