@@ -42,6 +42,11 @@ abstract class AbstractField implements OptionAwareInterface
     private $chapter;
 
     /**
+     * @var int
+     */
+    private $width;
+
+    /**
      * AbstractField constructor.
      * @param string $name
      * @param string $key
@@ -161,6 +166,32 @@ abstract class AbstractField implements OptionAwareInterface
         return $this;
     }
 
+    /**
+    * @return int
+    */
+    public function getWidth(): int
+    {
+        return $this->width;
+    }
+
+    /**
+    * @param int $width
+    *
+    * @return $this
+    */
+    public function setWidth(int $width): self
+    {
+        $this->width = $width;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasWidth(): bool
+    {
+        return $this->width !== null;
+    }
 
 
     /**
