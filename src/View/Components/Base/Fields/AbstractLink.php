@@ -15,6 +15,8 @@ abstract class AbstractLink extends AbstractField
     public const TARGET_PARENT = '_parent';
     public const TARGET_TOP = '_top';
 
+    public const OPTION_BUTTON_STYLE = 'button_style';
+
 
     /**
      * @var string
@@ -25,6 +27,11 @@ abstract class AbstractLink extends AbstractField
      * @var string
      */
     private $action;
+
+    /**
+     * @var string
+     */
+    private $style;
 
     /**
      * @return string
@@ -91,5 +98,47 @@ abstract class AbstractLink extends AbstractField
     public function hasAction(): bool
     {
         return $this->action !== null;
+    }
+
+    /**
+    * @return string
+    */
+    public function getStyle(): string
+    {
+        return $this->style;
+    }
+
+    /**
+    * @param string $style
+    *
+    * @return $this
+    */
+    public function setStyle(string $style): self
+    {
+        $this->style = $style;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasStyle(): bool
+    {
+        return $this->style !== null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClass(): string
+    {
+        $result = "";
+        if ($this->hasOption(self::OPTION_BUTTON_STYLE)) {
+            $result = 'btn';
+            if ($this->hasStyle()) {
+                $result .= ' btn-' . $this->getStyle();
+            }
+        }
+        return $result;
     }
 }

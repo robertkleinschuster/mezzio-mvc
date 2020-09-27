@@ -1,3 +1,4 @@
-<a <?= $field->hasAction() ? " href=\"{$field->getAction($data)}\"" : '' ?> <?= $field->hasTarget() ? " target=\"{$field->getTarget()}\"" : '' ?>>
+<a <?= $field->hasAction() ? " href=\"{$field->getAction($data)}\"" : '' ?> <?= $field->hasTarget() ? " target=\"{$field->getTarget()}\"" : '' ?>
+class="<?=$field->getClass()?>">
     <?= $field->getValue($data) ?>
 </a>
