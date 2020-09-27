@@ -72,8 +72,8 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public function getViewIdMap(): array
     {
         $viewId = $this->getAttribute(ViewIdHelper::VIEWID_ATTRIBUTE);
-        if (null === $viewId) {
-            return (new ViewIdHelper())->parseViewId(urlencode($viewId));
+        if (null !== $viewId) {
+            return (new ViewIdHelper())->parseViewId(urldecode($viewId));
         } else {
             return [];
         }
