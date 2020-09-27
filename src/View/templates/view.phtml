@@ -2,7 +2,7 @@
 <?php foreach ($components as $component): ?>
     <h2><?= $component->getTitle() ?></h2>
     <div class="container-fluid">
-        <div class="row row-cols-<?=$field->getCols()?>">
+        <div class="row row-cols-<?=$component->getCols()?>">
             <?php $this->insert($templateFolder . '::' . $component->getTemplate(), ['templateFolder' => $templateFolder, 'fields' => $component->getFieldList(), 'model' => $component->getComponentModel()]) ?>
         </div>
     </div>
