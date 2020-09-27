@@ -43,6 +43,11 @@ class View implements OptionAwareInterface
     private $viewModel;
 
     /**
+     * @var int
+     */
+    private $cols;
+
+    /**
      * View constructor.
      * @param string $title
      * @param ViewModelInterface $viewModel
@@ -164,6 +169,24 @@ class View implements OptionAwareInterface
         $this->description = $description;
         return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function getCols(): int
+    {
+        return $this->cols ?? 1;
+    }
+
+    /**
+     * @param int $cols
+     */
+    public function setCols(int $cols): void
+    {
+        $this->cols = $cols;
+    }
+
+
 
     /**
      * @return string
