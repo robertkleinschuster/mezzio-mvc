@@ -34,7 +34,7 @@
                     <?php if ($field->getChapter() == $previousChapter): ?>
                         <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
                     <?php elseif ($previousChapter == null): ?>
-                        <td <?= $field->hasWidth() ? 'class=w-"' . $field->getWidth() . '"': ''?>>
+                        <td <?= $field->hasWidth() ? 'class="w-' . $field->getWidth() . '"': ''?>>
                             <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
                     <?php else: ?>
                         </td>
