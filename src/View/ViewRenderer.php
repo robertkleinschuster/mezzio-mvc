@@ -44,6 +44,7 @@ class ViewRenderer
     {
         $view->getViewModel()->getTemplateData()->setData('layout', $view->getLayout());
         $view->getViewModel()->getTemplateData()->setData('cols', $view->getCols());
+        $view->getViewModel()->getTemplateData()->setData('indexLink', $view->getIndexLink());
         $view->getViewModel()->getTemplateData()->setData('title', $view->getTitle());
         $view->getViewModel()->getTemplateData()->setData('author', $view->getAuthor());
         $view->getViewModel()->getTemplateData()->setData('description', $view->getDescription());

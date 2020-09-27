@@ -48,6 +48,11 @@ class View implements OptionAwareInterface
     private $cols;
 
     /**
+     * @var string
+     */
+    private $indexLink;
+
+    /**
      * View constructor.
      * @param string $title
      * @param ViewModelInterface $viewModel
@@ -181,10 +186,29 @@ class View implements OptionAwareInterface
     /**
      * @param int $cols
      */
-    public function setCols(int $cols): void
+    public function setCols(int $cols)
     {
         $this->cols = $cols;
+        return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getIndexLink(): string
+    {
+        return $this->indexLink ?? '/';
+    }
+
+    /**
+     * @param string $indexLink
+     */
+    public function setIndexLink(string $indexLink)
+    {
+        $this->indexLink = $indexLink;
+        return $this;
+    }
+
 
 
 
