@@ -260,7 +260,7 @@ class PathHelper
         if ($this->hasRouteName()) {
             $routeName = $this->getRouteName();
         } else {
-            $routeName = [];
+            $routeName = null;
         }
         if ($this->hasViewIdMap()) {
             $params[ViewIdHelper::VIEWID_ATTRIBUTE] = $this->getViewIdHelper()->generateViewId($this->getViewIdMap());
