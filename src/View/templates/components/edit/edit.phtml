@@ -1,7 +1,10 @@
+<h2><?= $component->getTitle() ?></h2>
 <form method="post">
-    <?php foreach ($fields as $field): ?>
-    <div class="col">
-        <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $model->getComponentDataBean()]) ?>
+    <div class="row row-cols-<?= $component->getCols() ?>">
+        <?php foreach ($fields as $field): ?>
+            <div class="col">
+                <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $model->getComponentDataBean()]) ?>
+            </div>
+        <?php endforeach ?>
     </div>
-    <?php endforeach ?>
 </form>

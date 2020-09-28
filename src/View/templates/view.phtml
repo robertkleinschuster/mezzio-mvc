@@ -2,10 +2,7 @@
 <div class="row row-cols-<?= $cols ?>">
     <?php foreach ($components as $component): ?>
         <div class="col">
-            <h2><?= $component->getTitle() ?></h2>
-                <div class="row row-cols-<?= $component->getCols() ?>">
-                    <?php $this->insert($templateFolder . '::' . $component->getTemplate(), ['templateFolder' => $templateFolder, 'component' => $component, 'fields' => $component->getFieldList(), 'model' => $component->getComponentModel()]) ?>
-                </div>
+            <?php $this->insert($templateFolder . '::' . $component->getTemplate(), ['templateFolder' => $templateFolder, 'component' => $component, 'fields' => $component->getFieldList(), 'model' => $component->getComponentModel()]) ?>
         </div>
     <?php endforeach ?>
 </div>

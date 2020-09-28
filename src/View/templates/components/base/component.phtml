@@ -1,8 +1,11 @@
-<?php foreach ($model->getComponentDataBeanList() as $bean): ?>
-    <?php foreach ($fields as $field): ?>
-<div class="col">
+<h2><?= $component->getTitle() ?></h2>
 
-<?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
-</div>
-    <?php endforeach ?>
+<?php foreach ($model->getComponentDataBeanList() as $bean): ?>
+    <div class="row row-cols-<?= $component->getCols() ?>">
+        <?php foreach ($fields as $field): ?>
+            <div class="col">
+                <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
+            </div>
+        <?php endforeach ?>
+    </div>
 <?php endforeach ?>
