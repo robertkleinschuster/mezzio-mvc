@@ -99,10 +99,15 @@ class View implements OptionAwareInterface
 
     /**
      * @param AbstractComponent $component
+     * @param bool $prepend
      */
-    public function addComponent(AbstractComponent $component)
+    public function addComponent(AbstractComponent $component, bool $prepend)
     {
-        $this->component_List[] = $component;
+        if ($prepend) {
+            array_unshift($this->component_List, $component);
+        } else {
+            $this->component_List[] = $component;
+        }
     }
 
     /**
