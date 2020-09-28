@@ -7,7 +7,7 @@
             <?php $index = 1?>
             <?php $count = count($fields)?>
             <?php foreach ($fields as $key => $field): ?>
-                <?php if ($field->getChapter() == $previousChapter): ?>
+                <?php if ($field->getChapter() == $previousChapter && $field->getChapter() != ''): ?>
                     <?= $field->getName() ?>
                 <?php elseif ($previousChapter == null): ?>
                     <td>
@@ -32,7 +32,7 @@
                 <?php $index = 1?>
                 <?php $count = count($fields)?>
                 <?php foreach ($fields as $field): ?>
-                    <?php if ($field->getChapter() == $previousChapter): ?>
+                    <?php if ($field->getChapter() == $previousChapter && $field->getChapter() != ''): ?>
                         <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
                     <?php elseif ($previousChapter == null): ?>
                         <td <?= $field->hasWidth() ? 'style="width: ' . $field->getWidth() . 'px"': ''?>>
