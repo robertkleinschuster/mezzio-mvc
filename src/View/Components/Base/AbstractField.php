@@ -153,7 +153,7 @@ abstract class AbstractField implements OptionAwareInterface
      */
     public function getChapter(): string
     {
-        return $this->chapter ?? uniqid();
+        return $this->chapter ?? '';
     }
 
     /**

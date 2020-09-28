@@ -3,8 +3,8 @@
     <div class="row row-cols-<?= $component->getCols() ?>">
         <?php $prevChapter = null ?>
         <?php foreach ($fields as $field): ?>
-        <?= $field->getChapter() != $prevChapter ? "<h4>{$field->getChapter()}</h4>" : '' ?>
             <div class="col">
+                <?= $field->getChapter() != $prevChapter ? "<h4>{$field->getChapter()}</h4>" : '' ?>
                 <?php $this->insert($templateFolder . '::' . $field->getTemplate(), [
                         'templateFolder' => $templateFolder,
                     'field' => $field,
