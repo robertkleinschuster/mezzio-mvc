@@ -13,6 +13,7 @@ use Mezzio\Mvc\Handler\MvcHandler;
 use Mezzio\Mvc\Handler\MvcHandlerFactory;
 use Mezzio\Mvc\Helper\PathHelper;
 use Mezzio\Mvc\Helper\PathHelperFactory;
+use Mezzio\Mvc\Model\ErrorModel;
 
 class ConfigProvider
 {
@@ -28,7 +29,7 @@ class ConfigProvider
                     'error' => ErrorController::class
                 ],
                 'models' => [
-                    'error' => ErrorController::class
+                    'error' => ErrorModel::class
                 ],
                 'template_folder' => 'mvc',
                 'view' => [
