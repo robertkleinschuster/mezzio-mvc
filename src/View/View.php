@@ -210,8 +210,6 @@ class View implements OptionAwareInterface
     }
 
 
-
-
     /**
      * @return string
      */

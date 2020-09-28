@@ -4,7 +4,7 @@
         <div class="col">
             <h2><?= $component->getTitle() ?></h2>
                 <div class="row row-cols-<?= $component->getCols() ?>">
-                    <?php $this->insert($templateFolder . '::' . $component->getTemplate(), ['templateFolder' => $templateFolder, 'fields' => $component->getFieldList(), 'model' => $component->getComponentModel()]) ?>
+                    <?php $this->insert($templateFolder . '::' . $component->getTemplate(), ['templateFolder' => $templateFolder, 'component' => $component, 'fields' => $component->getFieldList(), 'model' => $component->getComponentModel()]) ?>
                 </div>
         </div>
     <?php endforeach ?>

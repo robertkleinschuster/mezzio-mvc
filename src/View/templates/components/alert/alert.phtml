@@ -1,0 +1,9 @@
+<?php foreach ($model->getComponentDataBeanList() as $bean): ?>
+    <div class="alert alert-<?=$component->getStyle()?>" role="alert">
+        <?php foreach ($fields as $field): ?>
+            <div class="col">
+                <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
+            </div>
+        <?php endforeach ?>
+    </div>
+<?php endforeach ?>
