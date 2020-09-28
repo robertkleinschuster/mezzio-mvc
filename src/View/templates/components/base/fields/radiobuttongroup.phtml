@@ -1,6 +1,6 @@
 <?php foreach ($field->getSelectOptions($data) as $key => $value): ?>
     <div class="form-check">
-        <input class="form-check-input"
+        <input class="form-check-input <?= is_array($errors) && count($errors) ? ' is-invalid ' : '' ?>"
                type="radio"
                name="<?= $field->getKey($data) ?>"
                id="<?= $key ?>"
@@ -10,3 +10,10 @@
         <label class="form-check-label" for="<?= $key ?>"><?= $value ?></label>
     </div>
 <?php endforeach; ?>
+<?php if (is_array($errors)): ?>
+    <?php foreach ($errors as $error): ?>
+        <div id="<?= $field->getKey($data) ?>_Error" class="invalid-feedback">
+            <?= $error ?>
+        </div>
+    <?php endforeach ?>
+<?php endif ?>

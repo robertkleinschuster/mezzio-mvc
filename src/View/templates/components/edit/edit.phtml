@@ -3,7 +3,12 @@
     <div class="row row-cols-<?= $component->getCols() ?>">
         <?php foreach ($fields as $field): ?>
             <div class="col">
-                <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $model->getComponentDataBean()]) ?>
+                <?php $this->insert($templateFolder . '::' . $field->getTemplate(), [
+                        'templateFolder' => $templateFolder,
+                    'field' => $field,
+                    'data' => $model->getComponentDataBean(),
+                    'errors' => $model->getValidationHelper()->getErrorList($field->getKey()),
+                    ]) ?>
             </div>
         <?php endforeach ?>
     </div>

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\View;
 
+use Mezzio\Mvc\Helper\ValidationHelper;
+
 class ComponentModel implements ComponentModelInterface
 {
 
@@ -11,6 +13,23 @@ class ComponentModel implements ComponentModelInterface
      * @var ComponentDataBeanListInterface
      */
     private $componentDataBeanList;
+
+    /**
+     * @var ValidationHelper
+     */
+    private $validationHelper;
+
+    /**
+     * @return ValidationHelper
+     */
+    public function getValidationHelper(): ValidationHelper
+    {
+        if (null === $this->validationHelper) {
+            $this->validationHelper = new ValidationHelper();
+        }
+        return $this->validationHelper;
+    }
+
 
     /**
      * ComponentModel constructor.

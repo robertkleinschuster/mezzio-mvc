@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\View;
 
+use Mezzio\Mvc\Helper\ValidationHelper;
+
 interface ComponentModelInterface
 {
     /**
@@ -34,5 +36,10 @@ interface ComponentModelInterface
      * @throws ViewException
      */
     public function getComponentDataBean(): ComponentDataBeanInterface;
+
+    /**
+     * @return ValidationHelper
+     */
+    public function getValidationHelper(): ValidationHelper;
 
 }
