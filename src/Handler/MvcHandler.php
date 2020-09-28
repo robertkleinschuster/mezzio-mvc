@@ -77,23 +77,9 @@ class MvcHandler implements RequestHandlerInterface
             $controller->init();
             $this->executeControllerAction($controller, $actionMethod);
             $controller->end();
-            if ($controller->getControllerResponse()->hasOption(ControllerResponse::OPTION_RENDER_RESPONSE)) {
-                $templateData = $controller->getModel()->getTemplateData();
-                if ($controller->hasView()) {
-                    $viewRenderer = new ViewRenderer($this->renderer, $viewTemplateFolder);
-                    $view = $controller->getView();
-                    $view->getViewModel()->getTemplateData()->setFromArray($templateData->toArray());
-                    $renderedOutput = $viewRenderer->render($view);
-                } else {
-                    $renderedOutput = $this->renderer->render(
-                        "$mvcTemplateFolder::$controllerCode/$actionCode",
-                        $templateData->toArray()
-                    );
-                }
-                $controller->getControllerResponse()->setBody($renderedOutput);
-            }
         } catch (ActionException | ControllerException $exception) {
-            $this->getErrorController($controller, $errorController, $request)->error($exception);
+            $controller = $this->getErrorController($controller, $errorController, $request);
+            $controller->error($exception);
         } catch (ActionNotFoundException | ControllerNotFoundException $exception) {
             try {
                 $controller = $this->getErrorController($controller, $errorController, $request);
@@ -106,6 +92,21 @@ class MvcHandler implements RequestHandlerInterface
         } catch (\Exception $exception) {
             $controller = $this->getErrorController($controller, $errorController, $request);
             $controller->error($exception);
+        }
+        if ($controller->getControllerResponse()->hasOption(ControllerResponse::OPTION_RENDER_RESPONSE)) {
+            $templateData = $controller->getModel()->getTemplateData();
+            if ($controller->hasView()) {
+                $viewRenderer = new ViewRenderer($this->renderer, $viewTemplateFolder);
+                $view = $controller->getView();
+                $view->getViewModel()->getTemplateData()->setFromArray($templateData->toArray());
+                $renderedOutput = $viewRenderer->render($view);
+            } else {
+                $renderedOutput = $this->renderer->render(
+                    "$mvcTemplateFolder::$controllerCode/$actionCode",
+                    $templateData->toArray()
+                );
+            }
+            $controller->getControllerResponse()->setBody($renderedOutput);
         }
         return (new ServerResponseFactory())($controller->getControllerResponse());
     }
