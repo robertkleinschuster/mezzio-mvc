@@ -96,13 +96,16 @@ class MvcHandler implements RequestHandlerInterface
             $this->getErrorController($controller, $errorController, $request)->error($exception);
         } catch (ActionNotFoundException | ControllerNotFoundException $exception) {
             try {
-                $controller = $this->getErrorController($controller, $errorController, $request)->error($exception);
+                $controller = $this->getErrorController($controller, $errorController, $request);
                 $controller->getControllerResponse()->setStatusCode(ControllerResponse::STATUS_NOT_FOUND);
+                $controller->error($exception);
             } catch (\Throwable $exception) {
-                $this->getErrorController(null, $errorController, $request)->error($exception);
+                $controller = $this->getErrorController(null, $errorController, $request);
+                $controller->error($exception);
             }
         } catch (\Exception $exception) {
-            $this->getErrorController($controller, $errorController, $request)->error($exception);
+            $controller = $this->getErrorController($controller, $errorController, $request);
+            $controller->error($exception);
         }
         return (new ServerResponseFactory())($controller->getControllerResponse());
     }
