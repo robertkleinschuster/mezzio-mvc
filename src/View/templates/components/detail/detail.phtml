@@ -1,6 +1,6 @@
 <h2><?= $component->getTitle() ?></h2>
 
-<?php foreach ($model->getComponentDataBean() as $bean): ?>
+<?php foreach ($model->getComponentDataBeanList() as $bean): ?>
     <div class="row row-cols-<?= $component->getCols() ?>">
         <?php foreach ($fields as $field): ?>
             <div class="col">
