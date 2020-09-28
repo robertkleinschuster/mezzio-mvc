@@ -101,7 +101,7 @@ class View implements OptionAwareInterface
      * @param AbstractComponent $component
      * @param bool $prepend
      */
-    public function addComponent(AbstractComponent $component, bool $prepend)
+    public function addComponent(AbstractComponent $component, bool $prepend = false)
     {
         if ($prepend) {
             array_unshift($this->component_List, $component);
