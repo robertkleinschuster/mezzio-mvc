@@ -12,6 +12,7 @@
         <?php if (count($errors)): ?>
             aria-describedby="<?= $field->getKey($data) ?>_Error"
         <?php endif; ?>
+            autocomplete="<?=$field->getAutocomplete()?>"
     >
     <?php foreach ($errors as $error): ?>
         <div id="<?= $field->getKey($data) ?>_Error" class="invalid-feedback">
