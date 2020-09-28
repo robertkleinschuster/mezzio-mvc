@@ -1,7 +1,9 @@
 <h3><?= $component->getTitle() ?></h3>
 <form method="post">
     <div class="row row-cols-<?= $component->getCols() ?>">
+        <?php $prevChapter = null ?>
         <?php foreach ($fields as $field): ?>
+        <?= $field->getChapter() != $prevChapter ? "<h4>{$field->getChapter()}</h4>" : '' ?>
             <div class="col">
                 <?php $this->insert($templateFolder . '::' . $field->getTemplate(), [
                         'templateFolder' => $templateFolder,
@@ -10,6 +12,7 @@
                     'errors' => $model->getValidationHelper()->getErrorList($field->getKey()),
                     ]) ?>
             </div>
+        <?php $prevChapter = $field->getChapter()?>
         <?php endforeach ?>
     </div>
 </form>
