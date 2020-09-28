@@ -20,11 +20,11 @@ class ErrorController extends AbstractController
     }
 
     /**
-     * @param \Exception $exception
+     * @param \Throwable $exception
      * @return mixed|void
      * @throws \NiceshopsDev\NiceCore\Exception
      */
-    public function error(\Exception $exception)
+    public function error(\Throwable $exception)
     {
         if ($exception instanceof NotFoundException) {
             $this->getControllerResponse()->setStatusCode(ControllerResponse::STATUS_NOT_FOUND);

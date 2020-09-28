@@ -22,10 +22,10 @@ interface ControllerInterface
     public function end();
 
     /**
-     * @param \Exception $exception
+     * @param \Throwable $exception
      * @return mixed
      */
-    public function error(\Exception $exception);
+    public function error(\Throwable $exception);
 
     /**
      * @return ControllerRequest
