@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\View\Components\Base\Fields;
 
+use Mezzio\Mvc\View\ComponentDataBeanInterface;
 use Mezzio\Mvc\View\Components\Base\AbstractField;
 
 abstract class AbstractBadge extends AbstractField
@@ -18,7 +19,7 @@ abstract class AbstractBadge extends AbstractField
     /**
      * @var string
      */
-    private $link;
+    private $action;
 
 
     /**
@@ -63,30 +64,35 @@ abstract class AbstractBadge extends AbstractField
     }
 
     /**
+     * @param ComponentDataBeanInterface|null $bean
      * @return string
      */
-    public function getLink(): string
+    public function getAction(?ComponentDataBeanInterface $bean = null): string
     {
-        return $this->link;
+        if (null === $bean) {
+            return $this->action;
+        } else {
+            return $this->replacePlaceholders($this->action, $bean);
+        }
     }
 
     /**
-     * @param string link
+     * @param string action
      *
      * @return $this
      */
-    public function setLink(string $link): self
+    public function setAction(string $action): self
     {
-        $this->link = $link;
+        $this->action = $action;
         return $this;
     }
 
     /**
      * @return bool
      */
-    public function hasLink(): bool
+    public function hasAction(): bool
     {
-        return $this->link !== null;
+        return $this->action !== null;
     }
 
     /**
