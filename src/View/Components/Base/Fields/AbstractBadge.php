@@ -20,6 +20,12 @@ abstract class AbstractBadge extends AbstractField
      */
     private $link;
 
+
+    /**
+     * @var string
+     */
+    private $style;
+
     /**
      * @return string
      */
@@ -82,4 +88,32 @@ abstract class AbstractBadge extends AbstractField
     {
         return $this->link !== null;
     }
+
+    /**
+    * @return string
+    */
+    public function getStyle(): string
+    {
+        return $this->style;
+    }
+
+    /**
+    * @param string $style
+    *
+    * @return $this
+    */
+    public function setStyle(string $style): self
+    {
+        $this->style = $style;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasStyle(): bool
+    {
+        return $this->style !== null;
+    }
+
 }
