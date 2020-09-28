@@ -29,6 +29,7 @@ class ErrorController extends AbstractController
         if ($exception instanceof NotFoundException) {
             $this->getControllerResponse()->setStatusCode(ControllerResponse::STATUS_NOT_FOUND);
         }
+        $errorString = htmlspecialchars($exception->__toString());
         $body = "<!DOCTYPE html>
 <html>
 <head>
@@ -53,10 +54,11 @@ class ErrorController extends AbstractController
 <body class=\"app\">
 
 <h1 class=\"text-center mx-auto\">Error</h1>
+<h2 class=\"text-center mx-auto\">{$exception->getMessage()}</h2>
 
 <div class=\"app-content\">
     <main class=\"container\">
-        <p>{$exception->__toString()}</p>
+    <pre><code>{$errorString}</code></pre>
     </main>
 </div>
 </body>
