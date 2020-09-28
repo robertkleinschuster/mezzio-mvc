@@ -58,6 +58,24 @@ class ValidationHelper
     }
 
     /**
+     * @return string[]
+     */
+    public function getErrorFieldMap(): array
+    {
+        return $this->errorField_Map;
+    }
+
+    /**
+     * @param array $errorField_Map
+     * @return ValidationHelper
+     */
+    public function addErrorFieldMap(array $errorField_Map)
+    {
+        $this->errorField_Map = array_merge_recursive($this->errorField_Map, $errorField_Map);
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function __toString(): string
