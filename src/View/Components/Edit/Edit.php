@@ -96,7 +96,7 @@ class Edit extends AbstractComponent
      */
     public function addAttribute(string $key, string $value): Fields\Text
     {
-        return $this->addText($key, $key)->setValue($value)->setType(Fields\Text::TYPE_HIDDEN);
+        return $this->addText('', $key)->setValue($value)->setType(Fields\Text::TYPE_HIDDEN);
     }
 
     /**
