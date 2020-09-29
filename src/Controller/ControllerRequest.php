@@ -20,6 +20,7 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 
     public const ATTRIBUTE_SUBMIT = 'submit';
     public const ATTRIBUTE_REDIRECT = 'redirect';
+    public const ATTRIBUTE_CREATE = 'create';
 
     /**
      * @var ServerRequestInterface

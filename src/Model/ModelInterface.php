@@ -17,6 +17,8 @@ interface ModelInterface
 
     public function find(array $ids);
 
+    public function create(array $ids);
+
     public function submit(array $attributes);
 
 }
