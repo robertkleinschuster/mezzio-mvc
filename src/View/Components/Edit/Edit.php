@@ -107,11 +107,13 @@ class Edit extends AbstractComponent
      */
     public function addSubmit(string $name, string $value, string $redirect = null): Fields\Button
     {
+        $result = $this->addButton($name, ControllerRequest::ATTRIBUTE_SUBMIT)
+            ->setValue($value)
+            ->setType(Fields\Button::TYPE_SUBMIT);
+
         if (null !== $redirect) {
             $this->addAttribute(ControllerRequest::ATTRIBUTE_REDIRECT, $redirect);
         }
-        return $this->addButton($name, ControllerRequest::ATTRIBUTE_SUBMIT)
-            ->setValue($value)
-            ->setType(Fields\Button::TYPE_SUBMIT);
+        return $result;
     }
 }
