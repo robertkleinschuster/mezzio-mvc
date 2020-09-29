@@ -57,6 +57,22 @@ abstract class AbstractController implements ControllerInterface
     }
 
     /**
+     * @return mixed|void
+     * @throws \NiceshopsDev\NiceCore\Exception
+     */
+    public function init()
+    {
+        $this->getModel()->init($this->getControllerRequest()->getViewIdMap());
+        if ($this->getControllerRequest()->hasAttribute('submit')) {
+            $this->getModel()->submit($this->getControllerRequest()->getAttributes());
+            $this->getControllerResponse()->setRedirect(
+                $this->getPathHelper()->setViewIdMap($this->getControllerRequest()->getViewIdMap())->getPath()
+            );
+        }
+    }
+
+
+    /**
      * @return ControllerRequest
      */
     public function getControllerRequest(): ControllerRequest
