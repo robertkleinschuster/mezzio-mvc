@@ -74,11 +74,17 @@ abstract class AbstractController implements ControllerInterface
 
     protected function handleSubmit()
     {
-        if ($this->getControllerRequest()->hasAttribute('submit')) {
+        if ($this->getControllerRequest()->hasSubmit()) {
             $this->getModel()->submit($this->getControllerRequest()->getAttributes());
-            $this->getControllerResponse()->setRedirect(
-                $this->getPathHelper()->setViewIdMap($this->getControllerRequest()->getViewIdMap())->getPath()
-            );
+            $path = $this->getPathHelper();
+            if ($this->getControllerRequest()->hasViewIdMap()) {
+                $path->setViewIdMap($this->getControllerRequest()->getViewIdMap());
+            }
+            $pathUrl = $path->getPath();
+            if ($this->getControllerRequest()->hasRedirect()) {
+                $pathUrl = $this->getControllerRequest()->getRedirect();
+            }
+            $this->getControllerResponse()->setRedirect($pathUrl);
         }
     }
 

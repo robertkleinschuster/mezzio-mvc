@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\View\Components\Edit;
 
+use Mezzio\Mvc\Controller\ControllerRequest;
 use Mezzio\Mvc\View\Components\Base\AbstractComponent;
 
 class Edit extends AbstractComponent
@@ -86,5 +87,31 @@ class Edit extends AbstractComponent
         $textarea = new Fields\Textarea($name, $key);
         $this->addField($textarea);
         return $textarea;
+    }
+
+    /**
+     * @param string $key
+     * @param string $value
+     * @return Fields\Text
+     */
+    public function addAttribute(string $key, string $value): Fields\Text
+    {
+        return $this->addText($key, $key)->setValue($value)->setType(Fields\Text::TYPE_HIDDEN);
+    }
+
+    /**
+     * @param string $name
+     * @param string $value
+     * @param string|null $redirect
+     * @return Fields\Button
+     */
+    public function addSubmit(string $name, string $value, string $redirect = null): Fields\Button
+    {
+        if (null !== $redirect) {
+            $this->addAttribute(ControllerRequest::ATTRIBUTE_REDIRECT, $redirect);
+        }
+        return $this->addButton($name, ControllerRequest::ATTRIBUTE_SUBMIT)
+            ->setValue($value)
+            ->setType(Fields\Button::TYPE_SUBMIT);
     }
 }

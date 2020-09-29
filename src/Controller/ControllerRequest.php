@@ -18,6 +18,8 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     use OptionTrait;
     use AttributeTrait;
 
+    public const ATTRIBUTE_SUBMIT = 'submit';
+    public const ATTRIBUTE_REDIRECT = 'redirect';
 
     /**
      * @var ServerRequestInterface
@@ -66,6 +68,16 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     }
 
     /**
+     * @return bool
+     * @throws Exception
+     */
+    public function hasViewIdMap(): bool
+    {
+        return $this->hasAttribute(ViewIdHelper::VIEWID_ATTRIBUTE)
+            && null != $this->getAttribute(ViewIdHelper::VIEWID_ATTRIBUTE);
+    }
+
+    /**
      * @return array
      * @throws Exception
      */
@@ -77,6 +89,40 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
         } else {
             return [];
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasRedirect(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_REDIRECT);
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function getRedirect(): string
+    {
+        return $this->getAttribute(self::ATTRIBUTE_REDIRECT);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasSubmit(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_SUBMIT);
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function getSubmit(): string
+    {
+        return $this->getAttribute(self::ATTRIBUTE_SUBMIT);
     }
 
 
