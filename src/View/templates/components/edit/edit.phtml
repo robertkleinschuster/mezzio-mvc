@@ -2,18 +2,22 @@
 <form method="post">
     <div class="row row-cols-<?= $component->getCols() ?>">
         <?php $prevChapter = null ?>
-        <?php foreach ($fields as $field): ?>
-            <div class="col">
-                <?= $field->getChapter() != $prevChapter ? "<h4>{$field->getChapter()}</h4>" : '' ?>
-                <?php $this->insert($templateFolder . '::' . $field->getTemplate(), [
-                        'templateFolder' => $templateFolder,
-                    'field' => $field,
-                    'data' => $model->getComponentDataBean(),
-                    'errors' => $model->getValidationHelper()->getErrorList($field->getKey()),
-                    ]) ?>
-            </div>
-        <?php $prevChapter = $field->getChapter()?>
+        <?php foreach ($fields as $key => $field): ?>
+            <?php if ($key == 0 || !$field->isAppendToPrevious()): ?>
+                <div class="col">
+            <?php endif ?>
+            <?= $field->getChapter() != $prevChapter ? "<h4>{$field->getChapter()}</h4>" : '' ?>
+            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), [
+            'templateFolder' => $templateFolder,
+            'field' => $field,
+            'data' => $model->getComponentDataBean(),
+            'errors' => $model->getValidationHelper()->getErrorList($field->getKey()),
+        ]) ?>
+            <?php if ($fields[$key + 1] === null || !$fields[$key + 1]->isAppendToPrevious()): ?>
+                </div>
+            <?php endif ?>
+            <?php $prevChapter = $field->getChapter() ?>
         <?php endforeach ?>
     </div>
-    <input type="hidden" name="token" value="<?= $token ?? ''?>">
+    <input type="hidden" name="token" value="<?= $token ?? '' ?>">
 </form>

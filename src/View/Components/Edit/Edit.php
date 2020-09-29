@@ -89,6 +89,21 @@ class Edit extends AbstractComponent
         return $textarea;
     }
 
+
+    /**
+     * @param string $name
+     * @param string $key
+     * @return Fields\Link
+     */
+    public function addLink(string $name, string $key): Fields\Link
+    {
+        $link = new Fields\Link($name, $key);
+        $link->addOption(Fields\Link::OPTION_BUTTON_STYLE);
+        $link->setStyle(Fields\Link::STYLE_PRIMARY);
+        $this->addField($link);
+        return $link;
+    }
+
     /**
      * @param string $key
      * @param string $value

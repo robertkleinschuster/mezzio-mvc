@@ -21,6 +21,8 @@ abstract class AbstractField implements OptionAwareInterface
     public const STYLE_LIGHT = 'light';
     public const STYLE_DARK = 'dark';
 
+    public const OPTION_APPEND_TO_PREVIOUS = 'append_to_previous';
+
     /**
      * @var string
      */
@@ -193,6 +195,27 @@ abstract class AbstractField implements OptionAwareInterface
         return $this->width !== null;
     }
 
+    /**
+     * @param bool $append
+     * @return $this
+     */
+    public function setAppendToColumnPrevious(bool $append)
+    {
+        if ($append) {
+            $this->addOption(self::OPTION_APPEND_TO_PREVIOUS);
+        } else {
+            $this->removeOption(self::OPTION_APPEND_TO_PREVIOUS);
+        }
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAppendToPrevious(): bool
+    {
+        return $this->hasOption(self::OPTION_APPEND_TO_PREVIOUS);
+    }
 
     /**
      * @return string

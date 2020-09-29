@@ -3,16 +3,20 @@
 <?php foreach ($model->getComponentDataBeanList() as $bean): ?>
     <div class="row row-cols-<?= $component->getCols() ?>">
         <?php foreach ($fields as $field): ?>
-            <div class="col">
-                <div class="row p-1">
-                    <div class="col-sm-4 bg-secondary text-white">
-                        <?= $field->getName($data) ?>:
-                    </div>
-                    <div class="col-sm-8 bg-white border border-secondary">
-                        <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
-                    </div>
+            <?php if (!$field->isAppendToPrevious()): ?>
+                <div class="col">
+            <?php endif ?>
+            <div class="row p-1">
+                <div class="col-sm-4 bg-secondary text-white">
+                    <?= $field->getName($data) ?>:
+                </div>
+                <div class="col-sm-8 bg-white border border-secondary">
+                    <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
                 </div>
             </div>
+            <?php if ($fields[$key + 1] === null || !$fields[$key + 1]->isAppendToPrevious()): ?>
+                </div>
+            <?php endif ?>
         <?php endforeach ?>
     </div>
 <?php endforeach ?>
