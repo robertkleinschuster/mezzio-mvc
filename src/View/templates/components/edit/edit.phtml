@@ -1,6 +1,6 @@
 <h3><?= $component->getTitle() ?></h3>
 <form method="post">
-    <div class="row row-cols-<?= $component->getCols() ?>">
+    <div class="row row-cols-1 row-cols-sm-<?= $component->getCols() ?>">
         <?php $prevChapter = null ?>
         <?php foreach ($fields as $key => $field): ?>
             <?php if ($key == 0 || !$field->isAppendToPrevious()): ?>
