@@ -80,16 +80,17 @@ abstract class AbstractController implements ControllerInterface
     protected function handleSubmit()
     {
         if ($this->getControllerRequest()->hasSubmit()) {
-            $this->getModel()->submit($this->getControllerRequest()->getAttributes());
             $path = $this->getPathHelper();
             if ($this->getControllerRequest()->hasViewIdMap()) {
                 $path->setViewIdMap($this->getControllerRequest()->getViewIdMap());
             }
             $pathUrl = $path->getPath();
-            if ($this->getModel()->getValidationHelper()->hasError()) {
-                $this->handleValidationError($this->getModel()->getValidationHelper());
-            } else {
-                if ($this->getControllerRequest()->hasRedirect()) {
+
+            if ($this->handleSubmitSecurity()) {
+                $this->getModel()->submit($this->getControllerRequest()->getAttributes());
+                if ($this->getModel()->getValidationHelper()->hasError()) {
+                    $this->handleValidationError($this->getModel()->getValidationHelper());
+                } elseif ($this->getControllerRequest()->hasRedirect()) {
                     $pathUrl = $this->getControllerRequest()->getRedirect();
                 }
             }
@@ -97,6 +98,15 @@ abstract class AbstractController implements ControllerInterface
         }
     }
 
+    /**
+     * @return bool
+     */
+    abstract protected function handleSubmitSecurity(): bool;
+
+    /**
+     * @param ValidationHelper $validationHelper
+     * @return mixed
+     */
     abstract protected function handleValidationError(ValidationHelper $validationHelper);
 
 
