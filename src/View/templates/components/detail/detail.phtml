@@ -2,7 +2,7 @@
 
 <?php foreach ($model->getComponentDataBeanList() as $bean): ?>
     <div class="row row-cols-1 row-cols-sm-<?= $component->getCols() ?>">
-        <?php foreach ($fields as $field): ?>
+        <?php foreach ($fields as $key => $field): ?>
             <?php if (!$field->isAppendToPrevious()): ?>
                 <div class="col">
             <?php endif ?>
@@ -13,8 +13,10 @@
                 <div class="col-sm-8 text-center text-sm-left">
                     <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
                 </div>
-                <hr>
             </div>
+            <?php if($key != count($fields) -1): ?>
+                <hr>
+            <?php endif ?>
             <?php if ($fields[$key + 1] === null || !$fields[$key + 1]->isAppendToPrevious()): ?>
                 </div>
             <?php endif ?>
