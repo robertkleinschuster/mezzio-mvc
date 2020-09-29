@@ -13,7 +13,7 @@ interface ModelInterface
 
     public function getValidationHelper(): ValidationHelper;
 
-    public function init(array $ids);
+    public function find(array $ids);
 
     public function submit(array $attributes);
 
