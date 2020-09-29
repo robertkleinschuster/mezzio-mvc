@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\Controller;
 
 use Mezzio\Mvc\Helper\PathHelper;
+use Mezzio\Mvc\Helper\ValidationHelper;
 use Mezzio\Mvc\Model\ModelInterface;
 use Mezzio\Mvc\View\View;
 use NiceshopsDev\Bean\BeanException;
@@ -81,12 +82,18 @@ abstract class AbstractController implements ControllerInterface
                 $path->setViewIdMap($this->getControllerRequest()->getViewIdMap());
             }
             $pathUrl = $path->getPath();
-            if ($this->getControllerRequest()->hasRedirect()) {
-                $pathUrl = $this->getControllerRequest()->getRedirect();
+            if ($this->getModel()->getValidationHelper()->hasError()) {
+                $this->handleValidationError($this->getModel()->getValidationHelper());
+            } else {
+                if ($this->getControllerRequest()->hasRedirect()) {
+                    $pathUrl = $this->getControllerRequest()->getRedirect();
+                }
             }
             $this->getControllerResponse()->setRedirect($pathUrl);
         }
     }
+
+    abstract protected function handleValidationError(ValidationHelper $validationHelper);
 
 
     /**
