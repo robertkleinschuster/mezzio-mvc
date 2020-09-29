@@ -158,7 +158,7 @@ abstract class AbstractButton extends AbstractField
      */
     public function getClass(): string
     {
-        $class = 'btn';
+        $class = 'btn mr-1 ';
         if ($this->isOutline()) {
             $class .= ' btn-outline-' . $this->getStyle();
         } else {

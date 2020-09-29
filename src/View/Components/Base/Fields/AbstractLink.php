@@ -132,9 +132,9 @@ abstract class AbstractLink extends AbstractField
      */
     public function getClass(): string
     {
-        $result = "";
+        $result = "mr-1 ";
         if ($this->hasOption(self::OPTION_BUTTON_STYLE)) {
-            $result = 'btn';
+            $result = ' btn';
             if ($this->hasStyle()) {
                 $result .= ' btn-' . $this->getStyle();
             }
