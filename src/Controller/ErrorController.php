@@ -6,6 +6,7 @@ namespace Mezzio\Mvc\Controller;
 
 
 use Mezzio\Mvc\Exception\NotFoundException;
+use Mezzio\Mvc\Helper\ValidationHelper;
 
 class ErrorController extends AbstractController
 {
@@ -18,6 +19,27 @@ class ErrorController extends AbstractController
     {
 
     }
+
+    protected function initView()
+    {
+        // TODO: Implement initView() method.
+    }
+
+    protected function initModel()
+    {
+        // TODO: Implement initModel() method.
+    }
+
+    protected function handleSubmitSecurity(): bool
+    {
+        return false;
+    }
+
+    protected function handleValidationError(ValidationHelper $validationHelper)
+    {
+        // TODO: Implement handleValidationError() method.
+    }
+
 
     /**
      * @param \Throwable $exception
