@@ -16,6 +16,12 @@ abstract class AbstractCheckbox extends AbstractField implements RequiredAwareIn
     private $hint;
 
     /**
+     * @var bool
+     */
+    private $checked;
+
+
+    /**
      * @return string
      */
     public function getTemplate()
@@ -49,4 +55,22 @@ abstract class AbstractCheckbox extends AbstractField implements RequiredAwareIn
     {
         return $this->hint !== null;
     }
+
+    /**
+     * @return bool
+     */
+    public function isChecked(): bool
+    {
+        return $this->checked ?? false;
+    }
+
+    /**
+     * @param bool $checked
+     */
+    public function setChecked(bool $checked): self
+    {
+        $this->checked = $checked;
+        return $this;
+    }
+
 }
