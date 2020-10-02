@@ -114,7 +114,13 @@ abstract class AbstractComponent implements OptionAwareInterface
     public function getId(): string
     {
         if (null === $this->id) {
-            $this->id = uniqid();
+            $string = '';
+            $characters = 'abcdefghijklmnopqrstuvwxyz';
+            $max = strlen($characters) - 1;
+            for ($i = 0; $i < 5; $i++) {
+                $string .= $characters[mt_rand(0, $max)];
+            }
+            $this->id = $string;
         }
         return $this->id;
     }
