@@ -1,3 +1,4 @@
+<h3><?= $component->getTitle() ?></h3>
 <ul class="nav nav-<?= $component->getType() ?>" id="<?= $component->getId() ?>" role="tablist">
     <?php foreach ($component->getComponentList() as $key => $tabcomponent): ?>
         <li class="nav-item" role="presentation">
