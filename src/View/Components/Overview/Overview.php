@@ -29,6 +29,7 @@ class Overview extends AbstractComponent
     public function addBadge(string $key, string $title): Fields\Badge
     {
         $badge = new Fields\Badge($key, $title);
+        $badge->setStyle(Fields\Badge::STYLE_PRIMARY);
         $this->addField($badge);
         return $badge;
     }
