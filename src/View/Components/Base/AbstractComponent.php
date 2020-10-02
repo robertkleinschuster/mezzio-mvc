@@ -108,7 +108,11 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
      */
     protected function addField(AbstractField $field): self
     {
-        if (!$this->hasPermissionList() || in_array($field->getPermission(), $this->getPermissionList())) {
+        if (
+            !$this->hasPermissionList()
+            || !$field->hasPermission()
+            || in_array($field->getPermission(), $this->getPermissionList())
+        ) {
             $this->field_List[] = $field;
         }
         return $this;
