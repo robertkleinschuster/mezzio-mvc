@@ -58,7 +58,7 @@ class Alert extends \Mezzio\Mvc\View\Components\Base\AbstractComponent
      * @param string $key
      * @return Fields\Text
      */
-    public function addText(string $title, string $key): Fields\Text
+    public function addText(string $key, string $title): Fields\Text
     {
         $text = new Fields\Text($key, $title);
         $this->addField($text);
@@ -70,7 +70,7 @@ class Alert extends \Mezzio\Mvc\View\Components\Base\AbstractComponent
      * @param string $key
      * @return Fields\Link
      */
-    public function addLink(string $title, string $key): Fields\Link
+    public function addLink(string $key, string $title): Fields\Link
     {
         $link = new Fields\Link($key, $title);
         $this->addField($link);
