@@ -1,11 +1,12 @@
-<h3><?= $component->getTitle() ?></h3>
 <ul class="nav nav-<?= $component->getType() ?>" id="<?= $component->getId() ?>" role="tablist">
     <?php foreach ($component->getComponentList() as $key => $tabcomponent): ?>
         <li class="nav-item" role="presentation">
             <a class="nav-link<?= $key == 0 ? ' active' : '' ?>" id="<?= $tabcomponent->getId() ?>-tab"
                data-toggle="tab" href="#<?= $tabcomponent->getId() ?>" role="tab"
                aria-controls="<?= $tabcomponent->getId() ?>"
-               aria-selected="<?= $key == 0 ? 'true' : 'false' ?>"><?= $tabcomponent->getTitle() ?></a>
+               aria-selected="<?= $key == 0 ? 'true' : 'false' ?>">
+                <?= $tabcomponent->hasTitle() ? $tabcomponent->getTitle() : ''?>
+            </a>
         </li>
     <?php endforeach; ?>
 </ul>

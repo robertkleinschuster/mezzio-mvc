@@ -2,6 +2,9 @@
 <div class="row row-cols-<?= $cols ?>">
     <?php foreach ($components as $component): ?>
         <div class="col">
+            <?php if ($component->hasTitle()): ?>
+                <h3><?= $component->getTitle() ?></h3>
+            <?php endif; ?>
             <?php $this->insert($templateFolder . '::' . $component->getTemplate(), ['templateFolder' => $templateFolder, 'component' => $component, 'fields' => $component->getFieldList(), 'model' => $component->getComponentModel()]) ?>
         </div>
     <?php endforeach ?>

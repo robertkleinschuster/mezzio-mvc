@@ -1,11 +1,13 @@
 <div class="form-group">
-    <label for="<?= $field->getKey($data) ?>"><?= $field->getName($data) ?></label>
+    <?php if ($field->hasTitle()): ?>
+        <label for="<?= $field->getKey($data) ?>"><?= $field->getTitle($data) ?></label>
+    <?php endif; ?>
     <textarea class="form-control <?= is_array($errors) && count($errors) ? ' is-invalid ' : '' ?>"
               id="<?= $field->getKey($data) ?>"
               name="<?= $field->getKey($data) ?>"
-              <?=$field->isRequired() ? ' required' : ''?>
+              <?= $field->isRequired() ? ' required' : '' ?>
         <?= $field->hasRows($data) ? " rows=\"{$field->getRows($data)}\"" : '' ?>>
-        <?=$field->getValue($data)?>
+        <?= $field->getValue($data) ?>
     </textarea>
     <?php if (is_array($errors)): ?>
         <?php foreach ($errors as $error): ?>

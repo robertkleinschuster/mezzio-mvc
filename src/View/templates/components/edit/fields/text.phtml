@@ -1,25 +1,34 @@
-<div class="form-group">
-    <label for="<?= $field->getKey($data) ?>"><?=$field->getName($data)?></label>
-    <input type="<?= $field->getType($data) ?>"
-           class="form-control <?= count($errors) ? ' is-invalid' : '' ?>"
-           id="<?= $field->getKey($data) ?>"
-           name="<?= $field->getKey($data) ?>"
-           value="<?= $field->getValue($data) ?>"
-        <?=$field->isRequired() ? ' required ' : ''?>
+<?php if ($field->getType() == \Mezzio\Mvc\View\Components\Edit\Fields\Text::TYPE_HIDDEN): ?>
+    <input type="<?= $field->getType($data) ?>" id="<?= $field->getKey($data) ?>" name="<?= $field->getKey($data) ?>"
+           value="<?= $field->getValue($data) ?>">
+<?php else: ?>
+    <div class="form-group">
+        <?php if ($field->hasTitle()): ?>
+            <label for="<?= $field->getKey($data) ?>"><?= $field->getTitle($data) ?></label>
+        <?php endif; ?>
+        <input type="<?= $field->getType($data) ?>"
+               class="form-control <?= count($errors) ? ' is-invalid' : '' ?>"
+               id="<?= $field->getKey($data) ?>"
+               name="<?= $field->getKey($data) ?>"
+               value="<?= $field->getValue($data) ?>"
+            <?= $field->isRequired() ? ' required ' : '' ?>
+            <?php if ($field->hasHint($data)): ?>
+                aria-describedby="<?= $field->getKey($data) ?>__hint"
+            <?php endif; ?>
+            <?php if (count($errors)): ?>
+                aria-describedby="<?= $field->getKey($data) ?>_Error"
+            <?php endif; ?>
+               autocomplete="<?= $field->getAutocomplete() ?>"
+        >
+        <?php foreach ($errors as $error): ?>
+            <div id="<?= $field->getKey($data) ?>_Error" class="invalid-feedback">
+                <?= $error ?>
+            </div>
+        <?php endforeach ?>
         <?php if ($field->hasHint($data)): ?>
-           aria-describedby="<?= $field->getKey($data) ?>__hint"
+            <small id="<?= $field->getKey($data) ?>__hint"
+                   class="form-text text-muted"><?= $field->getHint($data) ?></small>
         <?php endif; ?>
-        <?php if (count($errors)): ?>
-            aria-describedby="<?= $field->getKey($data) ?>_Error"
-        <?php endif; ?>
-            autocomplete="<?=$field->getAutocomplete()?>"
-    >
-    <?php foreach ($errors as $error): ?>
-        <div id="<?= $field->getKey($data) ?>_Error" class="invalid-feedback">
-            <?=$error?>
-        </div>
-    <?php endforeach?>
-    <?php if ($field->hasHint($data)): ?>
-        <small id="<?= $field->getKey($data) ?>__hint" class="form-text text-muted"><?= $field->getHint($data) ?></small>
-    <?php endif; ?>
-</div>
+    </div>
+
+<?php endif; ?>

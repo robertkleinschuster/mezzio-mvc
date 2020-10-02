@@ -26,7 +26,7 @@ abstract class AbstractField implements OptionAwareInterface
     /**
      * @var string
      */
-    private $name;
+    private $title;
 
     /**
      * @var string
@@ -50,12 +50,12 @@ abstract class AbstractField implements OptionAwareInterface
 
     /**
      * AbstractField constructor.
-     * @param string $name
+     * @param string $title
      * @param string $key
      */
-    public function __construct(string $name, string $key)
+    public function __construct(string $key, string $title = null)
     {
-        $this->name = $name;
+        $this->title = $title;
         $this->key = $key;
     }
 
@@ -117,18 +117,26 @@ abstract class AbstractField implements OptionAwareInterface
     /**
      * @return mixed
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**
-     * @param mixed $name
+     * @return mixed
+     */
+    public function hasTitle()
+    {
+        return $this->title !== null;
+    }
+
+    /**
+     * @param string $title
      * @return $this
      */
-    public function setName($name): self
+    public function setTitle(string $title): self
     {
-        $this->name = $name;
+        $this->title = $title;
         return $this;
     }
 

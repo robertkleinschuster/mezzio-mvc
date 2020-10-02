@@ -17,134 +17,134 @@ class Detail extends AbstractComponent
     }
 
     /**
-     * @param string $name
+     * @param string $title
      * @param string $key
      * @return Fields\Badge
      */
-    public function addBadge(string $name, string $key): Fields\Badge
+    public function addBadge(string $key, string $title): Fields\Badge
     {
-        $badge = new Fields\Badge($name, $key);
+        $badge = new Fields\Badge($key, $title);
         $this->addField($badge);
         return $badge;
     }
 
     /**
-     * @param string $name
+     * @param string $title
      * @param string $key
      * @return Fields\Blockquote
      */
-    public function addBlockquote(string $name, string $key): Fields\Blockquote
+    public function addBlockquote(string $key, string $title): Fields\Blockquote
     {
-        $blockquote = new Fields\Blockquote($name, $key);
+        $blockquote = new Fields\Blockquote($key, $title);
         $this->addField($blockquote);
         return $blockquote;
     }
 
     /**
-     * @param string $name
+     * @param string $title
      * @param string $key
      * @return Fields\Button
      */
-    public function addButton(string $name, string $key): Fields\Button
+    public function addButton(string $key, string $title): Fields\Button
     {
-        $button = new Fields\Button($name, $key);
+        $button = new Fields\Button($key, $title);
         $this->addField($button);
         return $button;
     }
 
     /**
-     * @param string $name
+     * @param string $title
      * @param string $key
      * @return Fields\Codeblock
      */
-    public function addCodeblock(string $name, string $key): Fields\Codeblock
+    public function addCodeblock(string $key, string $title): Fields\Codeblock
     {
-        $codeblock = new Fields\Codeblock($name, $key);
+        $codeblock = new Fields\Codeblock($key, $title);
         $this->addField($codeblock);
         return $codeblock;
     }
 
     /**
-     * @param string $name
+     * @param string $title
      * @param string $key
      * @return Fields\Figure
      */
-    public function addFigure(string $name, string $key): Fields\Figure
+    public function addFigure(string $key, string $title): Fields\Figure
     {
-        $figure = new Fields\Figure($name, $key);
+        $figure = new Fields\Figure($key, $title);
         $this->addField($figure);
         return $figure;
     }
 
     /**
-     * @param string $name
+     * @param string $title
      * @param string $key
      * @return Fields\Image
      */
-    public function addImage(string $name, string $key): Fields\Image
+    public function addImage(string $key, string $title): Fields\Image
     {
-        $image = new Fields\Image($name, $key);
+        $image = new Fields\Image($key, $title);
         $this->addField($image);
         return $image;
     }
 
     /**
-     * @param string $name
+     * @param string $title
      * @param string $key
      * @return Fields\Link
      */
-    public function addLink(string $name, string $key): Fields\Link
+    public function addLink(string $key, string $title): Fields\Link
     {
-        $link = new Fields\Link($name, $key);
+        $link = new Fields\Link($key, $title);
         $this->addField($link);
         return $link;
     }
 
     /**
-     * @param string $name
+     * @param string $title
      * @param string $key
      * @return Fields\Number
      */
-    public function addNumber(string $name, string $key): Fields\Number
+    public function addNumber(string $key, string $title): Fields\Number
     {
-        $number = new Fields\Number($name, $key);
+        $number = new Fields\Number($key, $title);
         $this->addField($number);
         return $number;
     }
 
     /**
-     * @param string $name
+     * @param string $title
      * @param string $key
      * @return Fields\Progress
      */
-    public function addProgress(string $name, string $key): Fields\Progress
+    public function addProgress(string $key, string $title): Fields\Progress
     {
-        $progress = new Fields\Progress($name, $key);
+        $progress = new Fields\Progress($key, $title);
         $this->addField($progress);
         return $progress;
     }
 
 
     /**
-     * @param string $name
+     * @param string $title
      * @param string $key
      * @return Fields\Spinner
      */
-    public function addSpinner(string $name, string $key): Fields\Spinner
+    public function addSpinner(string $key, string $title): Fields\Spinner
     {
-        $spinner = new Fields\Spinner($name, $key);
+        $spinner = new Fields\Spinner($key, $title);
         $this->addField($spinner);
         return $spinner;
     }
 
     /**
-     * @param string $text
      * @param string $key
+     * @param string $title
      * @return Fields\Text
      */
-    public function addText(string $text, string $key): Fields\Text
+    public function addText(string $key, string $title): Fields\Text
     {
-        $text = new Fields\Text($text, $key);
+        $text = new Fields\Text($key, $title);
         $this->addField($text);
         return $text;
     }

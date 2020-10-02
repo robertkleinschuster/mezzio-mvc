@@ -6,6 +6,10 @@ namespace Mezzio\Mvc\View\Components\Overview;
 
 use Mezzio\Mvc\View\Components\Base\AbstractComponent;
 
+/**
+ * Class Overview
+ * @package Mezzio\Mvc\View\Components\Overview
+ */
 class Overview extends AbstractComponent
 {
 
@@ -18,73 +22,73 @@ class Overview extends AbstractComponent
     }
 
     /**
-     * @param $name
-     * @param $key
+     * @param string $key
+     * @param string $title
      * @return Fields\Badge
      */
-    public function addBadge(string $name, string $key): Fields\Badge
+    public function addBadge(string $key, string $title): Fields\Badge
     {
-        $badge = new Fields\Badge($name, $key);
+        $badge = new Fields\Badge($key, $title);
         $this->addField($badge);
         return $badge;
     }
 
     /**
-     * @param $name
-     * @param $key
+     * @param string $key
+     * @param string $title
      * @return Fields\Link
      */
-    public function addLink(string $name, string $key): Fields\Link
+    public function addLink(string $key, string $title): Fields\Link
     {
-        $link = new Fields\Link($name, $key);
+        $link = new Fields\Link($key, $title);
         $this->addField($link);
         return $link;
     }
 
     /**
-     * @param $name
-     * @param $key
+     * @param string $key
+     * @param string $title
      * @return Fields\Number
      */
-    public function addNumber(string $name, string $key): Fields\Number
+    public function addNumber(string $key, string $title): Fields\Number
     {
-        $number = new Fields\Number($name, $key);
+        $number = new Fields\Number($key, $title);
         $this->addField($number);
         return $number;
     }
 
     /**
-     * @param $name
-     * @param $key
+     * @param string $key
+     * @param string $title
      * @return Fields\Progress
      */
-    public function addProgress(string $name, string $key): Fields\Progress
+    public function addProgress(string $key, string $title): Fields\Progress
     {
-        $progress = new Fields\Progress($name, $key);
+        $progress = new Fields\Progress($key, $title);
         $this->addField($progress);
         return $progress;
     }
 
     /**
-     * @param $name
-     * @param $key
+     * @param string $key
+     * @param string $title
      * @return Fields\Spinner
      */
-    public function addSpinner(string $name, string $key): Fields\Spinner
+    public function addSpinner(string $key, string $title): Fields\Spinner
     {
-        $spinner = new Fields\Spinner($name, $key);
+        $spinner = new Fields\Spinner($key, $title);
         $this->addField($spinner);
         return $spinner;
     }
 
     /**
-     * @param $name
-     * @param $key
+     * @param string $key
+     * @param string $title
      * @return Fields\Text
      */
-    public function addText(string $name, string $key): Fields\Text
+    public function addText(string $key, string $title): Fields\Text
     {
-        $text = new Fields\Text($name, $key);
+        $text = new Fields\Text($key, $title);
         $this->addField($text);
         return $text;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\View\Components\Base;
 
+use Mezzio\Mvc\View\ComponentModel;
 use Mezzio\Mvc\View\ComponentModelInterface;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use NiceshopsDev\NiceCore\Option\OptionTrait;
@@ -43,19 +44,38 @@ abstract class AbstractComponent implements OptionAwareInterface
      * @param string $title
      * @param ComponentModelInterface $componentModel
      */
-    public function __construct(string $title, ComponentModelInterface $componentModel)
+    public function __construct(string $title = null, ?ComponentModelInterface $componentModel = null)
     {
         $this->field_List = [];
         $this->title = $title;
-        $this->componentModel = $componentModel;
+        $this->componentModel = $componentModel ?? new ComponentModel();
     }
 
-    /**
-     * @return string
-     */
+   /**
+   * @return string
+   */
     public function getTitle(): string
     {
-        return $this->title ?? '';
+        return $this->title;
+    }
+
+   /**
+   * @param string $title
+   *
+   * @return $this
+   */
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+   /**
+   * @return bool
+   */
+    public function hasTitle(): bool
+    {
+        return $this->title !== null;
     }
 
     /**

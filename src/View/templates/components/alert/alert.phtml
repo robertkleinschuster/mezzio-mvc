@@ -1,5 +1,7 @@
 <div class="alert alert-<?= $component->getStyle() ?>" role="alert">
-    <h4 class="alert-heading"><?= $component->getTitle() ?></h4>
+    <?php if ($component->hasHeading()): ?>
+        <h4 class="alert-heading"><?= $component->getHeading() ?></h4>
+    <?php endif;?>
     <?php foreach ($model->getComponentDataBeanList() as $bean): ?>
         <?php foreach ($fields as $key => $field): ?>
             <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>

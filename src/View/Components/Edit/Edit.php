@@ -18,49 +18,49 @@ class Edit extends AbstractComponent
     }
 
     /**
-     * @param string $name
      * @param string $key
+     * @param string $title
      * @return Fields\Button
      */
-    public function addButton(string $name, string $key): Fields\Button
+    public function addButton(string $key, string $title): Fields\Button
     {
-        $button = new Fields\Button($name, $key);
+        $button = new Fields\Button($key, $title);
         $this->addField($button);
         return $button;
     }
 
     /**
-     * @param string $name
      * @param string $key
+     * @param string $title
      * @return Fields\Checkbox
      */
-    public function addCheckbox(string $name, string $key): Fields\Checkbox
+    public function addCheckbox(string $key, string $title): Fields\Checkbox
     {
-        $checkbox = new Fields\Checkbox($name, $key);
+        $checkbox = new Fields\Checkbox($key, $title);
         $this->addField($checkbox);
         return $checkbox;
     }
 
     /**
-     * @param string $name
      * @param string $key
+     * @param string $title
      * @return Fields\RadioButtonGroup
      */
-    public function addRadioButtonGroup(string $name, string $key): Fields\RadioButtonGroup
+    public function addRadioButtonGroup(string $key, string $title): Fields\RadioButtonGroup
     {
-        $radioButtonGroup = new Fields\RadioButtonGroup($name, $key);
+        $radioButtonGroup = new Fields\RadioButtonGroup($key, $title);
         $this->addField($radioButtonGroup);
         return $radioButtonGroup;
     }
 
     /**
-     * @param string $name
      * @param string $key
+     * @param string $title
      * @return Fields\Select
      */
-    public function addSelect(string $name, string $key): Fields\Select
+    public function addSelect(string $key, string $title): Fields\Select
     {
-        $select = new Fields\Select($name, $key);
+        $select = new Fields\Select($key, $title);
         $this->addField($select);
         return $select;
     }
@@ -70,34 +70,34 @@ class Edit extends AbstractComponent
      * @param string $key
      * @return Fields\Text
      */
-    public function addText(string $name, string $key): Fields\Text
+    public function addText(string $key, string $title): Fields\Text
     {
-        $text = new Fields\Text($name, $key);
+        $text = new Fields\Text($key, $title);
         $this->addField($text);
         return $text;
     }
 
     /**
-     * @param string $name
      * @param string $key
+     * @param string $title
      * @return Fields\Textarea
      */
-    public function addTextarea(string $name, string $key): Fields\Textarea
+    public function addTextarea(string $key, string $title): Fields\Textarea
     {
-        $textarea = new Fields\Textarea($name, $key);
+        $textarea = new Fields\Textarea($key, $title);
         $this->addField($textarea);
         return $textarea;
     }
 
 
     /**
-     * @param string $name
      * @param string $key
+     * @param string $title
      * @return Fields\Link
      */
-    public function addLink(string $name, string $key): Fields\Link
+    public function addLink(string $key, string $title): Fields\Link
     {
-        $link = new Fields\Link($name, $key);
+        $link = new Fields\Link($key, $title);
         $link->addOption(Fields\Link::OPTION_BUTTON_STYLE);
         $link->setStyle(Fields\Link::STYLE_PRIMARY);
         $this->addField($link);

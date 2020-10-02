@@ -1,10 +1,12 @@
 <div class="form-group">
-    <label for="<?= $field->getKey($data) ?>"><?= $field->getName($data) ?></label>
+    <?php if ($field->hasTitle()): ?>
+        <label for="<?= $field->getKey($data) ?>"><?= $field->getTitle($data) ?></label>
+    <?php endif; ?>
     <select class="form-control <?= is_array($errors) && count($errors) ? ' is-invalid ' : '' ?>"
             id="<?= $field->getKey($data) ?>"
             name="<?= $field->getKey($data) ?>"
             size="<?= $field->getSize($data) ?>"
-        <?=$field->isRequired() ? ' required' : ''?>
+        <?= $field->isRequired() ? ' required' : '' ?>
         <?= $field->isMultiple($data) ? ' multiple' : '' ?>>
         <?php foreach ($field->getSelectOptions($data) as $value => $name): ?>
             <option

@@ -22,6 +22,11 @@ class Alert extends \Mezzio\Mvc\View\Components\Base\AbstractComponent
     private $style;
 
     /**
+     * @var string
+     */
+    private $heading;
+
+    /**
      * @return string
      */
     public function getTemplate(): string
@@ -49,27 +54,54 @@ class Alert extends \Mezzio\Mvc\View\Components\Base\AbstractComponent
     }
 
     /**
-     * @param string $name
+     * @param string $title
      * @param string $key
      * @return Fields\Text
      */
-    public function addText(string $name, string $key): Fields\Text
+    public function addText(string $title, string $key): Fields\Text
     {
-        $text = new Fields\Text($name, $key);
+        $text = new Fields\Text($key, $title);
         $this->addField($text);
         return $text;
     }
 
     /**
-     * @param string $name
+     * @param string $title
      * @param string $key
      * @return Fields\Link
      */
-    public function addLink(string $name, string $key): Fields\Link
+    public function addLink(string $title, string $key): Fields\Link
     {
-        $link = new Fields\Link($name, $key);
+        $link = new Fields\Link($key, $title);
         $this->addField($link);
         return $link;
+    }
+
+    /**
+    * @return string
+    */
+    public function getHeading(): string
+    {
+        return $this->heading;
+    }
+
+    /**
+    * @param string $heading
+    *
+    * @return $this
+    */
+    public function setHeading(string $heading): self
+    {
+        $this->heading = $heading;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasHeading(): bool
+    {
+        return $this->heading !== null;
     }
 
 }

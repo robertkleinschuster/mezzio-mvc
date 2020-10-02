@@ -5,7 +5,9 @@
            value="<?= $field->getValue($data) ?>"
         <?=$field->isRequired() ? ' required' : ''?>
         <?= $field->isChecked($data) ? ' checked' : '' ?>>
-    <label class="form-check-label" for="<?= $field->getKey($data) ?>"><?= $field->getName($data) ?></label>
+    <?php if ($field->hasTitle()): ?>
+        <label class="form-check-label" for="<?= $field->getKey($data) ?>"><?= $field->getTitle($data) ?></label>
+    <?php endif;?>
     <?php if (is_array($errors)): ?>
         <?php foreach ($errors as $error): ?>
             <div id="<?= $field->getKey($data) ?>_Error" class="invalid-feedback">

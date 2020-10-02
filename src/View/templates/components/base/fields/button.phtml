@@ -5,5 +5,5 @@
         name="<?= $field->getKey($data) ?>"
         id="<?= $field->getKey($data) ?>"
     <?= $field->isDisabled() ? ' disabled' : '' ?>>
-    <?= $field->getName($data) ?>
+    <?= $field->hasTitle($data) ? $field->getTitle($data) : '' ?>
 </button>

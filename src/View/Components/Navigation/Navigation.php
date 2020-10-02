@@ -28,7 +28,7 @@ class Navigation extends AbstractComponent
      * @param string $title
      * @param ComponentModelInterface $componentModel
      */
-    public function __construct(string $title, ComponentModelInterface $componentModel)
+    public function __construct(string $title, ?ComponentModelInterface $componentModel = null)
     {
         parent::__construct($title, $componentModel);
         $this->component_List = [];
