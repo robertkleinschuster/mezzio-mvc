@@ -38,9 +38,10 @@ class ViewModel implements ViewModelInterface
     /**
      * @param mixed $title
      */
-    public function setTitle($title): void
+    public function setTitle($title)
     {
         $this->title = $title;
+        return $this;
     }
 
     /**
@@ -62,9 +63,10 @@ class ViewModel implements ViewModelInterface
     /**
      * @param Navigation $navigation
      */
-    public function addNavigation(Navigation $navigation): void
+    public function addNavigation(Navigation $navigation)
     {
         $this->navigation_List[] = $navigation;
+        return $this;
     }
 
     /**
