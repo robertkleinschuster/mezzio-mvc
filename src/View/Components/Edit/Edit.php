@@ -66,8 +66,8 @@ class Edit extends AbstractComponent
     }
 
     /**
-     * @param string $name
      * @param string $key
+     * @param string $title
      * @return Fields\Text
      */
     public function addText(string $key, string $title): Fields\Text
@@ -111,18 +111,18 @@ class Edit extends AbstractComponent
      */
     public function addAttribute(string $key, string $value): Fields\Text
     {
-        return $this->addText('', $key)->setValue($value)->setType(Fields\Text::TYPE_HIDDEN);
+        return $this->addText($key, '')->setValue($value)->setType(Fields\Text::TYPE_HIDDEN);
     }
 
     /**
-     * @param string $name
      * @param string $value
+     * @param string $title
      * @param string|null $redirect
      * @return Fields\Button
      */
-    public function addSubmit(string $name, string $value, string $redirect = null): Fields\Button
+    public function addSubmit(string $value, string $title, string $redirect = null): Fields\Button
     {
-        $result = $this->addButton($name, ControllerRequest::ATTRIBUTE_SUBMIT)
+        $result = $this->addButton(ControllerRequest::ATTRIBUTE_SUBMIT, $title)
             ->setValue($value)
             ->setType(Fields\Button::TYPE_SUBMIT);
 
