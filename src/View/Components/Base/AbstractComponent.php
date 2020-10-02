@@ -6,12 +6,15 @@ namespace Mezzio\Mvc\View\Components\Base;
 
 use Mezzio\Mvc\View\ComponentModel;
 use Mezzio\Mvc\View\ComponentModelInterface;
+use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
+use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use NiceshopsDev\NiceCore\Option\OptionTrait;
 
-abstract class AbstractComponent implements OptionAwareInterface
+abstract class AbstractComponent implements OptionAwareInterface, AttributeAwareInterface
 {
     use OptionTrait;
+    use AttributeTrait;
 
     /**
      * @var string

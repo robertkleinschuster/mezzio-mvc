@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\View\Components\Base;
 
 use Mezzio\Mvc\View\ComponentDataBeanInterface;
+use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
+use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use NiceshopsDev\NiceCore\Option\OptionTrait;
 
-abstract class AbstractField implements OptionAwareInterface
+abstract class AbstractField implements OptionAwareInterface, AttributeAwareInterface
 {
     use OptionTrait;
+    use AttributeTrait;
 
     public const STYLE_PRIMARY = 'primary';
     public const STYLE_SECONDARY = 'secondary';

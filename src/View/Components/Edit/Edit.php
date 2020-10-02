@@ -109,7 +109,7 @@ class Edit extends AbstractComponent
      * @param string $value
      * @return Fields\Text
      */
-    public function addAttribute(string $key, string $value): Fields\Text
+    public function addSubmitAttribute(string $key, string $value): Fields\Text
     {
         return $this->addText($key, '')->setValue($value)->setType(Fields\Text::TYPE_HIDDEN);
     }
@@ -127,7 +127,7 @@ class Edit extends AbstractComponent
             ->setType(Fields\Button::TYPE_SUBMIT);
 
         if (null !== $redirect) {
-            $this->addAttribute(ControllerRequest::ATTRIBUTE_REDIRECT, $redirect);
+            $this->addSubmitAttribute(ControllerRequest::ATTRIBUTE_REDIRECT, $redirect);
         }
         return $result;
     }
