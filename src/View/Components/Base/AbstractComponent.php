@@ -6,15 +6,18 @@ namespace Mezzio\Mvc\View\Components\Base;
 
 use Mezzio\Mvc\View\ComponentModel;
 use Mezzio\Mvc\View\ComponentModelInterface;
+use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
+use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareTrait;
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use NiceshopsDev\NiceCore\Option\OptionTrait;
 
-abstract class AbstractComponent implements OptionAwareInterface, AttributeAwareInterface
+abstract class AbstractComponent implements OptionAwareInterface, AttributeAwareInterface, BeanFormatterAwareInterface
 {
     use OptionTrait;
     use AttributeTrait;
+    use BeanFormatterAwareTrait;
 
     /**
      * @var string
@@ -46,6 +49,7 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
      * @var array
      */
     private $permission_List;
+
 
     /**
      * AbstractComponent constructor.
@@ -113,6 +117,9 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
             || !$field->hasPermission()
             || in_array($field->getPermission(), $this->getPermissionList())
         ) {
+            if ($this->hasBeanFormatter()) {
+                $field->setBeanFormatter($this->getBeanFormatter());
+            }
             $this->field_List[] = $field;
         }
         return $this;

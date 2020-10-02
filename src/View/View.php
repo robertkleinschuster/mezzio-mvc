@@ -5,12 +5,19 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\View;
 
 use Mezzio\Mvc\View\Components\Base\AbstractComponent;
+use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
+use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareTrait;
+use NiceshopsDev\Bean\BeanFormatter\BeanFormatterInterface;
+use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
+use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use NiceshopsDev\NiceCore\Option\OptionTrait;
 
-class View implements OptionAwareInterface
+class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatterAwareInterface
 {
     use OptionTrait;
+    use AttributeTrait;
+    use BeanFormatterAwareTrait;
 
     /**
      * @var string
@@ -56,6 +63,7 @@ class View implements OptionAwareInterface
      * @var array
      */
     private $permission_List;
+
 
     /**
      * View constructor.
@@ -103,6 +111,9 @@ class View implements OptionAwareInterface
     {
         if ($this->hasPermissionList()) {
             $component->setPermissionList($this->getPermissionList());
+        }
+        if ($this->hasBeanFormatter()) {
+            $component->setBeanFormatter($this->getBeanFormatter());
         }
         if ($prepend) {
             array_unshift($this->component_List, $component);

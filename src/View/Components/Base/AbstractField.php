@@ -5,16 +5,18 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\View\Components\Base;
 
 use Mezzio\Mvc\View\ComponentDataBeanInterface;
-use NiceshopsDev\Bean\BeanFormatter\BeanFormatterInterface;
+use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
+use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareTrait;
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use NiceshopsDev\NiceCore\Option\OptionTrait;
 
-abstract class AbstractField implements OptionAwareInterface, AttributeAwareInterface
+abstract class AbstractField implements OptionAwareInterface, AttributeAwareInterface, BeanFormatterAwareInterface
 {
     use OptionTrait;
     use AttributeTrait;
+    use BeanFormatterAwareTrait;
 
     public const STYLE_PRIMARY = 'primary';
     public const STYLE_SECONDARY = 'secondary';
@@ -57,10 +59,6 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
      */
     private $permission;
 
-    /**
-     * @var BeanFormatterInterface
-     */
-    private $formatter;
 
     /**
      * AbstractField constructor.
@@ -82,8 +80,8 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     {
         $output = $input;
         $formatter = null;
-        if ($this->hasFormatter()) {
-            $formatter = $this->getFormatter()->format($bean);
+        if ($this->hasBeanFormatter()) {
+            $formatter = $this->getBeanFormatter()->format($bean);
         }
         foreach ($bean as $key => $item) {
             $placeholder = "{{$key}}";
@@ -280,32 +278,6 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
         return $this->permission !== null;
     }
 
-    /**
-    * @return BeanFormatterInterface
-    */
-    public function getFormatter(): BeanFormatterInterface
-    {
-        return $this->formatter;
-    }
-
-    /**
-    * @param BeanFormatterInterface $formatter
-    *
-    * @return $this
-    */
-    public function setFormatter(BeanFormatterInterface $formatter): self
-    {
-        $this->formatter = $formatter;
-        return $this;
-    }
-
-    /**
-    * @return bool
-    */
-    public function hasFormatter(): bool
-    {
-        return $this->formatter !== null;
-    }
 
 
 
