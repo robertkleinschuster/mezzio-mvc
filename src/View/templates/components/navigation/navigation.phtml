@@ -3,7 +3,7 @@
     <?php foreach ($component->getComponentList() as $key => $tabcomponent): ?>
         <li class="nav-item" role="presentation">
             <a class="nav-link<?= $key == 0 ? ' active' : ''?>" id="<?= $tabcomponent->getId() ?>-tab" data-toggle="tab" href="#<?= $tabcomponent->getId() ?>" role="tab" aria-controls="<?= $tabcomponent->getId() ?>"
-               aria-selected="true"><?= $tabcomponent->getTitle() ?></a>
+               aria-selected="<?= $key == 0 ? 'true' : 'false'?>"><?= $tabcomponent->getTitle() ?></a>
         </li>
     <?php endforeach; ?>
 </ul>
