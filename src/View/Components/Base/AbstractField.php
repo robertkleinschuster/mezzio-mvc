@@ -52,6 +52,11 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     private $width;
 
     /**
+     * @var string
+     */
+    private $permission;
+
+    /**
      * AbstractField constructor.
      * @param string $title
      * @param string $key
@@ -227,6 +232,34 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     {
         return $this->hasOption(self::OPTION_APPEND_TO_PREVIOUS);
     }
+
+    /**
+    * @return string
+    */
+    public function getPermission(): string
+    {
+        return $this->permission;
+    }
+
+    /**
+    * @param string $permission
+    *
+    * @return $this
+    */
+    public function setPermission(string $permission): self
+    {
+        $this->permission = $permission;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasPermission(): bool
+    {
+        return $this->permission !== null;
+    }
+
 
     /**
      * @return string

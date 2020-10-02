@@ -53,6 +53,11 @@ class View implements OptionAwareInterface
     private $indexLink;
 
     /**
+     * @var array
+     */
+    private $permission_List;
+
+    /**
      * View constructor.
      * @param string $title
      * @param ViewModelInterface $viewModel
@@ -89,13 +94,6 @@ class View implements OptionAwareInterface
         return $this->component_List;
     }
 
-    /**
-     * @param AbstractComponent[] $component_List
-     */
-    public function setComponentList(array $component_List): void
-    {
-        $this->component_List = $component_List;
-    }
 
     /**
      * @param AbstractComponent $component
@@ -103,6 +101,9 @@ class View implements OptionAwareInterface
      */
     public function addComponent(AbstractComponent $component, bool $prepend = false)
     {
+        if ($this->hasPermissionList()) {
+            $component->setPermissionList($this->getPermissionList());
+        }
         if ($prepend) {
             array_unshift($this->component_List, $component);
         } else {
@@ -212,6 +213,33 @@ class View implements OptionAwareInterface
     {
         $this->indexLink = $indexLink;
         return $this;
+    }
+
+    /**
+    * @return array
+    */
+    public function getPermissionList(): array
+    {
+        return $this->permission_List;
+    }
+
+    /**
+    * @param array $permission_List
+    *
+    * @return $this
+    */
+    public function setPermissionList(array $permission_List): self
+    {
+        $this->permission_List = $permission_List;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasPermissionList(): bool
+    {
+        return $this->permission_List !== null;
     }
 
 

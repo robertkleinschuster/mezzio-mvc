@@ -43,6 +43,11 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
     private $id;
 
     /**
+     * @var array
+     */
+    private $permission_List;
+
+    /**
      * AbstractComponent constructor.
      * @param string $title
      * @param ComponentModelInterface $componentModel
@@ -54,28 +59,28 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
         $this->componentModel = $componentModel ?? new ComponentModel();
     }
 
-   /**
-   * @return string
-   */
+    /**
+     * @return string
+     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
-   /**
-   * @param string $title
-   *
-   * @return $this
-   */
+    /**
+     * @param string $title
+     *
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
         return $this;
     }
 
-   /**
-   * @return bool
-   */
+    /**
+     * @return bool
+     */
     public function hasTitle(): bool
     {
         return $this->title !== null;
@@ -103,7 +108,9 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
      */
     protected function addField(AbstractField $field): self
     {
-        $this->field_List[] = $field;
+        if (!$this->hasPermissionList() || in_array($field->getPermission(), $this->getPermissionList())) {
+            $this->field_List[] = $field;
+        }
         return $this;
     }
 
@@ -130,6 +137,34 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
     {
         $this->cols = $cols;
     }
+
+    /**
+     * @return array
+     */
+    public function getPermissionList(): array
+    {
+        return $this->permission_List;
+    }
+
+    /**
+     * @param array $permission_List
+     *
+     * @return $this
+     */
+    public function setPermissionList(array $permission_List): self
+    {
+        $this->permission_List = $permission_List;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPermissionList(): bool
+    {
+        return $this->permission_List !== null;
+    }
+
 
     /**
      * @return string
