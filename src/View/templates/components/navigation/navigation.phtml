@@ -1,0 +1,15 @@
+<ul class="nav nav-<?= $component->getType() ?>" id="<?= $component->getId() ?>" role="tablist">
+    <?php foreach ($component->getComponentList() as $key => $tabcomponent): ?>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link<?= $key == 0 ? ' active' : ''?>" id="<?= $tabcomponent->getId() ?>-tab" data-toggle="tab" href="#<?= $tabcomponent->getId() ?>" role="tab" aria-controls="<?= $tabcomponent->getId() ?>"
+               aria-selected="true"><?= $tabcomponent->getTitle() ?></a>
+        </li>
+    <?php endforeach; ?>
+</ul>
+<div class="tab-content" id="<?= $component->getId() ?>Content">
+    <?php foreach ($component->getComponentList() as $key => $tabcomponent): ?>
+        <div class="tab-pane fade <?= $key == 0 ? ' show active' : ''?>" id="<?= $tabcomponent->getId() ?>" role="tabpanel" aria-labelledby="<?= $tabcomponent->getId() ?>-tab">
+            <?php $this->insert($templateFolder . '::' . $tabcomponent->getTemplate(), ['templateFolder' => $templateFolder, 'component' => $tabcomponent, 'fields' => $tabcomponent->getFieldList(), 'model' => $tabcomponent->getComponentModel()]) ?>
+        </div>
+    <?php endforeach; ?>
+</div>

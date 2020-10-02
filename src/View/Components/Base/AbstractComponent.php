@@ -32,6 +32,12 @@ abstract class AbstractComponent implements OptionAwareInterface
      */
     private $cols;
 
+
+    /**
+     * @var string
+     */
+    private $id;
+
     /**
      * AbstractComponent constructor.
      * @param string $title
@@ -102,5 +108,14 @@ abstract class AbstractComponent implements OptionAwareInterface
         $this->cols = $cols;
     }
 
-
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        if (null === $this->id) {
+            $this->id = uniqid();
+        }
+        return $this->id;
+    }
 }
