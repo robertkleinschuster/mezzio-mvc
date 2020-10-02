@@ -18,13 +18,13 @@ class Toolbar extends AbstractComponent
 
 
     /**
-     * @param $name
+     * @param $title
      * @param $key
      * @return Fields\Link
      */
-    public function addLink(string $name, string $key): Fields\Link
+    public function addLink(string $key, string $title): Fields\Link
     {
-        $link = new Fields\Link($name, $key);
+        $link = new Fields\Link($key, $title);
         $this->addField($link);
         return $link;
     }
