@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\View\Components\Base;
 
 use Mezzio\Mvc\View\ComponentDataBeanInterface;
+use NiceshopsDev\Bean\BeanFormatter\BeanFormatterInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
@@ -57,6 +58,11 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     private $permission;
 
     /**
+     * @var BeanFormatterInterface
+     */
+    private $formatter;
+
+    /**
      * AbstractField constructor.
      * @param string $title
      * @param string $key
@@ -75,14 +81,28 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     protected function replacePlaceholders(string $input, ComponentDataBeanInterface $bean)
     {
         $output = $input;
+        $formatter = null;
+        if ($this->hasFormatter()) {
+            $formatter = $this->getFormatter()->format($bean);
+        }
         foreach ($bean as $key => $item) {
             $placeholder = "{{$key}}";
             if (strpos($input, $placeholder) !== false) {
-                $output = str_replace($placeholder, $item, $output);
+                if (null === $formatter) {
+                    $value = $item;
+                } else {
+                    $value = $formatter->getValue($key);
+                }
+                $output = str_replace($placeholder, $value, $output);
             }
             $placeholderEncoded = urlencode($placeholder);
             if (strpos($input, $placeholderEncoded) !== false) {
-                $output = str_replace($placeholderEncoded, $item, $output);
+                if (null === $formatter) {
+                    $value = $item;
+                } else {
+                    $value = $formatter->getValue($key);
+                }
+                $output = str_replace($placeholderEncoded, $value, $output);
             }
         }
         return $output;
@@ -259,6 +279,34 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     {
         return $this->permission !== null;
     }
+
+    /**
+    * @return BeanFormatterInterface
+    */
+    public function getFormatter(): BeanFormatterInterface
+    {
+        return $this->formatter;
+    }
+
+    /**
+    * @param BeanFormatterInterface $formatter
+    *
+    * @return $this
+    */
+    public function setFormatter(BeanFormatterInterface $formatter): self
+    {
+        $this->formatter = $formatter;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasFormatter(): bool
+    {
+        return $this->formatter !== null;
+    }
+
 
 
     /**
