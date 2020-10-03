@@ -1,5 +1,5 @@
 <?php foreach ($model->getComponentDataBeanList() as $bean): ?>
-    <div class="row row-cols-1 row-cols-sm-<?= $component->getCols() ?>">
+    <div class="row row-cols-1 row-cols-sm-<?= $component->getCols() ?> mb-4">
         <?php foreach ($fields as $key => $field): ?>
             <?php if (!$field->isAppendToPrevious()): ?>
                 <div class="col">
