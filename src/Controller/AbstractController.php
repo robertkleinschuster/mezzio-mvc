@@ -65,11 +65,7 @@ abstract class AbstractController implements ControllerInterface
     {
         $this->initView();
         $this->initModel();
-        if ($this->getControllerRequest()->hasAttribute(ControllerRequest::ATTRIBUTE_CREATE)) {
-            $this->getModel()->create($this->getControllerRequest()->getViewIdMap());
-        } else {
-            $this->getModel()->find($this->getControllerRequest()->getViewIdMap());
-        }
+        $this->getModel()->find($this->getControllerRequest()->getViewIdMap());
         $this->handleSubmit();
     }
 
@@ -87,7 +83,7 @@ abstract class AbstractController implements ControllerInterface
             $pathUrl = $path->getPath();
 
             if ($this->handleSubmitSecurity()) {
-                $this->getModel()->submit($this->getControllerRequest()->getAttributes());
+                $this->getModel()->submit($this->getControllerRequest());
                 if ($this->getModel()->getValidationHelper()->hasError()) {
                     $this->handleValidationError($this->getModel()->getValidationHelper());
                 } elseif ($this->getControllerRequest()->hasRedirect()) {

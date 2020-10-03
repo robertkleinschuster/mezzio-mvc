@@ -20,7 +20,10 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 
     public const ATTRIBUTE_SUBMIT = 'submit';
     public const ATTRIBUTE_REDIRECT = 'redirect';
-    public const ATTRIBUTE_CREATE = 'create';
+
+    public const SUBMIT_MODE_CREATE = 'create';
+    public const SUBMIT_MODE_SAVE = 'save';
+    public const SUBMIT_MODE_DELETE = 'delete';
 
     /**
      * @var ServerRequestInterface
@@ -125,6 +128,5 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     {
         return $this->getAttribute(self::ATTRIBUTE_SUBMIT);
     }
-
 
 }

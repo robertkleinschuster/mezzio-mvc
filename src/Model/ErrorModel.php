@@ -11,19 +11,25 @@ class ErrorModel extends AbstractModel
         // TODO: Implement init() method.
     }
 
-    public function find(array $ids)
+    public function find(array $viewIdMap)
     {
         // TODO: Implement find() method.
     }
 
-    public function create(array $ids)
+    public function create(array $viewIdMap)
     {
         // TODO: Implement create() method.
     }
 
-    public function submit(array $attributes)
+    public function delete(array $viewIdMap)
     {
-        // TODO: Implement submit() method.
+        // TODO: Implement delete() method.
     }
+
+    public function save(array $attributes)
+    {
+        // TODO: Implement save() method.
+    }
+
 
 }

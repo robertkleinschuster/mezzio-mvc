@@ -115,20 +115,59 @@ class Edit extends AbstractComponent
     }
 
     /**
-     * @param string $value
+     * @param string $link
+     * @return Fields\Text
+     */
+    public function addSubmitRedirect(string $link): Fields\Text
+    {
+        return $this->addSubmitAttribute(ControllerRequest::ATTRIBUTE_REDIRECT, $link);
+    }
+
+    /**
+     * @param string $mode
      * @param string $title
      * @param string|null $redirect
      * @return Fields\Button
      */
-    public function addSubmit(string $value, string $title, string $redirect = null): Fields\Button
+    public function addSubmit(string $mode, string $title, string $redirect = null): Fields\Button
     {
         $result = $this->addButton(ControllerRequest::ATTRIBUTE_SUBMIT, $title)
-            ->setValue($value)
+            ->setValue($mode)
             ->setType(Fields\Button::TYPE_SUBMIT);
 
         if (null !== $redirect) {
-            $this->addSubmitAttribute(ControllerRequest::ATTRIBUTE_REDIRECT, $redirect);
+            $this->addSubmitRedirect($redirect);
         }
         return $result;
+    }
+
+    /**
+     * @param string $title
+     * @param string $redirect
+     * @return Fields\Button
+     */
+    public function addSubmitDelete(string $title, string $redirect): Fields\Button
+    {
+        return $this->addSubmit(ControllerRequest::SUBMIT_MODE_DELETE, $title, $redirect);
+    }
+
+    /**
+     * @param string $title
+     * @param string $redirect
+     * @return Fields\Button
+     */
+    public function addSubmitCreate(string $title, string $redirect): Fields\Button
+    {
+        return $this->addSubmit(ControllerRequest::SUBMIT_MODE_CREATE, $title, $redirect);
+    }
+
+    /**
+     * @param string $title
+     * @param string $redirect
+     * @return Fields\Button
+     */
+    public function addSubmitSave(string $title, string $redirect): Fields\Button
+    {
+        return $this->addSubmit(ControllerRequest::SUBMIT_MODE_SAVE, $title, $redirect);
     }
 }
