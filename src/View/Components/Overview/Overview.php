@@ -93,4 +93,33 @@ class Overview extends AbstractComponent
         $this->addField($text);
         return $text;
     }
+
+    public function addDetailIcon(string $link)
+    {
+        return $this->addLink('', '')
+            ->setAction($link)
+            ->setValue('')
+            ->setIcon(Fields\Link::ICON_SEARCH)
+            ->setChapter('actions');
+    }
+
+    public function addEditIcon(string $link)
+    {
+        return $this->addLink('', '')
+            ->setAction($link)
+            ->setValue('')
+            ->setIcon(Fields\Link::ICON_EDIT_2)
+            ->setStyle(Fields\Link::STYLE_SUCCESS)
+            ->setChapter('actions');
+    }
+
+    public function addDeleteIcon(string $link)
+    {
+        return $this->addLink('', '')
+            ->setAction($link)
+            ->setValue('')
+            ->setIcon(Fields\Link::ICON_TRASH)
+            ->setStyle(Fields\Link::STYLE_DANGER)
+            ->setChapter('actions');
+    }
 }

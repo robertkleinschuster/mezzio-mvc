@@ -1,4 +1,7 @@
 <a <?= $field->hasAction() ? " href=\"{$field->getAction($data)}\"" : '' ?> <?= $field->hasTarget() ? " target=\"{$field->getTarget()}\"" : '' ?>
 class="<?=$field->getClass()?>">
+    <?php if($field->hasIcon()): ?>
+        <span data-feather="<?=$field->getIcon()?>"></span>
+    <?php endif;?>
     <?= $field->getValue($data) ?>
 </a>

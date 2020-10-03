@@ -142,6 +142,21 @@ class Edit extends AbstractComponent
     }
 
     /**
+     * @param string $link
+     * @param string $title
+     * @param bool $append
+     * @return Fields\Link
+     */
+    public function addCancel(string $link, string $title, bool $append = false): Fields\Link
+    {
+        return $this->addLink('cancel', $title)
+            ->setAction($link)
+            ->setAppendToColumnPrevious($append)
+            ->setStyle(Fields\Link::STYLE_SECONDARY)
+            ->setValue($title);
+    }
+
+    /**
      * @param string $title
      * @param string $redirect
      * @return Fields\Button
