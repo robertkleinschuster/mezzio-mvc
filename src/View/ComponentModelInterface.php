@@ -5,37 +5,39 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\View;
 
 use Mezzio\Mvc\Helper\ValidationHelper;
+use NiceshopsDev\Bean\BeanInterface;
+use NiceshopsDev\Bean\BeanList\BeanListInterface;
 
 interface ComponentModelInterface
 {
     /**
-     * @return ComponentDataBeanListInterface
+     * @return BeanListInterface
      */
-    public function getComponentDataBeanList(): ComponentDataBeanListInterface;
+    public function getComponentDataBeanList(): BeanListInterface;
 
     /**
-     * @param ComponentDataBeanListInterface $componentDataBeanList
+     * @param BeanListInterface $componentDataBeanList
      * @return ComponentModel
      */
-    public function setComponentDataBeanList(ComponentDataBeanListInterface $componentDataBeanList): self;
+    public function setComponentDataBeanList(BeanListInterface $componentDataBeanList): self;
 
     /**
-     * @param ComponentDataBeanInterface $componentDataBean
+     * @param BeanInterface $componentDataBean
      * @return $this
      */
-    public function addComponentDataBean(ComponentDataBeanInterface $componentDataBean): self;
+    public function addComponentDataBean(BeanInterface $componentDataBean): self;
 
     /**
-     * @param ComponentDataBeanInterface $componentDataBean
+     * @param BeanInterface $componentDataBean
      * @return $this
      */
-    public function setComponentDataBean(ComponentDataBeanInterface $componentDataBean): self;
+    public function setComponentDataBean(BeanInterface $componentDataBean): self;
 
     /**
-     * @return ComponentDataBeanInterface
+     * @return BeanInterface
      * @throws ViewException
      */
-    public function getComponentDataBean(): ComponentDataBeanInterface;
+    public function getComponentDataBean(): BeanInterface;
 
     /**
      * @return ValidationHelper

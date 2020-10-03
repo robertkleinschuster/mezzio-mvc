@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\View\Components\Base;
 
-use Mezzio\Mvc\View\ComponentDataBeanInterface;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareTrait;
+use NiceshopsDev\Bean\BeanInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
@@ -73,10 +73,10 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
 
     /**
      * @param string $input
-     * @param ComponentDataBeanInterface $bean
+     * @param BeanInterface $bean
      * @return string
      */
-    protected function replacePlaceholders(string $input, ComponentDataBeanInterface $bean)
+    protected function replacePlaceholders(string $input, BeanInterface $bean)
     {
         $output = $input;
         $formatter = null;
@@ -107,10 +107,10 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     }
 
     /**
-     * @param ComponentDataBeanInterface|null $bean
+     * @param BeanInterface|null $bean
      * @return string
      */
-    public function getValue(?ComponentDataBeanInterface $bean = null)
+    public function getValue(?BeanInterface $bean = null)
     {
         if (null !== $bean) {
             if (!$this->hasValue()) {

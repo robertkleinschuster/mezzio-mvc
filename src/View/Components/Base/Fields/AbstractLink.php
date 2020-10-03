@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Mezzio\Mvc\View\Components\Base\Fields;
 
-use Mezzio\Mvc\View\ComponentDataBeanInterface;
 use Mezzio\Mvc\View\Components\Base\AbstractField;
+use NiceshopsDev\Bean\BeanInterface;
 
 abstract class AbstractLink extends AbstractField
 {
@@ -371,10 +371,10 @@ abstract class AbstractLink extends AbstractField
     }
 
     /**
-     * @param ComponentDataBeanInterface|null $bean
+     * @param BeanInterface|null $bean
      * @return string
      */
-    public function getAction(?ComponentDataBeanInterface $bean = null): string
+    public function getAction(?BeanInterface $bean = null): string
     {
         if (null === $bean) {
             return $this->action;

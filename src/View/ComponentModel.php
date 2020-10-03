@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\View;
 
 use Mezzio\Mvc\Helper\ValidationHelper;
+use NiceshopsDev\Bean\BeanInterface;
+use NiceshopsDev\Bean\BeanList\BeanListInterface;
 
 class ComponentModel implements ComponentModelInterface
 {
@@ -40,41 +42,42 @@ class ComponentModel implements ComponentModelInterface
     }
 
     /**
-     * @param ComponentDataBeanInterface $componentDataBean
+     * @param BeanInterface $componentDataBean
      * @return $this
+     * @throws \NiceshopsDev\Bean\BeanList\BeanListException
      */
-    public function addComponentDataBean(ComponentDataBeanInterface $componentDataBean): ComponentModelInterface
+    public function addComponentDataBean(BeanInterface $componentDataBean): ComponentModelInterface
     {
         $this->componentDataBeanList->addBean($componentDataBean);
         return $this;
     }
 
     /**
-     * @return ComponentDataBeanListInterface
+     * @return BeanListInterface
      */
-    public function getComponentDataBeanList(): ComponentDataBeanListInterface
+    public function getComponentDataBeanList(): BeanListInterface
     {
         return $this->componentDataBeanList;
     }
 
     /**
-     * @param ComponentDataBeanListInterface $componentDataBeanList
+     * @param BeanListInterface $componentDataBeanList
      * @return ComponentModel
      */
     public function setComponentDataBeanList(
-        ComponentDataBeanListInterface $componentDataBeanList
+        BeanListInterface $componentDataBeanList
     ): ComponentModelInterface {
         $this->componentDataBeanList = $componentDataBeanList;
         return $this;
     }
 
     /**
-     * @param ComponentDataBeanInterface $componentDataBean
+     * @param BeanInterface $componentDataBean
      * @return $this|ComponentModelInterface
      * @throws ViewException
      * @throws \NiceshopsDev\Bean\BeanList\BeanListException
      */
-    public function setComponentDataBean(ComponentDataBeanInterface $componentDataBean): ComponentModelInterface
+    public function setComponentDataBean(BeanInterface $componentDataBean): ComponentModelInterface
     {
         if ($this->getComponentDataBeanList()->count() >= 1) {
             throw new ViewException(
@@ -87,14 +90,14 @@ class ComponentModel implements ComponentModelInterface
 
 
     /**
-     * @return ComponentDataBeanInterface
+     * @return BeanInterface
      * @throws ViewException|\NiceshopsDev\Bean\BeanList\BeanListException
      */
-    public function getComponentDataBean(): ComponentDataBeanInterface
+    public function getComponentDataBean(): BeanInterface
     {
         if ($this->getComponentDataBeanList()->count() === 1) {
             $bean = $this->getComponentDataBeanList()->offsetGet(0);
-            if ($bean instanceof ComponentDataBeanInterface) {
+            if ($bean instanceof BeanInterface) {
                 return $bean;
             }
         }
