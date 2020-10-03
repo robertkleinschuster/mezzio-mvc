@@ -6,7 +6,7 @@ namespace Mezzio\Mvc\View;
 
 use NiceshopsDev\Bean\BeanList\AbstractBaseBeanList;
 
-class ComponentDataBeanList extends AbstractBaseBeanList implements ComponentDataBeanListInterface
+class ComponentDataBeanList extends AbstractBaseBeanList
 {
 
 }

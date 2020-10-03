@@ -12,7 +12,7 @@ class ComponentModel implements ComponentModelInterface
 {
 
     /**
-     * @var ComponentDataBeanListInterface
+     * @var BeanListInterface
      */
     private $componentDataBeanList;
 
