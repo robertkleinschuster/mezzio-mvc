@@ -331,6 +331,11 @@ abstract class AbstractLink extends AbstractField
     private $size;
 
     /**
+     * @var bool
+     */
+    private $outline;
+
+    /**
      * @return string
      */
     public function getTemplate()
@@ -478,6 +483,27 @@ abstract class AbstractLink extends AbstractField
         return $this->size !== null;
     }
 
+    /**
+    * @return bool
+    */
+    public function isOutline(): bool
+    {
+        return $this->outline ?? false;
+    }
+
+    /**
+    * @param bool $outline
+    *
+    * @return $this
+    */
+    public function setOutline(bool $outline): self
+    {
+        $this->outline = $outline;
+        return $this;
+    }
+
+
+
 
     /**
      * @return string
@@ -488,7 +514,11 @@ abstract class AbstractLink extends AbstractField
         if ($this->hasOption(self::OPTION_BUTTON_STYLE)) {
             $result = ' btn';
             if ($this->hasStyle()) {
-                $result .= ' btn-' . $this->getStyle();
+                if ($this->isOutline()) {
+                    $result .= ' btn-outline-' . $this->getStyle();
+                } else {
+                    $result .= ' btn-' . $this->getStyle();
+                }
             }
             if ($this->hasSize()) {
                 $result .= ' btn-' . $this->getSize();
