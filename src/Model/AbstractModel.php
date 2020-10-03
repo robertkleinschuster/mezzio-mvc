@@ -77,7 +77,7 @@ abstract class AbstractModel implements ModelInterface, OptionAwareInterface
                 }
                 break;
             case ControllerRequest::SUBMIT_MODE_DELETE:
-                if ($this->addOption(self::OPTION_DELETE_ALLOWED)) {
+                if ($this->hasOption(self::OPTION_DELETE_ALLOWED)) {
                     $this->delete($request->getViewIdMap());
                 } else {
                     $this->handlePermissionDenied();
