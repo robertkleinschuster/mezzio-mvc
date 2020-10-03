@@ -7,9 +7,17 @@ namespace Mezzio\Mvc\Model;
 use Mezzio\Mvc\Bean\TemplateDataBean;
 use Mezzio\Mvc\Controller\ControllerRequest;
 use Mezzio\Mvc\Helper\ValidationHelper;
+use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
+use NiceshopsDev\NiceCore\Option\OptionTrait;
 
-abstract class AbstractModel implements ModelInterface
+abstract class AbstractModel implements ModelInterface, OptionAwareInterface
 {
+    use OptionTrait;
+
+    public const OPTION_CREATE_ALLOWED = 'create_allowed';
+    public const OPTION_EDIT_ALLOWED = 'edit_allowed';
+    public const OPTION_DELETE_ALLOWED = 'delete_allowed';
+
     /**
      * @var TemplateDataBean
      */
@@ -19,6 +27,11 @@ abstract class AbstractModel implements ModelInterface
      * @var ValidationHelper
      */
     private $validationHelper;
+
+    /**
+     * @var array
+     */
+    private $permissionList;
 
     /**
      * @return TemplateDataBean
@@ -50,16 +63,30 @@ abstract class AbstractModel implements ModelInterface
     {
         switch ($request->getSubmit()) {
             case ControllerRequest::SUBMIT_MODE_SAVE:
-                $this->save($request->getAttributes());
+                if ($this->hasOption(self::OPTION_EDIT_ALLOWED)) {
+                    $this->save($request->getAttributes());
+                } else {
+                    $this->handlePermissionDenied();
+                }
                 break;
             case ControllerRequest::SUBMIT_MODE_CREATE:
-                $this->create($request->getViewIdMap(), $request->getAttributes());
+                if ($this->hasOption(self::OPTION_CREATE_ALLOWED)) {
+                    $this->create($request->getViewIdMap(), $request->getAttributes());
+                } else {
+                    $this->handlePermissionDenied();
+                }
                 break;
             case ControllerRequest::SUBMIT_MODE_DELETE:
-                $this->delete($request->getViewIdMap());
+                if ($this->addOption(self::OPTION_DELETE_ALLOWED)) {
+                    $this->delete($request->getViewIdMap());
+                } else {
+                    $this->handlePermissionDenied();
+                }
                 break;
         }
     }
+
+    abstract protected function handlePermissionDenied();
 
     /**
      * @param array $viewIdMap
