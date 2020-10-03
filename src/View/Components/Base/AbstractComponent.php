@@ -103,6 +103,11 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
      */
     public function getFieldList(): array
     {
+        if ($this->hasPermissionList()) {
+            return array_filter($this->field_List, function ($field) {
+                return !$field->hasPermission() || in_array($field->getPermission(), $this->getPermissionList());
+            });
+        }
         return $this->field_List;
     }
 
