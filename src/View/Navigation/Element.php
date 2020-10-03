@@ -26,6 +26,11 @@ class Element
     private $active;
 
     /**
+     * @var string
+     */
+    private $permission;
+
+    /**
      * Element constructor.
      * @param string $name
      * @param string $link
@@ -127,4 +132,33 @@ class Element
     {
         $this->active = $active;
     }
+
+
+    /**
+    * @return string
+    */
+    public function getPermission(): string
+    {
+        return $this->permission;
+    }
+
+    /**
+    * @param string $permission
+    *
+    * @return $this
+    */
+    public function setPermission(string $permission): self
+    {
+        $this->permission = $permission;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasPermission(): bool
+    {
+        return $this->permission !== null;
+    }
+
 }
