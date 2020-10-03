@@ -48,6 +48,12 @@ class Navigation extends AbstractComponent
      */
     public function addComponent(AbstractComponent $component)
     {
+        if ($this->hasPermissionList()) {
+            $component->setPermissionList($this->getPermissionList());
+            if ($component->hasPermission() && !in_array($component->getPermission(), $this->getPermissionList())) {
+                return;
+            }
+        }
         $this->component_List[] = $component;
     }
 
@@ -56,6 +62,12 @@ class Navigation extends AbstractComponent
      */
     public function getComponentList(): array
     {
+        if ($this->hasPermissionList()) {
+            $componentList = $this->component_List;
+            return array_filter($componentList, function ($component) {
+                return !$component->hasPermission() || in_array($component->getPermission(), $this->getPermissionList());
+            });
+        }
         return $this->component_List;
     }
 
