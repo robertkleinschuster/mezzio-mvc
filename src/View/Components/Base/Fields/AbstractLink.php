@@ -18,7 +18,9 @@ abstract class AbstractLink extends AbstractField
     public const OPTION_BUTTON_STYLE = 'button_style';
     public const OPTION_TEXT_DECORATION_NONE = 'text-decoration-none';
 
-
+    public const SIZE_SMALL = 'sm';
+    public const SIZE_LARGE = 'lg';
+    public const SIZE_BLOCK = 'block';
 
     public const ICON_ACTIVITY = 'activity';
     public const ICON_AIRPLAY = 'airplay';
@@ -324,6 +326,11 @@ abstract class AbstractLink extends AbstractField
     private $icon;
 
     /**
+     * @var string
+     */
+    private $size;
+
+    /**
      * @return string
      */
     public function getTemplate()
@@ -444,6 +451,33 @@ abstract class AbstractLink extends AbstractField
         return $this->icon !== null;
     }
 
+    /**
+    * @return string
+    */
+    public function getSize(): string
+    {
+        return $this->size;
+    }
+
+    /**
+    * @param string $size
+    *
+    * @return $this
+    */
+    public function setSize(string $size): self
+    {
+        $this->size = $size;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasSize(): bool
+    {
+        return $this->size !== null;
+    }
+
 
     /**
      * @return string
@@ -455,6 +489,9 @@ abstract class AbstractLink extends AbstractField
             $result = ' btn';
             if ($this->hasStyle()) {
                 $result .= ' btn-' . $this->getStyle();
+            }
+            if ($this->hasSize()) {
+                $result .= ' btn-' . $this->getSize();
             }
         } else {
             if ($this->hasStyle()) {

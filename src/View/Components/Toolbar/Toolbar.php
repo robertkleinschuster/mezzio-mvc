@@ -28,6 +28,7 @@ class Toolbar extends AbstractComponent
         $button->setAction($link);
         $button->setValue($title);
         $button->addOption(Fields\Link::OPTION_BUTTON_STYLE);
+        $button->setSize(Fields\Link::SIZE_SMALL);
         $button->setStyle(Fields\Link::STYLE_SECONDARY);
         $this->addField($button);
         return $button;
