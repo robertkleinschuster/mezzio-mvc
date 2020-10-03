@@ -6,11 +6,11 @@
             <?php endif ?>
             <div class="row p-1">
                 <?php if ($field->hasTitle()): ?>
-                    <div class="col-sm-4 text-center text-sm-right font-weight-bolder">
+                    <div class="col-sm-2 text-center text-sm-left font-weight-bolder">
                         <?= $field->getTitle($data) ?>:
                     </div>
                 <?php endif; ?>
-                <div class="col-sm-8 text-center text-sm-left">
+                <div class="col-sm-10 text-center text-sm-left">
                     <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
                 </div>
             </div>

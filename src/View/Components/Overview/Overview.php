@@ -114,7 +114,7 @@ class Overview extends AbstractComponent
             ->setAction($link)
             ->setValue('')
             ->setIcon(Fields\Link::ICON_EDIT_2)
-            ->setStyle(Fields\Link::STYLE_SUCCESS)
+            ->setStyle(Fields\Link::STYLE_WARNING)
             ->setOutline(true)
             ->addOption(Fields\Link::OPTION_TEXT_DECORATION_NONE)
             ->addOption(Fields\Link::OPTION_BUTTON_STYLE)
