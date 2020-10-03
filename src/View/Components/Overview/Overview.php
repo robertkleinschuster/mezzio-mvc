@@ -102,7 +102,6 @@ class Overview extends AbstractComponent
             ->setIcon(Fields\Link::ICON_SEARCH)
             ->addOption(Fields\Link::OPTION_TEXT_DECORATION_NONE)
             ->addOption(Fields\Link::OPTION_BUTTON_STYLE)
-            ->setStyle(Fields\Link::STYLE_LIGHT)
             ->setSize(Fields\Link::SIZE_SMALL)
             ->setChapter('actions');
     }
@@ -116,7 +115,6 @@ class Overview extends AbstractComponent
             ->setStyle(Fields\Link::STYLE_SUCCESS)
             ->addOption(Fields\Link::OPTION_TEXT_DECORATION_NONE)
             ->addOption(Fields\Link::OPTION_BUTTON_STYLE)
-            ->setStyle(Fields\Link::STYLE_LIGHT)
             ->setSize(Fields\Link::SIZE_SMALL)
             ->setChapter('actions');
     }
