@@ -16,6 +16,8 @@ abstract class AbstractLink extends AbstractField
     public const TARGET_TOP = '_top';
 
     public const OPTION_BUTTON_STYLE = 'button_style';
+    public const OPTION_TEXT_DECORATION_NONE = 'text-decoration-none';
+
 
 
     public const ICON_ACTIVITY = 'activity';
@@ -454,6 +456,13 @@ abstract class AbstractLink extends AbstractField
             if ($this->hasStyle()) {
                 $result .= ' btn-' . $this->getStyle();
             }
+        } else {
+            if ($this->hasStyle()) {
+                $result .= ' text-' . $this->getStyle();
+            }
+        }
+        if ($this->hasOption(self::OPTION_TEXT_DECORATION_NONE)) {
+            $result .= ' text-decoration-none';
         }
         return $result;
     }
