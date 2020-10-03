@@ -53,7 +53,7 @@ abstract class AbstractModel implements ModelInterface
                 $this->save($request->getAttributes());
                 break;
             case ControllerRequest::SUBMIT_MODE_CREATE:
-                $this->create($request->getViewIdMap());
+                $this->create($request->getViewIdMap(), $request->getAttributes());
                 break;
             case ControllerRequest::SUBMIT_MODE_DELETE:
                 $this->delete($request->getViewIdMap());
@@ -63,9 +63,10 @@ abstract class AbstractModel implements ModelInterface
 
     /**
      * @param array $viewIdMap
+     * @param array $attributes
      * @return mixed
      */
-    abstract protected function create(array $viewIdMap);
+    abstract protected function create(array $viewIdMap, array $attributes);
 
     /**
      * @param array $viewIdMap

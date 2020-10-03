@@ -6,7 +6,7 @@ namespace Mezzio\Mvc\Model;
 
 class ErrorModel extends AbstractModel
 {
-    protected function create(array $viewIdMap)
+    protected function create(array $viewIdMap, array $attributes)
     {
         // TODO: Implement create() method.
     }
