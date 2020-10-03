@@ -117,7 +117,7 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     {
         if ($this->hasPermissionList()) {
             $component->setPermissionList($this->getPermissionList());
-            if (!in_array($component->getPermission(), $this->getPermissionList())) {
+            if ($component->hasPermission() && !in_array($component->getPermission(), $this->getPermissionList())) {
                 return;
             }
         }
