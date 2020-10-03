@@ -65,7 +65,9 @@ abstract class AbstractController implements ControllerInterface
     {
         $this->initView();
         $this->initModel();
-        if ($this->getControllerRequest()->getSubmit() !== ControllerRequest::SUBMIT_MODE_CREATE) {
+        if (!$this->getControllerRequest()->hasSubmit()
+            || $this->getControllerRequest()->getSubmit() !== ControllerRequest::SUBMIT_MODE_CREATE)
+        {
             $this->getModel()->find($this->getControllerRequest()->getViewIdMap());
         }
         $this->handleSubmit();
