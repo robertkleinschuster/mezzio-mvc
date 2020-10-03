@@ -44,7 +44,7 @@ class Navigation
     public function getElementList(): array
     {
         if ($this->hasPermissionList()) {
-            return array_filter($this->permissionList, function ($element) {
+            return array_filter($this->element_List, function ($element) {
                 return !$element->hasPermission() || in_array($element->getPermission(), $this->getPermissionList());
             });
         }
