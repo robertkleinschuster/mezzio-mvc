@@ -99,6 +99,12 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
      */
     public function getComponentList(): array
     {
+        if ($this->hasPermissionList()) {
+            $componentList = $this->component_List;
+            return array_filter($componentList, function ($component) {
+                return !$component->hasPermission() || in_array($component->getPermission(), $this->getPermissionList());
+            });
+        }
         return $this->component_List;
     }
 

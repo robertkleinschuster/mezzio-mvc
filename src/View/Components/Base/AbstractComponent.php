@@ -50,6 +50,11 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
      */
     private $permission_List;
 
+    /**
+     * @var string
+     */
+    private $permission;
+
 
     /**
      * AbstractComponent constructor.
@@ -180,6 +185,34 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
     {
         return $this->permission_List !== null;
     }
+
+    /**
+    * @return string
+    */
+    public function getPermission(): string
+    {
+        return $this->permission;
+    }
+
+    /**
+    * @param string $permission
+    *
+    * @return $this
+    */
+    public function setPermission(string $permission): self
+    {
+        $this->permission = $permission;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasPermission(): bool
+    {
+        return $this->permission !== null;
+    }
+
 
 
     /**
