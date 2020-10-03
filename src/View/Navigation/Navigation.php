@@ -25,6 +25,11 @@ class Navigation
     private $permissionList;
 
     /**
+     * @var string
+     */
+    private $permission;
+
+    /**
      * Navigation constructor.
      * @param string $title
      */
@@ -111,18 +116,18 @@ class Navigation
     }
 
     /**
-    * @return array
-    */
+     * @return array
+     */
     public function getPermissionList(): array
     {
         return $this->permissionList;
     }
 
     /**
-    * @param array $permissionList
-    *
-    * @return $this
-    */
+     * @param array $permissionList
+     *
+     * @return $this
+     */
     public function setPermissionList(array $permissionList): self
     {
         $this->permissionList = $permissionList;
@@ -130,11 +135,39 @@ class Navigation
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasPermissionList(): bool
     {
         return $this->permissionList !== null;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getPermission(): string
+    {
+        return $this->permission;
+    }
+
+    /**
+     * @param string $permission
+     *
+     * @return $this
+     */
+    public function setPermission(string $permission): self
+    {
+        $this->permission = $permission;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPermission(): bool
+    {
+        return $this->permission !== null;
     }
 
 
