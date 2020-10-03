@@ -18,12 +18,6 @@ interface ModelInterface
 
     public function find(array $viewIdMap);
 
-    public function create(array $viewIdMap);
-
-    public function delete(array $viewIdMap);
-
-    public function save(array $attributes);
-
     public function submit(ControllerRequest $request);
 
 }

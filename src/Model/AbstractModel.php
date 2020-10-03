@@ -60,4 +60,23 @@ abstract class AbstractModel implements ModelInterface
                 break;
         }
     }
+
+    /**
+     * @param array $viewIdMap
+     * @return mixed
+     */
+    abstract protected function create(array $viewIdMap);
+
+    /**
+     * @param array $viewIdMap
+     * @return mixed
+     */
+    abstract protected function delete(array $viewIdMap);
+
+    /**
+     * @param array $attributes
+     * @return mixed
+     */
+    abstract protected function save(array $attributes);
+
 }
