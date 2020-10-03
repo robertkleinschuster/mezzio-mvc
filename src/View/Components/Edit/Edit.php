@@ -136,7 +136,7 @@ class Edit extends AbstractComponent
             ->setType(Fields\Button::TYPE_SUBMIT);
 
         if (null !== $redirect) {
-            $this->addSubmitRedirect($redirect);
+            $this->addSubmitRedirect($redirect)->setAppendToColumnPrevious(true);
         }
         return $result;
     }
