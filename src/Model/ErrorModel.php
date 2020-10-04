@@ -6,6 +6,11 @@ namespace Mezzio\Mvc\Model;
 
 class ErrorModel extends AbstractModel
 {
+    protected function handlePermissionDenied()
+    {
+        // TODO: Implement handlePermissionDenied() method.
+    }
+
     protected function create(array $viewIdMap, array $attributes)
     {
         // TODO: Implement create() method.
