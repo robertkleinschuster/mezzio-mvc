@@ -41,6 +41,11 @@ class ConfigProvider
                     'suffix' => 'Action'
                 ],
             ],
+            'plates' => [
+                'extensions' => [
+
+                ]
+            ],
         ];
     }
 

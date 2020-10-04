@@ -20,9 +20,10 @@
     ],
     "require": {
         "php": "^7.3",
+        "laminas/laminas-diactoros": "^2.3.0",
+        "league/plates": "^3.3",
         "mezzio/mezzio": "^3.2.1",
         "mezzio/mezzio-helpers": "^5.3",
-        "laminas/laminas-diactoros": "^2.3.0",
         "niceshops/nice-beans": "dev-master"
     },
     "require-dev": {

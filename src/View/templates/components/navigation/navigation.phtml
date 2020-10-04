@@ -21,7 +21,7 @@
         </div>
     <?php endforeach; ?>
 </div>
-<?php $this->start('javascript') ?>
+<?php $this->push('javascript') ?>
 <script lang="js">
     $(document).ready(function () {
         var eventClickNav = 'click.<?= $tabcomponent->getId() ?>-tab';
