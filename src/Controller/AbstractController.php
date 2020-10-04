@@ -65,10 +65,17 @@ abstract class AbstractController implements ControllerInterface
     {
         $this->initView();
         $this->initModel();
-        if (!$this->getControllerRequest()->hasSubmit()
-            || $this->getControllerRequest()->getSubmit() !== ControllerRequest::SUBMIT_MODE_CREATE)
-        {
+        if (
+            !$this->getControllerRequest()->hasSubmit() ||
+            $this->getControllerRequest()->getSubmit() !== ControllerRequest::SUBMIT_MODE_CREATE
+        ) {
             $this->getModel()->find($this->getControllerRequest()->getViewIdMap());
+        }
+        if ($this->getControllerRequest()->hasNavId() && $this->getControllerRequest()->hasNavIndex()) {
+            $this->handleNavigationState(
+                $this->getControllerRequest()->getNavId(),
+                $this->getControllerRequest()->getNavIndex()
+            );
         }
         $this->handleSubmit();
     }
@@ -108,6 +115,13 @@ abstract class AbstractController implements ControllerInterface
      * @return mixed
      */
     abstract protected function handleValidationError(ValidationHelper $validationHelper);
+
+    /**
+     * @param string $id
+     * @param string $index
+     * @return mixed
+     */
+    abstract protected function handleNavigationState(string $id, string $index);
 
 
     /**

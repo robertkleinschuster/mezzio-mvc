@@ -214,20 +214,13 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
     }
 
 
-
     /**
      * @return string
      */
     public function getId(): string
     {
         if (null === $this->id) {
-            $string = '';
-            $characters = 'abcdefghijklmnopqrstuvwxyz';
-            $max = strlen($characters) - 1;
-            for ($i = 0; $i < 5; $i++) {
-                $string .= $characters[mt_rand(0, $max)];
-            }
-            $this->id = $string;
+            $this->id = preg_replace("/[^a-zA-Z]/", "", md5(serialize($this)));
         }
         return $this->id;
     }

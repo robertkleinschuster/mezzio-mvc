@@ -5,13 +5,15 @@
             <?php if ($key == 0 || !$field->isAppendToPrevious()): ?>
                 <div class="col">
             <?php endif ?>
-            <?= $field->getChapter() != $prevChapter ? "<h4>{$field->getChapter()}</h4>" : '' ?>
-            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), [
-            'templateFolder' => $templateFolder,
-            'field' => $field,
-            'data' => $model->getComponentDataBean(),
-            'errors' => $model->getValidationHelper()->getErrorList($field->getKey()),
-        ]) ?>
+            <?php if ($field->isShow($bean)): ?>
+                <?= $field->getChapter() != $prevChapter ? "<h4>{$field->getChapter()}</h4>" : '' ?>
+                <?php $this->insert($templateFolder . '::' . $field->getTemplate(), [
+                    'templateFolder' => $templateFolder,
+                    'field' => $field,
+                    'data' => $model->getComponentDataBean(),
+                    'errors' => $model->getValidationHelper()->getErrorList($field->getKey()),
+                ]) ?>
+            <?php endif; ?>
             <?php if ($fields[$key + 1] === null || !$fields[$key + 1]->isAppendToPrevious()): ?>
                 </div>
             <?php endif ?>

@@ -59,6 +59,15 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
      */
     private $permission;
 
+    /**
+     * @var callable
+     */
+    private $show;
+
+    /**
+     * @var callable
+     */
+    private $format;
 
     /**
      * AbstractField constructor.
@@ -113,12 +122,16 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     public function getValue(?BeanInterface $bean = null)
     {
         if (null !== $bean) {
-            if (!$this->hasValue()) {
-                $value = "{{$this->getKey()}}";
+            if ($this->hasFormat()) {
+                return ($this->getFormat())($bean);
             } else {
-                $value = $this->value;
+                if (!$this->hasValue()) {
+                    $value = "{{$this->getKey()}}";
+                } else {
+                    $value = $this->value;
+                }
+                return $this->replacePlaceholders($value, $bean);
             }
-            return $this->replacePlaceholders($value, $bean);
         }
         return $this->value;
     }
@@ -278,7 +291,71 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
         return $this->permission !== null;
     }
 
+    /**
+    * @return callable
+    */
+    public function getShow(): callable
+    {
+        return $this->show;
+    }
 
+    /**
+    * @param callable $show
+    *
+    * @return $this
+    */
+    public function setShow(callable $show): self
+    {
+        $this->show = $show;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasShow(): bool
+    {
+        return $this->show !== null;
+    }
+
+    /**
+     * @param BeanInterface $bean
+     * @return bool
+     */
+    public function isShow(BeanInterface $bean): bool
+    {
+        if ($this->hasShow()) {
+            return ($this->getShow())($bean);
+        }
+        return true;
+    }
+
+    /**
+    * @return callable
+    */
+    public function getFormat(): callable
+    {
+        return $this->format;
+    }
+
+    /**
+    * @param callable $format
+    *
+    * @return $this
+    */
+    public function setFormat(callable $format): self
+    {
+        $this->format = $format;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasFormat(): bool
+    {
+        return $this->format !== null;
+    }
 
 
     /**

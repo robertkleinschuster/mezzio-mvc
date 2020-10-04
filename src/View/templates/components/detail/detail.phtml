@@ -4,19 +4,21 @@
             <?php if (!$field->isAppendToPrevious()): ?>
                 <div class="col">
             <?php endif ?>
-            <div class="row p-1">
-                <?php if ($field->hasTitle()): ?>
-                    <div class="col-sm-2 text-center text-sm-left font-weight-bolder">
-                        <?= $field->getTitle($data) ?>:
+            <?php if ($field->isShow($bean)): ?>
+                <div class="row p-1">
+                    <?php if ($field->hasTitle()): ?>
+                        <div class="col-sm-2 text-center text-sm-left font-weight-bolder">
+                            <?= $field->getTitle($data) ?>:
+                        </div>
+                    <?php endif; ?>
+                    <div class="col-sm-10 text-center text-sm-left">
+                        <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
                     </div>
-                <?php endif; ?>
-                <div class="col-sm-10 text-center text-sm-left">
-                    <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
                 </div>
-            </div>
-            <?php if ($key != count($fields) - 1): ?>
-                <hr>
-            <?php endif ?>
+                <?php if ($key != count($fields) - 1): ?>
+                    <hr>
+                <?php endif ?>
+            <?php endif; ?>
             <?php if ($fields[$key + 1] === null || !$fields[$key + 1]->isAppendToPrevious()): ?>
                 </div>
             <?php endif ?>

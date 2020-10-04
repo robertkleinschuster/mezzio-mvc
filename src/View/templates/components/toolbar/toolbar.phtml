@@ -1,7 +1,9 @@
 <div class="btn-toolbar mb-2">
     <?php foreach ($fields as $field): ?>
         <div class="mr-1">
-            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $model->getComponentDataBean()]) ?>
+            <?php if ($field->isShow($model->getComponentDataBean())): ?>
+                <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $model->getComponentDataBean()]) ?>
+            <?php endif; ?>
         </div>
     <?php endforeach ?>
 </div>

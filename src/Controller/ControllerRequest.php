@@ -20,6 +20,8 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 
     public const ATTRIBUTE_SUBMIT = 'submit';
     public const ATTRIBUTE_REDIRECT = 'redirect';
+    public const ATTRIBUTE_NAV_ID = 'navid';
+    public const ATTRIBUTE_NAV_INDEX = 'navindex';
 
     public const SUBMIT_MODE_CREATE = 'create';
     public const SUBMIT_MODE_SAVE = 'save';
@@ -129,4 +131,37 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
         return $this->getAttribute(self::ATTRIBUTE_SUBMIT);
     }
 
+    /**
+     * @return bool
+     */
+    public function hasNavId(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_NAV_ID);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasNavIndex(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_NAV_INDEX);
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function getNavId(): string
+    {
+        return $this->getAttribute(self::ATTRIBUTE_NAV_ID);
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function getNavIndex(): string
+    {
+        return $this->getAttribute(self::ATTRIBUTE_NAV_INDEX);
+    }
 }

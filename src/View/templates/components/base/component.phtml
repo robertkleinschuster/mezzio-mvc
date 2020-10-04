@@ -2,7 +2,9 @@
     <div class="row row-cols-1 row-cols-sm-<?= $component->getCols() ?>">
         <?php foreach ($fields as $field): ?>
             <div class="col">
-                <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
+                <?php if ($field->isShow($bean)): ?>
+                    <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
+                <?php endif; ?>
             </div>
         <?php endforeach ?>
     </div>

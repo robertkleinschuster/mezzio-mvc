@@ -2,9 +2,9 @@
     <table class="table table-striped table-hover table-bordered table-sm ">
         <thead class="bg-light">
         <tr>
-            <?php $previousChapter = null?>
-            <?php $index = 1?>
-            <?php $count = count($fields)?>
+            <?php $previousChapter = null ?>
+            <?php $index = 1 ?>
+            <?php $count = count($fields) ?>
             <?php foreach ($fields as $key => $field): ?>
                 <?php if ($field->getChapter() == $previousChapter && $field->getChapter() != ''): ?>
                     <?= $field->hasTitle() ? $field->getTitle() : '' ?>
@@ -15,37 +15,42 @@
                     </td>
                     <td>
                     <?= $field->hasTitle() ? $field->getTitle() : '' ?>
-                <?php endif;?>
+                <?php endif; ?>
                 <?php if ($index == $count): ?>
                     </td>
-                <?php endif;?>
-                <?php $previousChapter = $field->getChapter()?>
-                <?php $index++;?>
+                <?php endif; ?>
+                <?php $previousChapter = $field->getChapter() ?>
+                <?php $index++; ?>
             <?php endforeach ?>
         </tr>
         </thead>
         <tbody>
         <?php foreach ($model->getComponentDataBeanList() as $bean): ?>
             <tr>
-                <?php $previousChapter = null?>
-                <?php $index = 1?>
-                <?php $count = count($fields)?>
+                <?php $previousChapter = null ?>
+                <?php $index = 1 ?>
+                <?php $count = count($fields) ?>
                 <?php foreach ($fields as $field): ?>
                     <?php if ($field->getChapter() == $previousChapter && $field->getChapter() != ''): ?>
-                        <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
-                    <?php elseif ($previousChapter == null): ?>
-                        <td class="align-middle" <?= $field->hasWidth() ? 'style="width: ' . $field->getWidth() . 'px"': ''?>>
+                        <?php if ($field->isShow($bean)): ?>
                             <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
+                        <?php endif; ?><?php elseif ($previousChapter == null): ?>
+                        <td class="align-middle" <?= $field->hasWidth() ? 'style="width: ' . $field->getWidth() . 'px"' : '' ?>>
+                        <?php if ($field->isShow($bean)): ?>
+                            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
+                        <?php endif; ?>
                     <?php else: ?>
                         </td>
-                        <td class="align-middle" <?= $field->hasWidth() ? 'style="width: ' . $field->getWidth() . 'px"': ''?>>
+                        <td class="align-middle" <?= $field->hasWidth() ? 'style="width: ' . $field->getWidth() . 'px"' : '' ?>>
+                        <?php if ($field->isShow($bean)): ?>
                             <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
-                    <?php endif;?>
+                        <?php endif; ?>
+                    <?php endif; ?>
                     <?php if ($index == $count): ?>
                         </td>
-                    <?php endif;?>
-                    <?php $previousChapter = $field->getChapter()?>
-                    <?php $index++;?>
+                    <?php endif; ?>
+                    <?php $previousChapter = $field->getChapter() ?>
+                    <?php $index++; ?>
                 <?php endforeach ?>
             </tr>
         <?php endforeach ?>

@@ -24,6 +24,11 @@ class Navigation extends AbstractComponent
     private $type;
 
     /**
+     * @var int
+     */
+    private $active;
+
+    /**
      * Navigation constructor.
      * @param string $title
      * @param ComponentModelInterface $componentModel
@@ -88,6 +93,25 @@ class Navigation extends AbstractComponent
     public function setType(string $type): self
     {
         $this->type = $type;
+        return $this;
+    }
+
+    /**
+    * @return int
+    */
+    public function getActive(): int
+    {
+        return $this->active ?? 0;
+    }
+
+    /**
+    * @param int $active
+    *
+    * @return $this
+    */
+    public function setActive(int $active): self
+    {
+        $this->active = $active;
         return $this;
     }
 }
