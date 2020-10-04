@@ -21,9 +21,17 @@
         </div>
     <?php endforeach; ?>
 </div>
+<?php $this->start('javascript') ?>
 <script lang="js">
-    var eventClickNav = 'click.<?= $tabcomponent->getId() ?>-tab';
-    $('#<?= $tabcomponent->getId() ?>-tab').off(eventClickNav).on(eventClickNav, function (event) {
-        $.get(window.location, {navid: '<?= $component->getId() ?>', navindex: $(event.currentTarget).data('index')})
-    });
+    $(document).ready(function () {
+        var eventClickNav = 'click.<?= $tabcomponent->getId() ?>-tab';
+        $('#<?= $tabcomponent->getId() ?>-tab').off(eventClickNav).on(eventClickNav, function (event) {
+            $.get(window.location, {
+                navid: '<?= $component->getId() ?>',
+                navindex: $(event.currentTarget).data('index')
+            })
+        });
+    }
 </script>
+<?php $this->stop() ?>
+
