@@ -5,7 +5,7 @@
             <?php if ($key == 0 || !$field->isAppendToPrevious()): ?>
                 <div class="col">
             <?php endif ?>
-            <?php if ($field->isShow($bean)): ?>
+            <?php if ($field->isShow($model->getComponentDataBean())): ?>
                 <?= $field->getChapter() != $prevChapter ? "<h4>{$field->getChapter()}</h4>" : '' ?>
                 <?php $this->insert($templateFolder . '::' . $field->getTemplate(), [
                     'templateFolder' => $templateFolder,
