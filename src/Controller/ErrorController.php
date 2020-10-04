@@ -51,6 +51,7 @@ class ErrorController extends AbstractController
         if ($exception instanceof NotFoundException) {
             $this->getControllerResponse()->setStatusCode(ControllerResponse::STATUS_NOT_FOUND);
         }
+        $this->getControllerResponse()->removeOption(ControllerResponse::OPTION_RENDER_RESPONSE);
         $errorString = htmlspecialchars($exception->__toString());
         $body = "<!DOCTYPE html>
 <html>
