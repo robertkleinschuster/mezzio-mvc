@@ -63,6 +63,9 @@ abstract class AbstractController implements ControllerInterface
      */
     public function init()
     {
+        if ($this->getControllerRequest()->isAjax()) {
+            $this->getControllerResponse()->setMode(ControllerResponse::MODE_JSON);
+        }
         $this->initView();
         $this->initModel();
         if (
