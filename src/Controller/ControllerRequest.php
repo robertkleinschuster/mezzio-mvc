@@ -164,4 +164,12 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     {
         return $this->getAttribute(self::ATTRIBUTE_NAV_INDEX);
     }
+
+    /**
+     * @return bool
+     */
+    public function isAjax(): bool
+    {
+        return $this->getServerRequest()->getHeaderLine('X-Requested-With') === 'xmlhttprequest';
+    }
 }
