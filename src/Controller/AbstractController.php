@@ -68,12 +68,7 @@ abstract class AbstractController implements ControllerInterface
         }
         $this->initView();
         $this->initModel();
-        if (
-            !$this->getControllerRequest()->hasSubmit() ||
-            $this->getControllerRequest()->getSubmit() !== ControllerRequest::SUBMIT_MODE_CREATE
-        ) {
-            $this->getModel()->find($this->getControllerRequest()->getViewIdMap());
-        }
+
         if ($this->getControllerRequest()->hasNavId() && $this->getControllerRequest()->hasNavIndex()) {
             $this->handleNavigationState(
                 $this->getControllerRequest()->getNavId(),
@@ -88,6 +83,12 @@ abstract class AbstractController implements ControllerInterface
             );
         }
 
+        if (
+            !$this->getControllerRequest()->hasSubmit() ||
+            $this->getControllerRequest()->getSubmit() !== ControllerRequest::SUBMIT_MODE_CREATE
+        ) {
+            $this->getModel()->find($this->getControllerRequest()->getViewIdMap());
+        }
         $this->handleSubmit();
     }
 
