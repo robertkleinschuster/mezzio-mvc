@@ -10,3 +10,18 @@
         </div>
     <?php endforeach ?>
 </div>
+<?php $this->push('javascript') ?>
+<script lang="js">
+    $(document).ready(function () {
+        $body = $('body');
+
+        $body.off('click').on('click', '.nav', function (event) {
+            $.get(window.location, {
+                navid: $(event.currentTarget).attr('id'),
+                navindex: $(event.currentTarget).data('index')
+            })
+        });
+
+    }
+</script>
+<?php $this->stop() ?>
