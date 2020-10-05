@@ -27,7 +27,7 @@
 <script lang="js">
     $().ready(function ($) {
         $body = $('body');
-        $body.off('click.handleNavState').on('click.handleNavState', '.nav', function (event) {
+        $body.off('click.handleNavState').on('click.handleNavState', '.js-nav', function (event) {
             $.get(window.location, {
                 navid: $(event.currentTarget).attr('id'),
                 navindex: $(event.target).data('index')

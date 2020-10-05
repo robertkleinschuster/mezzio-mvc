@@ -1,4 +1,4 @@
-<ul class="nav nav-<?= $component->getType() ?>" id="<?= $component->getId() ?>" role="tablist">
+<ul class="nav nav-<?= $component->getType() ?>" id="<?= $component->getId() ?> js-nav" role="tablist">
     <?php foreach ($component->getComponentList() as $key => $tabcomponent): ?>
         <li class="nav-item" role="presentation">
             <a class="nav-link<?= $key == $component->getActive() ? ' active' : '' ?>"
