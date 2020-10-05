@@ -313,7 +313,7 @@ abstract class AbstractLink extends AbstractField
     /**
      * @var string
      */
-    private $action;
+    private $link;
 
     /**
      * @var string
@@ -374,32 +374,32 @@ abstract class AbstractLink extends AbstractField
      * @param BeanInterface|null $bean
      * @return string
      */
-    public function getAction(?BeanInterface $bean = null): string
+    public function getLink(?BeanInterface $bean = null): string
     {
         if (null === $bean) {
-            return $this->action;
+            return $this->link;
         } else {
-            return $this->replacePlaceholders($this->action, $bean);
+            return $this->replacePlaceholders($this->link, $bean);
         }
     }
 
     /**
-     * @param string $action
+     * @param string $link
      *
      * @return $this
      */
-    public function setAction(string $action): self
+    public function setLink(string $link): self
     {
-        $this->action = $action;
+        $this->link = $link;
         return $this;
     }
 
     /**
      * @return bool
      */
-    public function hasAction(): bool
+    public function hasLink(): bool
     {
-        return $this->action !== null;
+        return $this->link !== null;
     }
 
     /**

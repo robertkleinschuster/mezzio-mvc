@@ -97,7 +97,7 @@ class Overview extends AbstractComponent
     public function addDetailIcon(string $link)
     {
         return $this->addLink('', '')
-            ->setAction($link)
+            ->setLink($link)
             ->setValue('')
             ->setIcon(Fields\Link::ICON_SEARCH)
             ->setStyle(Fields\Link::STYLE_INFO)
@@ -111,7 +111,7 @@ class Overview extends AbstractComponent
     public function addEditIcon(string $link)
     {
         return $this->addLink('', '')
-            ->setAction($link)
+            ->setLink($link)
             ->setValue('')
             ->setIcon(Fields\Link::ICON_EDIT_2)
             ->setStyle(Fields\Link::STYLE_WARNING)
@@ -125,7 +125,7 @@ class Overview extends AbstractComponent
     public function addDeleteIcon(string $link)
     {
         return $this->addLink('', '')
-            ->setAction($link)
+            ->setLink($link)
             ->setValue('')
             ->setIcon(Fields\Link::ICON_TRASH)
             ->setStyle(Fields\Link::STYLE_DANGER)

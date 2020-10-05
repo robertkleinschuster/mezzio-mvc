@@ -11,9 +11,5 @@ interface ViewModelInterface
 {
     public function getTitle(): string;
     public function setTitle($title);
-    public function getNavigationList(): array;
-    public function hasNavigation(): bool;
-    public function addNavigation(Navigation $navigation);
-    public function hasToolbar(): bool;
     public function getTemplateData(): TemplateDataBean;
 }

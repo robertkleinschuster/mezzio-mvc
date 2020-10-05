@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\View;
 
 use Mezzio\Mvc\Bean\TemplateDataBean;
-use Mezzio\Mvc\View\Navigation\Navigation;
 
 class ViewModel implements ViewModelInterface
 {
@@ -14,11 +13,6 @@ class ViewModel implements ViewModelInterface
      * @var string
      */
     private $title;
-
-    /**
-     * @var Navigation[]
-     */
-    private $navigation_List;
 
 
     /**
@@ -37,6 +31,7 @@ class ViewModel implements ViewModelInterface
 
     /**
      * @param mixed $title
+     * @return ViewModel
      */
     public function setTitle($title)
     {
@@ -44,30 +39,7 @@ class ViewModel implements ViewModelInterface
         return $this;
     }
 
-    /**
-     * @return Navigation[]
-     */
-    public function getNavigationList(): array
-    {
-        return $this->navigation_List;
-    }
 
-    /**
-     * @return bool
-     */
-    public function hasNavigation(): bool
-    {
-        return is_array($this->navigation_List) && count($this->navigation_List) > 0;
-    }
-
-    /**
-     * @param Navigation $navigation
-     */
-    public function addNavigation(Navigation $navigation)
-    {
-        $this->navigation_List[] = $navigation;
-        return $this;
-    }
 
     /**
      * @return TemplateDataBean
@@ -80,11 +52,4 @@ class ViewModel implements ViewModelInterface
         return $this->templateData;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasToolbar(): bool
-    {
-        return false;
-    }
 }

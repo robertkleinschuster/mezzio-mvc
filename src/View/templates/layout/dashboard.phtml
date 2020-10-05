@@ -155,10 +155,10 @@
 
 <div class="container-fluid">
     <div class="row">
-        <?php if ($model->hasNavigation()): ?>
+        <?php if ($hasNavigation): ?>
             <nav id="sidebarNavigation" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="sidebar-sticky pt-3">
-                    <?php foreach ($model->getNavigationList() as $navigation): ?>
+                    <?php foreach ($navigationList as $navigation): ?>
                         <?php if ($navigation->hasTitle()): ?>
                             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                                 <span><?= $navigation->getTitle() ?></span>
@@ -195,10 +195,10 @@
                 </div>
             </nav>
         <?php endif ?>
-        <main role="main" class="col-md-9 <?= $model->hasNavigation() ? 'ml-sm-auto' : 'm-auto' ?> col-lg-10 px-md-4">
+        <main role="main" class="col-md-9 <?= $hasNavigation ? 'ml-sm-auto' : 'm-auto' ?> col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2"><?= $model->getTitle() ?></h1>
-                <?php if ($model->hasToolbar()): ?>
+                <?php if (false): ?>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>

@@ -1,4 +1,4 @@
-<a <?= $field->hasAction() ? " href=\"{$field->getAction($data)}\"" : '' ?> <?= $field->hasTarget() ? " target=\"{$field->getTarget()}\"" : '' ?>
+<a <?= $field->hasLink() ? " href=\"{$field->getLink($data)}\"" : '' ?> <?= $field->hasTarget() ? " target=\"{$field->getTarget()}\"" : '' ?>
 class="<?=$field->getClass()?>">
     <?php if($field->hasIcon()): ?>
         <span data-feather="<?=$field->getIcon()?>"></span>

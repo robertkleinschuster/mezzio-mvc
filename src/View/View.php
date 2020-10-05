@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\View;
 
 use Mezzio\Mvc\View\Components\Base\AbstractComponent;
+use Mezzio\Mvc\View\Navigation\Navigation;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareTrait;
-use NiceshopsDev\Bean\BeanFormatter\BeanFormatterInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
@@ -43,6 +43,11 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
      * @var AbstractComponent[]
      */
     private $component_List;
+
+    /**
+     * @var Navigation[]
+     */
+    private $navigation_List;
 
     /**
      * @var ViewModelInterface
@@ -102,7 +107,8 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
         if ($this->hasPermissionList()) {
             $componentList = $this->component_List;
             return array_filter($componentList, function ($component) {
-                return !$component->hasPermission() || in_array($component->getPermission(), $this->getPermissionList());
+                return !$component->hasPermission() ||
+                    in_array($component->getPermission(), $this->getPermissionList());
             });
         }
         return $this->component_List;
@@ -211,6 +217,7 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
 
     /**
      * @param int $cols
+     * @return View
      */
     public function setCols(int $cols)
     {
@@ -262,6 +269,31 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
         return $this->permission_List !== null;
     }
 
+    /**
+     * @return Navigation[]
+     */
+    public function getNavigationList(): array
+    {
+        return $this->navigation_List;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasNavigation(): bool
+    {
+        return is_array($this->navigation_List) && count($this->navigation_List) > 0;
+    }
+
+    /**
+     * @param Navigation $navigation
+     * @return View
+     */
+    public function addNavigation(Navigation $navigation)
+    {
+        $this->navigation_List[] = $navigation;
+        return $this;
+    }
 
     /**
      * @return string

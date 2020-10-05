@@ -110,6 +110,26 @@ abstract class AbstractController implements ControllerInterface
     }
 
     /**
+     * @param $controller
+     * @param $action
+     */
+    public function setActiveNavigation(string $controller, string $action)
+    {
+        foreach ($this->getView()->getNavigationList() as $item) {
+            foreach ($item->getElementList() as $element) {
+                if ($element->getLink() === $this->getPathHelper()
+                        ->setController($controller)
+                        ->setAction($action)
+                        ->getPath()) {
+                    $element->setActive(true);
+                    return;
+                }
+            }
+        }
+    }
+
+
+    /**
      * @return bool
      */
     abstract protected function handleSubmitSecurity(): bool;

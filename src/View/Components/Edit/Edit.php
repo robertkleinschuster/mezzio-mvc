@@ -150,7 +150,7 @@ class Edit extends AbstractComponent
     public function addCancel(string $link, string $title, bool $append = false): Fields\Link
     {
         return $this->addLink('cancel', $title)
-            ->setAction($link)
+            ->setLink($link)
             ->setAppendToColumnPrevious($append)
             ->setStyle(Fields\Link::STYLE_SECONDARY)
             ->setValue($title);
