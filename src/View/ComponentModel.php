@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mezzio\Mvc\View;
 
 use Mezzio\Mvc\Helper\ValidationHelper;
+use Mezzio\Mvc\View\Navigation\PageNavigation;
 use NiceshopsDev\Bean\BeanInterface;
 use NiceshopsDev\Bean\BeanList\BeanListInterface;
 
@@ -15,6 +16,11 @@ class ComponentModel implements ComponentModelInterface
      * @var BeanListInterface
      */
     private $componentDataBeanList;
+
+    /**
+     * @var PageNavigation
+     */
+    private $pageNavigation;
 
     /**
      * @var ValidationHelper
@@ -66,7 +72,8 @@ class ComponentModel implements ComponentModelInterface
      */
     public function setComponentDataBeanList(
         BeanListInterface $componentDataBeanList
-    ): ComponentModelInterface {
+    ): ComponentModelInterface
+    {
         $this->componentDataBeanList = $componentDataBeanList;
         return $this;
     }
@@ -105,4 +112,33 @@ class ComponentModel implements ComponentModelInterface
             'Could not get single bean from ComponentModel. Count: ' . count($this->componentDataBeanList)
         );
     }
+
+    /**
+     * @return PageNavigation
+     */
+    public function getPageNavigation(): PageNavigation
+    {
+        return $this->pageNavigation;
+    }
+
+    /**
+     * @param PageNavigation $pageNavigation
+     *
+     * @return $this
+     */
+    public function setPageNavigation(PageNavigation $pageNavigation): self
+    {
+        $this->pageNavigation = $pageNavigation;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPageNavigation(): bool
+    {
+        return $this->pageNavigation !== null;
+    }
+
+
 }

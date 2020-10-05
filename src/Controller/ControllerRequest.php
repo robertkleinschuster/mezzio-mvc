@@ -22,6 +22,8 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public const ATTRIBUTE_REDIRECT = 'redirect';
     public const ATTRIBUTE_NAV_ID = 'navid';
     public const ATTRIBUTE_NAV_INDEX = 'navindex';
+    public const ATTRIBUTE_LIMIT = 'limit';
+    public const ATTRIBUTE_PAGE = 'page';
 
     public const SUBMIT_MODE_CREATE = 'create';
     public const SUBMIT_MODE_SAVE = 'save';
@@ -157,15 +159,50 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     }
 
     /**
-     * @return string
+     * @return int
      * @throws Exception
      */
-    public function getNavIndex(): string
+    public function getNavIndex(): int
     {
-        return $this->getAttribute(self::ATTRIBUTE_NAV_INDEX);
+        return intval($this->getAttribute(self::ATTRIBUTE_NAV_INDEX));
     }
 
     /**
+     * @return bool
+     */
+    public function hasLimit(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_LIMIT);
+    }
+
+    /**
+     * @return int
+     * @throws Exception
+     */
+    public function getLimit(): int
+    {
+        return intval($this->getAttribute(self::ATTRIBUTE_LIMIT));
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPage(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_PAGE);
+    }
+
+    /**
+     * @return int
+     * @throws Exception
+     */
+    public function getPage(): int
+    {
+        return intval($this->getAttribute(self::ATTRIBUTE_PAGE));
+    }
+
+    /**
+     *
      * @return bool
      */
     public function isAjax(): bool

@@ -16,6 +16,8 @@ interface ModelInterface
 
     public function init();
 
+    public function setLimit(int $limit, int $page);
+
     public function find(array $viewIdMap);
 
     public function submit(ControllerRequest $request);

@@ -36,5 +36,10 @@ class ErrorModel extends AbstractModel
         // TODO: Implement find() method.
     }
 
+    public function setLimit(int $limit, int $page)
+    {
+        // TODO: Implement setLimit() method.
+    }
+
 
 }

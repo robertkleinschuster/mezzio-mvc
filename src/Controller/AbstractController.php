@@ -81,6 +81,13 @@ abstract class AbstractController implements ControllerInterface
             );
             $this->getControllerResponse()->removeOption(ControllerResponse::OPTION_RENDER_RESPONSE);
         }
+        if ($this->getControllerRequest()->hasLimit() && $this->getControllerRequest()->hasPage()) {
+            $this->getModel()->setLimit(
+                $this->getControllerRequest()->getLimit(),
+                $this->getControllerRequest()->getPage()
+            );
+        }
+
         $this->handleSubmit();
     }
 
@@ -145,7 +152,7 @@ abstract class AbstractController implements ControllerInterface
      * @param string $index
      * @return mixed
      */
-    abstract protected function handleNavigationState(string $id, string $index);
+    abstract protected function handleNavigationState(string $id, int $index);
 
 
     /**

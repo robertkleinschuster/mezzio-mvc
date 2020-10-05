@@ -21,6 +21,7 @@ class Overview extends AbstractComponent
         return 'components/overview/overview';
     }
 
+
     /**
      * @param string $key
      * @param string $title
