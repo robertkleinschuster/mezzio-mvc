@@ -79,6 +79,7 @@ abstract class AbstractController implements ControllerInterface
                 $this->getControllerRequest()->getNavId(),
                 $this->getControllerRequest()->getNavIndex()
             );
+            $this->getControllerResponse()->removeOption(ControllerResponse::OPTION_RENDER_RESPONSE);
         }
         $this->handleSubmit();
     }
