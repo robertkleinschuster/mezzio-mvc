@@ -67,7 +67,7 @@
             </a>
         </li>
         <?php foreach ($model->getPageNavigation()->getElementList() as $key => $element): ?>
-            <li class="page-item"><a class="page-link" href="<?=$element->getLink()?>"><?=$key+1?></a></li>
+            <li class="page-item <?=$model->getPageNavigation()->getActive() == $key ? 'active' : ''?>"><a class="page-link" href="<?=$element->getLink()?>"><?=$key+1?></a></li>
         <?php endforeach;?>
         <li class="page-item <?= $model->getPageNavigation()->isLast() ? ' disabled' : ''?>">
             <a class="page-link" href="<?=$model->getPageNavigation()->getNext()->getLink()?>" aria-label="Next" <?= $model->getPageNavigation()->isLast() ? ' tabindex="-1"' : ''?>>
