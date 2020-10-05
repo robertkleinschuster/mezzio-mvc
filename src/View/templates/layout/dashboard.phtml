@@ -6,6 +6,8 @@
     <meta name="description" content="<?= $description ?>">
     <meta name="author" content="<?= $author ?>">
     <title><?= $title . ' - ' . $model->getTitle() ?></title>
+    <?= $this->section('stylesheets') ?>
+
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -126,7 +128,6 @@
             box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
         }
     </style>
-    <?= $this->section('stylesheets') ?>
 </head>
 <body>
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
