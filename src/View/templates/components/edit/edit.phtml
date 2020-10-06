@@ -14,7 +14,7 @@
                     'errors' => $model->getValidationHelper()->getErrorList($field->getKey()),
                 ]) ?>
             <?php endif; ?>
-            <?php if ($fields[$key + 1] === null || !$fields[$key + 1]->isAppendToPrevious()): ?>
+            <?php if (isset($fields[$key + 1]) || !$fields[$key + 1]->isAppendToPrevious()): ?>
                 </div>
             <?php endif ?>
             <?php $prevChapter = $field->getChapter() ?>
