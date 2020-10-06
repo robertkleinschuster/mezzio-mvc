@@ -19,7 +19,7 @@
                     <hr>
                 <?php endif ?>
             <?php endif; ?>
-            <?php if (isset($fields[$key + 1]) || !$fields[$key + 1]->isAppendToPrevious()): ?>
+            <?php if ($key === count($fields) - 1 || !$fields[$key + 1]->isAppendToPrevious()): ?>
                 </div>
             <?php endif ?>
         <?php endforeach ?>
