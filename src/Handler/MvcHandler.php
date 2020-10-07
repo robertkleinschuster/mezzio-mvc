@@ -158,10 +158,11 @@ class MvcHandler implements RequestHandlerInterface
     }
 
     /**
+     * @param string $basePath
      * @return string
      */
-    public static function getRoute(): string
+    public static function getRoute(string $basePath = ''): string
     {
-        return '[/[{' . self::CONTROLLER_ATTRIBUTE . '}[/[{' . self::ACTION_ATTRIBUTE . '}[/]]]]]';
+        return $basePath . '[/[{' . self::CONTROLLER_ATTRIBUTE . '}[/[{' . self::ACTION_ATTRIBUTE . '}[/]]]]]';
     }
 }
