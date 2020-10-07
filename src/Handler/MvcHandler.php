@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\Handler;
+namespace Mvc\Handler;
 
-use Mezzio\Mvc\Controller\ControllerInterface;
-use Mezzio\Mvc\Controller\ControllerResponse;
-use Mezzio\Mvc\Exception\ActionException;
-use Mezzio\Mvc\Exception\ActionNotFoundException;
-use Mezzio\Mvc\Exception\ControllerException;
-use Mezzio\Mvc\Exception\ControllerNotFoundException;
-use Mezzio\Mvc\Factory\ControllerFactory;
-use Mezzio\Mvc\Factory\ServerResponseFactory;
-use Mezzio\Mvc\View\ViewRenderer;
+use Mvc\Controller\ControllerInterface;
+use Mvc\Controller\ControllerResponse;
+use Mvc\Exception\ActionException;
+use Mvc\Exception\ActionNotFoundException;
+use Mvc\Exception\ControllerException;
+use Mvc\Exception\ControllerNotFoundException;
+use Mvc\Factory\ControllerFactory;
+use Mvc\Factory\ServerResponseFactory;
+use Mvc\View\ViewRenderer;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

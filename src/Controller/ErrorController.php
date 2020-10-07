@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace Mezzio\Mvc\Controller;
+namespace Mvc\Controller;
 
 
-use Mezzio\Mvc\Exception\NotFoundException;
-use Mezzio\Mvc\Helper\ValidationHelper;
+use Mvc\Exception\NotFoundException;
+use Mvc\Helper\ValidationHelper;
 
 class ErrorController extends AbstractController
 {

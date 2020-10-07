@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Mezzio\Mvc\Exception;
+namespace Mvc\Exception;
 
 
 class ActionException extends ControllerException

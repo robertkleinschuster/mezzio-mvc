@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Edit;
+namespace Mvc\View\Components\Edit;
 
-use Mezzio\Mvc\Controller\ControllerRequest;
-use Mezzio\Mvc\View\Components\Base\AbstractComponent;
+use Mvc\Controller\ControllerRequest;
+use Mvc\View\Components\Base\AbstractComponent;
 
 class Edit extends AbstractComponent
 {

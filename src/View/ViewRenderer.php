@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View;
+namespace Mvc\View;
 
 use Mezzio\Template\TemplateRendererInterface;
 

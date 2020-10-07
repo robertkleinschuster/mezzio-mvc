@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Mezzio\Mvc\View\Components\Edit\Fields;
+namespace Mvc\View\Components\Edit\Fields;
 
 
-use Mezzio\Mvc\View\Components\Base\Fields\AbstractLink;
+use Mvc\View\Components\Base\Fields\AbstractLink;
 
 class Link extends AbstractLink
 {

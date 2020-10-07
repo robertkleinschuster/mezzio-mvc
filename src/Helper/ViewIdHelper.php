@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\Helper;
+namespace Mvc\Helper;
 
 class ViewIdHelper
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\Controller;
+namespace Mvc\Controller;
 
-use Mezzio\Mvc\Exception\MvcException;
+use Mvc\Exception\MvcException;
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Mezzio\Mvc\Model;
+namespace Mvc\Model;
 
 
 class ErrorModel extends AbstractModel

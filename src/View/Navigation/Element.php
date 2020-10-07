@@ -1,6 +1,6 @@
 <?php
 
-namespace Mezzio\Mvc\View\Navigation;
+namespace Mvc\View\Navigation;
 
 
 class Element

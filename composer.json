@@ -1,5 +1,5 @@
 {
-    "name": "mezzio/mezzio-mvc",
+    "name": "robertkleinschuster/mvc",
     "description": "",
     "license": "BSD-3-Clause",
     "keywords": [
@@ -7,9 +7,9 @@
     ],
     "support": {
         "docs": "https://docs.mezzio.dev/mezzio-mvc/",
-        "issues": "https://github.com/mezzio/mezzio-mvc/issues",
-        "source": "https://github.com/mezzio/mezzio-mvc",
-        "rss": "https://github.com/mezzio/mezzio-mvc/releases.atom",
+        "issues": "https://github.com/robertkleinschuster/mvc/issues",
+        "source": "https://github.com/robertkleinschuster/mvc",
+        "rss": "https://github.com/robertkleinschuster/mvc/releases.atom",
         "forum": "https://discourse.laminas.dev/"
     },
     "repositories": [
@@ -30,12 +30,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Mezzio\\Mvc\\": "src//"
+            "Mvc\\": "src//"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MezzioTest\\Mvc\\": "test/"
+            "Mvc\\": "test/"
         }
     },
     "extra": {
@@ -43,7 +43,7 @@
             "dev-master": "1.0.x-dev"
         },
         "laminas": {
-            "module": "Mezzio\\Mvc"
+            "module": "Mvc"
         }
     },
     "config": {

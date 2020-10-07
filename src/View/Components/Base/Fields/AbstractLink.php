@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Base\Fields;
+namespace Mvc\View\Components\Base\Fields;
 
-use Mezzio\Mvc\View\Components\Base\AbstractField;
+use Mvc\View\Components\Base\AbstractField;
 use NiceshopsDev\Bean\BeanInterface;
 
 abstract class AbstractLink extends AbstractField

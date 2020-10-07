@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Base;
+namespace Mvc\View\Components\Base;
 
-use Mezzio\Mvc\View\ComponentModel;
-use Mezzio\Mvc\View\ComponentModelInterface;
+use Mvc\View\ComponentModel;
+use Mvc\View\ComponentModelInterface;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareTrait;
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;

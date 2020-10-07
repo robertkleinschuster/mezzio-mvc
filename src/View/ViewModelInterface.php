@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View;
+namespace Mvc\View;
 
-use Mezzio\Mvc\Bean\TemplateDataBean;
-use Mezzio\Mvc\View\Navigation\Navigation;
+use Mvc\Bean\TemplateDataBean;
+use Mvc\View\Navigation\Navigation;
 
 interface ViewModelInterface
 {

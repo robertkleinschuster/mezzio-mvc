@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\Handler;
+namespace Mvc\Handler;
 
-use Mezzio\Mvc\Factory\ControllerFactory;
+use Mvc\Factory\ControllerFactory;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;
 

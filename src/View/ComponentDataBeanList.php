@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Mezzio\Mvc\View;
+namespace Mvc\View;
 
 
 use NiceshopsDev\Bean\BeanList\AbstractBaseBeanList;

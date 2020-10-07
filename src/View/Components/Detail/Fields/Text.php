@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Detail\Fields;
+namespace Mvc\View\Components\Detail\Fields;
 
-use Mezzio\Mvc\View\Components\Base\Fields\AbstractText;
+use Mvc\View\Components\Base\Fields\AbstractText;
 
 class Text extends AbstractText
 {

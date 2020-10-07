@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Navigation;
+namespace Mvc\View\Components\Navigation;
 
-use Mezzio\Mvc\View\ComponentModelInterface;
-use Mezzio\Mvc\View\Components\Base\AbstractComponent;
+use Mvc\View\ComponentModelInterface;
+use Mvc\View\Components\Base\AbstractComponent;
 
 class Navigation extends AbstractComponent
 {

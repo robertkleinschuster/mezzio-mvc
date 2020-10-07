@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\Factory;
+namespace Mvc\Factory;
 
-use Mezzio\Mvc\Exception\ControllerNotFoundException;
-use Mezzio\Mvc\Exception\MvcException;
+use Mvc\Exception\ControllerNotFoundException;
+use Mvc\Exception\MvcException;
 use Psr\Container\ContainerInterface;
 
 class ModelFactory

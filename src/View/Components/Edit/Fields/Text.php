@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Edit\Fields;
+namespace Mvc\View\Components\Edit\Fields;
 
-use Mezzio\Mvc\View\Components\Base\Fields\AbstractText;
-use Mezzio\Mvc\View\Components\Base\Fields\RequiredAwareInterface;
-use Mezzio\Mvc\View\Components\Base\Fields\RequiredAwareTrait;
+use Mvc\View\Components\Base\Fields\AbstractText;
+use Mvc\View\Components\Base\Fields\RequiredAwareInterface;
+use Mvc\View\Components\Base\Fields\RequiredAwareTrait;
 
 class Text extends AbstractText implements RequiredAwareInterface
 {

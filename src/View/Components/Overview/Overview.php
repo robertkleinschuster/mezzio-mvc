@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Overview;
+namespace Mvc\View\Components\Overview;
 
-use Mezzio\Mvc\View\Components\Base\AbstractComponent;
+use Mvc\View\Components\Base\AbstractComponent;
 
 /**
  * Class Overview
- * @package Mezzio\Mvc\View\Components\Overview
+ * @package Mvc\View\Components\Overview
  */
 class Overview extends AbstractComponent
 {

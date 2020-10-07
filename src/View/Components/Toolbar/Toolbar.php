@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Toolbar;
+namespace Mvc\View\Components\Toolbar;
 
-use Mezzio\Mvc\View\Components\Base\AbstractComponent;
+use Mvc\View\Components\Base\AbstractComponent;
 
 class Toolbar extends AbstractComponent
 {

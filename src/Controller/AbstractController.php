@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\Controller;
+namespace Mvc\Controller;
 
-use Mezzio\Mvc\Helper\PathHelper;
-use Mezzio\Mvc\Helper\ValidationHelper;
-use Mezzio\Mvc\Model\ModelInterface;
-use Mezzio\Mvc\View\View;
+use Mvc\Helper\PathHelper;
+use Mvc\Helper\ValidationHelper;
+use Mvc\Model\ModelInterface;
+use Mvc\View\View;
 use NiceshopsDev\Bean\BeanException;
 
 abstract class AbstractController implements ControllerInterface

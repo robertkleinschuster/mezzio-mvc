@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Base;
+namespace Mvc\View\Components\Base;
 
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareTrait;

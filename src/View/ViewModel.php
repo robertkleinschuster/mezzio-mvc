@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View;
+namespace Mvc\View;
 
-use Mezzio\Mvc\Bean\TemplateDataBean;
+use Mvc\Bean\TemplateDataBean;
 
 class ViewModel implements ViewModelInterface
 {

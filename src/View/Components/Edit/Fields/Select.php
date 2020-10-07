@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Edit\Fields;
+namespace Mvc\View\Components\Edit\Fields;
 
-use Mezzio\Mvc\View\Components\Base\Fields\AbstractSelect;
+use Mvc\View\Components\Base\Fields\AbstractSelect;
 
 class Select extends AbstractSelect
 {

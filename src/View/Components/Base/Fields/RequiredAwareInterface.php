@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Mezzio\Mvc\View\Components\Base\Fields;
+namespace Mvc\View\Components\Base\Fields;
 
 
 interface RequiredAwareInterface

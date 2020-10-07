@@ -1,5 +1,5 @@
 <?php if ($field->hasSource($data)): ?>
-    <?php if ($field->hasAlign($data) && $field->getAlign($field) == \Mezzio\Mvc\View\Components\Base\Fields\AbstractText::ALIGN_CENTER): ?>
+    <?php if ($field->hasAlign($data) && $field->getAlign($field) == \Mvc\View\Components\Base\Fields\AbstractText::ALIGN_CENTER): ?>
         <img
                 src="<?= $field->getSource($data) ?>"
                 class="<?= $field->hasSize($data) ? 'img-' . $field->getSize($field) : '' ?> mx-auto d-block"

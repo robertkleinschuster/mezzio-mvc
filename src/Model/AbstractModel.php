@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\Model;
+namespace Mvc\Model;
 
-use Mezzio\Mvc\Bean\TemplateDataBean;
-use Mezzio\Mvc\Controller\ControllerRequest;
-use Mezzio\Mvc\Helper\ValidationHelper;
+use Mvc\Bean\TemplateDataBean;
+use Mvc\Controller\ControllerRequest;
+use Mvc\Helper\ValidationHelper;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use NiceshopsDev\NiceCore\Option\OptionTrait;
 

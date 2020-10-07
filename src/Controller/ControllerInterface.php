@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\Controller;
+namespace Mvc\Controller;
 
-use Mezzio\Mvc\Helper\PathHelper;
-use Mezzio\Mvc\Model\ModelInterface;
-use Mezzio\Mvc\View\View;
+use Mvc\Helper\PathHelper;
+use Mvc\Model\ModelInterface;
+use Mvc\View\View;
 
 interface ControllerInterface
 {

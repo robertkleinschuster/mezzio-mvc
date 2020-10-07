@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View;
+namespace Mvc\View;
 
-use Mezzio\Mvc\Helper\ValidationHelper;
-use Mezzio\Mvc\View\Navigation\PageNavigation;
+use Mvc\Helper\ValidationHelper;
+use Mvc\View\Navigation\PageNavigation;
 use NiceshopsDev\Bean\BeanInterface;
 use NiceshopsDev\Bean\BeanList\BeanListInterface;
 

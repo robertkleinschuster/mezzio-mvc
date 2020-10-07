@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc;
+namespace Mvc;
 
-use Mezzio\Mvc\Controller\ErrorController;
-use Mezzio\Mvc\Factory\ControllerFactory;
-use Mezzio\Mvc\Factory\ControllerFactoryFactory;
-use Mezzio\Mvc\Factory\ModelFactory;
-use Mezzio\Mvc\Factory\ModelFactoryFactory;
-use Mezzio\Mvc\Handler\MvcHandler;
-use Mezzio\Mvc\Handler\MvcHandlerFactory;
-use Mezzio\Mvc\Helper\PathHelper;
-use Mezzio\Mvc\Helper\PathHelperFactory;
-use Mezzio\Mvc\Model\ErrorModel;
+use Mvc\Controller\ErrorController;
+use Mvc\Factory\ControllerFactory;
+use Mvc\Factory\ControllerFactoryFactory;
+use Mvc\Factory\ModelFactory;
+use Mvc\Factory\ModelFactoryFactory;
+use Mvc\Handler\MvcHandler;
+use Mvc\Handler\MvcHandlerFactory;
+use Mvc\Helper\PathHelper;
+use Mvc\Helper\PathHelperFactory;
+use Mvc\Model\ErrorModel;
 
 class ConfigProvider
 {

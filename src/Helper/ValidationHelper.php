@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Mezzio\Mvc\Helper;
+namespace Mvc\Helper;
 
 
 class ValidationHelper

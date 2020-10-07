@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\Bean;
+namespace Mvc\Bean;
 
 use NiceshopsDev\Bean\AbstractBaseBean;
 
 /**
  * Class TemplateDataBean
- * @package Mezzio\Mvc\Bean
+ * @package Mvc\Bean
  */
 class TemplateDataBean extends AbstractBaseBean
 {

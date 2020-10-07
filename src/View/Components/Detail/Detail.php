@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Detail;
+namespace Mvc\View\Components\Detail;
 
-use Mezzio\Mvc\View\Components\Base\AbstractComponent;
+use Mvc\View\Components\Base\AbstractComponent;
 
 class Detail extends AbstractComponent
 {

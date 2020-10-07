@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Detail\Fields;
+namespace Mvc\View\Components\Detail\Fields;
 
-use Mezzio\Mvc\View\Components\Base\Fields\AbstractLink;
+use Mvc\View\Components\Base\Fields\AbstractLink;
 
 class Link extends AbstractLink
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Base\Fields;
+namespace Mvc\View\Components\Base\Fields;
 
 abstract class AbstractBlockquote extends AbstractText
 {

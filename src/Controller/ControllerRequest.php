@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\Controller;
+namespace Mvc\Controller;
 
-use Mezzio\Mvc\Helper\ViewIdHelper;
+use Mvc\Helper\ViewIdHelper;
 use Mezzio\Router\RouteResult;
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeTrait;

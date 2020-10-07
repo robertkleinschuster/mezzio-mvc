@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Mezzio\Mvc\View\Components\Alert;
+namespace Mvc\View\Components\Alert;
 
 
-class Alert extends \Mezzio\Mvc\View\Components\Base\AbstractComponent
+class Alert extends \Mvc\View\Components\Base\AbstractComponent
 {
 
     public const STYLE_PRIMARY = 'primary';

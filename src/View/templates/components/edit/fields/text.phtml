@@ -1,4 +1,4 @@
-<?php if ($field->getType() == \Mezzio\Mvc\View\Components\Edit\Fields\Text::TYPE_HIDDEN): ?>
+<?php if ($field->getType() == \Mvc\View\Components\Edit\Fields\Text::TYPE_HIDDEN): ?>
     <input type="<?= $field->getType($data) ?>" id="<?= $field->getKey($data) ?>" name="<?= $field->getKey($data) ?>"
            value="<?= $field->getValue($data) ?>">
 <?php else: ?>

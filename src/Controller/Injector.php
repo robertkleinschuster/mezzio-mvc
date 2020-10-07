@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\Controller;
+namespace Mvc\Controller;
 
 class Injector
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\View\Components\Overview\Fields;
+namespace Mvc\View\Components\Overview\Fields;
 
-use Mezzio\Mvc\View\Components\Base\Fields\AbstractProgress;
+use Mvc\View\Components\Base\Fields\AbstractProgress;
 
 class Progress extends AbstractProgress
 {

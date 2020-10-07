@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\Factory;
+namespace Mvc\Factory;
 
-use Mezzio\Mvc\Controller\AbstractController;
-use Mezzio\Mvc\Controller\ControllerInterface;
-use Mezzio\Mvc\Controller\ControllerRequest;
-use Mezzio\Mvc\Controller\ControllerResponse;
-use Mezzio\Mvc\Exception\ControllerNotFoundException;
-use Mezzio\Mvc\Helper\PathHelper;
+use Mvc\Controller\AbstractController;
+use Mvc\Controller\ControllerInterface;
+use Mvc\Controller\ControllerRequest;
+use Mvc\Controller\ControllerResponse;
+use Mvc\Exception\ControllerNotFoundException;
+use Mvc\Helper\PathHelper;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

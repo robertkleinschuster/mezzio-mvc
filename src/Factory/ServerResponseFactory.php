@@ -1,13 +1,13 @@
 <?php
 
-namespace Mezzio\Mvc\Factory;
+namespace Mvc\Factory;
 
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Diactoros\UriFactory;
-use Mezzio\Mvc\Controller\ControllerResponse;
-use Mezzio\Mvc\Exception\MvcException;
+use Mvc\Controller\ControllerResponse;
+use Mvc\Exception\MvcException;
 
 class ServerResponseFactory
 {

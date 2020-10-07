@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\Helper;
+namespace Mvc\Helper;
 
 
 use Mezzio\Helper\ServerUrlHelper;
 use Mezzio\Helper\UrlHelper;
-use Mezzio\Mvc\Handler\MvcHandler;
+use Mvc\Handler\MvcHandler;
 
 /**
  * Class PathHelper
- * @package Mezzio\Mvc\Helper
+ * @package Mvc\Helper
  */
 class PathHelper
 {

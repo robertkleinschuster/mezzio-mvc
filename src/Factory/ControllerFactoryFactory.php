@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mezzio\Mvc\Factory;
+namespace Mvc\Factory;
 
 use Psr\Container\ContainerInterface;
 
