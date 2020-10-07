@@ -66,11 +66,11 @@ class ControllerFactory
      */
     protected function getControllerClass(array $config, string $code): string
     {
-        if (null === $config['mvc']['controllers'][$code]) {
+        if (null === $config['controllers'][$code]) {
             throw new ControllerNotFoundException(
                 "No controller class found for code '$code'. Check your mvc configuration."
             );
         }
-        return $config['mvc']['controllers'][$code];
+        return $config['controllers'][$code];
     }
 }

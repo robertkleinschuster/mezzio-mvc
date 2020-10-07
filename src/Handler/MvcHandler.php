@@ -68,13 +68,20 @@ class MvcHandler implements RequestHandlerInterface
         $actionCode = $request->getAttribute(self::ACTION_ATTRIBUTE) ?? 'index';
 
         $routeResult = $request->getAttribute(RouteResult::class);
-        $config = $this->config['merge']($routeResult->getMatchedRouteName());
+        if (array_key_exists($this->config['module'], $routeResult->getMatchedRouteName())) {
+            $config = array_replace_recursive(
+                $this->config,
+                $this->config['module'][$routeResult->getMatchedRouteName()]
+            );
+        } else {
+            $config = $this->config;
+        }
 
-        $mvcTemplateFolder = $config['mvc']['template_folder'];
-        $errorController = $config['mvc']['error_controller'];
-        $actionSuffix = $config['mvc']['action']['suffix'] ?? '';
-        $actionPrefix = $config['mvc']['action']['prefix'] ?? '';
-        $viewTemplateFolder = $config['mvc']['view']['template_folder'];
+        $mvcTemplateFolder = $config['template_folder'];
+        $errorController = $config['error_controller'];
+        $actionSuffix = $config['action']['suffix'] ?? '';
+        $actionPrefix = $config['action']['prefix'] ?? '';
+        $viewTemplateFolder = $config['view']['template_folder'];
         $actionMethod = $actionPrefix . $actionCode . $actionSuffix;
 
         try {
@@ -120,6 +127,7 @@ class MvcHandler implements RequestHandlerInterface
      * @param $controller
      * @param $errorController
      * @param $request
+     * @param $config
      * @return ControllerInterface
      * @throws ControllerNotFoundException
      * @throws \NiceshopsDev\NiceCore\Exception

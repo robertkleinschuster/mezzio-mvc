@@ -50,15 +50,10 @@ class ConfigProvider
                 'prefix' => '',
                 'suffix' => 'Action'
             ],
-            'module' => []
+            'module' => [
+                // 'routeName' => [] <- same keys as main mvc config, keys will be recursivly replaced
+            ]
         ];
-        $mvcConfig['merge'] = function (string $module) use ($mvcConfig): array {
-            if (array_key_exists($module, $mvcConfig['module'])) {
-                $moduleConfig = $mvcConfig['module'][$module];
-                return array_replace_recursive($mvcConfig, $moduleConfig);
-            }
-            return $mvcConfig;
-        };
         return $mvcConfig;
     }
 

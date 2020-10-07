@@ -31,11 +31,11 @@ class ModelFactory
      */
     protected function getModelClass(array $config, string $code): string
     {
-        if (null === $config['mvc']['models'][$code]) {
+        if (null === $config['models'][$code]) {
             throw new ControllerNotFoundException(
                 "No model class found for code '$code'. Check your mvc configuration."
             );
         }
-        return $config['mvc']['models'][$code];
+        return $config['models'][$code];
     }
 }
