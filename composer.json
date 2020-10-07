@@ -3,10 +3,9 @@
     "description": "",
     "license": "BSD-3-Clause",
     "keywords": [
-        "mezzio"
+        "mvc"
     ],
     "support": {
-        "docs": "https://docs.mezzio.dev/mezzio-mvc/",
         "issues": "https://github.com/robertkleinschuster/mvc/issues",
         "source": "https://github.com/robertkleinschuster/mvc",
         "rss": "https://github.com/robertkleinschuster/mvc/releases.atom",
