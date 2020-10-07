@@ -31,7 +31,7 @@ class ModelFactory
      */
     protected function getModelClass(array $config, string $code): string
     {
-        if (null === $config['models'][$code]) {
+        if (!isset($config['models'][$code])) {
             throw new ControllerNotFoundException(
                 "No model class found for code '$code'. Check your mvc configuration."
             );
