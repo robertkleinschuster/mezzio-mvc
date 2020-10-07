@@ -40,6 +40,11 @@ class ErrorController extends AbstractController
         // TODO: Implement handleValidationError() method.
     }
 
+    protected function handleNavigationState(string $id, int $index)
+    {
+        // TODO: Implement handleNavigationState() method.
+    }
+
 
     /**
      * @param \Throwable $exception
