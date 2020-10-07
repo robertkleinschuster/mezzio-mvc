@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mvc\Factory;
 
+use Mezzio\Router\RouteResult;
 use Mvc\Controller\AbstractController;
 use Mvc\Controller\ControllerInterface;
 use Mvc\Controller\ControllerRequest;
@@ -15,12 +16,14 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class ControllerFactory
 {
-
-
-    private $config;
-
+    /**
+     * @var ModelFactory
+     */
     private $modelFactory;
 
+    /**
+     * @var PathHelper
+     */
     private $pathHelper;
 
     /**
@@ -29,7 +32,6 @@ class ControllerFactory
      */
     public function __construct(ContainerInterface $container)
     {
-        $this->config = $container->get('config');
         $this->modelFactory = $container->get(ModelFactory::class);
         $this->pathHelper = $container->get(PathHelper::class);
     }
@@ -37,20 +39,21 @@ class ControllerFactory
     /**
      * @param string $code
      * @param ServerRequestInterface $request
+     * @param array $config
      * @return ControllerInterface
      * @throws ControllerNotFoundException
      * @throws \NiceshopsDev\NiceCore\Exception
      */
-    public function __invoke(string $code, ServerRequestInterface $request): ControllerInterface
+    public function __invoke(string $code, ServerRequestInterface $request, array $config): ControllerInterface
     {
-        $class = $this->getControllerClass($this->config, $code);
+        $class = $this->getControllerClass($config, $code);
         /**
          * @var AbstractController $controller
          */
         return new $class(
             new ControllerRequest($request),
             new ControllerResponse(),
-            ($this->modelFactory)($code),
+            ($this->modelFactory)($code, $config),
             $this->pathHelper
         );
     }

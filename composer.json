@@ -18,7 +18,8 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.4",
+        "laminas/laminas-diactoros": "^2.4",
         "mezzio/mezzio": "^3.2.1",
         "mezzio/mezzio-helpers": "^5.3",
         "niceshops/nice-beans": "dev-master"

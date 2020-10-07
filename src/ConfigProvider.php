@@ -23,30 +23,43 @@ class ConfigProvider
         return [
             'dependencies' => $this->getDependencies(),
             'templates' => $this->getTemplates(),
-            'mvc' => [
-                'error_controller' => 'error',
-                'controllers' => [
-                    'error' => ErrorController::class
-                ],
-                'models' => [
-                    'error' => ErrorModel::class
-                ],
-                'template_folder' => 'mvc',
-                'view' => [
-                    'template_folder' => 'view',
-                    'default_layout' => 'dashboard'
-                ],
-                'action' => [
-                    'prefix' => '',
-                    'suffix' => 'Action'
-                ],
-            ],
+            'mvc' => $this->getMvc(),
             'plates' => [
                 'extensions' => [
-
                 ]
             ],
         ];
+    }
+
+    protected function getMvc()
+    {
+        $mvcConfig =  [
+            'error_controller' => 'error',
+            'controllers' => [
+                'error' => ErrorController::class
+            ],
+            'models' => [
+                'error' => ErrorModel::class
+            ],
+            'template_folder' => 'mvc',
+            'view' => [
+                'template_folder' => 'view',
+                'default_layout' => 'dashboard'
+            ],
+            'action' => [
+                'prefix' => '',
+                'suffix' => 'Action'
+            ],
+            'module' => []
+        ];
+        $mvcConfig['merge'] = function (string $module) use ($mvcConfig): array {
+            if (array_key_exists($module, $mvcConfig['module'])) {
+                $moduleConfig = $mvcConfig['module'][$module];
+                return array_replace_recursive($mvcConfig, $moduleConfig);
+            }
+            return $mvcConfig;
+        };
+        return $mvcConfig;
     }
 
     protected function getDependencies()

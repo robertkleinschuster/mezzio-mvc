@@ -10,25 +10,16 @@ use Psr\Container\ContainerInterface;
 
 class ModelFactory
 {
-    private $config;
-
-    /**
-     * ControllerFactory constructor.
-     * @param ContainerInterface $container
-     */
-    public function __construct(ContainerInterface $container)
-    {
-        $this->config = $container->get('config');
-    }
 
     /**
      * @param string $code
+     * @param array $config
      * @return mixed
-     * @throws MvcException
+     * @throws ControllerNotFoundException
      */
-    public function __invoke(string $code)
+    public function __invoke(string $code, array $config)
     {
-        $model = $this->getModelClass($this->config, $code);
+        $model = $this->getModelClass($config, $code);
         return new $model();
     }
 

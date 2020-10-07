@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mvc\Handler;
 
+use Mezzio\Router\RouteResult;
 use Mvc\Controller\ControllerInterface;
 use Mvc\Controller\ControllerResponse;
 use Mvc\Exception\ActionException;
@@ -66,31 +67,35 @@ class MvcHandler implements RequestHandlerInterface
         $controllerCode = $request->getAttribute(self::CONTROLLER_ATTRIBUTE) ?? 'index';
         $actionCode = $request->getAttribute(self::ACTION_ATTRIBUTE) ?? 'index';
 
-        $mvcTemplateFolder = $this->config['mvc']['template_folder'];
-        $errorController = $this->config['mvc']['error_controller'];
-        $actionSuffix = $this->config['mvc']['action']['suffix'] ?? '';
-        $actionPrefix = $this->config['mvc']['action']['prefix'] ?? '';
-        $viewTemplateFolder = $this->config['mvc']['view']['template_folder'];
+        $routeResult = $request->getAttribute(RouteResult::class);
+        $config = $this->config['merge']($routeResult->getMatchedRouteName());
+
+        $mvcTemplateFolder = $config['mvc']['template_folder'];
+        $errorController = $config['mvc']['error_controller'];
+        $actionSuffix = $config['mvc']['action']['suffix'] ?? '';
+        $actionPrefix = $config['mvc']['action']['prefix'] ?? '';
+        $viewTemplateFolder = $config['mvc']['view']['template_folder'];
         $actionMethod = $actionPrefix . $actionCode . $actionSuffix;
+
         try {
-            $controller = ($this->controllerFactory)($controllerCode, $request);
+            $controller = ($this->controllerFactory)($controllerCode, $request, $config);
             $controller->init();
             $this->executeControllerAction($controller, $actionMethod);
             $controller->end();
         } catch (ActionException | ControllerException $exception) {
-            $controller = $this->getErrorController($controller, $errorController, $request);
+            $controller = $this->getErrorController($controller, $errorController, $request, $config);
             $controller->error($exception);
         } catch (ActionNotFoundException | ControllerNotFoundException $exception) {
             try {
-                $controller = $this->getErrorController($controller, $errorController, $request);
+                $controller = $this->getErrorController($controller, $errorController, $request, $config);
                 $controller->getControllerResponse()->setStatusCode(ControllerResponse::STATUS_NOT_FOUND);
                 $controller->error($exception);
             } catch (\Throwable $exception) {
-                $controller = $this->getErrorController(null, $errorController, $request);
+                $controller = $this->getErrorController(null, $errorController, $request, $config);
                 $controller->error($exception);
             }
         } catch (\Exception $exception) {
-            $controller = $this->getErrorController($controller, $errorController, $request);
+            $controller = $this->getErrorController($controller, $errorController, $request, $config);
             $controller->error($exception);
         }
         if ($controller->getControllerResponse()->hasOption(ControllerResponse::OPTION_RENDER_RESPONSE)) {
@@ -119,10 +124,10 @@ class MvcHandler implements RequestHandlerInterface
      * @throws ControllerNotFoundException
      * @throws \NiceshopsDev\NiceCore\Exception
      */
-    private function getErrorController($controller, $errorController, $request)
+    private function getErrorController($controller, $errorController, $request, $config)
     {
         if (null === $controller) {
-            $controller = ($this->controllerFactory)($errorController, $request);
+            $controller = ($this->controllerFactory)($errorController, $request, $config);
         }
         return $controller;
     }
