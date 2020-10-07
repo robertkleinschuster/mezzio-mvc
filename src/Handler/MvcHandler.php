@@ -69,7 +69,7 @@ class MvcHandler implements RequestHandlerInterface
 
         $routeResult = $request->getAttribute(RouteResult::class);
         if (is_string($routeResult->getMatchedRouteName()) &&
-            array_key_exists($routeResult->getMatchedRouteName(), $this->config['module'])
+            isset($this->config['module'][$routeResult->getMatchedRouteName()])
         ) {
             $config = array_replace_recursive(
                 $this->config,
