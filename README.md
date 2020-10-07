@@ -1,4 +1,4 @@
-# mvc
+# MVC for Mezzio Middleware
 
 [![Build Status](https://travis-ci.com/robertkleinschuster/mvc.svg?branch=master)](https://travis-ci.com/robertkleinschuster/mvc)
 [![Coverage Status](https://coveralls.io/repos/github/robertkleinschuster/mvc/badge.svg?branch=master)](https://coveralls.io/github/robertkleinschuster/mvc?branch=master)
