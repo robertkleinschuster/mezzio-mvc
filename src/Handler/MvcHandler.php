@@ -85,7 +85,7 @@ class MvcHandler implements RequestHandlerInterface
         $actionPrefix = $config['action']['prefix'] ?? '';
         $viewTemplateFolder = $config['view']['template_folder'];
         $actionMethod = $actionPrefix . $actionCode . $actionSuffix;
-
+        $controller = null;
         try {
             $controller = ($this->controllerFactory)($controllerCode, $request, $config);
             $controller->init();
