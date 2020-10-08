@@ -123,7 +123,7 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     {
         if (null !== $bean) {
             if ($this->hasFormat()) {
-                return ($this->getFormat())($bean);
+                return ($this->getFormat())($bean, $this);
             } else {
                 if (!$this->hasValue()) {
                     $value = "{{$this->getKey()}}";
