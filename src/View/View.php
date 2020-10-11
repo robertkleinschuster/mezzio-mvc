@@ -316,6 +316,9 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     */
     public function setToolbar(Toolbar $toolbar): self
     {
+        if ($this->hasPermissionList()) {
+            $toolbar->setPermissionList($this->getPermissionList());
+        }
         $this->toolbar = $toolbar;
         return $this;
     }
