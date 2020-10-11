@@ -297,6 +297,9 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
      */
     public function addNavigation(Navigation $navigation)
     {
+        if ($this->hasPermissionList()) {
+            $navigation->setPermissionList($this->getPermissionList());
+        }
         $this->navigation_List[] = $navigation;
         return $this;
     }
