@@ -5,7 +5,7 @@
     <?php foreach ($model->getComponentDataBeanList() as $bean): ?>
         <?php foreach ($fields as $key => $field): ?>
             <?php if ($field->isShow($bean)): ?>
-                <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
+                <?= $field->hasTitle($bean) ? "<h5>{$field->getTitle()}: </h5>" : ''?><?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
                 <?= count($fields) > 1 && $key < count($fields) - 1 ? '<hr>' : '' ?>
             <?php endif; ?>
         <?php endforeach ?>
