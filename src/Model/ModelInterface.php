@@ -33,6 +33,11 @@ interface ModelInterface
     public function setLimit(int $limit, int $page);
 
     /**
+     * @param string $search
+     */
+    public function handleSearch(string $search);
+
+    /**
      * Preload data for given ids
      * Load all data with set limit if ids are empty
      *

@@ -24,6 +24,7 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public const ATTRIBUTE_NAV_INDEX = 'navindex';
     public const ATTRIBUTE_LIMIT = 'limit';
     public const ATTRIBUTE_PAGE = 'page';
+    public const ATTRIBUTE_SEARCH = 'search';
 
     public const SUBMIT_MODE_CREATE = 'create';
     public const SUBMIT_MODE_SAVE = 'save';
@@ -199,6 +200,23 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public function getPage(): int
     {
         return intval($this->getAttribute(self::ATTRIBUTE_PAGE));
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasSearch(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_SEARCH);
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function getSearch(): string
+    {
+        return $this->getAttribute(self::ATTRIBUTE_SEARCH);
     }
 
     /**

@@ -91,6 +91,9 @@ abstract class AbstractController implements ControllerInterface
                 $this->getControllerRequest()->getPage()
             );
         }
+        if ($this->getControllerRequest()->hasSearch()) {
+            $this->getModel()->handleSearch($this->getControllerRequest()->getSearch());
+        }
     }
 
     protected function handleSubmit()

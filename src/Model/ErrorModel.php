@@ -41,5 +41,10 @@ class ErrorModel extends AbstractModel
         // TODO: Implement setLimit() method.
     }
 
+    public function handleSearch(string $search)
+    {
+        // TODO: Implement handleSearch() method.
+    }
+
 
 }
