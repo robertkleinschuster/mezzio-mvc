@@ -1,9 +1,13 @@
 <div class="btn-toolbar mb-2">
-    <?php foreach ($fields as $field): ?>
-        <div class="mr-1">
-            <?php if ($field->isShow($model->getComponentDataBean())): ?>
-                <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $model->getComponentDataBean()]) ?>
-            <?php endif; ?>
-        </div>
+    <?php foreach ($fields as $key => $field): ?>
+        <?php if ($key == 0 || !$field->isAppendToPrevious()): ?>
+            <div class="<?= (count($fields) > 1) ? 'btn-group ' : '' ?>mr-1">
+        <?php endif ?>
+        <?php if ($field->isShow($model->getComponentDataBean())): ?>
+            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $model->getComponentDataBean()]) ?>
+        <?php endif; ?>
+        <?php if ($key === count($fields) - 1 || !$fields[$key + 1]->isAppendToPrevious()): ?>
+            </div>
+        <?php endif ?>
     <?php endforeach ?>
 </div>

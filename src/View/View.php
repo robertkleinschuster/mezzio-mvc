@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mvc\View;
 
 use Mvc\View\Components\Base\AbstractComponent;
+use Mvc\View\Components\Toolbar\Toolbar;
 use Mvc\View\Navigation\Navigation;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareTrait;
@@ -68,6 +69,11 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
      * @var array
      */
     private $permission_List;
+
+    /**
+     * @var Components\Toolbar\Toolbar
+     */
+    private Components\Toolbar\Toolbar $toolbar;
 
 
     /**
@@ -294,6 +300,34 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
         $this->navigation_List[] = $navigation;
         return $this;
     }
+
+    /**
+    * @return Toolbar
+    */
+    public function getToolbar(): Toolbar
+    {
+        return $this->toolbar;
+    }
+
+    /**
+    * @param Toolbar $toolbar
+    *
+    * @return $this
+    */
+    public function setToolbar(Toolbar $toolbar): self
+    {
+        $this->toolbar = $toolbar;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasToolbar(): bool
+    {
+        return $this->toolbar !== null;
+    }
+
 
     /**
      * @return string

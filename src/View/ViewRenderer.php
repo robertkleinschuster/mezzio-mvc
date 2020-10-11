@@ -53,6 +53,8 @@ class ViewRenderer
         $view->getViewModel()->getTemplateData()->setData('hasNavigation', $view->hasNavigation());
         $view->getViewModel()->getTemplateData()->setData('navigationList', $view->getNavigationList());
         $view->getViewModel()->getTemplateData()->setData('templateFolder', $this->templateFolder);
+        $view->getViewModel()->getTemplateData()->setData('toolbar', $view->getToolbar());
+        $view->getViewModel()->getTemplateData()->setData('hasToolbar', $view->hasToolbar());
         foreach ($view->getViewModel()->getTemplateData() as $key => $templateDatum) {
             $this->getTemplateRenderer()->addDefaultParam(TemplateRendererInterface::TEMPLATE_ALL, $key, $templateDatum);
         }
