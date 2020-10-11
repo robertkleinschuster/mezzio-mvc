@@ -10,7 +10,7 @@ class PageNavigationElement
     /**
      * @var string
      */
-    private string $link;
+    private ?string $link = null;
 
     /**
      * @return string

@@ -13,22 +13,22 @@ class Element
     /**
      * @var string
      */
-    private string $icon;
+    private string $link;
 
     /**
      * @var string
      */
-    private string $link;
+    private ?string $icon = null;
 
     /**
      * @var bool
      */
-    private bool $active;
+    private bool $active = false;
 
     /**
      * @var string
      */
-    private string $permission;
+    private ?string $permission = null;
 
     /**
      * Element constructor.

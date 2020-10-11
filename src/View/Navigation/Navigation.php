@@ -12,22 +12,22 @@ class Navigation
     /**
      * @var Action
      */
-    private Action $action;
+    private ?Action $action = null;
 
     /**
      * @var Element[]
      */
-    private array $element_List;
+    private array $element_List = [];
 
     /**
      * @var Element[]
      */
-    private array $permissionList;
+    private ?array $permissionList = null;
 
     /**
      * @var string
      */
-    private string $permission;
+    private ?string $permission = null;
 
     /**
      * Navigation constructor.
