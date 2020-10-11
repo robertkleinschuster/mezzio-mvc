@@ -56,29 +56,30 @@ abstract class AbstractModel implements ModelInterface, OptionAwareInterface
     }
 
     /**
-     * @param ControllerRequest $request
-     * @throws \NiceshopsDev\NiceCore\Exception
+     * @param string $submitModel
+     * @param array $viewIdMap
+     * @param array $attributes
      */
-    public function submit(ControllerRequest $request)
+    public function submit(string $submitModel, array $viewIdMap, array $attributes)
     {
-        switch ($request->getSubmit()) {
+        switch ($submitModel) {
             case ControllerRequest::SUBMIT_MODE_SAVE:
                 if ($this->hasOption(self::OPTION_EDIT_ALLOWED)) {
-                    $this->save($request->getAttributes());
+                    $this->save($attributes);
                 } else {
                     $this->handlePermissionDenied();
                 }
                 break;
             case ControllerRequest::SUBMIT_MODE_CREATE:
                 if ($this->hasOption(self::OPTION_CREATE_ALLOWED)) {
-                    $this->create($request->getViewIdMap(), $request->getAttributes());
+                    $this->create($viewIdMap, $attributes);
                 } else {
                     $this->handlePermissionDenied();
                 }
                 break;
             case ControllerRequest::SUBMIT_MODE_DELETE:
                 if ($this->hasOption(self::OPTION_DELETE_ALLOWED)) {
-                    $this->delete($request->getViewIdMap());
+                    $this->delete($viewIdMap);
                 } else {
                     $this->handlePermissionDenied();
                 }

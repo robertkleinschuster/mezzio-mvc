@@ -7,27 +7,27 @@ class Navigation
     /**
      * @var string
      */
-    private $title;
+    private string $title;
 
     /**
      * @var Action
      */
-    private $action;
+    private Action $action;
 
     /**
      * @var Element[]
      */
-    private $element_List;
+    private array $element_List;
 
     /**
      * @var Element[]
      */
-    private $permissionList;
+    private array $permissionList;
 
     /**
      * @var string
      */
-    private $permission;
+    private string $permission;
 
     /**
      * Navigation constructor.
@@ -109,10 +109,12 @@ class Navigation
 
     /**
      * @param Action $action
+     * @return Navigation
      */
-    public function setAction(Action $action): void
+    public function setAction(Action $action)
     {
         $this->action = $action;
+        return $this;
     }
 
     /**

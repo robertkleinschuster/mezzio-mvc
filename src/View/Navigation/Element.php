@@ -8,27 +8,27 @@ class Element
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var string
      */
-    private $icon;
+    private string $icon;
 
     /**
      * @var string
      */
-    private $link;
+    private string $link;
 
     /**
      * @var bool
      */
-    private $active;
+    private bool $active;
 
     /**
      * @var string
      */
-    private $permission;
+    private string $permission;
 
     /**
      * Element constructor.

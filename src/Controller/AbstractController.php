@@ -63,18 +63,27 @@ abstract class AbstractController implements ControllerInterface
      */
     public function init()
     {
+        $this->handleParameter();
+        $this->initView();
+        $this->initModel();
+        $this->getModel()->find($this->getControllerRequest()->getViewIdMap());
+        $this->handleSubmit();
+    }
+
+    abstract protected function initView();
+
+    abstract protected function initModel();
+
+    protected function handleParameter()
+    {
         if ($this->getControllerRequest()->isAjax()) {
             $this->getControllerResponse()->setMode(ControllerResponse::MODE_JSON);
         }
-        $this->initView();
-        $this->initModel();
-
         if ($this->getControllerRequest()->hasNavId() && $this->getControllerRequest()->hasNavIndex()) {
             $this->handleNavigationState(
                 $this->getControllerRequest()->getNavId(),
                 $this->getControllerRequest()->getNavIndex()
             );
-            $this->getControllerResponse()->removeOption(ControllerResponse::OPTION_RENDER_RESPONSE);
         }
         if ($this->getControllerRequest()->hasLimit() && $this->getControllerRequest()->hasPage()) {
             $this->getModel()->setLimit(
@@ -82,19 +91,7 @@ abstract class AbstractController implements ControllerInterface
                 $this->getControllerRequest()->getPage()
             );
         }
-
-        if (
-            !$this->getControllerRequest()->hasSubmit() ||
-            $this->getControllerRequest()->getSubmit() !== ControllerRequest::SUBMIT_MODE_CREATE
-        ) {
-            $this->getModel()->find($this->getControllerRequest()->getViewIdMap());
-        }
-        $this->handleSubmit();
     }
-
-    abstract protected function initView();
-
-    abstract protected function initModel();
 
     protected function handleSubmit()
     {
@@ -106,7 +103,11 @@ abstract class AbstractController implements ControllerInterface
             $pathUrl = $path->getPath();
 
             if ($this->handleSubmitSecurity()) {
-                $this->getModel()->submit($this->getControllerRequest());
+                $this->getModel()->submit(
+                    $this->getControllerRequest()->getSubmit(),
+                    $this->getControllerRequest()->getViewIdMap(),
+                    $this->getControllerRequest()->getAttributes()
+                );
                 if ($this->getModel()->getValidationHelper()->hasError()) {
                     $this->handleValidationError($this->getModel()->getValidationHelper());
                 } elseif ($this->getControllerRequest()->hasRedirect()) {
@@ -138,19 +139,25 @@ abstract class AbstractController implements ControllerInterface
 
 
     /**
+     * Handle security checks e.g. csrf token before executing submit in model
+     *
      * @return bool
      */
     abstract protected function handleSubmitSecurity(): bool;
 
     /**
+     * Handle validation errors from model after submit
+     * e.g. set to flash messanger to display them after redirect
+     *
      * @param ValidationHelper $validationHelper
      * @return mixed
      */
     abstract protected function handleValidationError(ValidationHelper $validationHelper);
 
     /**
+     * Persist naviations states in Session
      * @param string $id
-     * @param string $index
+     * @param int $index
      * @return mixed
      */
     abstract protected function handleNavigationState(string $id, int $index);

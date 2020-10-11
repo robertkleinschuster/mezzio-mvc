@@ -9,17 +9,17 @@ class Action
     /**
      * @var string
      */
-    private $link;
+    private string $link;
 
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var string
      */
-    private $icon;
+    private string $icon;
 
     public const ICON_ACTIVITY = 'activity';
     public const ICON_AIRPLAY = 'airplay';

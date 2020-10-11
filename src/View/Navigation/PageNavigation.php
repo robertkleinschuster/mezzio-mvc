@@ -9,12 +9,12 @@ class PageNavigation
     /**
      * @var PageNavigationElement[]
      */
-    private $element_List;
+    private array $element_List;
 
     /**
      * @var int
      */
-    private $active;
+    private int $active;
 
     /**
      * @return PageNavigationElement[]
