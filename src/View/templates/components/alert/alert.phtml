@@ -13,7 +13,7 @@
         <?php foreach ($component->getFieldList() as $key => $field): ?>
             <?php if ($field->isShow($bean)): ?>
                 <?= $field->hasTitle() ? "<h5>{$field->getTitle()}</h5>" : '' ?><?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $bean]) ?>
-                <?= count($fields) > 1 && $key < count($fields) - 1 ? '<hr>' : '' ?>
+                <?= count($component->getFieldList()) > 1 && $key < count($component->getFieldList()) - 1 ? '<hr>' : '' ?>
             <?php endif; ?>
         <?php endforeach ?>
     <?php endforeach ?>
