@@ -223,7 +223,7 @@
               class="col-md-9 <?= $view->hasNavigation(\Mvc\View\Navigation\Navigation::POSITION_SIDEBAR) ? 'ml-sm-auto' : 'm-auto' ?> col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <?php if ($view->hasData('heading')): ?>
-                    <h1 class="h2"><?= $view->hasData('heading') ?></h1>
+                    <h1 class="h2"><?= $view->getData('heading') ?></h1>
                 <?php endif; ?>
                 <?php if ($view->hasToolbar()): ?>
                     <?php $this->insert($templateFolder . '::' . $view->getToolbar()->getTemplate(), ['component' => $view->getToolbar()]) ?>
