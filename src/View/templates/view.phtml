@@ -17,7 +17,7 @@ $this->layout($templateFolder . '::' . $view->getLayout()) ?>
             <? endif; ?>
             <? $this->insert($templateFolder . '::' . $component->getTemplate(), ['component' => $component]) ?>
         </div>
-    <?php endforeach ?>
+    <?php endforeach; ?>
 </div>
 <?php $this->push('javascript') ?>
 <script
