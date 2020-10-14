@@ -60,7 +60,7 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     /**
      * @var TemplateDataBean
      */
-    private TemplateDataBean $templateData;
+    private ?TemplateDataBean $templateData = null;
 
 
     /**
