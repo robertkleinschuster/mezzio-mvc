@@ -8,33 +8,33 @@
 <? if ($field->getType() == \Mvc\View\Components\Edit\Fields\Text::TYPE_HIDDEN): ?>
     <input type="<?= $field->getType() ?>" id="<?= $field->getKey() ?>" name="<?= $field->getKey() ?>"
            value="<?= $field->getValue($bean) ?>">
-<?php else: ?>
+<? else: ?>
     <div class="form-group">
-        <?php if ($field->hasTitle()): ?>
+        <? if ($field->hasTitle()): ?>
             <label for="<?= $field->getKey() ?>"><?= $field->getTitle() ?></label>
-        <?php endif; ?>
+        <? endif; ?>
         <input type="<?= $field->getType() ?>"
                class="form-control <?= count($errors) ? ' is-invalid' : '' ?>"
                id="<?= $field->getKey() ?>"
                name="<?= $field->getKey() ?>"
                value="<?= $field->getValue($bean) ?>"
             <?= $field->isRequired() ? ' required ' : '' ?>
-            <?php if ($field->hasHint()): ?>
+            <? if ($field->hasHint()): ?>
                 aria-describedby="<?= $field->getKey() ?>__hint"
-            <?php endif; ?>
-            <?php if (count($errors)): ?>
+            <? endif; ?>
+            <? if (count($errors)): ?>
                 aria-describedby="<?= $field->getKey() ?>_Error"
-            <?php endif; ?>
+            <? endif; ?>
                autocomplete="<?= $field->getAutocomplete() ?>"
         >
-        <?php foreach ($errors as $error): ?>
+        <? foreach ($errors as $error): ?>
             <div id="<?= $field->getKey() ?>_Error" class="invalid-feedback">
                 <?= $error ?>
             </div>
-        <?php endforeach ?>
-        <?php if ($field->hasHint()): ?>
+        <? endforeach ?>
+        <? if ($field->hasHint()): ?>
             <small id="<?= $field->getKey() ?>__hint"
                    class="form-text text-muted"><?= $field->getHint() ?></small>
-        <?php endif; ?>
+        <? endif; ?>
     </div>
-<?php endif; ?>
+<? endif; ?>

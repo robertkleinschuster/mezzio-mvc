@@ -6,9 +6,9 @@
  */
 ?>
 <div class="form-group">
-    <?php if ($field->hasTitle()): ?>
+    <? if ($field->hasTitle()): ?>
         <label for="<?= $field->getKey() ?>"><?= $field->getTitle() ?></label>
-    <?php endif; ?>
+    <? endif; ?>
     <textarea class="form-control <?= is_array($errors) && count($errors) ? ' is-invalid ' : '' ?>"
               id="<?= $field->getKey() ?>"
               name="<?= $field->getKey() ?>"
@@ -16,11 +16,11 @@
         <?= $field->hasRows() ? " rows=\"{$field->getRows()}\"" : '' ?>>
         <?= $field->getValue($bean) ?>
     </textarea>
-    <?php if (is_array($errors)): ?>
-        <?php foreach ($errors as $error): ?>
+    <? if (is_array($errors)): ?>
+        <? foreach ($errors as $error): ?>
             <div id="<?= $field->getKey() ?>_Error" class="invalid-feedback">
                 <?= $error ?>
             </div>
-        <?php endforeach ?>
-    <?php endif ?>
+        <? endforeach ?>
+    <? endif ?>
 </div>

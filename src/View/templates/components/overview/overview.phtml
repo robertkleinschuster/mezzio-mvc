@@ -27,39 +27,39 @@
                 <? endif; ?>
                 <? $previousChapter = $field->getChapter() ?>
                 <? $index++; ?>
-            <?php endforeach ?>
+            <? endforeach ?>
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($component->getBeanList() as $bean): ?>
+        <? foreach ($component->getBeanList() as $bean): ?>
             <tr>
-                <?php $previousChapter = null ?>
-                <?php $index = 1 ?>
-                <?php $count = count($component->getFieldList()) ?>
-                <?php foreach ($component->getFieldList() as $field): ?>
-                    <?php if ($field->getChapter() == $previousChapter && $field->getChapter() != ''): ?>
-                        <?php if ($field->isShow($bean)): ?>
-                            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $bean]) ?>
-                        <?php endif; ?><?php elseif ($previousChapter == null): ?>
+                <? $previousChapter = null ?>
+                <? $index = 1 ?>
+                <? $count = count($component->getFieldList()) ?>
+                <? foreach ($component->getFieldList() as $field): ?>
+                    <? if ($field->getChapter() == $previousChapter && $field->getChapter() != ''): ?>
+                        <? if ($field->isShow($bean)): ?>
+                            <? $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $bean]) ?>
+                        <? endif; ?><? elseif ($previousChapter == null): ?>
                         <td class="align-middle" <?= $field->hasWidth() ? 'style="width: ' . $field->getWidth() . 'px"' : '' ?>>
-                        <?php if ($field->isShow($bean)): ?>
-                            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $bean]) ?>
-                        <?php endif; ?>
-                    <?php else: ?>
+                        <? if ($field->isShow($bean)): ?>
+                            <? $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $bean]) ?>
+                        <? endif; ?>
+                    <? else: ?>
                         </td>
                         <td class="align-middle" <?= $field->hasWidth() ? 'style="width: ' . $field->getWidth() . 'px"' : '' ?>>
-                        <?php if ($field->isShow($bean)): ?>
-                            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $bean]) ?>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                    <?php if ($index == $count): ?>
+                        <? if ($field->isShow($bean)): ?>
+                            <? $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $bean]) ?>
+                        <? endif; ?>
+                    <? endif; ?>
+                    <? if ($index == $count): ?>
                         </td>
-                    <?php endif; ?>
-                    <?php $previousChapter = $field->getChapter() ?>
-                    <?php $index++; ?>
-                <?php endforeach ?>
+                    <? endif; ?>
+                    <? $previousChapter = $field->getChapter() ?>
+                    <? $index++; ?>
+                <? endforeach ?>
             </tr>
-        <?php endforeach ?>
+        <? endforeach ?>
         </tbody>
     </table>
 </div>

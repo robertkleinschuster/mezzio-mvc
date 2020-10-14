@@ -175,59 +175,59 @@
                 <? endforeach; ?>
             </ul>
         <? endforeach; ?>
-    <?php endif ?>
+    <? endif ?>
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <?php if ($view->hasNavigation(\Mvc\View\Navigation\Navigation::POSITION_SIDEBAR)): ?>
+        <? if ($view->hasNavigation(\Mvc\View\Navigation\Navigation::POSITION_SIDEBAR)): ?>
             <nav id="sidebarNavigation" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="sidebar-sticky pt-3">
-                    <?php foreach ($view->getNavigationList(\Mvc\View\Navigation\Navigation::POSITION_SIDEBAR) as $navigation): ?>
-                        <?php if ($navigation->hasTitle()): ?>
+                    <? foreach ($view->getNavigationList(\Mvc\View\Navigation\Navigation::POSITION_SIDEBAR) as $navigation): ?>
+                        <? if ($navigation->hasTitle()): ?>
                             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                                 <span><?= $navigation->getTitle() ?></span>
-                                <?php if ($navigation->hasAction()): ?>
-                                    <?php if ($navigation->getAction()->hasLink()): ?>
+                                <? if ($navigation->hasAction()): ?>
+                                    <? if ($navigation->getAction()->hasLink()): ?>
                                         <a class="d-flex align-items-center text-muted"
                                            href="<?= $navigation->getAction()->getLink() ?>"
                                            aria-label="<?= $navigation->getAction()->hasName() ? $navigation->getAction()->getName() : '' ?>">
-                                            <?php if ($navigation->getAction()->hasIcon()): ?>
+                                            <? if ($navigation->getAction()->hasIcon()): ?>
                                                 <span data-feather="<?= $navigation->getAction()->getIcon() ?>"></span>
-                                            <?php endif ?>
+                                            <? endif ?>
                                         </a>
-                                    <?php endif ?>
-                                <?php endif ?>
+                                    <? endif ?>
+                                <? endif ?>
                             </h6>
-                        <?php endif ?>
+                        <? endif ?>
                         <ul class="nav flex-column mb-2">
-                            <?php foreach ($navigation->getElementList() as $element): ?>
+                            <? foreach ($navigation->getElementList() as $element): ?>
                                 <li class="nav-item">
                                     <a class="nav-link <?= $element->isActive() ? 'active' : '' ?>"
                                        href="<?= $element->getLink() ?>">
-                                        <?php if ($element->hasIcon()): ?>
+                                        <? if ($element->hasIcon()): ?>
                                             <span data-feather="<?= $element->getIcon() ?>"></span>
-                                        <?php endif ?>
+                                        <? endif ?>
                                         <?= $element->getName() ?>
-                                        <?php if ($element->isActive()): ?>
+                                        <? if ($element->isActive()): ?>
                                             <span class="sr-only">(current)</span>
-                                        <?php endif ?>
+                                        <? endif ?>
                                     </a>
                                 </li>
-                            <?php endforeach ?>
+                            <? endforeach ?>
                         </ul>
-                    <?php endforeach ?>
+                    <? endforeach ?>
                 </div>
             </nav>
-        <?php endif ?>
+        <? endif ?>
         <main role="main"
               class="col-md-9 <?= $view->hasNavigation(\Mvc\View\Navigation\Navigation::POSITION_SIDEBAR) ? 'ml-sm-auto' : 'm-auto' ?> col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <?php if ($view->hasData('heading')): ?>
+                <? if ($view->hasData('heading')): ?>
                     <h1 class="h2"><?= $view->hasData('heading') ?></h1>
-                <?php endif; ?>
-                <?php if ($view->hasToolbar()): ?>
-                    <?php $this->insert($templateFolder . '::' . $view->getToolbar()->getTemplate(), ['component' => $view->getToolbar()]) ?>
-                <?php endif ?>
+                <? endif; ?>
+                <? if ($view->hasToolbar()): ?>
+                    <? $this->insert($templateFolder . '::' . $view->getToolbar()->getTemplate(), ['component' => $view->getToolbar()]) ?>
+                <? endif ?>
             </div>
             <?= $this->section('content') ?>
         </main>

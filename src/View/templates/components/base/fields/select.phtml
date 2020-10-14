@@ -20,11 +20,11 @@
                 <?= $field->getValue($bean) == $value ? ' selected' : '' ?>value="<?= $value ?>"><?= $name ?></option>
         <? endforeach; ?>
     </select>
-    <?php if (is_array($errors)): ?>
-        <?php foreach ($errors as $error): ?>
+    <? if (is_array($errors)): ?>
+        <? foreach ($errors as $error): ?>
             <div id="<?= $field->getKey() ?>_Error" class="invalid-feedback">
                 <?= $error ?>
             </div>
-        <?php endforeach ?>
-    <?php endif ?>
+        <? endforeach ?>
+    <? endif ?>
 </div>

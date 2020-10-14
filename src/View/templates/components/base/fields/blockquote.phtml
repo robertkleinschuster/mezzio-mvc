@@ -6,11 +6,11 @@
 ?>
 <blockquote class="blockquote<?= $field->hasAlign() ? ' text-' . $field->getAlign() : '' ?>">
     <p class="mb-0"><?= $field->getValue($bean) ?></p>
-    <?php if ($field->hasFooter()): ?>
+    <? if ($field->hasFooter()): ?>
         <footer class="blockquote-footer"><?= $field->getFooter() ?>
-            <?php if ($field->hasSource()): ?>
+            <? if ($field->hasSource()): ?>
                 <cite title="<?= $field->getSource() ?>"><?= $field->getSource() ?></cite>
-            <?php endif; ?>
+            <? endif; ?>
         </footer>
-    <?php endif; ?>
+    <? endif; ?>
 </blockquote>
