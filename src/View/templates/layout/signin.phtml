@@ -98,15 +98,7 @@
     <?php if ($view->hasData('title')): ?>
         <h1 class="text-center mx-auto"><?= $view->getData('title') ?></h1>
     <?php endif; ?>
-    <?php if ($view->hasData('heading')): ?>
-        <hr>
-        <h2 class="text-center mx-auto mb-5"><?= $view->getData('heading') ?></h2>
-    <?php endif; ?>
-
     <?= $this->section('content') ?>
-</form>
-
-<footer class="app-footer">
     <div class="container">
         <hr/>
         <?php if ($this->section('footer')): ?>
@@ -117,7 +109,8 @@
             </p>
         <?php endif ?>
     </div>
-</footer>
+</form>
+
 <?= $this->section('javascript') ?>
 </body>
 </html>
