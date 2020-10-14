@@ -95,4 +95,15 @@ class Pagination extends AbstractComponent
             return $this->getField($this->getActive() + 1);
         }
     }
+
+    /**
+     * @param string $link
+     * @return Link
+     */
+    public function addLink(string $link): Link
+    {
+        $field = new Link($link);
+        $field->setLink($link);
+        return $field;
+    }
 }
