@@ -16,6 +16,10 @@ use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use NiceshopsDev\NiceCore\Option\OptionTrait;
 
+/**
+ * Class View
+ * @package Mvc\View
+ */
 class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatterAwareInterface
 {
     use OptionTrait;
@@ -280,11 +284,67 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     /**
      * @param string $name
      * @param $value
-     * @return TemplateDataBean
+     * @return $this
      * @throws BeanException
      */
-    public function setData(string $name, $value)
+    public function setData(string $name, $value): self
     {
-        return $this->getTemplateData()->setData($name, $value);
+        $this->getTemplateData()->setData($name, $value);
+        return $this;
+    }
+
+    /**
+     * @param string $title
+     * @return $this
+     * @throws BeanException
+     */
+    public function setTitle(string $title): self
+    {
+        $this->setData('title', $title);
+        return $this;
+    }
+
+    /**
+     * @param string $heading
+     * @return $this
+     * @throws BeanException
+     */
+    public function setHeading(string $heading): self
+    {
+        $this->setData('heading', $heading);
+        return $this;
+    }
+
+    /**
+     * @param string $description
+     * @return $this
+     * @throws BeanException
+     */
+    public function setDescription(string $description): self
+    {
+        $this->setData('description', $description);
+        return $this;
+    }
+
+    /**
+     * @param string $author
+     * @return $this
+     * @throws BeanException
+     */
+    public function setAuthor(string $author): self
+    {
+        $this->setData('author', $author);
+        return $this;
+    }
+
+    /**
+     * @param string $favicon
+     * @return $this
+     * @throws BeanException
+     */
+    public function setFavicon(string $favicon): self
+    {
+        $this->setData('favicon', $favicon);
+        return $this;
     }
 }

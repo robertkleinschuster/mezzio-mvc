@@ -12,6 +12,10 @@ use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use NiceshopsDev\NiceCore\Option\OptionTrait;
 
+/**
+ * Class AbstractField
+ * @package Mvc\View\Components\Base
+ */
 abstract class AbstractField implements OptionAwareInterface, AttributeAwareInterface, BeanFormatterAwareInterface
 {
     use OptionTrait;

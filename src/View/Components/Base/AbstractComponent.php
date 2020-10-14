@@ -18,6 +18,10 @@ use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use NiceshopsDev\NiceCore\Option\OptionTrait;
 
+/**
+ * Class AbstractComponent
+ * @package Mvc\View\Components\Base
+ */
 abstract class AbstractComponent implements
     OptionAwareInterface,
     AttributeAwareInterface,
