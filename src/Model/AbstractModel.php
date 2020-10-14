@@ -21,17 +21,12 @@ abstract class AbstractModel implements ModelInterface, OptionAwareInterface
     /**
      * @var TemplateDataBean
      */
-    private $templateData;
+    private TemplateDataBean $templateData;
 
     /**
      * @var ValidationHelper
      */
-    private $validationHelper;
-
-    /**
-     * @var array
-     */
-    private $permissionList;
+    private ValidationHelper $validationHelper;
 
     /**
      * @return TemplateDataBean

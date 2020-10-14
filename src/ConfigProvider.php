@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Mvc;
 
-use Mvc\Controller\ErrorController;
 use Mvc\Factory\ControllerFactory;
 use Mvc\Factory\ControllerFactoryFactory;
 use Mvc\Factory\ModelFactory;
@@ -13,7 +12,6 @@ use Mvc\Handler\MvcHandler;
 use Mvc\Handler\MvcHandlerFactory;
 use Mvc\Helper\PathHelper;
 use Mvc\Helper\PathHelperFactory;
-use Mvc\Model\ErrorModel;
 
 class ConfigProvider
 {
@@ -35,12 +33,8 @@ class ConfigProvider
     {
         $mvcConfig =  [
             'error_controller' => 'error',
-            'controllers' => [
-                'error' => ErrorController::class
-            ],
-            'models' => [
-                'error' => ErrorModel::class
-            ],
+            'controllers' => [],
+            'models' => [],
             'template_folder' => 'mvc',
             'view' => [
                 'template_folder' => 'view',

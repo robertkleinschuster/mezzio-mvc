@@ -28,6 +28,11 @@ interface ControllerInterface
     public function error(\Throwable $exception);
 
     /**
+     * @return mixed
+     */
+    public function unauthorized();
+
+    /**
      * @return ControllerRequest
      */
     public function getControllerRequest(): ControllerRequest;
@@ -52,9 +57,37 @@ interface ControllerInterface
      */
     public function getView(): View;
 
-
     /**
      * @return bool
      */
     public function hasView(): bool;
+
+    /**
+     * @return string
+     */
+    public function getTemplate(): string;
+
+    /**
+     * @param string $template
+     *
+     * @return $this
+     */
+    public function setTemplate(string $template): self;
+
+    /**
+     * @return bool
+     */
+    public function hasTemplate(): bool;
+
+
+    /**
+     * @return bool
+     */
+    public function isAuthorized(): bool;
+
+    /**
+     * @param string $controller
+     * @param string $action
+     */
+    public function setActiveNavigation(string $controller, string $action);
 }

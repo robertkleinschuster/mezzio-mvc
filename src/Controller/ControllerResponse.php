@@ -47,7 +47,7 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
     private $statusCode;
 
     /**
-     * @var Injector
+     * @var ControllerResponseInjector
      */
     private $injector;
 
@@ -139,12 +139,12 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
     }
 
     /**
-     * @return Injector
+     * @return ControllerResponseInjector
      */
-    public function getInjector(): Injector
+    public function getInjector(): ControllerResponseInjector
     {
         if (null === $this->injector) {
-            $this->injector = new Injector();
+            $this->injector = new ControllerResponseInjector();
         }
         return $this->injector;
     }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mvc\Handler;
 
+use Exception;
+use Laminas\Diactoros\Response;
 use Mezzio\Router\RouteResult;
 use Mvc\Controller\ControllerInterface;
 use Mvc\Controller\ControllerResponse;
@@ -11,15 +13,17 @@ use Mvc\Exception\ActionException;
 use Mvc\Exception\ActionNotFoundException;
 use Mvc\Exception\ControllerException;
 use Mvc\Exception\ControllerNotFoundException;
+use Mvc\Exception\NotFoundException;
 use Mvc\Factory\ControllerFactory;
 use Mvc\Factory\ServerResponseFactory;
 use Mvc\View\ViewRenderer;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class MvcHandler implements RequestHandlerInterface
+class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
 {
 
     public const CONTROLLER_ATTRIBUTE = 'controller';
@@ -68,8 +72,9 @@ class MvcHandler implements RequestHandlerInterface
         $actionCode = $request->getAttribute(self::ACTION_ATTRIBUTE) ?? 'index';
 
         $routeResult = $request->getAttribute(RouteResult::class);
-        if (is_string($routeResult->getMatchedRouteName()) &&
-            isset($this->config['module'][$routeResult->getMatchedRouteName()])
+        if (
+            is_string($routeResult->getMatchedRouteName())
+            && isset($this->config['module'][$routeResult->getMatchedRouteName()])
         ) {
             $config = array_replace_recursive(
                 $this->config,
@@ -89,21 +94,16 @@ class MvcHandler implements RequestHandlerInterface
         try {
             $controller = ($this->controllerFactory)($controllerCode, $request, $config);
             $controller->init();
-            $this->executeControllerAction($controller, $actionMethod);
-            $controller->end();
-        } catch (ActionException | ControllerException $exception) {
-            $controller = $this->getErrorController($controller, $errorController, $request, $config);
-            $controller->error($exception);
-        } catch (ActionNotFoundException | ControllerNotFoundException $exception) {
-            try {
-                $controller = $this->getErrorController($controller, $errorController, $request, $config);
-                $controller->getControllerResponse()->setStatusCode(ControllerResponse::STATUS_NOT_FOUND);
-                $controller->error($exception);
-            } catch (\Throwable $exception) {
-                $controller = $this->getErrorController(null, $errorController, $request, $config);
-                $controller->error($exception);
+            $controller->setActiveNavigation($controllerCode, $actionCode);
+            if ($controller->isAuthorized()) {
+                $this->executeControllerAction($controller, $actionMethod);
+            } else {
+                $controller->unauthorized();
             }
-        } catch (\Exception $exception) {
+            $controller->end();
+        } catch (NotFoundException $exception) {
+            return new Response('', 404);
+        } catch (\Throwable $exception) {
             $controller = $this->getErrorController($controller, $errorController, $request, $config);
             $controller->error($exception);
         }
@@ -114,6 +114,11 @@ class MvcHandler implements RequestHandlerInterface
                 $view = $controller->getView();
                 $view->getViewModel()->getTemplateData()->setFromArray($templateData->toArray());
                 $renderedOutput = $viewRenderer->render($view);
+            } elseif ($controller->hasTemplate()) {
+                $renderedOutput = $this->renderer->render(
+                    "$mvcTemplateFolder::{$controller->getTemplate()}",
+                    $templateData->toArray()
+                );
             } else {
                 $renderedOutput = $this->renderer->render(
                     "$mvcTemplateFolder::$controllerCode/$actionCode",
@@ -123,6 +128,23 @@ class MvcHandler implements RequestHandlerInterface
             $controller->getControllerResponse()->setBody($renderedOutput);
         }
         return (new ServerResponseFactory())($controller->getControllerResponse());
+    }
+
+
+    /**
+     * @param ServerRequestInterface  $request
+     * @param RequestHandlerInterface $handler
+     *
+     * @return ResponseInterface
+     * @throws Exception
+     */
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        $response = $this->handle($request);
+        if ($response->getStatusCode() === 404) {
+            return $handler->handle($request);
+        }
+        return $response;
     }
 
     /**

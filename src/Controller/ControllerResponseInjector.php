@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mvc\Controller;
 
-class Injector
+class ControllerResponseInjector
 {
     public const POSITION_BEFORE = 'before';
     public const POSITION_REPLACE = 'replace';

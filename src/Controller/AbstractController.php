@@ -16,27 +16,32 @@ abstract class AbstractController implements ControllerInterface
     /**
      * @var ControllerRequest
      */
-    private $controllerRequest;
+    private ControllerRequest $controllerRequest;
 
     /**
      * @var ControllerResponse
      */
-    private $controllerResponse;
+    private ControllerResponse $controllerResponse;
 
     /**
      * @var ModelInterface
      */
-    private $model;
+    private ModelInterface $model;
 
     /**
      * @var PathHelper
      */
-    private $pathHelper;
+    private PathHelper $pathHelper;
 
     /**
      * @var View
      */
-    private $view;
+    private ?View $view = null;
+
+    /**
+     * @var string|null
+     */
+    private ?string $template = null;
 
     /**
      * AbstractController constructor.
@@ -127,14 +132,16 @@ abstract class AbstractController implements ControllerInterface
      */
     public function setActiveNavigation(string $controller, string $action)
     {
-        foreach ($this->getView()->getNavigationList() as $item) {
-            foreach ($item->getElementList() as $element) {
-                if ($element->getLink() === $this->getPathHelper()
-                        ->setController($controller)
-                        ->setAction($action)
-                        ->getPath()) {
-                    $element->setActive(true);
-                    return;
+        if ($this->hasView()) {
+            foreach ($this->getView()->getNavigationList() as $item) {
+                foreach ($item->getElementList() as $element) {
+                    if ($element->getLink() === $this->getPathHelper()
+                            ->setController($controller)
+                            ->setAction($action)
+                            ->getPath()) {
+                        $element->setActive(true);
+                        return;
+                    }
                 }
             }
         }
@@ -229,6 +236,34 @@ abstract class AbstractController implements ControllerInterface
     }
 
     /**
+    * @return string
+    */
+    public function getTemplate(): string
+    {
+        return $this->template;
+    }
+
+    /**
+    * @param string $template
+    *
+    * @return $this
+    */
+    public function setTemplate(string $template): self
+    {
+        $this->template = $template;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasTemplate(): bool
+    {
+        return $this->template !== null;
+    }
+
+
+    /**
      * @param string $key
      * @param $value
      * @return AbstractController
@@ -239,4 +274,14 @@ abstract class AbstractController implements ControllerInterface
         $this->getModel()->getTemplateData()->setData($key, $value);
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isAuthorized(): bool
+    {
+        return true;
+    }
+
+
 }
