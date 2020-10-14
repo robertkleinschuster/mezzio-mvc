@@ -276,4 +276,15 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     {
         return $this->getTemplateData()->getData($name);
     }
+
+    /**
+     * @param string $name
+     * @param $value
+     * @return TemplateDataBean
+     * @throws BeanException
+     */
+    public function setData(string $name, $value)
+    {
+        return $this->getTemplateData()->setData($name, $value);
+    }
 }
