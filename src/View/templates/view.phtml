@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @var Mvc\View\View $view
  */
@@ -6,20 +6,20 @@
 /**
  * @var string $templateFolder
  */
-
-$this->layout($templateFolder . '::' . $view->getLayout()) ?>
+?>
+<?php $this->layout($templateFolder . '::' . $view->getLayout()) ?>
 <div class="row row-cols-<?= $view->getCols() ?>">
-    <? foreach ($view->getComponentList() as $component): ?>
+    <?php foreach ($view->getComponentList() as $component): ?>
         <div class="col">
-            <? if ($component->hasTitle()): ?>
+            <?php if ($component->hasTitle()): ?>
                 <h3><?= $component->getTitle() ?></h3>
             <hr>
-            <? endif; ?>
-            <? $this->insert($templateFolder . '::' . $component->getTemplate(), ['component' => $component]) ?>
+            <?php endif; ?>
+            <?php $this->insert($templateFolder . '::' . $component->getTemplate(), ['component' => $component]) ?>
         </div>
-    <? endforeach; ?>
+    <?php endforeach; ?>
 </div>
-<? $this->push('javascript') ?>
+<?php $this->push('javascript') ?>
 <script
         src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
@@ -45,9 +45,9 @@ $this->layout($templateFolder . '::' . $view->getLayout()) ?>
         feather.replace()
     });
 </script>
-<? $this->stop() ?>
-<? $this->push('stylesheets') ?>
+<?php $this->stop() ?>
+<?php $this->push('stylesheets') ?>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<? $this->stop() ?>
+<?php $this->stop() ?>
 

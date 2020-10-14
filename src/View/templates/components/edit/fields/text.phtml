@@ -1,40 +1,40 @@
-<?
+<?php
 /**
  * @var $field \Mvc\View\Components\Edit\Fields\Text
  * @var $bean \NiceshopsDev\Bean\BeanInterface
  * @var $errors array
  */
 ?>
-<? if ($field->getType() == \Mvc\View\Components\Edit\Fields\Text::TYPE_HIDDEN): ?>
+<?php if ($field->getType() == \Mvc\View\Components\Edit\Fields\Text::TYPE_HIDDEN): ?>
     <input type="<?= $field->getType() ?>" id="<?= $field->getKey() ?>" name="<?= $field->getKey() ?>"
            value="<?= $field->getValue($bean) ?>">
-<? else: ?>
+<?php else: ?>
     <div class="form-group">
-        <? if ($field->hasTitle()): ?>
+        <?php if ($field->hasTitle()): ?>
             <label for="<?= $field->getKey() ?>"><?= $field->getTitle() ?></label>
-        <? endif; ?>
+        <?php endif; ?>
         <input type="<?= $field->getType() ?>"
                class="form-control <?= count($errors) ? ' is-invalid' : '' ?>"
                id="<?= $field->getKey() ?>"
                name="<?= $field->getKey() ?>"
                value="<?= $field->getValue($bean) ?>"
             <?= $field->isRequired() ? ' required ' : '' ?>
-            <? if ($field->hasHint()): ?>
+            <?php if ($field->hasHint()): ?>
                 aria-describedby="<?= $field->getKey() ?>__hint"
-            <? endif; ?>
-            <? if (count($errors)): ?>
+            <?php endif; ?>
+            <?php if (count($errors)): ?>
                 aria-describedby="<?= $field->getKey() ?>_Error"
-            <? endif; ?>
+            <?php endif; ?>
                autocomplete="<?= $field->getAutocomplete() ?>"
         >
-        <? foreach ($errors as $error): ?>
+        <?php foreach ($errors as $error): ?>
             <div id="<?= $field->getKey() ?>_Error" class="invalid-feedback">
                 <?= $error ?>
             </div>
-        <? endforeach ?>
-        <? if ($field->hasHint()): ?>
+        <?php endforeach ?>
+        <?php if ($field->hasHint()): ?>
             <small id="<?= $field->getKey() ?>__hint"
                    class="form-text text-muted"><?= $field->getHint() ?></small>
-        <? endif; ?>
+        <?php endif; ?>
     </div>
-<? endif; ?>
+<?php endif; ?>

@@ -1,12 +1,13 @@
-<?
+<?php
+
 /**
  * @var $field \Mvc\View\Components\Base\Fields\AbstractBadge
  * @var $bean \NiceshopsDev\Bean\BeanInterface
  */
 ?>
-<? if ($field->hasAction()): ?>
+<?php if ($field->hasAction()): ?>
     <a href="<?= $field->getAction($bean) ?>"
        class="badge<?= $field->hasStyle() ? ' badge-' . $field->getStyle() : '' ?><?= $field->hasType() ? ' badge-' . $field->getType() : '' ?>"><?= $field->getValue($bean) ?></a>
-<? else: ?>
+<?php else: ?>
     <span class="badge<?= $field->hasStyle() ? ' badge-' . $field->getStyle() : '' ?><?= $field->hasType() ? ' badge-' . $field->getType() : '' ?>"><?= $field->getValue($bean) ?></span>
-<? endif; ?>
+<?php endif; ?>

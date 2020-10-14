@@ -1,14 +1,15 @@
-<?
+<?php
+
 /**
  * @var $field \Mvc\View\Components\Base\Fields\AbstractFigure
  * @var $bean \NiceshopsDev\Bean\BeanInterface
  */
 ?>
 <figure class="figure">
-    <? if ($field->hasSource()): ?>
+    <?php if ($field->hasSource()): ?>
         <img src="<?= $field->getSource() ?>" class="figure-img img-fluid rounded"
              alt="<?= $field->getValue($bean) ?>">
-    <? endif; ?>
+    <?php endif; ?>
     <figcaption
             class="figure-caption <?= $field->hasAlign() ? ' text-' . $field->getAlign() : '' ?>"><?= $field->getValue($bean) ?></figcaption>
 </figure>

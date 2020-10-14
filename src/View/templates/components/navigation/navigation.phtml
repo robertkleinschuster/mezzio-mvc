@@ -1,11 +1,11 @@
-<?
+<?php
 /**
  * @var $component \Mvc\View\Components\Navigation\Navigation
  * @var $templateFolder string
  */
 ?>
 <ul class="nav nav-<?= $component->getType() ?> js-nav" id="<?= $component->getId() ?>" role="tablist">
-    <? foreach ($component->getComponentList() as $key => $tabcomponent): ?>
+    <?php foreach ($component->getComponentList() as $key => $tabcomponent): ?>
         <li class="nav-item" role="presentation">
             <a class="nav-link<?= $key == $component->getActive() ? ' active' : '' ?>"
                id="<?= $tabcomponent->getId() ?>-tab"
@@ -16,15 +16,15 @@
                 <?= $tabcomponent->hasTitle() ? $tabcomponent->getTitle() : '' ?>
             </a>
         </li>
-    <? endforeach; ?>
+    <?php endforeach; ?>
 </ul>
 <div class="tab-content" id="<?= $component->getId() ?>Content">
-    <? foreach ($component->getComponentList() as $key => $tabcomponent): ?>
+    <?php foreach ($component->getComponentList() as $key => $tabcomponent): ?>
         <div class="tab-pane fade <?= $key == $component->getActive() ? ' show active' : '' ?>"
              id="<?= $tabcomponent->getId() ?>"
              role="tabpanel" aria-labelledby="<?= $tabcomponent->getId() ?>-tab">
-            <? $this->insert($templateFolder . '::' . $tabcomponent->getTemplate(), ['component' => $tabcomponent, 'fields' => $tabcomponent->getFieldList()]) ?>
+            <?php $this->insert($templateFolder . '::' . $tabcomponent->getTemplate(), ['component' => $tabcomponent, 'fields' => $tabcomponent->getFieldList()]) ?>
         </div>
-    <? endforeach; ?>
+    <?php endforeach; ?>
 </div>
 

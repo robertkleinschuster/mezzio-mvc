@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @var $field \Mvc\View\Components\Base\Fields\AbstractSelect
  * @var $bean \NiceshopsDev\Bean\BeanInterface
@@ -6,25 +6,25 @@
  */
 ?>
 <div class="form-group">
-    <? if ($field->hasTitle()): ?>
+    <?php if ($field->hasTitle()): ?>
         <label for="<?= $field->getKey() ?>"><?= $field->getTitle() ?></label>
-    <? endif; ?>
+    <?php endif; ?>
     <select class="form-control <?= is_array($errors) && count($errors) ? ' is-invalid ' : '' ?>"
             id="<?= $field->getKey() ?>"
             name="<?= $field->getKey() ?>"
             size="<?= $field->getSize() ?>"
         <?= $field->isRequired() ? ' required' : '' ?>
         <?= $field->isMultiple() ? ' multiple' : '' ?>>
-        <? foreach ($field->getSelectOptions() as $value => $name): ?>
+        <?php foreach ($field->getSelectOptions() as $value => $name): ?>
             <option
                 <?= $field->getValue($bean) == $value ? ' selected' : '' ?>value="<?= $value ?>"><?= $name ?></option>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </select>
-    <? if (is_array($errors)): ?>
-        <? foreach ($errors as $error): ?>
+    <?php if (is_array($errors)): ?>
+        <?php foreach ($errors as $error): ?>
             <div id="<?= $field->getKey() ?>_Error" class="invalid-feedback">
                 <?= $error ?>
             </div>
-        <? endforeach ?>
-    <? endif ?>
+        <?php endforeach ?>
+    <?php endif ?>
 </div>

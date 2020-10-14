@@ -1,20 +1,20 @@
-<?
+<?php
 /**
  * @var $field \Mvc\View\Components\Base\Fields\AbstractImage
  * @var $bean \NiceshopsDev\Bean\BeanInterface
  */
 ?>
-<? if ($field->hasSource()): ?>
-    <? if ($field->hasAlign() && $field->getAlign() == \Mvc\View\Components\Base\Fields\AbstractText::ALIGN_CENTER): ?>
+<?php if ($field->hasSource()): ?>
+    <?php if ($field->hasAlign() && $field->getAlign() == \Mvc\View\Components\Base\Fields\AbstractText::ALIGN_CENTER): ?>
         <img
                 src="<?= $field->getSource() ?>"
                 class="<?= $field->hasSize() ? 'img-' . $field->getSize() : '' ?> mx-auto d-block"
                 alt="<?= $field->getValue($bean) ?>">
-    <? else: ?>
+    <?php else: ?>
         <img
                 src="<?= $field->getSource() ?>"
                 class="<?= $field->hasSize() ? 'img-' . $field->getSize() : '' ?>
                <?= $field->hasAlign() ? ' float-' . $field->getAlign() : '' ?>"
                 alt="<?= $field->getValue($bean) ?>">
-    <? endif; ?>
-<? endif; ?>
+    <?php endif; ?>
+<?php endif; ?>

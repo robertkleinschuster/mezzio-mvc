@@ -1,19 +1,19 @@
-<?
+<?php
 /**
  * @var $component \Mvc\View\Components\Toolbar\Toolbar
  * @var $templateFolder string
  */
 ?>
 <div class="btn-toolbar mb-2">
-    <? foreach ($component->getFieldList() as $key => $field): ?>
-        <? if ($key == 0 || !$field->isAppendToPrevious()): ?>
+    <?php foreach ($component->getFieldList() as $key => $field): ?>
+        <?php if ($key == 0 || !$field->isAppendToPrevious()): ?>
             <div class="<?= (count($fields) > 1) ? 'btn-group ' : '' ?>mr-1">
-        <? endif ?>
-        <? if ($field->isShow($component->getBean())): ?>
-            <? $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $component->getBean()]) ?>
-        <? endif; ?>
-        <? if ($key === count($fields) - 1 || !$fields[$key + 1]->isAppendToPrevious()): ?>
+        <?php endif ?>
+        <?php if ($field->isShow($component->getBean())): ?>
+            <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $component->getBean()]) ?>
+        <?php endif; ?>
+        <?php if ($key === count($fields) - 1 || !$fields[$key + 1]->isAppendToPrevious()): ?>
             </div>
-        <? endif ?>
-    <? endforeach ?>
+        <?php endif ?>
+    <?php endforeach ?>
 </div>

@@ -1,19 +1,20 @@
-<?
+<?php
+
 /**
  * @var $component \Mvc\View\Components\Alert\Alert
  * @var $templateFolder string
  */
 ?>
 <div class="alert alert-<?= $component->getStyle() ?>" role="alert">
-    <? if ($component->hasHeading()): ?>
+    <?php if ($component->hasHeading()): ?>
         <h4 class="alert-heading"><?= $component->getHeading() ?></h4>
-    <? endif; ?>
-    <? foreach ($component->getBeanList() as $bean): ?>
-        <? foreach ($component->getFieldList() as $key => $field): ?>
-            <? if ($field->isShow($bean)): ?>
-                <?= $field->hasTitle() ? "<h5>{$field->getTitle()}</h5>" : '' ?><? $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $bean]) ?>
+    <?php endif; ?>
+    <?php foreach ($component->getBeanList() as $bean): ?>
+        <?php foreach ($component->getFieldList() as $key => $field): ?>
+            <?php if ($field->isShow($bean)): ?>
+                <?= $field->hasTitle() ? "<h5>{$field->getTitle()}</h5>" : '' ?><?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $bean]) ?>
                 <?= count($fields) > 1 && $key < count($fields) - 1 ? '<hr>' : '' ?>
-            <? endif; ?>
-        <? endforeach ?>
-    <? endforeach ?>
+            <?php endif; ?>
+        <?php endforeach ?>
+    <?php endforeach ?>
 </div>

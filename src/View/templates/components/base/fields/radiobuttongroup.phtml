@@ -1,10 +1,10 @@
-<?
+<?php
 /**
  * @var $field \Mvc\View\Components\Base\Fields\AbstractRadioButtonGroup
  * @var $bean \NiceshopsDev\Bean\BeanInterface
  */
 ?>
-<? foreach ($field->getSelectOptions() as $key => $value): ?>
+<?php foreach ($field->getSelectOptions() as $key => $value): ?>
     <div class="form-check">
         <input class="form-check-input <?= is_array($errors) && count($errors) ? ' is-invalid ' : '' ?>"
                type="radio"
@@ -15,11 +15,11 @@
             <?= $field->getValue($bean) == $key ? ' checked' : '' ?>>
         <label class="form-check-label" for="<?= $key ?>"><?= $value ?></label>
     </div>
-<? endforeach; ?>
-<? if (is_array($errors)): ?>
-    <? foreach ($errors as $error): ?>
+<?php endforeach; ?>
+<?php if (is_array($errors)): ?>
+    <?php foreach ($errors as $error): ?>
         <div id="<?= $field->getKey() ?>_Error" class="invalid-feedback">
             <?= $error ?>
         </div>
-    <? endforeach ?>
-<? endif ?>
+    <?php endforeach ?>
+<?php endif ?>

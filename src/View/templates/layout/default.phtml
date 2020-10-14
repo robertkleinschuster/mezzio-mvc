@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @var Mvc\View\View $view
  * @var string $templateFolder
@@ -10,20 +10,20 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <? if ($view->hasData('description')): ?>
+    <?php if ($view->hasData('description')): ?>
         <meta name="description" content="<?= $view->getData('description') ?>">
-    <? endif; ?>
-    <? if ($view->hasData('author')): ?>
+    <?php endif; ?>
+    <?php if ($view->hasData('author')): ?>
         <meta name="author" content="<?= $view->getData('author') ?>">
-    <? endif; ?>
-    <? if ($view->hasData('title')): ?>
+    <?php endif; ?>
+    <?php if ($view->hasData('title')): ?>
         <title><?= $view->getData('title') ?></title>
-    <? endif; ?>
-    <? if ($view->hasData('favicon')): ?>
+    <?php endif; ?>
+    <?php if ($view->hasData('favicon')): ?>
         <link rel="shortcut icon" href="<?= $view->getData('favicon') ?>"/>
-    <? else: ?>
+    <?php else: ?>
         <link rel="shortcut icon" href="favicon.ico"/>
-    <? endif; ?>
+    <?php endif; ?>
     <?= $this->section('stylesheets') ?>
 
     <style>
@@ -51,13 +51,13 @@
 </head>
 <body class="app">
 
-<? if ($view->hasData('title')): ?>
+<?php if ($view->hasData('title')): ?>
     <h1 class="text-center mx-auto"><?= $view->getData('title') ?></h1>
-<? endif; ?>
-<? if ($view->hasData('heading')): ?>
+<?php endif; ?>
+<?php if ($view->hasData('heading')): ?>
     <hr>
     <h2 class="text-center mx-auto mb-5"><?= $view->getData('heading') ?></h2>
-<? endif; ?>
+<?php endif; ?>
 
 <div class="app-content">
     <main class="container">
@@ -68,13 +68,13 @@
 <footer class="app-footer">
     <div class="container">
         <hr/>
-        <? if ($this->section('footer')): ?>
+        <?php if ($this->section('footer')): ?>
             <?= $this->section('footer') ?>
-        <? else: ?>
+        <?php else: ?>
             <p>
                 &copy; <?= date('Y') ?> <a href="https://kleinschuster.de">Robert Kleinschuster</a>
             </p>
-        <? endif ?>
+        <?php endif ?>
     </div>
 </footer>
 <?= $this->section('javascript') ?>

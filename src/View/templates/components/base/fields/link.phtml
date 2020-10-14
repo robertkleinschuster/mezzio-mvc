@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @var $field \Mvc\View\Components\Base\Fields\AbstractLink
  * @var $bean \NiceshopsDev\Bean\BeanInterface
@@ -6,8 +6,8 @@
 ?>
 <a <?= $field->hasLink() ? " href=\"{$field->getLink($bean)}\"" : '' ?> <?= $field->hasTarget() ? " target=\"{$field->getTarget()}\"" : '' ?>
 class="<?=$field->getClass()?>">
-    <? if($field->hasIcon()): ?>
+    <?php if($field->hasIcon()): ?>
         <span data-feather="<?=$field->getIcon()?>"></span>
-    <? endif;?>
+    <?php endif;?>
     <?= $field->getValue($bean) ?>
 </a>

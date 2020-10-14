@@ -1,33 +1,34 @@
-<?
+<?php
+
 /**
  * @var $component \Mvc\View\Components\Detail\Detail
  * @var $templateFolder string
  */
 ?>
-<? foreach ($component->getBeanList() as $bean): ?>
+<?php foreach ($component->getBeanList() as $bean): ?>
     <div class="row row-cols-1 row-cols-sm-<?= $component->getCols() ?> mb-4">
-        <? foreach ($component->getFieldList() as $key => $field): ?>
-            <? if (!$field->isAppendToPrevious()): ?>
+        <?php foreach ($component->getFieldList() as $key => $field): ?>
+            <?php if (!$field->isAppendToPrevious()): ?>
                 <div class="col">
-            <? endif ?>
-            <? if ($field->isShow($bean)): ?>
+            <?php endif ?>
+            <?php if ($field->isShow($bean)): ?>
                 <div class="row p-1">
-                    <? if ($field->hasTitle()): ?>
+                    <?php if ($field->hasTitle()): ?>
                         <div class="col-sm-2 text-center text-sm-left font-weight-bolder">
                             <?= $field->getTitle() ?>:
                         </div>
-                    <? endif; ?>
+                    <?php endif; ?>
                     <div class="col-sm-10 text-center text-sm-left">
-                        <? $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $bean]) ?>
+                        <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $bean]) ?>
                     </div>
                 </div>
-                <? if ($key != count($component->getFieldList()) - 1): ?>
+                <?php if ($key != count($component->getFieldList()) - 1): ?>
                     <hr>
-                <? endif ?>
-            <? endif; ?>
-            <? if ($key === count($component->getFieldList()) - 1 || !$component->getFieldList()[$key + 1]->isAppendToPrevious()): ?>
+                <?php endif ?>
+            <?php endif; ?>
+            <?php if ($key === count($component->getFieldList()) - 1 || !$component->getFieldList()[$key + 1]->isAppendToPrevious()): ?>
                 </div>
-            <? endif ?>
-        <? endforeach ?>
+            <?php endif ?>
+        <?php endforeach ?>
     </div>
-<? endforeach ?>
+<?php endforeach ?>

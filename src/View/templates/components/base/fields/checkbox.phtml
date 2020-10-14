@@ -1,4 +1,5 @@
-<?
+<?php
+
 /**
  * @var $field \Mvc\View\Components\Base\Fields\AbstractCheckbox
  * @var $bean \NiceshopsDev\Bean\BeanInterface
@@ -12,18 +13,18 @@
            value="<?= $field->getValue($bean) ?>"
         <?=$field->isRequired() ? ' required' : ''?>
         <?= $field->isChecked() ? ' checked' : '' ?>>
-    <? if ($field->hasTitle()): ?>
+    <?php if ($field->hasTitle()): ?>
         <label class="form-check-label" for="<?= $field->getKey() ?>"><?= $field->getTitle() ?></label>
-    <? endif;?>
-    <? if (is_array($errors)): ?>
-        <? foreach ($errors as $error): ?>
+    <?php endif;?>
+    <?php if (is_array($errors)): ?>
+        <?php foreach ($errors as $error): ?>
             <div id="<?= $field->getKey() ?>_Error" class="invalid-feedback">
                 <?= $error ?>
             </div>
-        <? endforeach ?>
-    <? endif ?>
-    <? if ($field->hasHint()): ?>
+        <?php endforeach ?>
+    <?php endif ?>
+    <?php if ($field->hasHint()): ?>
         <small id="<?= $field->getKey() ?>__hint"
                class="form-text text-muted"><?= $field->getHint() ?></small>
-    <? endif; ?>
+    <?php endif; ?>
 </div>
