@@ -99,16 +99,14 @@
         <h1 class="text-center mx-auto"><?= $view->getData('title') ?></h1>
     <?php endif; ?>
     <?= $this->section('content') ?>
-    <div class="container">
-        <hr/>
-        <?php if ($this->section('footer')): ?>
-            <?= $this->section('footer') ?>
-        <?php else: ?>
-            <p>
-                &copy; <?= date('Y') ?> <a href="https://kleinschuster.de">Robert Kleinschuster</a>
-            </p>
-        <?php endif ?>
-    </div>
+    <hr/>
+    <?php if ($this->section('footer')): ?>
+        <?= $this->section('footer') ?>
+    <?php else: ?>
+        <p>
+            &copy; <?= date('Y') ?> <a href="https://kleinschuster.de">Robert Kleinschuster</a>
+        </p>
+    <?php endif ?>
 </form>
 
 <?= $this->section('javascript') ?>
