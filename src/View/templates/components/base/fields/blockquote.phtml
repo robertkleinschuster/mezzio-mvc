@@ -1,9 +1,15 @@
+<?
+/**
+ * @var $field \Mvc\View\Components\Base\Fields\AbstractBlockquote
+ * @var $bean \NiceshopsDev\Bean\BeanInterface
+ */
+?>
 <blockquote class="blockquote<?= $field->hasAlign() ? ' text-' . $field->getAlign() : '' ?>">
-    <p class="mb-0"><?= $field->getValue($data) ?></p>
+    <p class="mb-0"><?= $field->getValue($bean) ?></p>
     <?php if ($field->hasFooter()): ?>
-        <footer class="blockquote-footer"><?= $field->getFooter($data) ?>
+        <footer class="blockquote-footer"><?= $field->getFooter() ?>
             <?php if ($field->hasSource()): ?>
-                <cite title="<?= $field->getSource($data) ?>"><?= $field->getSource($data) ?></cite>
+                <cite title="<?= $field->getSource() ?>"><?= $field->getSource() ?></cite>
             <?php endif; ?>
         </footer>
     <?php endif; ?>

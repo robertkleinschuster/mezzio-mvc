@@ -1,9 +1,15 @@
+<?
+/**
+ * @var $field \Mvc\View\Components\Base\Fields\AbstractButton
+ * @var $bean \NiceshopsDev\Bean\BeanInterface
+ */
+?>
 <button
         type="<?= $field->getType() ?>"
         class="<?= $field->getClass() ?>"
-        value="<?= $field->getValue($data) ?>"
-        name="<?= $field->getKey($data) ?>"
-        id="<?= $field->getKey($data) ?>"
+        value="<?= $field->getValue($bean) ?>"
+        name="<?= $field->getKey() ?>"
+        id="<?= $field->getKey() ?>"
     <?= $field->isDisabled() ? ' disabled' : '' ?>>
-    <?= $field->hasTitle($data) ? $field->getTitle($data) : '' ?>
+    <?= $field->hasTitle() ? $field->getTitle() : '' ?>
 </button>

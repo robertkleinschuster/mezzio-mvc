@@ -1,21 +1,28 @@
+<?
+/**
+ * @var $field \Mvc\View\Components\Base\Fields\AbstractSelect
+ * @var $bean \NiceshopsDev\Bean\BeanInterface
+ * @var $errors array
+ */
+?>
 <div class="form-group">
-    <?php if ($field->hasTitle()): ?>
-        <label for="<?= $field->getKey($data) ?>"><?= $field->getTitle($data) ?></label>
-    <?php endif; ?>
+    <? if ($field->hasTitle()): ?>
+        <label for="<?= $field->getKey() ?>"><?= $field->getTitle() ?></label>
+    <? endif; ?>
     <select class="form-control <?= is_array($errors) && count($errors) ? ' is-invalid ' : '' ?>"
-            id="<?= $field->getKey($data) ?>"
-            name="<?= $field->getKey($data) ?>"
-            size="<?= $field->getSize($data) ?>"
+            id="<?= $field->getKey() ?>"
+            name="<?= $field->getKey() ?>"
+            size="<?= $field->getSize() ?>"
         <?= $field->isRequired() ? ' required' : '' ?>
-        <?= $field->isMultiple($data) ? ' multiple' : '' ?>>
-        <?php foreach ($field->getSelectOptions($data) as $value => $name): ?>
+        <?= $field->isMultiple() ? ' multiple' : '' ?>>
+        <? foreach ($field->getSelectOptions() as $value => $name): ?>
             <option
-                <?= $field->getValue($data) == $value ? ' selected' : '' ?>value="<?= $value ?>"><?= $name ?></option>
-        <?php endforeach; ?>
+                <?= $field->getValue($bean) == $value ? ' selected' : '' ?>value="<?= $value ?>"><?= $name ?></option>
+        <? endforeach; ?>
     </select>
     <?php if (is_array($errors)): ?>
         <?php foreach ($errors as $error): ?>
-            <div id="<?= $field->getKey($data) ?>_Error" class="invalid-feedback">
+            <div id="<?= $field->getKey() ?>_Error" class="invalid-feedback">
                 <?= $error ?>
             </div>
         <?php endforeach ?>

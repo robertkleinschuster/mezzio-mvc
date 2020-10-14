@@ -1,9 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mvc\View\Navigation;
 
 class Navigation
 {
+
+    public const POSITION_SIDEBAR = 'sidebar';
+    public const POSITION_HEADER = 'header';
+
     /**
      * @var string
      */
@@ -30,13 +36,29 @@ class Navigation
     private ?string $permission = null;
 
     /**
+     * @var string
+     */
+    private string $position;
+
+    /**
      * Navigation constructor.
      * @param string $title
+     * @param string $position
      */
-    public function __construct(string $title)
+    public function __construct(string $title, string $position = self::POSITION_SIDEBAR)
     {
         $this->title = $title;
+        $this->position = $position;
     }
+
+    /**
+     * @return string
+     */
+    public function getPosition(): string
+    {
+        return $this->position;
+    }
+
 
     /**
      * @return Element[]
@@ -171,6 +193,4 @@ class Navigation
     {
         return $this->permission !== null;
     }
-
-
 }

@@ -33,5 +33,4 @@ class Toolbar extends AbstractComponent
         $this->addField($button);
         return $button;
     }
-
 }

@@ -96,18 +96,18 @@ abstract class AbstractBadge extends AbstractField
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getStyle(): string
     {
         return $this->style;
     }
 
     /**
-    * @param string $style
-    *
-    * @return $this
-    */
+     * @param string $style
+     *
+     * @return $this
+     */
     public function setStyle(string $style): self
     {
         $this->style = $style;
@@ -115,11 +115,10 @@ abstract class AbstractBadge extends AbstractField
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasStyle(): bool
     {
         return $this->style !== null;
     }
-
 }

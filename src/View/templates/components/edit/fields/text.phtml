@@ -1,34 +1,40 @@
-<?php if ($field->getType() == \Mvc\View\Components\Edit\Fields\Text::TYPE_HIDDEN): ?>
-    <input type="<?= $field->getType($data) ?>" id="<?= $field->getKey($data) ?>" name="<?= $field->getKey($data) ?>"
-           value="<?= $field->getValue($data) ?>">
+<?
+/**
+ * @var $field \Mvc\View\Components\Edit\Fields\Text
+ * @var $bean \NiceshopsDev\Bean\BeanInterface
+ * @var $errors array
+ */
+?>
+<? if ($field->getType() == \Mvc\View\Components\Edit\Fields\Text::TYPE_HIDDEN): ?>
+    <input type="<?= $field->getType() ?>" id="<?= $field->getKey() ?>" name="<?= $field->getKey() ?>"
+           value="<?= $field->getValue($bean) ?>">
 <?php else: ?>
     <div class="form-group">
         <?php if ($field->hasTitle()): ?>
-            <label for="<?= $field->getKey($data) ?>"><?= $field->getTitle($data) ?></label>
+            <label for="<?= $field->getKey() ?>"><?= $field->getTitle() ?></label>
         <?php endif; ?>
-        <input type="<?= $field->getType($data) ?>"
+        <input type="<?= $field->getType() ?>"
                class="form-control <?= count($errors) ? ' is-invalid' : '' ?>"
-               id="<?= $field->getKey($data) ?>"
-               name="<?= $field->getKey($data) ?>"
-               value="<?= $field->getValue($data) ?>"
+               id="<?= $field->getKey() ?>"
+               name="<?= $field->getKey() ?>"
+               value="<?= $field->getValue($bean) ?>"
             <?= $field->isRequired() ? ' required ' : '' ?>
-            <?php if ($field->hasHint($data)): ?>
-                aria-describedby="<?= $field->getKey($data) ?>__hint"
+            <?php if ($field->hasHint()): ?>
+                aria-describedby="<?= $field->getKey() ?>__hint"
             <?php endif; ?>
             <?php if (count($errors)): ?>
-                aria-describedby="<?= $field->getKey($data) ?>_Error"
+                aria-describedby="<?= $field->getKey() ?>_Error"
             <?php endif; ?>
                autocomplete="<?= $field->getAutocomplete() ?>"
         >
         <?php foreach ($errors as $error): ?>
-            <div id="<?= $field->getKey($data) ?>_Error" class="invalid-feedback">
+            <div id="<?= $field->getKey() ?>_Error" class="invalid-feedback">
                 <?= $error ?>
             </div>
         <?php endforeach ?>
-        <?php if ($field->hasHint($data)): ?>
-            <small id="<?= $field->getKey($data) ?>__hint"
-                   class="form-text text-muted"><?= $field->getHint($data) ?></small>
+        <?php if ($field->hasHint()): ?>
+            <small id="<?= $field->getKey() ?>__hint"
+                   class="form-text text-muted"><?= $field->getHint() ?></small>
         <?php endif; ?>
     </div>
-
 <?php endif; ?>

@@ -11,9 +11,12 @@ class ViewRenderer
     /**
      * @var TemplateRendererInterface
      */
-    private $templateRenderer;
+    private TemplateRendererInterface $templateRenderer;
 
-    private $templateFolder;
+    /**
+     * @var string
+     */
+    private string $templateFolder;
 
     /**
      * ViewRenderer constructor.
@@ -34,33 +37,30 @@ class ViewRenderer
         return $this->templateRenderer;
     }
 
+    /**
+     * @return string
+     */
+    public function getTemplateFolder(): string
+    {
+        return $this->templateFolder;
+    }
 
     /**
      * @param View $view
      * @return string
-     * @throws \NiceshopsDev\Bean\BeanException
      */
     public function render(View $view): string
     {
-        $view->getViewModel()->getTemplateData()->setData('layout', $view->getLayout());
-        $view->getViewModel()->getTemplateData()->setData('cols', $view->getCols());
-        $view->getViewModel()->getTemplateData()->setData('indexLink', $view->getIndexLink());
-        $view->getViewModel()->getTemplateData()->setData('title', $view->getTitle());
-        $view->getViewModel()->getTemplateData()->setData('author', $view->getAuthor());
-        $view->getViewModel()->getTemplateData()->setData('description', $view->getDescription());
-        $view->getViewModel()->getTemplateData()->setData('components', $view->getComponentList());
-        $view->getViewModel()->getTemplateData()->setData('model', $view->getViewModel());
-        $view->getViewModel()->getTemplateData()->setData('hasNavigation', $view->hasNavigation());
-        $view->getViewModel()->getTemplateData()->setData('navigationList', $view->getNavigationList());
-        $view->getViewModel()->getTemplateData()->setData('templateFolder', $this->templateFolder);
-        $view->getViewModel()->getTemplateData()->setData('toolbar', $view->getToolbar());
-        $view->getViewModel()->getTemplateData()->setData('hasToolbar', $view->hasToolbar());
-        foreach ($view->getViewModel()->getTemplateData() as $key => $templateDatum) {
-            $this->getTemplateRenderer()->addDefaultParam(TemplateRendererInterface::TEMPLATE_ALL, $key, $templateDatum);
-        }
-        return $this->getTemplateRenderer()->render(
-            $this->templateFolder . '::' . $view->getTemplate(),
-            $view->getViewModel()->getTemplateData()->toArray()
+        $this->getTemplateRenderer()->addDefaultParam(
+            TemplateRendererInterface::TEMPLATE_ALL,
+            'templateFolder',
+            $this->getTemplateFolder()
         );
+        $this->getTemplateRenderer()->addDefaultParam(
+            TemplateRendererInterface::TEMPLATE_ALL,
+            'view',
+            $view
+        );
+        return $this->getTemplateRenderer()->render($this->getTemplateFolder() . '::' . $view->getTemplate());
     }
 }

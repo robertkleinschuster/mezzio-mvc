@@ -100,18 +100,18 @@ class Text extends AbstractText implements RequiredAwareInterface
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getHint(): string
     {
         return $this->hint;
     }
 
     /**
-    * @param string $hint
-    *
-    * @return $this
-    */
+     * @param string $hint
+     *
+     * @return $this
+     */
     public function setHint(string $hint): self
     {
         $this->hint = $hint;
@@ -119,8 +119,8 @@ class Text extends AbstractText implements RequiredAwareInterface
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasHint(): bool
     {
         return $this->hint !== null;
@@ -128,18 +128,18 @@ class Text extends AbstractText implements RequiredAwareInterface
 
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getType(): string
     {
         return $this->type ?? self::TYPE_TEXT;
     }
 
     /**
-    * @param string $type
-    *
-    * @return $this
-    */
+     * @param string $type
+     *
+     * @return $this
+     */
     public function setType(string $type): self
     {
         $this->type = $type;
@@ -147,22 +147,21 @@ class Text extends AbstractText implements RequiredAwareInterface
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getAutocomplete(): string
     {
         return $this->autocomplete ?? self::AUTOCOMPLETE_OFF;
     }
 
     /**
-    * @param string $autocomplete
-    *
-    * @return $this
-    */
+     * @param string $autocomplete
+     *
+     * @return $this
+     */
     public function setAutocomplete(string $autocomplete): self
     {
         $this->autocomplete = $autocomplete;
         return $this;
     }
-
 }

@@ -102,5 +102,4 @@ abstract class AbstractModel implements ModelInterface, OptionAwareInterface
      * @return mixed
      */
     abstract protected function save(array $attributes);
-
 }

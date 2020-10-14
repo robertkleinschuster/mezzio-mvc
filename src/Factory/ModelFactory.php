@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Mvc\Factory;
 
 use Mvc\Exception\ControllerNotFoundException;
-use Mvc\Exception\MvcException;
-use Psr\Container\ContainerInterface;
 
 class ModelFactory
 {

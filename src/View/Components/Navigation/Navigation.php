@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Mvc\View\Components\Navigation;
 
-use Mvc\View\ComponentModelInterface;
 use Mvc\View\Components\Base\AbstractComponent;
 
 class Navigation extends AbstractComponent
@@ -16,7 +15,7 @@ class Navigation extends AbstractComponent
     /**
      * @var array
      */
-    private $component_List;
+    private $component_List = [];
 
     /**
      * @var string
@@ -27,17 +26,6 @@ class Navigation extends AbstractComponent
      * @var int
      */
     private $active;
-
-    /**
-     * Navigation constructor.
-     * @param string $title
-     * @param ComponentModelInterface $componentModel
-     */
-    public function __construct(string $title, ?ComponentModelInterface $componentModel = null)
-    {
-        parent::__construct($title, $componentModel);
-        $this->component_List = [];
-    }
 
 
     /**
@@ -63,7 +51,7 @@ class Navigation extends AbstractComponent
     }
 
     /**
-     * @return array
+     * @return AbstractComponent[]
      */
     public function getComponentList(): array
     {
@@ -78,18 +66,18 @@ class Navigation extends AbstractComponent
 
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getType(): string
     {
         return $this->type ?? self::TYPE_TABS;
     }
 
     /**
-    * @param string $type
-    *
-    * @return $this
-    */
+     * @param string $type
+     *
+     * @return $this
+     */
     public function setType(string $type): self
     {
         $this->type = $type;
@@ -97,18 +85,18 @@ class Navigation extends AbstractComponent
     }
 
     /**
-    * @return int
-    */
+     * @return int
+     */
     public function getActive(): int
     {
         return $this->active ?? 0;
     }
 
     /**
-    * @param int $active
-    *
-    * @return $this
-    */
+     * @param int $active
+     *
+     * @return $this
+     */
     public function setActive(int $active): self
     {
         $this->active = $active;

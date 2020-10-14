@@ -1,1 +1,7 @@
-<span><?= number_format($field->getValue($data), $field->getDecimals($data), $field->getDecimalPoint($data), $field->getThousandsSeparator($data)) ?></span>
+<?
+/**
+ * @var $field \Mvc\View\Components\Base\Fields\AbstractNumber
+ * @var $bean \NiceshopsDev\Bean\BeanInterface
+ */
+?>
+<span><?= number_format($field->getValue($bean), $field->getDecimals(), $field->getDecimalPoint(), $field->getThousandsSeparator()) ?></span>

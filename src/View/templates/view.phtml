@@ -1,12 +1,21 @@
-<?php $this->layout($templateFolder . '::' . $layout, ['templateFolder' => $templateFolder, 'title' => $title, 'model' => $model]) ?>
-<div class="row row-cols-<?= $cols ?>">
-    <?php foreach ($components as $component): ?>
+<?
+/**
+ * @var Mvc\View\View $view
+ */
+
+/**
+ * @var string $templateFolder
+ */
+
+$this->layout($templateFolder . '::' . $view->getLayout()) ?>
+<div class="row row-cols-<?= $view->getCols() ?>">
+    <? foreach ($view->getComponentList() as $component): ?>
         <div class="col">
-            <?php if ($component->hasTitle()): ?>
+            <? if ($component->hasTitle()): ?>
                 <h3><?= $component->getTitle() ?></h3>
             <hr>
-            <?php endif; ?>
-            <?php $this->insert($templateFolder . '::' . $component->getTemplate(), ['templateFolder' => $templateFolder, 'component' => $component, 'fields' => $component->getFieldList(), 'model' => $component->getComponentModel()]) ?>
+            <? endif; ?>
+            <? $this->insert($templateFolder . '::' . $component->getTemplate(), ['component' => $component]) ?>
         </div>
     <?php endforeach ?>
 </div>

@@ -1,19 +1,25 @@
-<?php foreach ($field->getSelectOptions($data) as $key => $value): ?>
+<?
+/**
+ * @var $field \Mvc\View\Components\Base\Fields\AbstractRadioButtonGroup
+ * @var $bean \NiceshopsDev\Bean\BeanInterface
+ */
+?>
+<? foreach ($field->getSelectOptions() as $key => $value): ?>
     <div class="form-check">
         <input class="form-check-input <?= is_array($errors) && count($errors) ? ' is-invalid ' : '' ?>"
                type="radio"
-               name="<?= $field->getKey($data) ?>"
+               name="<?= $field->getKey() ?>"
                id="<?= $key ?>"
                value="<?= $key ?>"
             <?=$field->isRequired() ? ' required' : ''?>
-            <?= $field->getValue($data) == $key ? ' checked' : '' ?>>
+            <?= $field->getValue($bean) == $key ? ' checked' : '' ?>>
         <label class="form-check-label" for="<?= $key ?>"><?= $value ?></label>
     </div>
-<?php endforeach; ?>
-<?php if (is_array($errors)): ?>
-    <?php foreach ($errors as $error): ?>
-        <div id="<?= $field->getKey($data) ?>_Error" class="invalid-feedback">
+<? endforeach; ?>
+<? if (is_array($errors)): ?>
+    <? foreach ($errors as $error): ?>
+        <div id="<?= $field->getKey() ?>_Error" class="invalid-feedback">
             <?= $error ?>
         </div>
-    <?php endforeach ?>
-<?php endif ?>
+    <? endforeach ?>
+<? endif ?>

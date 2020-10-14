@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Mvc\View;
 
+use Mvc\Bean\TemplateDataBean;
 use Mvc\View\Components\Base\AbstractComponent;
 use Mvc\View\Components\Toolbar\Toolbar;
 use Mvc\View\Navigation\Navigation;
+use NiceshopsDev\Bean\BeanException;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareTrait;
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
@@ -23,87 +25,62 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     /**
      * @var string
      */
-    private $title;
-
-    /**
-     * @var string
-     */
-    private $author;
-
-    /**
-     * @var string
-     */
-    private $description;
-
-    /**
-     * @var string
-     */
-    private $layout;
-
-    /**
-     * @var AbstractComponent[]
-     */
-    private $component_List;
-
-    /**
-     * @var Navigation[]
-     */
-    private $navigation_List;
-
-    /**
-     * @var ViewModelInterface
-     */
-    private $viewModel;
+    private string $layout;
 
     /**
      * @var int
      */
-    private $cols;
+    private int $cols = 1;
 
     /**
-     * @var string
+     * @var AbstractComponent[]
      */
-    private $indexLink;
+    private array $component_List = [];
+
+    /**
+     * @var Navigation[]
+     */
+    private array $navigation_List;
 
     /**
      * @var array
      */
-    private $permission_List;
+    private ?array $permission_List = null;
 
     /**
-     * @var Components\Toolbar\Toolbar
+     * @var Toolbar
      */
-    private Components\Toolbar\Toolbar $toolbar;
+    private ?Toolbar $toolbar = null;
+
+
+    /**
+     * @var TemplateDataBean
+     */
+    private TemplateDataBean $templateData;
 
 
     /**
      * View constructor.
-     * @param string $title
-     * @param ViewModelInterface $viewModel
+     * @param string $layout
      */
-    public function __construct(string $title, ViewModelInterface $viewModel)
+    public function __construct(string $layout)
     {
-        $this->title = $title;
+        $this->layout = $layout;
         $this->component_List = [];
-        $this->viewModel = $viewModel;
+        $this->navigation_List = [];
     }
+
 
     /**
-     * @return ViewModelInterface
+     * @return TemplateDataBean
      */
-    public function getViewModel(): ViewModelInterface
+    public function getTemplateData(): TemplateDataBean
     {
-        return $this->viewModel;
+        if (null == $this->templateData) {
+            $this->templateData = new TemplateDataBean();
+        }
+        return $this->templateData;
     }
-
-    /**
-     * @param ViewModelInterface $viewModel
-     */
-    public function setViewModel(ViewModelInterface $viewModel): void
-    {
-        $this->viewModel = $viewModel;
-    }
-
 
     /**
      * @return AbstractComponent[]
@@ -148,7 +125,7 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
      */
     public function getLayout(): string
     {
-        return $this->layout ?? 'layout/default';
+        return $this->layout;
     }
 
     /**
@@ -161,64 +138,13 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAuthor(): string
-    {
-        return $this->author ?? '';
-    }
-
-    /**
-     * @param string $author
-     * @return $this;
-     */
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return $this->description ?? '';
-    }
-
-    /**
-     * @param string $description
-     * @return $this;
-     */
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-        return $this;
-    }
 
     /**
      * @return int
      */
     public function getCols(): int
     {
-        return $this->cols ?? 1;
+        return $this->cols;
     }
 
     /**
@@ -231,36 +157,20 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getIndexLink(): string
-    {
-        return $this->indexLink ?? '/';
-    }
 
     /**
-     * @param string $indexLink
+     * @return array
      */
-    public function setIndexLink(string $indexLink)
-    {
-        $this->indexLink = $indexLink;
-        return $this;
-    }
-
-    /**
-    * @return array
-    */
     public function getPermissionList(): array
     {
         return $this->permission_List;
     }
 
     /**
-    * @param array $permission_List
-    *
-    * @return $this
-    */
+     * @param array $permission_List
+     *
+     * @return $this
+     */
     public function setPermissionList(array $permission_List): self
     {
         $this->permission_List = $permission_List;
@@ -268,27 +178,31 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasPermissionList(): bool
     {
         return $this->permission_List !== null;
     }
 
     /**
+     * @param string $position
      * @return Navigation[]
      */
-    public function getNavigationList(): array
+    public function getNavigationList(string $position = Navigation::POSITION_SIDEBAR): array
     {
-        return $this->navigation_List;
+        return array_filter($this->navigation_List, function ($navigation) use ($position) {
+            return $navigation->getPosition() === $position;
+        });
     }
 
     /**
+     * @param string $position
      * @return bool
      */
-    public function hasNavigation(): bool
+    public function hasNavigation(string $position = Navigation::POSITION_SIDEBAR): bool
     {
-        return is_array($this->navigation_List) && count($this->navigation_List) > 0;
+        return count($this->getNavigationList($position)) > 0;
     }
 
     /**
@@ -305,18 +219,18 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     }
 
     /**
-    * @return Toolbar
-    */
+     * @return Toolbar
+     */
     public function getToolbar(): Toolbar
     {
         return $this->toolbar;
     }
 
     /**
-    * @param Toolbar $toolbar
-    *
-    * @return $this
-    */
+     * @param Toolbar $toolbar
+     *
+     * @return $this
+     */
     public function setToolbar(Toolbar $toolbar): self
     {
         if ($this->hasPermissionList()) {
@@ -327,8 +241,8 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasToolbar(): bool
     {
         return $this->toolbar !== null;
@@ -341,5 +255,25 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     public function getTemplate(): string
     {
         return 'view';
+    }
+
+    /**
+     * @param string $name
+     * @return bool
+     * @throws BeanException
+     */
+    public function hasData(string $name): bool
+    {
+        return $this->getTemplateData()->hasData($name);
+    }
+
+    /**
+     * @param string $name
+     * @return mixed|null
+     * @throws BeanException
+     */
+    public function getData(string $name)
+    {
+        return $this->getTemplateData()->getData($name);
     }
 }

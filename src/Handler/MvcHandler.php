@@ -7,6 +7,7 @@ namespace Mvc\Handler;
 use Exception;
 use Laminas\Diactoros\Response;
 use Mezzio\Router\RouteResult;
+use Mezzio\Template\TemplateRendererInterface;
 use Mvc\Controller\ControllerInterface;
 use Mvc\Controller\ControllerResponse;
 use Mvc\Exception\ActionException;
@@ -17,11 +18,11 @@ use Mvc\Exception\NotFoundException;
 use Mvc\Factory\ControllerFactory;
 use Mvc\Factory\ServerResponseFactory;
 use Mvc\View\ViewRenderer;
-use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Throwable;
 
 class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
 {
@@ -103,7 +104,7 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
             $controller->end();
         } catch (NotFoundException $exception) {
             return new Response('', 404);
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             $controller = $this->getErrorController($controller, $errorController, $request, $config);
             $controller->error($exception);
         }
@@ -112,7 +113,7 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
             if ($controller->hasView()) {
                 $viewRenderer = new ViewRenderer($this->renderer, $viewTemplateFolder);
                 $view = $controller->getView();
-                $view->getViewModel()->getTemplateData()->setFromArray($templateData->toArray());
+                $view->getTemplateData()->setFromArray($templateData->toArray());
                 $renderedOutput = $viewRenderer->render($view);
             } elseif ($controller->hasTemplate()) {
                 $renderedOutput = $this->renderer->render(
@@ -132,7 +133,7 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
 
 
     /**
-     * @param ServerRequestInterface  $request
+     * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler
      *
      * @return ResponseInterface

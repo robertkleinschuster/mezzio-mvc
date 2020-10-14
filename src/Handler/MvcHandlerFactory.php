@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Mvc\Handler;
 
-use Mvc\Factory\ControllerFactory;
 use Mezzio\Template\TemplateRendererInterface;
+use Mvc\Factory\ControllerFactory;
 use Psr\Container\ContainerInterface;
 
 class MvcHandlerFactory

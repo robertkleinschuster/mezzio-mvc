@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Mvc\View\Components\Alert;
 
+use Mvc\View\Components\Base\AbstractComponent;
 
-class Alert extends \Mvc\View\Components\Base\AbstractComponent
+class Alert extends AbstractComponent
 {
 
     public const STYLE_PRIMARY = 'primary';
@@ -35,18 +37,18 @@ class Alert extends \Mvc\View\Components\Base\AbstractComponent
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getStyle(): string
     {
         return $this->style ?? self::STYLE_DANGER;
     }
 
     /**
-    * @param string $style
-    *
-    * @return $this
-    */
+     * @param string $style
+     *
+     * @return $this
+     */
     public function setStyle(string $style): self
     {
         $this->style = $style;
@@ -78,18 +80,18 @@ class Alert extends \Mvc\View\Components\Base\AbstractComponent
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getHeading(): string
     {
         return $this->heading;
     }
 
     /**
-    * @param string $heading
-    *
-    * @return $this
-    */
+     * @param string $heading
+     *
+     * @return $this
+     */
     public function setHeading(string $heading): self
     {
         $this->heading = $heading;
@@ -97,11 +99,10 @@ class Alert extends \Mvc\View\Components\Base\AbstractComponent
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasHeading(): bool
     {
         return $this->heading !== null;
     }
-
 }

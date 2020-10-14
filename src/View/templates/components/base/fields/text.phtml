@@ -1,3 +1,9 @@
-<div class="<?= $field->hasAlign($data) ? ' text-' . $field->getAlign($data) : ''?>">
-    <span class="<?=implode(' ', $field->getOptions())?>"><?=$field->getValue($data)?></span>
+<?
+/**
+ * @var $field \Mvc\View\Components\Base\Fields\AbstractText
+ * @var $bean \NiceshopsDev\Bean\BeanInterface
+ */
+?>
+<div class="<?= $field->hasAlign() ? ' text-' . $field->getAlign() : ''?>">
+    <span class="<?=implode(' ', $field->getOptions())?>"><?=$field->getValue($bean)?></span>
 </div>

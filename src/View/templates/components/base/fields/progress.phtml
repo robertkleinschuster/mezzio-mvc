@@ -1,9 +1,15 @@
-<div class="progress" <?= $field->hasHeight($data) ? "style=\"height: {$field->getHeight($data)}px;\"" : '' ?>>
+<?
+/**
+ * @var $field \Mvc\View\Components\Base\Fields\AbstractProgress
+ * @var $bean \NiceshopsDev\Bean\BeanInterface
+ */
+?>
+<div class="progress" <?= $field->hasHeight() ? "style=\"height: {$field->getHeight()}px;\"" : '' ?>>
     <div
-            class="progress-bar progress-bar-striped <?= $field->hasStyle($data) ? 'bg-' . $field->getStyle($data) : '' ?>"
+            class="progress-bar progress-bar-striped <?= $field->hasStyle() ? 'bg-' . $field->getStyle() : '' ?>"
             role="progressbar"
-            style="width: <?= $field->getValue($data) ?>%"
-            aria-valuenow="<?= $field->getValue($data) ?>"
+            style="width: <?= $field->getValue($bean) ?>%"
+            aria-valuenow="<?= $field->getValue($bean) ?>"
             aria-valuemin="0"
             aria-valuemax="100">
     </div>

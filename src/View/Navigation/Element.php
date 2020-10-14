@@ -1,7 +1,8 @@
 <?php
 
-namespace Mvc\View\Navigation;
+declare(strict_types=1);
 
+namespace Mvc\View\Navigation;
 
 class Element
 {
@@ -135,18 +136,18 @@ class Element
 
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getPermission(): string
     {
         return $this->permission;
     }
 
     /**
-    * @param string $permission
-    *
-    * @return $this
-    */
+     * @param string $permission
+     *
+     * @return $this
+     */
     public function setPermission(string $permission): self
     {
         $this->permission = $permission;
@@ -154,11 +155,10 @@ class Element
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasPermission(): bool
     {
         return $this->permission !== null;
     }
-
 }

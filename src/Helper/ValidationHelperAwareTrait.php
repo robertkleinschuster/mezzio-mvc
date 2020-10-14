@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Mvc\Helper;
-
 
 trait ValidationHelperAwareTrait
 {
@@ -22,5 +22,4 @@ trait ValidationHelperAwareTrait
         }
         return $this->validationHelper;
     }
-
 }

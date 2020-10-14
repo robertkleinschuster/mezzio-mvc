@@ -7,6 +7,7 @@ namespace Mvc\Controller;
 use Mvc\Helper\PathHelper;
 use Mvc\Model\ModelInterface;
 use Mvc\View\View;
+use Throwable;
 
 interface ControllerInterface
 {
@@ -22,10 +23,10 @@ interface ControllerInterface
     public function end();
 
     /**
-     * @param \Throwable $exception
+     * @param Throwable $exception
      * @return mixed
      */
-    public function error(\Throwable $exception);
+    public function error(Throwable $exception);
 
     /**
      * @return mixed

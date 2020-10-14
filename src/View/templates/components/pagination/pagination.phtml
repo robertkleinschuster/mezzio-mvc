@@ -1,0 +1,28 @@
+<?php
+/**
+ * @var $component \Mvc\View\Components\Pagination\Pagination
+ * @var $templateFolder string
+ */
+?>
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-end">
+        <li class="page-item <?= $component->isFirst() ? ' disabled' : '' ?>">
+            <a class="page-link" href="<?= $component->getPrevious()->getLink() ?>"
+               aria-label="Previous" <?= $component->isFirst() ? ' tabindex="-1"' : '' ?>>
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        <?php foreach ($component->getFieldList() as $key => $field): ?>
+            <li class="page-item <?= $component->getActive() == $key ? 'active' : '' ?>"><a
+                        class="page-link" href="<?= $field->getLink() ?>"><?= $key + 1 ?></a></li>
+        <?php endforeach; ?>
+        <li class="page-item <?= $component->isLast() ? ' disabled' : '' ?>">
+            <a class="page-link" href="<?= $component->getNext()->getLink() ?>"
+               aria-label="Next" <?= $component->isLast() ? ' tabindex="-1"' : '' ?>>
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav>

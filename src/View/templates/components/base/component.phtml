@@ -1,11 +1,17 @@
-<?php foreach ($model->getComponentDataBeanList() as $bean): ?>
+<?
+/**
+ * @var $component \Mvc\View\Components\Base\AbstractComponent
+ * @var $templateFolder string
+ */
+?>
+<? foreach ($component->getBeanList() as $bean): ?>
     <div class="row row-cols-1 row-cols-sm-<?= $component->getCols() ?>">
-        <?php foreach ($fields as $field): ?>
+        <? foreach ($component->getFieldList() as $field): ?>
             <div class="col">
-                <?php if ($field->isShow($bean)): ?>
-                    <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['templateFolder' => $templateFolder, 'field' => $field, 'data' => $bean]) ?>
-                <?php endif; ?>
+                <? if ($field->isShow($bean)): ?>
+                    <? $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $bean]) ?>
+                <? endif; ?>
             </div>
-        <?php endforeach ?>
+        <? endforeach ?>
     </div>
-<?php endforeach ?>
+<? endforeach ?>

@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mvc\Helper;
-
 
 use Mezzio\Helper\ServerUrlHelper;
 use Mezzio\Helper\UrlHelper;
@@ -93,18 +93,18 @@ class PathHelper
     }
 
     /**
-    * @return array
-    */
+     * @return array
+     */
     public function getViewIdMap(): array
     {
         return $this->viewId_Map;
     }
 
     /**
-    * @param array $viewId_Map
-    *
-    * @return $this
-    */
+     * @param array $viewId_Map
+     *
+     * @return $this
+     */
     public function setViewIdMap(array $viewId_Map): self
     {
         $this->viewId_Map = $viewId_Map;
@@ -112,26 +112,26 @@ class PathHelper
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasViewIdMap(): bool
     {
         return $this->viewId_Map !== null;
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getController(): string
     {
         return $this->controller;
     }
 
     /**
-    * @param string $controller
-    *
-    * @return $this
-    */
+     * @param string $controller
+     *
+     * @return $this
+     */
     public function setController(string $controller): self
     {
         $this->controller = $controller;
@@ -139,25 +139,26 @@ class PathHelper
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasController(): bool
     {
         return $this->controller !== null;
     }
+
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getAction(): string
     {
         return $this->action;
     }
 
     /**
-    * @param string $action
-    *
-    * @return $this
-    */
+     * @param string $action
+     *
+     * @return $this
+     */
     public function setAction(string $action): self
     {
         $this->action = $action;
@@ -165,26 +166,26 @@ class PathHelper
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasAction(): bool
     {
         return $this->action !== null;
     }
 
     /**
-    * @return array
-    */
+     * @return array
+     */
     public function getParams(): array
     {
         return $this->params;
     }
 
     /**
-    * @param array $params
-    *
-    * @return $this
-    */
+     * @param array $params
+     *
+     * @return $this
+     */
     public function setParams(array $params): self
     {
         $this->params = $params;
@@ -192,26 +193,26 @@ class PathHelper
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasParams(): bool
     {
         return $this->params !== null;
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getRouteName(): string
     {
         return $this->routeName;
     }
 
     /**
-    * @param string $routeName
-    *
-    * @return $this
-    */
+     * @param string $routeName
+     *
+     * @return $this
+     */
     public function setRouteName(string $routeName): self
     {
         $this->routeName = $routeName;
@@ -219,8 +220,8 @@ class PathHelper
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasRouteName(): bool
     {
         return $this->routeName !== null;
@@ -265,7 +266,7 @@ class PathHelper
         if ($this->hasViewIdMap()) {
             $params[ViewIdHelper::VIEWID_ATTRIBUTE] = $this->getViewIdHelper()->generateViewId($this->getViewIdMap());
         }
-        $path =  $this->getUrlHelper()->generate($routeName, $routeParams, $params);
+        $path = $this->getUrlHelper()->generate($routeName, $routeParams, $params);
         if ($reset) {
             $this->reset();
         }

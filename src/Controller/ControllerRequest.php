@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Mvc\Controller;
 
-use Mvc\Helper\ViewIdHelper;
 use Mezzio\Router\RouteResult;
+use Mvc\Helper\ViewIdHelper;
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Exception;

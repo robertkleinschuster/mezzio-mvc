@@ -1,5 +1,11 @@
-<div <?= $field->hasAlign($data) ? "class=\"text-{$field->getAlign($data)}\"" : '' ?>>
-    <div class="<?= $field->hasType($data) ? ' spinner-' . $field->getType($data) : '' ?><?= $field->hasStyle($data) ? ' text-' . $field->getStyle($data) : '' ?>" role="status">
-        <span class="sr-only"><?= $this->getValue($data) ?>></span>
+<?
+/**
+ * @var $field \Mvc\View\Components\Base\Fields\AbstractSpinner
+ * @var $bean \NiceshopsDev\Bean\BeanInterface
+ */
+?>
+<div <?= $field->hasAlign() ? "class=\"text-{$field->getAlign()}\"" : '' ?>>
+    <div class="<?= $field->hasType() ? ' spinner-' . $field->getType() : '' ?><?= $field->hasStyle() ? ' text-' . $field->getStyle() : '' ?>" role="status">
+        <span class="sr-only"><?= $this->getValue($bean) ?>></span>
     </div>
 <div>

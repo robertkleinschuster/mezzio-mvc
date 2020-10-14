@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mvc\Helper;
@@ -36,6 +37,4 @@ class ViewIdHelper
         }
         return implode(';', $result);
     }
-
-
 }

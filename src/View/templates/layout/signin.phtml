@@ -1,10 +1,29 @@
+<?
+/**
+ * @var Mvc\View\View $view
+ * @var string $templateFolder
+ */
+?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <title><?= $title . ' - ' . $model->getTitle() ?></title>
+    <? if ($view->hasData('description')): ?>
+        <meta name="description" content="<?= $view->getData('description') ?>">
+    <? endif; ?>
+    <? if ($view->hasData('author')): ?>
+        <meta name="author" content="<?= $view->getData('author') ?>">
+    <? endif; ?>
+    <? if ($view->hasData('title')): ?>
+        <title><?= $view->getData('title') ?></title>
+    <? endif; ?>
+    <? if ($view->hasData('favicon')): ?>
+        <link rel="shortcut icon" href="<?= $view->getData('favicon') ?>"/>
+    <? else: ?>
+        <link rel="shortcut icon" href="favicon.ico"/>
+    <? endif; ?>
+    <?= $this->section('stylesheets') ?>
 
     <style>
         html,
@@ -28,9 +47,11 @@
             padding: 15px;
             margin: auto;
         }
+
         .form-signin .checkbox {
             font-weight: 400;
         }
+
         .form-signin .form-control {
             position: relative;
             box-sizing: border-box;
@@ -38,14 +59,17 @@
             padding: 10px;
             font-size: 16px;
         }
+
         .form-signin .form-control:focus {
             z-index: 2;
         }
+
         .form-signin input[type="email"] {
             margin-bottom: -1px;
             border-bottom-right-radius: 0;
             border-bottom-left-radius: 0;
         }
+
         .form-signin input[type="password"] {
             margin-bottom: 10px;
             border-top-left-radius: 0;
@@ -68,26 +92,30 @@
             }
         }
     </style>
-    <?= $this->section('stylesheets') ?>
 </head>
 <body class="text-center">
 <form class="form-signin">
-    <h1 class="text-center mx-auto"><?= $title ?></h1>
-    <hr>
-    <h2 class="text-center mx-auto mb-5"><?= $model->getTitle() ?></h2>
+    <? if ($view->hasData('title')): ?>
+        <h1 class="text-center mx-auto"><?= $view->getData('title') ?></h1>
+    <? endif; ?>
+    <? if ($view->hasData('heading')): ?>
+        <hr>
+        <h2 class="text-center mx-auto mb-5"><?= $view->getData('heading') ?></h2>
+    <? endif; ?>
+
     <?= $this->section('content') ?>
 </form>
 
 <footer class="app-footer">
     <div class="container">
         <hr/>
-        <?php if ($this->section('footer')): ?>
+        <? if ($this->section('footer')): ?>
             <?= $this->section('footer') ?>
-        <?php else: ?>
+        <? else: ?>
             <p>
                 &copy; <?= date('Y') ?> <a href="https://kleinschuster.de">Robert Kleinschuster</a>
             </p>
-        <?php endif ?>
+        <? endif ?>
     </div>
 </footer>
 <?= $this->section('javascript') ?>

@@ -4,68 +4,117 @@ declare(strict_types=1);
 
 namespace Mvc\View\Components\Base;
 
-use Mvc\View\ComponentModel;
-use Mvc\View\ComponentModelInterface;
+use Mvc\Helper\ValidationHelperAwareInterface;
+use Mvc\Helper\ValidationHelperAwareTrait;
+use Mvc\View\ComponentDataBeanList;
+use Mvc\View\ViewException;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareTrait;
+use NiceshopsDev\Bean\BeanInterface;
+use NiceshopsDev\Bean\BeanList\BeanListAwareInterface;
+use NiceshopsDev\Bean\BeanList\BeanListAwareTrait;
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use NiceshopsDev\NiceCore\Option\OptionTrait;
 
-abstract class AbstractComponent implements OptionAwareInterface, AttributeAwareInterface, BeanFormatterAwareInterface
+abstract class AbstractComponent implements
+    OptionAwareInterface,
+    AttributeAwareInterface,
+    BeanFormatterAwareInterface,
+    ValidationHelperAwareInterface,
+    BeanListAwareInterface
 {
     use OptionTrait;
     use AttributeTrait;
     use BeanFormatterAwareTrait;
+    use ValidationHelperAwareTrait;
+    use BeanListAwareTrait;
 
     /**
      * @var string
      */
-    private $title;
+    private ?string $title;
 
     /**
      * @var AbstractField[]
      */
-    private $field_List;
-
-    /**
-     * @var ComponentModelInterface
-     */
-    private $componentModel;
+    private array $field_List;
 
     /**
      * @var int
      */
-    private $cols;
-
+    private ?int $cols = null;
 
     /**
      * @var string
      */
-    private $id;
+    private string $id;
 
     /**
      * @var array
      */
-    private $permission_List;
+    private ?array $permission_List = null;
 
     /**
      * @var string
      */
-    private $permission;
+    private ?string $permission = null;
 
 
     /**
      * AbstractComponent constructor.
      * @param string $title
-     * @param ComponentModelInterface $componentModel
      */
-    public function __construct(string $title = null, ?ComponentModelInterface $componentModel = null)
+    public function __construct(?string $title = null)
     {
         $this->field_List = [];
         $this->title = $title;
-        $this->componentModel = $componentModel ?? new ComponentModel();
+        $this->setBeanList(new ComponentDataBeanList());
+        $this->id = (string)preg_replace("/[^a-zA-Z]/", "", md5(serialize($this)));
+    }
+
+    /**
+     * @param BeanInterface $bean
+     * @return $this
+     */
+    public function addBean(BeanInterface $bean)
+    {
+        $this->getBeanList()->addBean($bean);
+        return $this;
+    }
+
+    /**
+     * @param BeanInterface $bean
+     * @return $this
+     * @throws ViewException
+     */
+    public function setBean(BeanInterface $bean)
+    {
+        if ($this->getBeanList()->count() >= 1) {
+            throw new ViewException(
+                'Could not set bean in Component. Count: ' . $this->getBeanList()->count()
+            );
+        }
+        $this->getBeanList()->offsetSet(0, $bean);
+        return $this;
+    }
+
+    /**
+     * @return BeanInterface
+     * @throws ViewException
+     */
+    public function getBean(): BeanInterface
+    {
+        if ($this->getBeanList()->count() === 1) {
+            $bean = $this->getBeanList()->offsetGet(0);
+            if ($bean instanceof BeanInterface) {
+                return $bean;
+            }
+        }
+        throw new ViewException(
+            'Could not get single bean from Componen. Count: ' . $this->getBeanList()->count()
+        );
     }
 
     /**
@@ -95,13 +144,6 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
         return $this->title !== null;
     }
 
-    /**
-     * @return ComponentModelInterface
-     */
-    public function getComponentModel(): ComponentModelInterface
-    {
-        return $this->componentModel;
-    }
 
     /**
      * @return AbstractField[]
@@ -187,18 +229,18 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getPermission(): string
     {
         return $this->permission;
     }
 
     /**
-    * @param string $permission
-    *
-    * @return $this
-    */
+     * @param string $permission
+     *
+     * @return $this
+     */
     public function setPermission(string $permission): self
     {
         $this->permission = $permission;
@@ -206,8 +248,8 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasPermission(): bool
     {
         return $this->permission !== null;
@@ -219,9 +261,6 @@ abstract class AbstractComponent implements OptionAwareInterface, AttributeAware
      */
     public function getId(): string
     {
-        if (null === $this->id) {
-            $this->id = preg_replace("/[^a-zA-Z]/", "", md5(serialize($this)));
-        }
         return $this->id;
     }
 }

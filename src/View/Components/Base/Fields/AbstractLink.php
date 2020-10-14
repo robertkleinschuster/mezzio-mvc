@@ -457,18 +457,18 @@ abstract class AbstractLink extends AbstractField
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getSize(): string
     {
         return $this->size;
     }
 
     /**
-    * @param string $size
-    *
-    * @return $this
-    */
+     * @param string $size
+     *
+     * @return $this
+     */
     public function setSize(string $size): self
     {
         $this->size = $size;
@@ -476,33 +476,31 @@ abstract class AbstractLink extends AbstractField
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasSize(): bool
     {
         return $this->size !== null;
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function isOutline(): bool
     {
         return $this->outline ?? false;
     }
 
     /**
-    * @param bool $outline
-    *
-    * @return $this
-    */
+     * @param bool $outline
+     *
+     * @return $this
+     */
     public function setOutline(bool $outline): self
     {
         $this->outline = $outline;
         return $this;
     }
-
-
 
 
     /**

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Mvc\Factory;
 
-use Mezzio\Router\RouteResult;
 use Mvc\Controller\AbstractController;
 use Mvc\Controller\ControllerInterface;
 use Mvc\Controller\ControllerRequest;
 use Mvc\Controller\ControllerResponse;
 use Mvc\Exception\ControllerNotFoundException;
 use Mvc\Helper\PathHelper;
+use NiceshopsDev\NiceCore\Exception;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -42,7 +42,7 @@ class ControllerFactory
      * @param array $config
      * @return ControllerInterface
      * @throws ControllerNotFoundException
-     * @throws \NiceshopsDev\NiceCore\Exception
+     * @throws Exception
      */
     public function __invoke(string $code, ServerRequestInterface $request, array $config): ControllerInterface
     {

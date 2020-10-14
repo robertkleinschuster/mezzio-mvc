@@ -31,7 +31,7 @@ class ConfigProvider
 
     protected function getMvc()
     {
-        $mvcConfig =  [
+        $mvcConfig = [
             'error_controller' => 'error',
             'controllers' => [],
             'models' => [],

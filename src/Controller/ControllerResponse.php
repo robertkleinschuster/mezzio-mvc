@@ -7,6 +7,7 @@ namespace Mvc\Controller;
 use Mvc\Exception\MvcException;
 use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
+use NiceshopsDev\NiceCore\Exception;
 use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
 use NiceshopsDev\NiceCore\Option\OptionTrait;
 
@@ -196,7 +197,7 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
     /**
      * @param string $uri
      * @return bool
-     * @throws \NiceshopsDev\NiceCore\Exception
+     * @throws Exception
      */
     public function setRedirect(string $uri): bool
     {

@@ -9,6 +9,7 @@ use Mvc\Helper\ValidationHelper;
 use Mvc\Model\ModelInterface;
 use Mvc\View\View;
 use NiceshopsDev\Bean\BeanException;
+use NiceshopsDev\NiceCore\Exception;
 
 abstract class AbstractController implements ControllerInterface
 {
@@ -64,7 +65,7 @@ abstract class AbstractController implements ControllerInterface
 
     /**
      * @return mixed|void
-     * @throws \NiceshopsDev\NiceCore\Exception
+     * @throws Exception
      */
     public function init()
     {
@@ -135,10 +136,12 @@ abstract class AbstractController implements ControllerInterface
         if ($this->hasView()) {
             foreach ($this->getView()->getNavigationList() as $item) {
                 foreach ($item->getElementList() as $element) {
-                    if ($element->getLink() === $this->getPathHelper()
+                    if (
+                        $element->getLink() === $this->getPathHelper()
                             ->setController($controller)
                             ->setAction($action)
-                            ->getPath()) {
+                            ->getPath()
+                    ) {
                         $element->setActive(true);
                         return;
                     }
@@ -236,18 +239,18 @@ abstract class AbstractController implements ControllerInterface
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getTemplate(): string
     {
         return $this->template;
     }
 
     /**
-    * @param string $template
-    *
-    * @return $this
-    */
+     * @param string $template
+     *
+     * @return $this
+     */
     public function setTemplate(string $template): self
     {
         $this->template = $template;
@@ -255,8 +258,8 @@ abstract class AbstractController implements ControllerInterface
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasTemplate(): bool
     {
         return $this->template !== null;
@@ -282,6 +285,4 @@ abstract class AbstractController implements ControllerInterface
     {
         return true;
     }
-
-
 }

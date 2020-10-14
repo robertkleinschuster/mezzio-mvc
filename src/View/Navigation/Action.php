@@ -1,7 +1,8 @@
 <?php
 
-namespace Mvc\View\Navigation;
+declare(strict_types=1);
 
+namespace Mvc\View\Navigation;
 
 class Action
 {
@@ -376,6 +377,4 @@ class Action
     {
         $this->icon = $icon;
     }
-
-
 }

@@ -32,42 +32,42 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     /**
      * @var string
      */
-    private $title;
+    private ?string $title = null;
 
     /**
      * @var string
      */
-    private $key;
+    private string $key;
 
     /**
      * @var string
      */
-    private $value;
+    private ?string $value = null;
 
     /**
      * @var string
      */
-    private $chapter;
+    private ?string $chapter = null;
 
     /**
      * @var int
      */
-    private $width;
+    private ?int $width = null;
 
     /**
      * @var string
      */
-    private $permission;
+    private ?string $permission = null;
 
     /**
      * @var callable
      */
-    private $show;
+    private $show = null;
 
     /**
      * @var callable
      */
-    private $format;
+    private $format = null;
 
     /**
      * AbstractField constructor.
@@ -216,18 +216,18 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     }
 
     /**
-    * @return int
-    */
+     * @return int
+     */
     public function getWidth(): int
     {
         return $this->width;
     }
 
     /**
-    * @param int $width
-    *
-    * @return $this
-    */
+     * @param int $width
+     *
+     * @return $this
+     */
     public function setWidth(int $width): self
     {
         $this->width = $width;
@@ -235,8 +235,8 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasWidth(): bool
     {
         return $this->width !== null;
@@ -265,18 +265,18 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getPermission(): string
     {
         return $this->permission;
     }
 
     /**
-    * @param string $permission
-    *
-    * @return $this
-    */
+     * @param string $permission
+     *
+     * @return $this
+     */
     public function setPermission(string $permission): self
     {
         $this->permission = $permission;
@@ -284,26 +284,26 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasPermission(): bool
     {
         return $this->permission !== null;
     }
 
     /**
-    * @return callable
-    */
+     * @return callable
+     */
     public function getShow(): callable
     {
         return $this->show;
     }
 
     /**
-    * @param callable $show
-    *
-    * @return $this
-    */
+     * @param callable $show
+     *
+     * @return $this
+     */
     public function setShow(callable $show): self
     {
         $this->show = $show;
@@ -311,8 +311,8 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasShow(): bool
     {
         return $this->show !== null;
@@ -331,18 +331,18 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     }
 
     /**
-    * @return callable
-    */
+     * @return callable
+     */
     public function getFormat(): callable
     {
         return $this->format;
     }
 
     /**
-    * @param callable $format
-    *
-    * @return $this
-    */
+     * @param callable $format
+     *
+     * @return $this
+     */
     public function setFormat(callable $format): self
     {
         $this->format = $format;
@@ -350,8 +350,8 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasFormat(): bool
     {
         return $this->format !== null;

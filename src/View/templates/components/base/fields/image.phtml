@@ -1,14 +1,20 @@
-<?php if ($field->hasSource($data)): ?>
-    <?php if ($field->hasAlign($data) && $field->getAlign($field) == \Mvc\View\Components\Base\Fields\AbstractText::ALIGN_CENTER): ?>
+<?
+/**
+ * @var $field \Mvc\View\Components\Base\Fields\AbstractImage
+ * @var $bean \NiceshopsDev\Bean\BeanInterface
+ */
+?>
+<?php if ($field->hasSource()): ?>
+    <?php if ($field->hasAlign() && $field->getAlign() == \Mvc\View\Components\Base\Fields\AbstractText::ALIGN_CENTER): ?>
         <img
-                src="<?= $field->getSource($data) ?>"
-                class="<?= $field->hasSize($data) ? 'img-' . $field->getSize($field) : '' ?> mx-auto d-block"
-                alt="<?= $field->getValue($data) ?>">
+                src="<?= $field->getSource() ?>"
+                class="<?= $field->hasSize() ? 'img-' . $field->getSize() : '' ?> mx-auto d-block"
+                alt="<?= $field->getValue($bean) ?>">
     <?php else: ?>
         <img
-                src="<?= $field->getSource($data) ?>"
-                class="<?= $field->hasSize($data) ? 'img-' . $field->getSize($field) : '' ?>
-               <?= $field->hasAlign($data) ? ' float-' . $field->getAlign($field) : '' ?>"
-                alt="<?= $field->getValue($data) ?>">
+                src="<?= $field->getSource() ?>"
+                class="<?= $field->hasSize() ? 'img-' . $field->getSize() : '' ?>
+               <?= $field->hasAlign() ? ' float-' . $field->getAlign() : '' ?>"
+                alt="<?= $field->getValue($bean) ?>">
     <?php endif; ?>
 <?php endif; ?>

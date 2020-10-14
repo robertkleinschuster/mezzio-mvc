@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mvc\Factory;
 
 use Laminas\Diactoros\Response\HtmlResponse;
@@ -8,13 +10,14 @@ use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Diactoros\UriFactory;
 use Mvc\Controller\ControllerResponse;
 use Mvc\Exception\MvcException;
+use NiceshopsDev\NiceCore\Exception;
 
 class ServerResponseFactory
 {
     /**
      * @param ControllerResponse $controllerResponse
      * @return HtmlResponse|JsonResponse|RedirectResponse
-     * @throws \NiceshopsDev\NiceCore\Exception
+     * @throws Exception
      */
     public function __invoke(ControllerResponse $controllerResponse)
     {

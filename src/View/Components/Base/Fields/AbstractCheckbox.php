@@ -72,5 +72,4 @@ abstract class AbstractCheckbox extends AbstractField implements RequiredAwareIn
         $this->checked = $checked;
         return $this;
     }
-
 }

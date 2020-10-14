@@ -1,1 +1,7 @@
-<pre><code><?= htmlspecialchars($field->getValue($data)) ?></code></pre>
+<?
+/**
+ * @var $field \Mvc\View\Components\Base\Fields\AbstractCodeblock
+ * @var $bean \NiceshopsDev\Bean\BeanInterface
+ */
+?>
+<pre><code><?= htmlspecialchars($field->getValue($bean)) ?></code></pre>
