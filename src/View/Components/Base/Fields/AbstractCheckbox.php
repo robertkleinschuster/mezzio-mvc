@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mvc\View\Components\Base\Fields;
 
 use Mvc\View\Components\Base\AbstractField;
+use NiceshopsDev\Bean\BeanInterface;
 
 abstract class AbstractCheckbox extends AbstractField implements RequiredAwareInterface
 {
@@ -57,10 +58,14 @@ abstract class AbstractCheckbox extends AbstractField implements RequiredAwareIn
     }
 
     /**
+     * @param BeanInterface $bean
      * @return bool
      */
-    public function isChecked(): bool
+    public function isChecked(BeanInterface $bean): bool
     {
+        if ($bean->hasData($this->getKey())) {
+            return $bean->getData($this->getKey());
+        }
         return $this->checked ?? false;
     }
 

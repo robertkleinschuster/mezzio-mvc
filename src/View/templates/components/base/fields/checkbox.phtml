@@ -12,7 +12,7 @@
            name="<?= $field->getKey() ?>"
            value="<?= $field->getValue($bean) ?>"
         <?=$field->isRequired() ? ' required' : ''?>
-        <?= $field->isChecked() ? ' checked' : '' ?>>
+        <?= $field->isChecked($bean) ? ' checked' : '' ?>>
     <?php if ($field->hasTitle()): ?>
         <label class="form-check-label" for="<?= $field->getKey() ?>"><?= $field->getTitle() ?></label>
     <?php endif;?>
