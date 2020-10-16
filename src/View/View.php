@@ -197,7 +197,7 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     {
         if ($this->hasPermissionList()) {
             return array_values(array_filter($this->navigation_List, function ($navigation) use ($position) {
-                return $navigation->getPosition() === $position && in_array($navigation->getPermission(), $this->getPermissionList());
+                return $navigation->getPosition() === $position && (!$navigation->hasPermission() || in_array($navigation->getPermission(), $this->getPermissionList()));
             }));
         }
         return array_values(array_filter($this->navigation_List, function ($navigation) use ($position) {
@@ -222,7 +222,7 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     {
         if ($this->hasPermissionList()) {
             $navigation->setPermissionList($this->getPermissionList());
-            if (in_array($navigation->getPermission(), $this->getPermissionList())) {
+            if (!$navigation->hasPermission() || in_array($navigation->getPermission(), $this->getPermissionList())) {
                 $this->navigation_List[] = $navigation;
             }
         } else {
