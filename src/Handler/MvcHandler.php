@@ -103,7 +103,7 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
             }
             $controller->end();
         } catch (NotFoundException $exception) {
-            return new Response('', 404);
+            return new Response($exception->getMessage(), 404);
         } catch (Throwable $exception) {
             $controller = $this->getErrorController($controller, $errorController, $request, $config);
             $controller->error($exception);
