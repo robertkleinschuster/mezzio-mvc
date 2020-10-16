@@ -11,7 +11,7 @@
     <input type="checkbox" class="form-check-input <?= is_array($errors) && count($errors) ? ' is-invalid ' : '' ?>"
            id="<?= $field->getKey() ?>"
            name="<?= $field->getKey() ?>"
-           value="<?= $field->getValue($bean) ? '1' : '0' ?>"
+           value="1"
         <?=$field->isRequired() ? ' required' : ''?>
         <?= $field->isChecked($bean) ? ' checked' : '' ?>>
     <?php if ($field->hasTitle()): ?>
