@@ -51,13 +51,13 @@ abstract class AbstractModel implements ModelInterface, OptionAwareInterface
     }
 
     /**
-     * @param string $submitModel
+     * @param string $submitMode
      * @param array $viewIdMap
      * @param array $attributes
      */
-    public function submit(string $submitModel, array $viewIdMap, array $attributes)
+    public function submit(string $submitMode, array $viewIdMap, array $attributes)
     {
-        switch ($submitModel) {
+        switch ($submitMode) {
             case ControllerRequest::SUBMIT_MODE_SAVE:
                 if ($this->hasOption(self::OPTION_EDIT_ALLOWED)) {
                     $this->save($attributes);

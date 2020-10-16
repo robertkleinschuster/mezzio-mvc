@@ -48,9 +48,9 @@ interface ModelInterface
     /**
      * Handle form submit
      *
-     * @param string $submitModel
+     * @param string $submitMode
      * @param array $viewIdMap
      * @param array $attributes
      */
-    public function submit(string $submitModel, array $viewIdMap, array $attributes);
+    public function submit(string $submitMode, array $viewIdMap, array $attributes);
 }
