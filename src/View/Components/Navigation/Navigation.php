@@ -57,9 +57,9 @@ class Navigation extends AbstractComponent
     {
         if ($this->hasPermissionList()) {
             $componentList = $this->component_List;
-            return array_filter($componentList, function ($component) {
+            return array_values(array_filter($componentList, function ($component) {
                 return !$component->hasPermission() || in_array($component->getPermission(), $this->getPermissionList());
-            });
+            }));
         }
         return $this->component_List;
     }

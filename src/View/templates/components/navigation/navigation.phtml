@@ -3,9 +3,10 @@
  * @var $component \Mvc\View\Components\Navigation\Navigation
  * @var $templateFolder string
  */
+$componentList = $component->getComponentList();
 ?>
 <ul class="nav nav-<?= $component->getType() ?> js-nav" id="<?= $component->getId() ?>" role="tablist">
-    <?php foreach ($component->getComponentList() as $key => $tabcomponent): ?>
+    <?php foreach ($componentList as $key => $tabcomponent): ?>
         <li class="nav-item" role="presentation">
             <a class="nav-link<?= $key == $component->getActive() ? ' active' : '' ?>"
                id="<?= $tabcomponent->getId() ?>-tab"
@@ -19,7 +20,7 @@
     <?php endforeach; ?>
 </ul>
 <div class="tab-content" id="<?= $component->getId() ?>Content">
-    <?php foreach ($component->getComponentList() as $key => $tabcomponent): ?>
+    <?php foreach ($componentList as $key => $tabcomponent): ?>
         <div class="tab-pane fade <?= $key == $component->getActive() ? ' show active' : '' ?>"
              id="<?= $tabcomponent->getId() ?>"
              role="tabpanel" aria-labelledby="<?= $tabcomponent->getId() ?>-tab">

@@ -3,6 +3,9 @@
  * @var $component \Mvc\View\Components\Overview\Overview
  * @var $templateFolder string
  */
+
+$fieldList = $component->getFieldList();
+$count = count($fieldList);
 ?>
 <div class="table-responsive">
     <table class="table table-striped table-hover table-bordered table-sm ">
@@ -10,8 +13,7 @@
         <tr>
             <?php $previousChapter = null ?>
             <?php $index = 1 ?>
-            <?php $count = count($component->getFieldList()) ?>
-            <?php foreach ($component->getFieldList() as $key => $field): ?>
+            <?php foreach ($fieldList as $key => $field): ?>
                 <?php if ($field->getChapter() == $previousChapter && $field->getChapter() != ''): ?>
                     <?= $field->hasTitle() ? $field->getTitle() : '' ?>
                 <?php elseif ($previousChapter == null): ?>
@@ -35,8 +37,7 @@
             <tr>
                 <?php $previousChapter = null ?>
                 <?php $index = 1 ?>
-                <?php $count = count($component->getFieldList()) ?>
-                <?php foreach ($component->getFieldList() as $field): ?>
+                <?php foreach ($fieldList as $field): ?>
                     <?php if ($field->getChapter() == $previousChapter && $field->getChapter() != ''): ?>
                         <?php if ($field->isShow($bean)): ?>
                             <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $bean]) ?>

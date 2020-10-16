@@ -93,10 +93,10 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     {
         if ($this->hasPermissionList()) {
             $componentList = $this->component_List;
-            return array_filter($componentList, function ($component) {
+            return array_values(array_filter($componentList, function ($component) {
                 return !$component->hasPermission() ||
                     in_array($component->getPermission(), $this->getPermissionList());
-            });
+            }));
         }
         return $this->component_List;
     }
@@ -195,9 +195,14 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
      */
     public function getNavigationList(string $position = Navigation::POSITION_SIDEBAR): array
     {
-        return array_filter($this->navigation_List, function ($navigation) use ($position) {
+        if ($this->hasPermissionList()) {
+            return array_values(array_filter($this->navigation_List, function ($navigation) use ($position) {
+                return $navigation->getPosition() === $position && in_array($navigation->getPermission(), $this->getPermissionList());
+            }));
+        }
+        return array_values(array_filter($this->navigation_List, function ($navigation) use ($position) {
             return $navigation->getPosition() === $position;
-        });
+        }));
     }
 
     /**
@@ -217,8 +222,12 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     {
         if ($this->hasPermissionList()) {
             $navigation->setPermissionList($this->getPermissionList());
+            if (in_array($navigation->getPermission(), $this->getPermissionList())) {
+                $this->navigation_List[] = $navigation;
+            }
+        } else {
+            $this->navigation_List[] = $navigation;
         }
-        $this->navigation_List[] = $navigation;
         return $this;
     }
 

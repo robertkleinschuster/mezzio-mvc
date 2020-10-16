@@ -3,16 +3,18 @@
  * @var $component \Mvc\View\Components\Toolbar\Toolbar
  * @var $templateFolder string
  */
+$fieldList = $component->getFieldList();
+$count = count($fieldList);
 ?>
 <div class="btn-toolbar mb-2">
-    <?php foreach ($component->getFieldList() as $key => $field): ?>
+    <?php foreach ($fieldList as $key => $field): ?>
         <?php if ($key == 0 || !$field->isAppendToPrevious()): ?>
-            <div class="<?= (count($component->getFieldList()) > 1) ? 'btn-group ' : '' ?>mr-1">
+            <div class="<?= $count > 1 ? 'btn-group ' : '' ?>mr-1">
         <?php endif ?>
         <?php if ($field->isShow($component->getBean())): ?>
             <?php $this->insert($templateFolder . '::' . $field->getTemplate(), ['field' => $field, 'bean' => $component->getBean()]) ?>
         <?php endif; ?>
-        <?php if ($key === count($component->getFieldList()) - 1 || !$component->getFieldList()[$key + 1]->isAppendToPrevious()): ?>
+        <?php if ($key === $count - 1 || !$fieldList[$key + 1]->isAppendToPrevious()): ?>
             </div>
         <?php endif ?>
     <?php endforeach ?>
