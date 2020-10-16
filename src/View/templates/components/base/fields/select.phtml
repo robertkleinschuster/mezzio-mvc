@@ -17,7 +17,7 @@
         <?= $field->isMultiple() ? ' multiple' : '' ?>>
         <?php foreach ($field->getSelectOptions() as $value => $name): ?>
             <option
-                <?= $field->getValue($bean) == $value ? ' selected' : '' ?>value="<?= $value ?>"><?= $name ?></option>
+                <?= $field->getValue($bean) == $value ? ' selected ' : '' ?>value="<?= $value ?>"><?= $name ?></option>
         <?php endforeach; ?>
     </select>
     <?php if (is_array($errors)): ?>
