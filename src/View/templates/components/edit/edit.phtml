@@ -1,5 +1,6 @@
 <?php
 /**
+ * @var $view \Mvc\View\View
  * @var $component \Mvc\View\Components\Edit\Edit
  * @var $templateFolder string
  */
@@ -25,5 +26,7 @@
             <?php $prevChapter = $field->getChapter() ?>
         <?php endforeach ?>
     </div>
-    <input type="hidden" name="token" value="<?= $token ?? '' ?>">
+    <?php if ($view->hasData('token')): ?>
+        <input type="hidden" name="token" value="<?= $view->getData('token') ?>">
+    <?php endif;?>
 </form>
