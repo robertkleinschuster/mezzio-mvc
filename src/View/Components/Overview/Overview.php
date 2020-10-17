@@ -48,7 +48,7 @@ class Overview extends AbstractComponent
             $title,
             [true => $trueValue, false => $falseValue],
             [true => Fields\Badge::STYLE_SUCCESS, false => Fields\Badge::STYLE_DANGER]
-        );
+        )->setWidth(50);
     }
 
     /**
@@ -68,6 +68,7 @@ class Overview extends AbstractComponent
             }
             return $bean->getData($key);
         });
+        return $badge;
     }
 
     /**
