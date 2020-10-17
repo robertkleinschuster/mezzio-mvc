@@ -142,7 +142,9 @@ abstract class AbstractController implements ControllerInterface
                             ->setAction($action)
                             ->getPath()
                     ) {
-                        $this->getView()->setTitle($element->getName());
+                        $title = $this->getView()->getData('title');
+                        $this->getView()->setHeading($element->getName());
+                        $this->getView()->setTitle($title . ' - ' . $element->getName());
                         $element->setActive(true);
                         return;
                     }
