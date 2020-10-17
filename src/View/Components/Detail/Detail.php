@@ -34,6 +34,7 @@ class Detail extends AbstractComponent
      * @param string $title
      * @param string $trueValue
      * @param string $falseValue
+     * @return Fields\Badge
      */
     public function addBadgeBoolean(string $key, string $title, string $trueValue, string $falseValue) {
         return $this->addBadgeState(
@@ -49,6 +50,7 @@ class Detail extends AbstractComponent
      * @param string $title
      * @param array $stateMap
      * @param array|null $styleMap
+     * @return Fields\Badge
      */
     public function addBadgeState(string $key, string $title, array $stateMap, array $styleMap = null) {
         $badge = $this->addBadge($key, $title);
@@ -61,6 +63,7 @@ class Detail extends AbstractComponent
             }
             return $bean->getData($key);
         });
+        return $badge;
     }
 
     /**
