@@ -63,7 +63,7 @@ abstract class AbstractCheckbox extends AbstractField implements RequiredAwareIn
      */
     public function isChecked(BeanInterface $bean): bool
     {
-        if ($bean->hasData($this->getKey())) {
+        if ($bean->hasData($this->getKey()) && $bean->getData($this->getKey()) !== null) {
             return $bean->getData($this->getKey());
         }
         return $this->checked ?? false;
