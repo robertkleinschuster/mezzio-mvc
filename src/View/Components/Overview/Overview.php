@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mvc\View\Components\Overview;
 
 use Mvc\View\Components\Base\AbstractComponent;
+use NiceshopsDev\Bean\BeanInterface;
 
 /**
  * Class Overview
@@ -33,6 +34,40 @@ class Overview extends AbstractComponent
         $badge->setStyle(Fields\Badge::STYLE_PRIMARY);
         $this->addField($badge);
         return $badge;
+    }
+
+    /**
+     * @param string $key
+     * @param string $title
+     * @param string $trueValue
+     * @param string $falseValue
+     */
+    public function addBadgeBoolean(string $key, string $title, string $trueValue, string $falseValue) {
+        return $this->addBadgeState(
+            $key,
+            $title,
+            [true => $trueValue, false => $falseValue],
+            [true => Fields\Badge::STYLE_SUCCESS, false => Fields\Badge::STYLE_DANGER]
+        );
+    }
+
+    /**
+     * @param string $key
+     * @param string $title
+     * @param array $stateMap
+     * @param array|null $styleMap
+     */
+    public function addBadgeState(string $key, string $title, array $stateMap, array $styleMap = null) {
+        $badge = $this->addBadge($key, $title);
+        $badge->setFormat(function(BeanInterface $bean, Fields\Badge $badge) use ($key, $stateMap, $styleMap) {
+            if (null !== $styleMap && isset($styleMap[$bean->getData($key)])) {
+                $badge->setStyle($styleMap[$bean->getData($key)]);
+            }
+            if (isset($stateMap[$bean->getData($key)])) {
+                return $stateMap[$bean->getData($key)];
+            }
+            return $bean->getData($key);
+        });
     }
 
     /**
