@@ -12,17 +12,14 @@
         "forum": "https://discourse.laminas.dev/"
     },
     "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/robertkleinschuster/nice-beans"
-        }
+
     ],
     "require": {
         "php": "^7.4",
         "laminas/laminas-diactoros": "^2.4",
         "mezzio/mezzio": "^3.2.1",
         "mezzio/mezzio-helpers": "^5.3",
-        "niceshops/nice-beans": "dev-master"
+        "niceshops/nice-beans": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.5 || ^8.1",
