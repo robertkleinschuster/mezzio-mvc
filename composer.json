@@ -19,6 +19,7 @@
         "laminas/laminas-diactoros": "^2.4",
         "mezzio/mezzio": "^3.2.1",
         "mezzio/mezzio-helpers": "^5.3",
+        "pfaciana/tiny-html-minifier": "^3.0",
         "robertkleinschuster/nice-beans": "^1.0"
     },
     "require-dev": {

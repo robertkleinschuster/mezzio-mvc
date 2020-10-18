@@ -8,6 +8,7 @@ use Exception;
 use Laminas\Diactoros\Response;
 use Mezzio\Router\RouteResult;
 use Mezzio\Template\TemplateRendererInterface;
+use Minifier\TinyMinify;
 use Mvc\Controller\ControllerInterface;
 use Mvc\Controller\ControllerResponse;
 use Mvc\Exception\ActionException;
@@ -126,7 +127,7 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
                     $templateData->toArray()
                 );
             }
-            $controller->getControllerResponse()->setBody($renderedOutput);
+            $controller->getControllerResponse()->setBody(TinyMinify::html($renderedOutput));
         }
         return (new ServerResponseFactory())($controller->getControllerResponse());
     }
