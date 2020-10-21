@@ -5,12 +5,20 @@
  * @var $bean \NiceshopsDev\Bean\BeanInterface
  */
 ?>
-<div class="custom-file">
-    <input type="file" class="custom-file-input" id="<?= $field->getKey() ?>" name="<?= $field->getKey() ?>"
-    <?= $field->hasAccept() ? " accept='{$field->getAccept()}' " : ''?>
-    <?= $field->hasCapture() ? " capture='{$field->getCapture()}' " : ''?>
-    <?= $field->isMultiple() ? " multiple " : ''?>
-    >
-    <label class="custom-file-label" for="<?= $field->getKey() ?>" data-browse="<?= $field->getTitle() ?>"><?= $field->getValue($bean) ?></label>
+<div class="form-group">
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="<?= $field->getKey() ?>" name="<?= $field->getKey() ?>"
+            <?= $field->hasAccept() ? " accept='{$field->getAccept()}' " : ''?>
+            <?= $field->hasCapture() ? " capture='{$field->getCapture()}' " : ''?>
+            <?= $field->isMultiple() ? " multiple " : ''?>
+        >
+        <label class="custom-file-label" for="<?= $field->getKey() ?>" data-browse="<?= $field->getTitle() ?>"><?= $field->getValue($bean) ?></label>
+    </div>
 </div>
 
+
+<script>
+    document.getElementById('<?= $field->getKey() ?>').addEventListener('change',function(e){
+        e.target.nextElementSibling.innerText = document.getElementById("<?= $field->getKey() ?>").files[0].name;
+    })
+</script>

@@ -58,6 +58,10 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
         foreach ($serverRequest->getQueryParams() as $key => $value) {
             $this->setAttribute($key, $value);
         }
+
+        foreach ($serverRequest->getUploadedFiles() as $key => $value) {
+            $this->setAttribute($key, $value);
+        }
     }
 
     /**
