@@ -9,7 +9,7 @@ class AbstractWysiwyg extends AbstractTextarea
     public const TYPE_TOOLTIP = 'tooltip';
     public const TYPE_TOOLBAR = 'toolbar';
 
-    private ?string $type;
+    private ?string $type = null;
 
 
     public function getTemplate()

@@ -19,11 +19,11 @@ abstract class AbstractFile extends AbstractField
     /**
      * @var string[]
      */
-    private ?array $accept;
+    private ?array $accept = null;
 
-    private ?bool $multiple;
+    private ?bool $multiple = null;
 
-    private ?string $capture;
+    private ?string $capture = null;
 
     public function getTemplate()
     {
