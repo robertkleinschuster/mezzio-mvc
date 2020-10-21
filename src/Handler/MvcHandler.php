@@ -74,13 +74,15 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
         $actionCode = $request->getAttribute(self::ACTION_ATTRIBUTE) ?? 'index';
 
         if ($controllerCode == 'js') {
+            $file = $request->getQueryParams()['file'];
             header('Content-Type: text/javascript');
-            readfile(__DIR__ . '/../View/templates/static/js/' . $actionCode);
+            readfile(__DIR__ . '/../View/templates/static/js/' . $file);
             exit;
         }
         if ($controllerCode == 'css') {
+            $file = $request->getQueryParams()['file'];
             header('Content-Type: text/css');
-            readfile(__DIR__ . '/../View/templates/static/css/' . $actionCode);
+            readfile(__DIR__ . '/../View/templates/static/css/' . $file);
             exit;
         }
 
