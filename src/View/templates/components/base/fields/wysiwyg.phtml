@@ -15,7 +15,7 @@
               name="<?= $field->getKey() ?>"
         <?= $field->isRequired() ? ' required' : '' ?>
         <?= $field->hasRows() ? " rows=\"{$field->getRows()}\" " : '' ?>><?= $field->getValue($bean) ?></textarea>
-    <div id="edit-<?= $field->getKey() ?>">
+    <div class="form-controle" id="edit-<?= $field->getKey() ?>">
         <?= $field->getValue($bean) ?>
     </div>
     <?php if (is_array($errors)): ?>
