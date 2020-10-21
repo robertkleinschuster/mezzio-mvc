@@ -80,22 +80,6 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
     {
         $controllerCode = $request->getAttribute(self::CONTROLLER_ATTRIBUTE) ?? 'index';
         $actionCode = $request->getAttribute(self::ACTION_ATTRIBUTE) ?? 'index';
-        if (isset($request->getQueryParams()['lib-file'])) {
-            $file = $request->getQueryParams()['lib-file'];
-            if (strlen(trim($file))) {
-                if ($this->endsWith($file, 'js')) {
-                    header('Content-Type: text/javascript');
-                    readfile(__DIR__ . '/../View/templates/static/js/' . $file);
-                    exit;
-                }
-                if ($this->endsWith($file, 'css')) {
-                    header('Content-Type: text/css');
-                    readfile(__DIR__ . '/../View/templates/static/css/' . $file);
-                    exit;
-                }
-            }
-        }
-
 
         $routeResult = $request->getAttribute(RouteResult::class);
         if (
