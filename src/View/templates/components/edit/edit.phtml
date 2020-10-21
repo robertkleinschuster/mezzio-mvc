@@ -7,7 +7,7 @@
 $fieldList = $component->getFieldList();
 $count = count($fieldList);
 ?>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <div class="row row-cols-1 row-cols-sm-<?= $component->getCols() ?>">
         <?php $prevChapter = null ?>
         <?php foreach ($fieldList as $key => $field): ?>
