@@ -1,6 +1,6 @@
 <?php
 /**
- * @var $field \Mvc\View\Components\Base\Fields\AbstractTextarea
+ * @var $field \Mvc\View\Components\Base\Fields\AbstractWysiwyg
  * @var $bean \NiceshopsDev\Bean\BeanInterface
  * @var $errors array
  */
@@ -31,20 +31,25 @@
         var textarea = document.getElementById('<?= $field->getKey() ?>');
         var x = textarea.getAttribute('class')
         document.getElementById('<?= $field->getKey() ?>').setAttribute('class', x + ' d-none');
-
+        var toolbarOptions = [
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            ['blockquote', 'code-block'],
+            [{ 'header': 3 }, { 'header': 4 }],               // custom button values
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+            [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+            [{ 'direction': 'rtl' }],                         // text direction
+            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            [{ 'font': [] }],
+            [{ 'align': [] }],
+            ['clean']                                         // remove formatting button
+        ];
         var quill = new Quill('#edit-<?= $field->getKey() ?>', {
             modules: {
-                toolbar: [
-                    [{ header: [1, 2, 3, 4, 5, 6,  false] }],
-                    ['bold', 'italic', 'underline','strike'],
-                    ['image', 'code-block'],
-                    ['link'],
-                    [{ 'script': 'sub'}, { 'script': 'super' }],
-                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                    ['clean']
-                ]
+               <?= $field->getType() == $field::TYPE_TOOLBAR ? "toolbar: toolbarOptions" : ""?>
             },
-            theme: 'snow'
+            theme: '<?= $field->getType() == $field::TYPE_TOOLBAR ? "snow" : "bubble"?>'
         });
         quill.on('text-change', function(delta, oldDelta, source) {
             document.getElementById('<?= $field->getKey() ?>').innerText = quill.root.innerHTML;
