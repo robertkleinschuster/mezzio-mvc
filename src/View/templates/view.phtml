@@ -20,11 +20,11 @@
     <?php endforeach; ?>
 </div>
 <?php $this->push('javascript') ?>
-<script src="/static/js?file=jquery.min.js"></script>
-<script src="/static/js?file=popper.min.js"></script>
-<script src="/static/js?file=feather.min.js"></script>
-<script src="/static/js?file=bs-custom-file-input.min.js"></script>
-<script src="/static/js?file=bootstrap.bundle.min.js"></script>
+<script src="?lib-file=jquery.min.js"></script>
+<script src="?lib-file=popper.min.js"></script>
+<script src="?lib-file=feather.min.js"></script>
+<script src="?lib-file=bs-custom-file-input.min.js"></script>
+<script src="?lib-file=bootstrap.bundle.min.js"></script>
 <script lang="js">
     $().ready(function ($) {
         $body = $('body');
@@ -40,6 +40,6 @@
 <?php $this->stop() ?>
 <?php $this->push('stylesheets') ?>
 
-<link rel="stylesheet" href="/static/css?file=bootstrap.min.css">
+<link rel="stylesheet" href="?lib-file=bootstrap.min.css">
 <?php $this->stop() ?>
 
