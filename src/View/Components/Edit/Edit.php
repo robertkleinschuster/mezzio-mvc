@@ -44,6 +44,18 @@ class Edit extends AbstractComponent
     /**
      * @param string $key
      * @param string $title
+     * @return Fields\File
+     */
+    public function addFile(string $key, string $title): Fields\File
+    {
+        $file = new Fields\File($key, $title);
+        $this->addField($file);
+        return $file;
+    }
+
+    /**
+     * @param string $key
+     * @param string $title
      * @return Fields\RadioButtonGroup
      */
     public function addRadioButtonGroup(string $key, string $title): Fields\RadioButtonGroup
@@ -102,6 +114,18 @@ class Edit extends AbstractComponent
         $link->setStyle(Fields\Link::STYLE_PRIMARY);
         $this->addField($link);
         return $link;
+    }
+
+    /**
+     * @param string $key
+     * @param string $title
+     * @return Fields\Wysiwyg
+     */
+    public function addWysiwyg(string $key, string $title): Fields\Wysiwyg
+    {
+        $wysiwyg = new Fields\Wysiwyg($key, $title);
+        $this->addField($wysiwyg);
+        return $wysiwyg;
     }
 
     /**

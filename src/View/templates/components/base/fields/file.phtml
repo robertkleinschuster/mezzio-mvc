@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @var $field \Mvc\View\Components\Base\Fields\AbstractFile
+ * @var $bean \NiceshopsDev\Bean\BeanInterface
+ */
+?>
+<div class="custom-file">
+    <input type="file" class="custom-file-input" id="<?= $field->getKey() ?>" name="<?= $field->getKey() ?>"
+    <?= $field->hasAccept() ? " accept='{$field->getAccept()}' " : ''?>
+    <?= $field->hasCapture() ? " capture='{$field->getCapture()}' " : ''?>
+    <?= $field->isMultiple() ? " multiple " : ''?>
+    >
+    <label class="custom-file-label" for="<?= $field->getKey() ?>" data-browse="<?= $field->getTitle() ?>"><?= $field->getValue($bean) ?></label>
+</div>
+
