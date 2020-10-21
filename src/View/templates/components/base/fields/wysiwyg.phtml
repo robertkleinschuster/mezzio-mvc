@@ -24,7 +24,9 @@
     <?php endif ?>
 </div>
 <script>
-    var quill = new Quill('#<?= $field->getKey() ?>', {
-        theme: 'snow'
+    document.addEventListener("DOMContentLoaded", function(event) {
+        var quill = new Quill('#<?= $field->getKey() ?>', {
+            theme: 'snow'
+        });
     });
 </script>
