@@ -120,6 +120,19 @@ class PathHelper
     }
 
     /**
+     * @param string $key
+     * @param null $value
+     */
+    public function addViewId(string $key, $value = null)
+    {
+        if (null === $value) {
+            $value = "{{$key}}";
+        }
+        $this->viewId_Map[$key] = $value;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getController(): string
@@ -198,6 +211,20 @@ class PathHelper
     public function hasParams(): bool
     {
         return $this->params !== null;
+    }
+
+    /**
+     * @param string $key
+     * @param $value
+     * @return PathHelper
+     */
+    public function addParam(string $key, $value = null)
+    {
+        if ($value === null) {
+            $value = "{{$key}}";
+        }
+        $this->params[$key] = $value;
+        return $this;
     }
 
     /**

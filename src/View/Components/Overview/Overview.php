@@ -172,4 +172,32 @@ class Overview extends AbstractComponent
             ->setSize(Fields\Link::SIZE_SMALL)
             ->setChapter('actions');
     }
+
+    public function addOrderUpIcon(string $link)
+    {
+        return $this->addLink('', '')
+            ->setLink($link)
+            ->setValue('')
+            ->setIcon(Fields\Link::ICON_ARROW_UP)
+            ->setStyle(Fields\Link::STYLE_SECONDARY)
+            ->setOutline(true)
+            ->addOption(Fields\Link::OPTION_TEXT_DECORATION_NONE)
+            ->addOption(Fields\Link::OPTION_BUTTON_STYLE)
+            ->setSize(Fields\Link::SIZE_SMALL)
+            ->setChapter('order');
+    }
+
+    public function addOrderDownIcon(string $link)
+    {
+        return $this->addLink('', '')
+            ->setLink($link)
+            ->setValue('')
+            ->setIcon(Fields\Link::ICON_ARROW_DOWN)
+            ->setStyle(Fields\Link::STYLE_SECONDARY)
+            ->setOutline(true)
+            ->addOption(Fields\Link::OPTION_TEXT_DECORATION_NONE)
+            ->addOption(Fields\Link::OPTION_BUTTON_STYLE)
+            ->setSize(Fields\Link::SIZE_SMALL)
+            ->setChapter('order');
+    }
 }

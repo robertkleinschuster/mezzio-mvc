@@ -25,6 +25,7 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public const ATTRIBUTE_LIMIT = 'limit';
     public const ATTRIBUTE_PAGE = 'page';
     public const ATTRIBUTE_SEARCH = 'search';
+    public const ATTRIBUTE_ORDER = 'order';
 
     public const SUBMIT_MODE_CREATE = 'create';
     public const SUBMIT_MODE_SAVE = 'save';
@@ -221,6 +222,23 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public function getSearch(): string
     {
         return $this->getAttribute(self::ATTRIBUTE_SEARCH);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOrder(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_ORDER);
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function getOrder(): string
+    {
+        return $this->getAttribute(self::ATTRIBUTE_ORDER);
     }
 
     /**

@@ -108,6 +108,7 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
             if ($controller->isAuthorized()) {
                 $this->executeControllerAction($controller, $actionMethod);
             } else {
+                $controller->getControllerResponse()->setStatusCode(401);
                 $controller->unauthorized();
             }
             $controller->end();

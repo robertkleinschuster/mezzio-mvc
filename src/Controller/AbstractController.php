@@ -85,21 +85,29 @@ abstract class AbstractController implements ControllerInterface
         if ($this->getControllerRequest()->isAjax()) {
             $this->getControllerResponse()->setMode(ControllerResponse::MODE_JSON);
         }
+
         if ($this->getControllerRequest()->hasNavId() && $this->getControllerRequest()->hasNavIndex()) {
             $this->handleNavigationState(
                 $this->getControllerRequest()->getNavId(),
                 $this->getControllerRequest()->getNavIndex()
             );
         }
+
+        if ($this->getControllerRequest()->hasSearch() && !empty($this->getControllerRequest()->getSearch())) {
+            $this->getModel()->handleSearch($this->getControllerRequest()->getSearch());
+        }
+
+        if ($this->getControllerRequest()->hasOrder() && !empty($this->getControllerRequest()->getOrder())) {
+            $this->getModel()->handleOrder($this->getControllerRequest()->getOrder());
+        }
+
         if ($this->getControllerRequest()->hasLimit() && $this->getControllerRequest()->hasPage()) {
             $this->getModel()->setLimit(
                 $this->getControllerRequest()->getLimit(),
                 $this->getControllerRequest()->getPage()
             );
         }
-        if ($this->getControllerRequest()->hasSearch() && !empty($this->getControllerRequest()->getSearch())) {
-            $this->getModel()->handleSearch($this->getControllerRequest()->getSearch());
-        }
+
     }
 
     protected function handleSubmit()

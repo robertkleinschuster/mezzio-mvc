@@ -38,6 +38,12 @@ interface ModelInterface
     public function handleSearch(string $search);
 
     /**
+     * @param string $order
+     * @return mixed
+     */
+    public function handleOrder(string $order);
+
+    /**
      * Preload data for given ids
      * Load all data with set limit if ids are empty
      *
