@@ -27,6 +27,9 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public const ATTRIBUTE_SEARCH = 'search';
     public const ATTRIBUTE_ORDER = 'order';
 
+    public const ORDER_MODE_UP = 'up';
+    public const ORDER_MODE_DOWN = 'down';
+
     public const SUBMIT_MODE_CREATE = 'create';
     public const SUBMIT_MODE_SAVE = 'save';
     public const SUBMIT_MODE_DELETE = 'delete';

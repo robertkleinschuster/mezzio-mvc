@@ -6,6 +6,7 @@ namespace Mvc\Helper;
 
 use Mezzio\Helper\ServerUrlHelper;
 use Mezzio\Helper\UrlHelper;
+use Mvc\Controller\ControllerRequest;
 use Mvc\Handler\MvcHandler;
 
 /**
@@ -224,6 +225,48 @@ class PathHelper
             $value = "{{$key}}";
         }
         $this->params[$key] = $value;
+        return $this;
+    }
+
+    /**
+     * @param string $id
+     * @param int $index
+     * @return $this
+     */
+    public function setNavState(string $id, int $index)
+    {
+        $this->addParam(ControllerRequest::ATTRIBUTE_NAV_ID, $id);
+        $this->addParam(ControllerRequest::ATTRIBUTE_NAV_INDEX, $index);
+        return $this;
+    }
+
+    /**
+     * @param int $limit
+     * @param int $page
+     * @return $this
+     */
+    public function setLimit(int $limit, int $page)
+    {
+        $this->addParam(ControllerRequest::ATTRIBUTE_LIMIT, $limit);
+        $this->addParam(ControllerRequest::ATTRIBUTE_PAGE, $page);
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setOrderDown()
+    {
+        $this->addParam(ControllerRequest::ATTRIBUTE_ORDER, ControllerRequest::ORDER_MODE_DOWN);
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setOrderUp()
+    {
+        $this->addParam(ControllerRequest::ATTRIBUTE_ORDER, ControllerRequest::ORDER_MODE_UP);
         return $this;
     }
 
