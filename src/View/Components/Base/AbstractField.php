@@ -372,9 +372,9 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     public function getLink(?BeanInterface $bean = null): string
     {
         if (null === $bean) {
-            return $this->link ?? $this->getPathHelper()->getPath();
+            return $this->link ?? $this->getPathHelper()->getPath(false);
         } else {
-            return $this->replacePlaceholders($this->link ?? $this->getPathHelper()->getPath(), $bean);
+            return $this->replacePlaceholders($this->link ?? $this->getPathHelper()->getPath(false), $bean);
         }
     }
     /**

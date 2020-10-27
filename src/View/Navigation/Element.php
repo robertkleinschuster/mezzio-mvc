@@ -101,7 +101,7 @@ class Element implements PathHelperAwareInterface
      */
     public function getLink(): string
     {
-        return $this->link ?? $this->getPathHelper()->getPath();
+        return $this->link ?? $this->getPathHelper()->getPath(false);
     }
 
     /**
