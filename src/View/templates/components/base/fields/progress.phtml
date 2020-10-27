@@ -5,13 +5,19 @@
  * @var $bean \NiceshopsDev\Bean\BeanInterface
  */
 ?>
-<div class="progress" <?= $field->hasHeight() ? "style=\"height: {$field->getHeight()}px;\"" : '' ?>>
-    <div
-            class="progress-bar progress-bar-striped <?= $field->hasStyle() ? 'bg-' . $field->getStyle() : '' ?>"
-            role="progressbar"
-            style="width: <?= $field->getValue($bean) ?>%"
-            aria-valuenow="<?= $field->getValue($bean) ?>"
-            aria-valuemin="0"
-            aria-valuemax="100">
+<?php if ($field->hasLink()): ?>
+<a href="<?= $field->getLink($bean) ?>" <?= $field->hasTarget() ? " target=\"{$field->getTarget()}\"" : '' ?>>
+    <?php endif; ?>
+    <div class="progress" <?= $field->hasHeight() ? "style=\"height: {$field->getHeight()}px;\"" : '' ?>>
+        <div
+                class="progress-bar progress-bar-striped <?= $field->hasStyle() ? 'bg-' . $field->getStyle() : '' ?>"
+                role="progressbar"
+                style="width: <?= $field->getValue($bean) ?>%"
+                aria-valuenow="<?= $field->getValue($bean) ?>"
+                aria-valuemin="0"
+                aria-valuemax="100">
+        </div>
     </div>
-</div>
+    <?php if ($field->hasLink()): ?>
+</a>
+<?php endif; ?>

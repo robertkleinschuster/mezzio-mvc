@@ -5,11 +5,19 @@
  * @var $bean \NiceshopsDev\Bean\BeanInterface
  */
 ?>
-<figure class="figure">
-    <?php if ($field->hasSource()): ?>
-        <img src="<?= $field->getSource() ?>" class="figure-img img-fluid rounded"
-             alt="<?= $field->getValue($bean) ?>">
+<?php if ($field->hasLink()): ?>
+<a href="<?= $field->getLink($bean) ?>" <?= $field->hasTarget() ? " target=\"{$field->getTarget()}\"" : '' ?>>
     <?php endif; ?>
-    <figcaption
-            class="figure-caption <?= $field->hasAlign() ? ' text-' . $field->getAlign() : '' ?>"><?= $field->getValue($bean) ?></figcaption>
-</figure>
+
+    <figure class="figure">
+        <?php if ($field->hasSource()): ?>
+            <img src="<?= $field->getSource() ?>" class="figure-img img-fluid rounded"
+                 alt="<?= $field->getValue($bean) ?>">
+        <?php endif; ?>
+        <figcaption
+                class="figure-caption <?= $field->hasAlign() ? ' text-' . $field->getAlign() : '' ?>"><?= $field->getValue($bean) ?></figcaption>
+    </figure>
+
+    <?php if ($field->hasLink()): ?>
+</a>
+<?php endif; ?>

@@ -72,7 +72,6 @@ abstract class AbstractController implements ControllerInterface
         $this->initView();
         $this->initModel();
         $this->handleParameter();
-        $this->getModel()->find($this->getControllerRequest()->getViewIdMap());
         $this->handleSubmit();
     }
 
@@ -102,23 +101,22 @@ abstract class AbstractController implements ControllerInterface
         }
 
         if ($this->getControllerRequest()->hasLimit() && $this->getControllerRequest()->hasPage()) {
-            $this->getModel()->setLimit(
+            $this->getModel()->handleLimit(
                 $this->getControllerRequest()->getLimit(),
                 $this->getControllerRequest()->getPage()
             );
         }
 
-    }
+        if ($this->getControllerRequest()->hasViewIdMap()) {
+            $this->getModel()->handleViewIdMap($this->getControllerRequest()->getViewIdMap());
+        }
 
-    protected function handleSubmit()
-    {
         if ($this->getControllerRequest()->hasSubmit()) {
             $path = $this->getPathHelper();
             if ($this->getControllerRequest()->hasViewIdMap()) {
                 $path->setViewIdMap($this->getControllerRequest()->getViewIdMap());
             }
             $pathUrl = $path->getPath();
-
             if ($this->handleSubmitSecurity()) {
                 $this->getModel()->submit(
                     $this->getControllerRequest()->getSubmit(),
@@ -186,6 +184,11 @@ abstract class AbstractController implements ControllerInterface
      */
     abstract protected function handleNavigationState(string $id, int $index);
 
+    /**
+     * @param string $id
+     * @return int
+     */
+    abstract protected function getNavigationState(string $id): int;
 
     /**
      * @return ControllerRequest

@@ -131,6 +131,10 @@ class Overview extends AbstractComponent
         return $text;
     }
 
+    /**
+     * @param string $link
+     * @return Fields\Link
+     */
     public function addDetailIcon(string $link)
     {
         return $this->addLink('', '')
@@ -145,6 +149,10 @@ class Overview extends AbstractComponent
             ->setChapter('actions');
     }
 
+    /**
+     * @param string $link
+     * @return Fields\Link
+     */
     public function addEditIcon(string $link)
     {
         return $this->addLink('', '')

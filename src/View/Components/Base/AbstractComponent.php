@@ -6,6 +6,7 @@ namespace Mvc\View\Components\Base;
 
 use Mvc\Helper\ValidationHelperAwareInterface;
 use Mvc\Helper\ValidationHelperAwareTrait;
+use Mvc\View\ComponentDataBean;
 use Mvc\View\ComponentDataBeanList;
 use Mvc\View\ViewException;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
@@ -75,6 +76,7 @@ abstract class AbstractComponent implements
         $this->field_List = [];
         $this->title = $title;
         $this->setBeanList(new ComponentDataBeanList());
+        $this->setBean(new ComponentDataBean());
         $this->id = (string)preg_replace("/[^a-zA-Z]/", "", md5(serialize($this)));
     }
 

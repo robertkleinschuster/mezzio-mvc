@@ -4,8 +4,15 @@ declare(strict_types=1);
 
 namespace Mvc\View\Navigation;
 
-class Element
+use Mvc\Helper\PathHelper;
+use Mvc\Helper\PathHelperAwareInterface;
+use Mvc\Helper\PathHelperAwareTrait;
+
+class Element implements PathHelperAwareInterface
 {
+
+    use PathHelperAwareTrait;
+
     /**
      * @var string
      */
@@ -20,11 +27,6 @@ class Element
      * @var string
      */
     private ?string $icon = null;
-
-    /**
-     * @var bool
-     */
-    private bool $active = false;
 
     /**
      * @var string
@@ -99,7 +101,7 @@ class Element
      */
     public function getLink(): string
     {
-        return $this->link;
+        return $this->link ?? $this->getPathHelper()->getPath();
     }
 
     /**
@@ -107,7 +109,7 @@ class Element
      */
     public function hasLink(): bool
     {
-        return $this->link !== null;
+        return $this->link !== null || $this->hasPathHelper();
     }
 
     /**
@@ -117,23 +119,6 @@ class Element
     {
         $this->link = $link;
     }
-
-    /**
-     * @return bool
-     */
-    public function isActive(): bool
-    {
-        return $this->active ?? false;
-    }
-
-    /**
-     * @param bool $active
-     */
-    public function setActive(bool $active): void
-    {
-        $this->active = $active;
-    }
-
 
     /**
      * @return string

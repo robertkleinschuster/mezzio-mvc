@@ -4,4 +4,10 @@
  * @var $bean \NiceshopsDev\Bean\BeanInterface
  */
 ?>
+<?php if ($field->hasLink()): ?>
+<a href="<?= $field->getLink($bean) ?>" <?= $field->hasTarget() ? " target=\"{$field->getTarget()}\"" : '' ?>>
+    <?php endif; ?>
 <span><?= number_format($field->getValue($bean), $field->getDecimals(), $field->getDecimalPoint(), $field->getThousandsSeparator()) ?></span>
+    <?php if ($field->hasLink()): ?>
+</a>
+<?php endif; ?>

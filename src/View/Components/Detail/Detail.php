@@ -22,7 +22,7 @@ class Detail extends AbstractComponent
      * @param string $key
      * @return Fields\Badge
      */
-    public function addBadge(string $key, string $title): Fields\Badge
+    public function addBadge(string $key, ?string $title = null): Fields\Badge
     {
         $badge = new Fields\Badge($key, $title);
         $this->addField($badge);
@@ -36,7 +36,7 @@ class Detail extends AbstractComponent
      * @param string $falseValue
      * @return Fields\Badge
      */
-    public function addBadgeBoolean(string $key, string $title, string $trueValue, string $falseValue) {
+    public function addBadgeBoolean(string $key, ?string $title, string $trueValue, string $falseValue) {
         return $this->addBadgeState(
             $key,
             $title,
@@ -52,7 +52,7 @@ class Detail extends AbstractComponent
      * @param array|null $styleMap
      * @return Fields\Badge
      */
-    public function addBadgeState(string $key, string $title, array $stateMap, array $styleMap = null) {
+    public function addBadgeState(string $key, ?string $title, array $stateMap, array $styleMap = null) {
         $badge = $this->addBadge($key, $title);
         $badge->setFormat(function(BeanInterface $bean, Fields\Badge $badge) use ($key, $stateMap, $styleMap) {
             if (null !== $styleMap && isset($styleMap[$bean->getData($key)])) {
@@ -71,7 +71,7 @@ class Detail extends AbstractComponent
      * @param string $key
      * @return Fields\Blockquote
      */
-    public function addBlockquote(string $key, string $title): Fields\Blockquote
+    public function addBlockquote(string $key, ?string $title = null): Fields\Blockquote
     {
         $blockquote = new Fields\Blockquote($key, $title);
         $this->addField($blockquote);
@@ -83,7 +83,7 @@ class Detail extends AbstractComponent
      * @param string $key
      * @return Fields\Button
      */
-    public function addButton(string $key, string $title): Fields\Button
+    public function addButton(string $key, ?string $title = null): Fields\Button
     {
         $button = new Fields\Button($key, $title);
         $this->addField($button);
@@ -95,7 +95,7 @@ class Detail extends AbstractComponent
      * @param string $key
      * @return Fields\Codeblock
      */
-    public function addCodeblock(string $key, string $title): Fields\Codeblock
+    public function addCodeblock(string $key, ?string $title = null): Fields\Codeblock
     {
         $codeblock = new Fields\Codeblock($key, $title);
         $this->addField($codeblock);
@@ -107,7 +107,7 @@ class Detail extends AbstractComponent
      * @param string $key
      * @return Fields\Figure
      */
-    public function addFigure(string $key, string $title): Fields\Figure
+    public function addFigure(string $key, ?string $title = null): Fields\Figure
     {
         $figure = new Fields\Figure($key, $title);
         $this->addField($figure);
@@ -119,7 +119,7 @@ class Detail extends AbstractComponent
      * @param string $key
      * @return Fields\Image
      */
-    public function addImage(string $key, string $title): Fields\Image
+    public function addImage(string $key, ?string $title = null): Fields\Image
     {
         $image = new Fields\Image($key, $title);
         $this->addField($image);
@@ -131,7 +131,7 @@ class Detail extends AbstractComponent
      * @param string $key
      * @return Fields\Link
      */
-    public function addLink(string $key, string $title): Fields\Link
+    public function addLink(string $key, ?string $title = null): Fields\Link
     {
         $link = new Fields\Link($key, $title);
         $this->addField($link);
@@ -155,7 +155,7 @@ class Detail extends AbstractComponent
      * @param string $key
      * @return Fields\Progress
      */
-    public function addProgress(string $key, string $title): Fields\Progress
+    public function addProgress(string $key, ?string $title = null): Fields\Progress
     {
         $progress = new Fields\Progress($key, $title);
         $this->addField($progress);
@@ -168,7 +168,7 @@ class Detail extends AbstractComponent
      * @param string $key
      * @return Fields\Spinner
      */
-    public function addSpinner(string $key, string $title): Fields\Spinner
+    public function addSpinner(string $key, ?string $title = null): Fields\Spinner
     {
         $spinner = new Fields\Spinner($key, $title);
         $this->addField($spinner);
@@ -180,7 +180,7 @@ class Detail extends AbstractComponent
      * @param string $title
      * @return Fields\Text
      */
-    public function addText(string $key, string $title): Fields\Text
+    public function addText(string $key, ?string $title = null): Fields\Text
     {
         $text = new Fields\Text($key, $title);
         $this->addField($text);

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Mvc\View\Components\Base;
 
 trait RequiredAwareTrait
 {

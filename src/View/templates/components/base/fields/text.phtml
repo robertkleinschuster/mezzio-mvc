@@ -4,6 +4,12 @@
  * @var $bean \NiceshopsDev\Bean\BeanInterface
  */
 ?>
-<div class="<?= $field->hasAlign() ? ' text-' . $field->getAlign() : ''?>">
-    <span class="<?=implode(' ', $field->getOptions())?>"><?=$field->getValue($bean)?></span>
-</div>
+<?php if ($field->hasLink()): ?>
+    <a href="<?= $field->getLink($bean) ?>" <?= $field->hasTarget() ? " target=\"{$field->getTarget()}\"" : '' ?>>
+<?php endif; ?>
+    <div class="<?= $field->hasAlign() ? ' text-' . $field->getAlign() : '' ?>">
+        <span class="<?= implode(' ', $field->getOptions()) ?>"><?= $field->getValue($bean) ?></span>
+    </div>
+<?php if ($field->hasLink()): ?>
+    </a>
+<?php endif; ?>

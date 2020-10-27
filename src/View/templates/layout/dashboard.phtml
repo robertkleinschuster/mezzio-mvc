@@ -199,15 +199,15 @@
                             </h6>
                         <?php endif ?>
                         <ul class="nav flex-column mb-2">
-                            <?php foreach ($navigation->getElementList() as $element): ?>
+                            <?php foreach ($navigation->getElementList() as $key => $element): ?>
                                 <li class="nav-item">
-                                    <a class="nav-link <?= $element->isActive() ? 'active' : '' ?>"
+                                    <a class="nav-link <?= $navigation->hasActive() && $navigation->getActive() == $key ? 'active' : '' ?>"
                                        href="<?= $element->getLink() ?>">
                                         <?php if ($element->hasIcon()): ?>
                                             <span data-feather="<?= $element->getIcon() ?>"></span>
                                         <?php endif ?>
                                         <?= $element->getName() ?>
-                                        <?php if ($element->isActive()): ?>
+                                        <?php if ($navigation->hasActive() && $navigation->getActive() == $key): ?>
                                             <span class="sr-only">(current)</span>
                                         <?php endif ?>
                                     </a>

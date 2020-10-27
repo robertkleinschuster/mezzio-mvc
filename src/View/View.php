@@ -356,4 +356,15 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
         $this->setData('favicon', $favicon);
         return $this;
     }
+
+    /**
+     * @param string $logo
+     * @return $this
+     * @throws BeanException
+     */
+    public function setLogo(string $logo): self
+    {
+        $this->setData('logo', $logo);
+        return $this;
+    }
 }

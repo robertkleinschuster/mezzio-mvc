@@ -30,7 +30,7 @@ interface ModelInterface
      * @param int $limit
      * @param int $page
      */
-    public function setLimit(int $limit, int $page);
+    public function handleLimit(int $limit, int $page);
 
     /**
      * @param string $search
@@ -49,7 +49,7 @@ interface ModelInterface
      *
      * @param array $viewIdMap
      */
-    public function find(array $viewIdMap);
+    public function handleViewIdMap(array $viewIdMap);
 
     /**
      * Handle form submit

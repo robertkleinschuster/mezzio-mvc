@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mvc\View\Components\Base\Fields;
 
 use Mvc\View\Components\Base\AbstractField;
+use Mvc\View\Components\Base\RequiredAwareInterface;
+use Mvc\View\Components\Base\RequiredAwareTrait;
 
 abstract class AbstractRadioButtonGroup extends AbstractField implements RequiredAwareInterface
 {

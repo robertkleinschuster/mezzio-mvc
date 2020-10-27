@@ -95,8 +95,10 @@
 </head>
 <body class="text-center">
 <div class="form-signin">
-    <?php if ($view->hasData('title')): ?>
-        <h1 class="text-center mx-auto"><?= $view->getData('title') ?></h1>
+    <?php if ($view->hasData('logo')): ?>
+        <img class="mb-4" src="<?= $view->getData('logo') ?>" alt="<?= $view->hasData('title') ? $view->getData('title') : 'Logo'?>" width="330">
+    <?php elseif ($view->hasData('title')): ?>
+            <h1 class="text-center mx-auto"><?= $view->getData('title') ?></h1>
     <?php endif; ?>
     <?= $this->section('content') ?>
     <hr/>
@@ -106,7 +108,6 @@
         &copy; <?= date('Y') ?> <a href="https://kleinschuster.de">Robert Kleinschuster</a>
     <?php endif ?>
 </div>
-
 <?= $this->section('javascript') ?>
 </body>
 </html>

@@ -104,7 +104,6 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
         try {
             $controller = ($this->controllerFactory)($controllerCode, $request, $config);
             $controller->init();
-            $controller->setActiveNavigation($controllerCode, $actionCode);
             if ($controller->isAuthorized()) {
                 $this->executeControllerAction($controller, $actionMethod);
             } else {

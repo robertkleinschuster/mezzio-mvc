@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mvc\View\Components\Base;
 
+use Mvc\Helper\PathHelperAwareInterface;
+use Mvc\Helper\PathHelperAwareTrait;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
 use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareTrait;
 use NiceshopsDev\Bean\BeanInterface;
@@ -16,11 +18,13 @@ use NiceshopsDev\NiceCore\Option\OptionTrait;
  * Class AbstractField
  * @package Mvc\View\Components\Base
  */
-abstract class AbstractField implements OptionAwareInterface, AttributeAwareInterface, BeanFormatterAwareInterface
+abstract class AbstractField implements OptionAwareInterface, AttributeAwareInterface, BeanFormatterAwareInterface, PathHelperAwareInterface, LinkAwareInterface
 {
     use OptionTrait;
     use AttributeTrait;
     use BeanFormatterAwareTrait;
+    use PathHelperAwareTrait;
+    use LinkAwareTrait;
 
     public const STYLE_PRIMARY = 'primary';
     public const STYLE_SECONDARY = 'secondary';
@@ -361,6 +365,25 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
         return $this->format !== null;
     }
 
+    /**
+     * @param BeanInterface|null $bean
+     * @return string
+     */
+    public function getLink(?BeanInterface $bean = null): string
+    {
+        if (null === $bean) {
+            return $this->link ?? $this->getPathHelper()->getPath();
+        } else {
+            return $this->replacePlaceholders($this->link ?? $this->getPathHelper()->getPath(), $bean);
+        }
+    }
+    /**
+     * @return bool
+     */
+    public function hasLink(): bool
+    {
+        return $this->link !== null || $this->hasPathHelper();
+    }
 
     /**
      * @return string

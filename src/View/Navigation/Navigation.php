@@ -41,6 +41,16 @@ class Navigation
     private string $position;
 
     /**
+     * @var int|null
+     */
+    private ?int $active = null;
+
+    /**
+     * @var string
+     */
+    private string $id;
+
+    /**
      * Navigation constructor.
      * @param string $title
      * @param string $position
@@ -49,6 +59,7 @@ class Navigation
     {
         $this->title = $title;
         $this->position = $position;
+        $this->id = (string)preg_replace("/[^a-zA-Z]/", "", md5(serialize($this)));
     }
 
     /**
@@ -193,4 +204,42 @@ class Navigation
     {
         return $this->permission !== null;
     }
+
+    /**
+    * @return int
+    */
+    public function getActive(): int
+    {
+        return $this->active;
+    }
+
+    /**
+    * @param int $active
+    *
+    * @return $this
+    */
+    public function setActive(int $active): self
+    {
+        $this->active = $active;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasActive(): bool
+    {
+        return $this->active !== null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+
+
 }
