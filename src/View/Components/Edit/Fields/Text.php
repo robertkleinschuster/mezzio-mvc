@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Mvc\View\Components\Edit\Fields;
 
 use Mvc\View\Components\Base\Fields\AbstractText;
-use Mvc\View\Components\Base\Fields\RequiredAwareInterface;
-use Mvc\View\Components\Base\Fields\RequiredAwareTrait;
+use Mvc\View\Components\Base\RequiredAwareInterface;
+use Mvc\View\Components\Base\RequiredAwareTrait;
 
 class Text extends AbstractText implements RequiredAwareInterface
 {
