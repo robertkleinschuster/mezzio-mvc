@@ -7,7 +7,7 @@ namespace Mvc\Helper;
 
 trait PathHelperAwareTrait
 {
-    private ?PathHelper $pathHelper;
+    private ?PathHelper $pathHelper = null;
 
     /**
     * @return PathHelper

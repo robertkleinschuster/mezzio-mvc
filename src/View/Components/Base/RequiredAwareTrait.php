@@ -10,7 +10,7 @@ trait RequiredAwareTrait
     /**
      * @var bool
      */
-    private $required;
+    private bool $required = false;
 
 
     /**

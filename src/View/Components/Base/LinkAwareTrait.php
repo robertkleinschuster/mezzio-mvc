@@ -5,19 +5,18 @@ declare(strict_types=1);
 namespace Mvc\View\Components\Base;
 
 
-use Mvc\View\Components\Base\Fields\AbstractLink;
 
 trait LinkAwareTrait
 {
     /**
      * @var string
      */
-    private $target;
+    private ?string $target = null;
 
     /**
      * @var string
      */
-    private $link;
+    private ?string $link = null;
 
     /**
      * @return string
