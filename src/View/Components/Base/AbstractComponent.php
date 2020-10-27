@@ -97,6 +97,7 @@ abstract class AbstractComponent implements
      */
     public function setBean(BeanInterface $bean)
     {
+        $this->getBeanList()->resetBeans();
         $this->getBeanList()->offsetSet(0, $bean);
         return $this;
     }
@@ -114,7 +115,7 @@ abstract class AbstractComponent implements
             }
         }
         throw new ViewException(
-            'Could not get single bean from Componen. Count: ' . $this->getBeanList()->count()
+            'Could not get single bean from component. Count: ' . $this->getBeanList()->count()
         );
     }
 
