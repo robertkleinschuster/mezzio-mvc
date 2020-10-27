@@ -97,11 +97,6 @@ abstract class AbstractComponent implements
      */
     public function setBean(BeanInterface $bean)
     {
-        if ($this->getBeanList()->count() >= 1) {
-            throw new ViewException(
-                'Could not set bean in Component. Count: ' . $this->getBeanList()->count()
-            );
-        }
         $this->getBeanList()->offsetSet(0, $bean);
         return $this;
     }
