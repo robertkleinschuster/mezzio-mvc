@@ -80,15 +80,9 @@ interface ControllerInterface
      */
     public function hasTemplate(): bool;
 
-
     /**
      * @return bool
      */
     public function isAuthorized(): bool;
 
-    /**
-     * @param string $controller
-     * @param string $action
-     */
-    public function setActiveNavigation(string $controller, string $action);
 }

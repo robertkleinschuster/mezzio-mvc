@@ -44,12 +44,17 @@ interface ModelInterface
     public function handleOrder(string $order);
 
     /**
-     * Preload data for given ids
-     * Load all data with set limit if ids are empty
+
      *
      * @param array $viewIdMap
      */
     public function handleViewIdMap(array $viewIdMap);
+
+    /**
+     * Preload data for given ids
+     * Load all data with set limit if ids are empty
+     */
+    public function load();
 
     /**
      * Handle form submit

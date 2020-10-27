@@ -72,11 +72,27 @@ abstract class AbstractController implements ControllerInterface
         $this->initView();
         $this->initModel();
         $this->handleParameter();
+        $this->loadData();
+        $this->handleSubmit();
     }
 
+    /**
+     * @return mixed
+     */
     abstract protected function initView();
 
+    /**
+     * @return mixed
+     */
     abstract protected function initModel();
+
+    /**
+     *
+     */
+    protected function loadData()
+    {
+        $this->getModel()->load();
+    }
 
     protected function handleParameter()
     {
@@ -109,7 +125,10 @@ abstract class AbstractController implements ControllerInterface
         if ($this->getControllerRequest()->hasViewIdMap()) {
             $this->getModel()->handleViewIdMap($this->getControllerRequest()->getViewIdMap());
         }
+    }
 
+    protected function handleSubmit()
+    {
         if ($this->getControllerRequest()->hasSubmit()) {
             $path = $this->getPathHelper();
             if ($this->getControllerRequest()->hasViewIdMap()) {
@@ -131,33 +150,6 @@ abstract class AbstractController implements ControllerInterface
             $this->getControllerResponse()->setRedirect($pathUrl);
         }
     }
-
-    /**
-     * @param $controller
-     * @param $action
-     */
-    public function setActiveNavigation(string $controller, string $action)
-    {
-        if ($this->hasView()) {
-            foreach ($this->getView()->getNavigationList() as $item) {
-                foreach ($item->getElementList() as $element) {
-                    if (
-                        $element->getLink() === $this->getPathHelper()
-                            ->setController($controller)
-                            ->setAction($action)
-                            ->getPath()
-                    ) {
-                        $title = $this->getView()->getData('title');
-                        $this->getView()->setHeading($element->getName());
-                        $this->getView()->setTitle($title . ' - ' . $element->getName());
-                        $element->setActive(true);
-                        return;
-                    }
-                }
-            }
-        }
-    }
-
 
     /**
      * Handle security checks e.g. csrf token before executing submit in model
