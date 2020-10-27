@@ -72,7 +72,6 @@ abstract class AbstractController implements ControllerInterface
         $this->initView();
         $this->initModel();
         $this->handleParameter();
-        $this->handleSubmit();
     }
 
     abstract protected function initView();
