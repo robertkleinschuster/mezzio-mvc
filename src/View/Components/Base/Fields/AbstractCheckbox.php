@@ -2,13 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
-use Mvc\View\Components\Base\AbstractField;
-use Mvc\View\Components\Base\RequiredAwareInterface;
-use Mvc\View\Components\Base\RequiredAwareTrait;
-use NiceshopsDev\Bean\BeanInterface;
+use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Mvc\View\Components\Base\AbstractField;
+use Pars\Mvc\View\Components\Base\RequiredAwareInterface;
+use Pars\Mvc\View\Components\Base\RequiredAwareTrait;
 
+/**
+ * Class AbstractCheckbox
+ * @package Pars\Mvc\View\Components\Base\Fields
+ */
 abstract class AbstractCheckbox extends AbstractField implements RequiredAwareInterface
 {
     use RequiredAwareTrait;
@@ -16,12 +20,12 @@ abstract class AbstractCheckbox extends AbstractField implements RequiredAwareIn
     /**
      * @var string
      */
-    private $hint;
+    private ?string $hint = null;
 
     /**
      * @var bool
      */
-    private $checked;
+    private ?bool $checked = null;
 
 
     /**

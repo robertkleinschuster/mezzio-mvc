@@ -2,15 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
+/**
+ * Class AbstractCodeblock
+ * @package Pars\Mvc\View\Components\Base\Fields
+ */
 abstract class AbstractCodeblock extends AbstractText
 {
 
     /**
      * @var bool
      */
-    private $scrollable;
+    private ?bool $scrollable = null;
 
     /**
      * @return string

@@ -2,8 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Helper;
+namespace Pars\Mvc\Helper;
 
+/**
+ * Class ValidationHelper
+ * @package Pars\Mvc\Helper
+ */
 class ValidationHelper
 {
     /**

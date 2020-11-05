@@ -1,3 +1,3 @@
-# mezzio-mvc
+# pars-mvc
 
-This component provides ...
+This component provides middleware based MVC and view components.

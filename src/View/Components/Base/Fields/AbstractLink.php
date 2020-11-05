@@ -2,12 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
-use Mvc\View\Components\Base\AbstractField;
-use Mvc\View\Components\Base\IconAwareInterface;
-use Mvc\View\Components\Base\IconAwareTrait;
+use Pars\Mvc\View\Components\Base\AbstractField;
+use Pars\Mvc\View\Components\Base\IconAwareInterface;
+use Pars\Mvc\View\Components\Base\IconAwareTrait;
 
+/**
+ * Class AbstractLink
+ * @package Pars\Mvc\View\Components\Base\Fields
+ */
 abstract class AbstractLink extends AbstractField implements IconAwareInterface
 {
     use IconAwareTrait;
@@ -22,17 +26,17 @@ abstract class AbstractLink extends AbstractField implements IconAwareInterface
     /**
      * @var string
      */
-    private $style;
+    private ?string $style = null;
 
     /**
      * @var string
      */
-    private $size;
+    private ?string $size = null;
 
     /**
      * @var bool
      */
-    private $outline;
+    private ?bool $outline = null;
 
     /**
      * @return string

@@ -2,17 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Mvc;
+namespace Pars\Mvc;
 
-use Mvc\Factory\ControllerFactory;
-use Mvc\Factory\ControllerFactoryFactory;
-use Mvc\Factory\ModelFactory;
-use Mvc\Factory\ModelFactoryFactory;
-use Mvc\Handler\MvcHandler;
-use Mvc\Handler\MvcHandlerFactory;
-use Mvc\Helper\PathHelper;
-use Mvc\Helper\PathHelperFactory;
+use Pars\Mvc\Factory\ControllerFactory;
+use Pars\Mvc\Factory\ControllerFactoryFactory;
+use Pars\Mvc\Factory\ModelFactory;
+use Pars\Mvc\Factory\ModelFactoryFactory;
+use Pars\Mvc\Handler\MvcHandler;
+use Pars\Mvc\Handler\MvcHandlerFactory;
+use Pars\Mvc\Helper\PathHelper;
+use Pars\Mvc\Helper\PathHelperFactory;
 
+/**
+ * Class ConfigProvider
+ * @package Pars\Mvc
+ */
 class ConfigProvider
 {
 

@@ -2,11 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Model;
+namespace Pars\Mvc\Model;
 
-use Mvc\Bean\TemplateDataBean;
-use Mvc\Helper\ValidationHelper;
+use Pars\Mvc\Bean\TemplateDataBean;
+use Pars\Mvc\Helper\ValidationHelper;
 
+/**
+ * Interface ModelInterface
+ * @package Pars\Mvc\Model
+ */
 interface ModelInterface
 {
     /**

@@ -1,9 +1,14 @@
 <?php
 
+declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
-class AbstractWysiwyg extends AbstractTextarea
+/**
+ * Class AbstractWysiwyg
+ * @package Pars\Mvc\View\Components\Base\Fields
+ */
+abstract class AbstractWysiwyg extends AbstractTextarea
 {
 
     public const TYPE_TOOLTIP = 'tooltip';

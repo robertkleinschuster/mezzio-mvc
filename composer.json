@@ -1,9 +1,10 @@
 {
-    "name": "robertkleinschuster/mvc",
+    "name": "pars/mvc",
     "description": "",
     "license": "BSD-3-Clause",
     "keywords": [
-        "mvc"
+        "mvc",
+        "pars"
     ],
     "support": {
         "issues": "https://github.com/robertkleinschuster/mvc/issues",
@@ -28,12 +29,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Mvc\\": "src//"
+            "Pars\\Mvc\\": "src//"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Mvc\\": "test//"
+            "Pars\\Mvc\\": "test//"
         }
     },
     "extra": {

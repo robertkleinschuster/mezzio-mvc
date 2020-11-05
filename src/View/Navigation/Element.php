@@ -2,15 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Navigation;
+namespace Pars\Mvc\View\Navigation;
 
-use Mvc\Helper\PathHelper;
-use Mvc\Helper\PathHelperAwareInterface;
-use Mvc\Helper\PathHelperAwareTrait;
+use Pars\Mvc\Helper\PathHelperAwareInterface;
+use Pars\Mvc\Helper\PathHelperAwareTrait;
 
+/**
+ * Class Element
+ * @package Pars\Mvc\View\Navigation
+ */
 class Element implements PathHelperAwareInterface
 {
-
     use PathHelperAwareTrait;
 
     /**

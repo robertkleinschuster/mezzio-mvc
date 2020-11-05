@@ -1,18 +1,21 @@
 <?php
-
 declare(strict_types=1);
 
-namespace Mvc\Model;
+namespace Pars\Mvc\Model;
 
-use Mvc\Bean\TemplateDataBean;
-use Mvc\Controller\ControllerRequest;
-use Mvc\Helper\ValidationHelper;
-use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
-use NiceshopsDev\NiceCore\Option\OptionTrait;
+use Pars\Mvc\Bean\TemplateDataBean;
+use Niceshops\Core\Option\OptionAwareInterface;
+use Niceshops\Core\Option\OptionAwareTrait;
+use Pars\Mvc\Controller\ControllerRequest;
+use Pars\Mvc\Helper\ValidationHelper;
 
+/**
+ * Class AbstractModel
+ * @package Pars\Mvc\Model
+ */
 abstract class AbstractModel implements ModelInterface, OptionAwareInterface
 {
-    use OptionTrait;
+    use OptionAwareTrait;
 
     public const OPTION_CREATE_ALLOWED = 'create_allowed';
     public const OPTION_EDIT_ALLOWED = 'edit_allowed';

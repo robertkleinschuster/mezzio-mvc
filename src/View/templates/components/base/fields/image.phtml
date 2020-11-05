@@ -1,14 +1,14 @@
 <?php
 /**
- * @var $field \Mvc\View\Components\Base\Fields\AbstractImage
- * @var $bean \NiceshopsDev\Bean\BeanInterface
+ * @var $field \Pars\Mvc\View\Components\Base\Fields\AbstractImage
+ * @var $bean \Niceshops\Bean\Type\Base\BeanInterface
  */
 ?>
 <?php if ($field->hasLink()): ?>
     <a href="<?= $field->getLink($bean) ?>" <?= $field->hasTarget() ? " target=\"{$field->getTarget()}\"" : '' ?>>
 <?php endif; ?>
 <?php if ($field->hasSource()): ?>
-    <?php if ($field->hasAlign() && $field->getAlign() == \Mvc\View\Components\Base\Fields\AbstractText::ALIGN_CENTER): ?>
+    <?php if ($field->hasAlign() && $field->getAlign() == \Pars\Mvc\View\Components\Base\Fields\AbstractText::ALIGN_CENTER): ?>
         <img
                 src="<?= $field->getSource() ?>"
                 class="<?= $field->hasSize() ? 'img-' . $field->getSize() : '' ?> mx-auto d-block"

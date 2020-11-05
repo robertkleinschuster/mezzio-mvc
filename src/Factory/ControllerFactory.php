@@ -2,18 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Factory;
+namespace Pars\Mvc\Factory;
 
-use Mvc\Controller\AbstractController;
-use Mvc\Controller\ControllerInterface;
-use Mvc\Controller\ControllerRequest;
-use Mvc\Controller\ControllerResponse;
-use Mvc\Exception\ControllerNotFoundException;
-use Mvc\Helper\PathHelper;
-use NiceshopsDev\NiceCore\Exception;
+use Pars\Mvc\Controller\AbstractController;
+use Pars\Mvc\Controller\ControllerInterface;
+use Pars\Mvc\Controller\ControllerRequest;
+use Pars\Mvc\Controller\ControllerResponse;
+use Pars\Mvc\Exception\ControllerNotFoundException;
+use Pars\Mvc\Helper\PathHelper;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
+/**
+ * Class ControllerFactory
+ * @package Pars\Mvc\Factory
+ */
 class ControllerFactory
 {
     /**
@@ -42,7 +45,6 @@ class ControllerFactory
      * @param array $config
      * @return ControllerInterface
      * @throws ControllerNotFoundException
-     * @throws Exception
      */
     public function __invoke(string $code, ServerRequestInterface $request, array $config): ControllerInterface
     {

@@ -2,19 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
+/**
+ * Class AbstractSelect
+ * @package Pars\Mvc\View\Components\Base\Fields
+ */
 abstract class AbstractSelect extends AbstractRadioButtonGroup
 {
     /**
      * @var int
      */
-    private $size;
+    private ?int $size = null;
 
     /**
      * @var bool
      */
-    private $multiple;
+    private ?bool $multiple = null;
 
     /**
      * @return string

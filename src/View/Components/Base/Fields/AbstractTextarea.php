@@ -2,12 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
-use Mvc\View\Components\Base\AbstractField;
-use Mvc\View\Components\Base\RequiredAwareInterface;
-use Mvc\View\Components\Base\RequiredAwareTrait;
+use Pars\Mvc\View\Components\Base\AbstractField;
+use Pars\Mvc\View\Components\Base\RequiredAwareInterface;
+use Pars\Mvc\View\Components\Base\RequiredAwareTrait;
 
+/**
+ * Class AbstractTextarea
+ * @package Pars\Mvc\View\Components\Base\Fields
+ */
 abstract class AbstractTextarea extends AbstractField implements RequiredAwareInterface
 {
     use RequiredAwareTrait;
@@ -15,7 +19,7 @@ abstract class AbstractTextarea extends AbstractField implements RequiredAwareIn
     /**
      * @var int
      */
-    private $rows;
+    private ?int $rows = null;
 
     /**
      * @return string

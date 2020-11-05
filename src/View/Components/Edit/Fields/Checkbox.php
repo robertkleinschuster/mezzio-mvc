@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Edit\Fields;
+namespace Pars\Mvc\View\Components\Edit\Fields;
 
-use Mvc\View\Components\Base\Fields\AbstractCheckbox;
+use Pars\Mvc\View\Components\Base\Fields\AbstractCheckbox;
 
+/**
+ * Class Checkbox
+ * @package Pars\Mvc\View\Components\Edit\Fields
+ */
 class Checkbox extends AbstractCheckbox
 {
 

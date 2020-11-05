@@ -2,15 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
+/**
+ * Class AbstractFigure
+ * @package Pars\Mvc\View\Components\Base\Fields
+ */
 abstract class AbstractFigure extends AbstractText
 {
 
     /**
      * @var string
      */
-    private $source;
+    private ?string $source = null;
 
 
     /**

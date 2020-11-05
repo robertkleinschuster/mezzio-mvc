@@ -2,29 +2,33 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Handler;
+namespace Pars\Mvc\Handler;
 
 use Exception;
 use Laminas\Diactoros\Response;
 use Mezzio\Router\RouteResult;
 use Mezzio\Template\TemplateRendererInterface;
 use Minifier\TinyMinify;
-use Mvc\Controller\ControllerInterface;
-use Mvc\Controller\ControllerResponse;
-use Mvc\Exception\ActionException;
-use Mvc\Exception\ActionNotFoundException;
-use Mvc\Exception\ControllerException;
-use Mvc\Exception\ControllerNotFoundException;
-use Mvc\Exception\NotFoundException;
-use Mvc\Factory\ControllerFactory;
-use Mvc\Factory\ServerResponseFactory;
-use Mvc\View\ViewRenderer;
+use Pars\Mvc\Controller\ControllerInterface;
+use Pars\Mvc\Controller\ControllerResponse;
+use Pars\Mvc\Exception\ActionException;
+use Pars\Mvc\Exception\ActionNotFoundException;
+use Pars\Mvc\Exception\ControllerException;
+use Pars\Mvc\Exception\ControllerNotFoundException;
+use Pars\Mvc\Exception\NotFoundException;
+use Pars\Mvc\Factory\ControllerFactory;
+use Pars\Mvc\Factory\ServerResponseFactory;
+use Pars\Mvc\View\ViewRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Throwable;
 
+/**
+ * Class MvcHandler
+ * @package Pars\Mvc\Handler
+ */
 class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
 {
 
@@ -62,19 +66,23 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
         $this->config = $config;
     }
 
-    function endsWith( $haystack, $needle ) {
-        $length = strlen( $needle );
-        if( !$length ) {
+    /**
+     * @param $haystack
+     * @param $needle
+     * @return bool
+     */
+    protected function endsWith(string $haystack, string $needle)
+    {
+        $length = strlen($needle);
+        if (!$length) {
             return true;
         }
-        return substr( $haystack, -$length ) === $needle;
+        return substr($haystack, -$length) === $needle;
     }
 
     /**
      * @param ServerRequestInterface $request
      * @return ResponseInterface
-     * @throws \NiceshopsDev\NiceCore\Exception
-     * @throws ControllerNotFoundException
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
@@ -122,7 +130,7 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
             if ($controller->hasView()) {
                 $viewRenderer = new ViewRenderer($this->renderer, $viewTemplateFolder);
                 $view = $controller->getView();
-                $view->getTemplateData()->setFromArray($templateData->toArray());
+                $view->getTemplateData()->fromArray($templateData->toArray());
                 $renderedOutput = $viewRenderer->render($view);
             } elseif ($controller->hasTemplate()) {
                 $renderedOutput = $this->renderer->render(
@@ -164,7 +172,6 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
      * @param $config
      * @return ControllerInterface
      * @throws ControllerNotFoundException
-     * @throws \NiceshopsDev\NiceCore\Exception
      */
     private function getErrorController($controller, $errorController, $request, $config)
     {
@@ -177,7 +184,7 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
     /**
      * @param ControllerInterface $controller
      * @param string $actionMethod
-     * @throws ActionException | ControllerException | ActionNotFoundException
+     * @throws ActionNotFoundException
      */
     protected function executeControllerAction(ControllerInterface $controller, string $actionMethod)
     {

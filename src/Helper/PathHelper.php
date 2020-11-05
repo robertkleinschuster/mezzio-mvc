@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Helper;
+namespace Pars\Mvc\Helper;
 
 use Mezzio\Helper\ServerUrlHelper;
 use Mezzio\Helper\UrlHelper;
-use Mvc\Controller\ControllerRequest;
-use Mvc\Handler\MvcHandler;
+use Pars\Mvc\Controller\ControllerRequest;
+use Pars\Mvc\Handler\MvcHandler;
 
 /**
  * Class PathHelper
- * @package Mvc\Helper
+ * @package Pars\Mvc\Helper
  */
 class PathHelper
 {

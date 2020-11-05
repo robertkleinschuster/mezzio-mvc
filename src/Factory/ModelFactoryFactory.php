@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Factory;
+namespace Pars\Mvc\Factory;
 
 use Psr\Container\ContainerInterface;
 
+/**
+ * Class ModelFactoryFactory
+ * @package Pars\Mvc\Factory
+ */
 class ModelFactoryFactory
 {
     /**

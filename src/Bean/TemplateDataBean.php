@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Bean;
+namespace Pars\Mvc\Bean;
 
-use NiceshopsDev\Bean\AbstractBaseBean;
+use Niceshops\Bean\Type\Base\AbstractBaseBean;
 
 /**
  * Class TemplateDataBean
- * @package Mvc\Bean
+ * @package Pars\Mvc\Bean
  */
 class TemplateDataBean extends AbstractBaseBean
 {

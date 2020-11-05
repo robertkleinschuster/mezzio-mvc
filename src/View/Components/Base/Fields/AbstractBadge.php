@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
-use Mvc\View\Components\Base\AbstractField;
-use NiceshopsDev\Bean\BeanInterface;
+use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Mvc\View\Components\Base\AbstractField;
 
 abstract class AbstractBadge extends AbstractField
 {
@@ -14,18 +14,18 @@ abstract class AbstractBadge extends AbstractField
     /**
      * @var string
      */
-    private $type;
+    private ?string $type = null;
 
     /**
      * @var string
      */
-    private $action;
+    private ?string $action = null;
 
 
     /**
      * @var string
      */
-    private $style;
+    private ?string $style = null;
 
     /**
      * @return string

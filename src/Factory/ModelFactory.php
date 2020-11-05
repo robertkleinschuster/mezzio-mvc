@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Factory;
+namespace Pars\Mvc\Factory;
 
-use Mvc\Exception\ControllerNotFoundException;
+use Pars\Mvc\Exception\ControllerNotFoundException;
 
+/**
+ * Class ModelFactory
+ * @package Pars\Mvc\Factory
+ */
 class ModelFactory
 {
 

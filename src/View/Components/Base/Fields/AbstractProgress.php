@@ -2,36 +2,38 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
-use Mvc\View\Components\Base\AbstractField;
+use Pars\Mvc\View\Components\Base\AbstractField;
 
+/**
+ * Class AbstractProgress
+ * @package Pars\Mvc\View\Components\Base\Fields
+ */
 abstract class AbstractProgress extends AbstractField
 {
-
-
     public const TYPE_STRIPED = 'striped';
     public const TYPE_ANIMATED = 'animated';
 
     /**
      * @var int
      */
-    private $height;
+    private ?int $height = null;
 
     /**
      * @var string
      */
-    private $label;
+    private ?string $label = null;
 
     /**
      * @var string
      */
-    private $type;
+    private ?string $type = null;
 
     /**
      * @var string
      */
-    private $style;
+    private ?string $style = null;
 
     /**
      * @return string

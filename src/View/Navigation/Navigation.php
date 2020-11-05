@@ -2,11 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Navigation;
+namespace Pars\Mvc\View\Navigation;
 
+/**
+ * Class Navigation
+ * @package Pars\Mvc\View\Navigation
+ */
 class Navigation
 {
-
     public const POSITION_SIDEBAR = 'sidebar';
     public const POSITION_HEADER = 'header';
 
@@ -206,18 +209,18 @@ class Navigation
     }
 
     /**
-    * @return int
-    */
+     * @return int
+     */
     public function getActive(): int
     {
         return $this->active;
     }
 
     /**
-    * @param int $active
-    *
-    * @return $this
-    */
+     * @param int $active
+     *
+     * @return $this
+     */
     public function setActive(int $active): self
     {
         $this->active = $active;
@@ -225,8 +228,8 @@ class Navigation
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasActive(): bool
     {
         return $this->active !== null;
@@ -239,7 +242,4 @@ class Navigation
     {
         return $this->id;
     }
-
-
-
 }

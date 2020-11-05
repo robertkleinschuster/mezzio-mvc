@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
-use Mvc\View\Components\Base\AbstractField;
+use Pars\Mvc\View\Components\Base\AbstractField;
 
+/**
+ * Class AbstractButton
+ * @package Pars\Mvc\View\Components\Base\Fields
+ */
 abstract class AbstractButton extends AbstractField
 {
 
@@ -22,31 +26,32 @@ abstract class AbstractButton extends AbstractField
     /**
      * @var string
      */
-    private $type;
+    private ?string $type = null;
 
     /**
      * @var bool
      */
-    private $outline;
+    private ?bool $outline = null;
 
     /**
      * @var string
      */
-    private $style;
+    private ?string $style = null;
 
-
-    /** @var string */
-    private $size;
+    /**
+     * @var string
+     */
+    private ?string $size = null;
 
     /**
      * @var bool
      */
-    private $disabled;
+    private ?bool $disabled = null;
 
     /**
      * @var string
      */
-    private $tooltip;
+    private ?string $tooltip = null;
 
 
     /**

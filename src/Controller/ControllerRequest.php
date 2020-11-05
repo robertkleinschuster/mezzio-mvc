@@ -2,21 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Controller;
+namespace Pars\Mvc\Controller;
 
 use Mezzio\Router\RouteResult;
-use Mvc\Helper\ViewIdHelper;
-use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
-use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
-use NiceshopsDev\NiceCore\Exception;
-use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
-use NiceshopsDev\NiceCore\Option\OptionTrait;
+use Pars\Mvc\Helper\ViewIdHelper;
+use Niceshops\Core\Attribute\AttributeAwareInterface;
+use Niceshops\Core\Attribute\AttributeAwareTrait;
+use Niceshops\Core\Option\OptionAwareInterface;
+use Niceshops\Core\Option\OptionAwareTrait;
 use Psr\Http\Message\ServerRequestInterface;
 
+/**
+ * Class ControllerRequest
+ * @package Pars\Mvc\Controller
+ */
 class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 {
-    use OptionTrait;
-    use AttributeTrait;
+    use OptionAwareTrait;
+    use AttributeAwareTrait;
 
     public const ATTRIBUTE_SUBMIT = 'submit';
     public const ATTRIBUTE_REDIRECT = 'redirect';
@@ -47,7 +50,6 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     /**
      * ControllerRequestProperties constructor.
      * @param ServerRequestInterface $serverRequest
-     * @throws Exception
      */
     public function __construct(ServerRequestInterface $serverRequest)
     {
@@ -86,7 +88,6 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 
     /**
      * @return bool
-     * @throws Exception
      */
     public function hasViewIdMap(): bool
     {
@@ -96,7 +97,6 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 
     /**
      * @return array
-     * @throws Exception
      */
     public function getViewIdMap(): array
     {
@@ -118,7 +118,6 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 
     /**
      * @return string
-     * @throws Exception
      */
     public function getRedirect(): string
     {
@@ -135,7 +134,6 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 
     /**
      * @return string
-     * @throws Exception
      */
     public function getSubmit(): string
     {
@@ -160,7 +158,6 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 
     /**
      * @return string
-     * @throws Exception
      */
     public function getNavId(): string
     {
@@ -169,7 +166,6 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 
     /**
      * @return int
-     * @throws Exception
      */
     public function getNavIndex(): int
     {
@@ -186,7 +182,6 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 
     /**
      * @return int
-     * @throws Exception
      */
     public function getLimit(): int
     {
@@ -203,7 +198,6 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 
     /**
      * @return int
-     * @throws Exception
      */
     public function getPage(): int
     {
@@ -220,7 +214,6 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 
     /**
      * @return string
-     * @throws Exception
      */
     public function getSearch(): string
     {
@@ -237,7 +230,6 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 
     /**
      * @return string
-     * @throws Exception
      */
     public function getOrder(): string
     {

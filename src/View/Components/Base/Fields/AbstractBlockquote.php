@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
 abstract class AbstractBlockquote extends AbstractText
 {
@@ -10,12 +10,12 @@ abstract class AbstractBlockquote extends AbstractText
     /**
      * @var string
      */
-    private $footer;
+    private ?string $footer = null;
 
     /**
      * @var string
      */
-    private $source;
+    private ?string $source = null;
 
     /**
      * @return string

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Pagination;
+namespace Pars\Mvc\View\Components\Pagination;
 
-use Mvc\View\Components\Base\AbstractComponent;
-use Mvc\View\Components\Pagination\Fields\Link;
+use Pars\Mvc\View\Components\Base\AbstractComponent;
+use Pars\Mvc\View\Components\Pagination\Fields\Link;
 
 /**
  * Class Pagination
- * @package Mvc\View\Components\Pagination
+ * @package Pars\Mvc\View\Components\Pagination
  * @method Link[] getFieldList() : array
  */
 class Pagination extends AbstractComponent

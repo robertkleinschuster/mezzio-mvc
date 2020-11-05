@@ -2,8 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Helper;
+namespace Pars\Mvc\Helper;
 
+/**
+ * Class ViewIdHelper
+ * @package Pars\Mvc\Helper
+ */
 class ViewIdHelper
 {
 

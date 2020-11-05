@@ -2,10 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View;
+namespace Pars\Mvc\View;
 
-use NiceshopsDev\Bean\AbstractBaseBean;
 
+use Niceshops\Bean\Type\Base\AbstractBaseBean;
+
+/**
+ * Class ComponentDataBean
+ * @package Pars\Mvc\View
+ */
 class ComponentDataBean extends AbstractBaseBean
 {
 

@@ -2,8 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base;
+namespace Pars\Mvc\View\Components\Base;
 
+/**
+ * Trait RequiredAwareTrait
+ * @package Pars\Mvc\View\Components\Base
+ */
 trait RequiredAwareTrait
 {
 

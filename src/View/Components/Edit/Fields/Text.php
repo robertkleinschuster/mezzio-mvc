@@ -2,12 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Edit\Fields;
+namespace Pars\Mvc\View\Components\Edit\Fields;
 
-use Mvc\View\Components\Base\Fields\AbstractText;
-use Mvc\View\Components\Base\RequiredAwareInterface;
-use Mvc\View\Components\Base\RequiredAwareTrait;
+use Pars\Mvc\View\Components\Base\Fields\AbstractText;
+use Pars\Mvc\View\Components\Base\RequiredAwareInterface;
+use Pars\Mvc\View\Components\Base\RequiredAwareTrait;
 
+/**
+ * Class Text
+ * @package Pars\Mvc\View\Components\Edit\Fields
+ */
 class Text extends AbstractText implements RequiredAwareInterface
 {
     use RequiredAwareTrait;

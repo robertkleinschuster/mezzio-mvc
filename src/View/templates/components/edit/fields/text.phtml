@@ -1,11 +1,11 @@
 <?php
 /**
- * @var $field \Mvc\View\Components\Edit\Fields\Text
- * @var $bean \NiceshopsDev\Bean\BeanInterface
+ * @var $field \Pars\Mvc\View\Components\Edit\Fields\Text
+ * @var $bean \Niceshops\Bean\Type\Base\BeanInterface
  * @var $errors array
  */
 ?>
-<?php if ($field->getType() == \Mvc\View\Components\Edit\Fields\Text::TYPE_HIDDEN): ?>
+<?php if ($field->getType() == \Pars\Mvc\View\Components\Edit\Fields\Text::TYPE_HIDDEN): ?>
     <input type="<?= $field->getType() ?>" id="<?= $field->getKey() ?>" name="<?= $field->getKey() ?>"
            value="<?= $field->getValue($bean) ?>">
 <?php else: ?>

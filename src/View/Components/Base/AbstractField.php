@@ -2,27 +2,33 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base;
+namespace Pars\Mvc\View\Components\Base;
 
-use Mvc\Helper\PathHelperAwareInterface;
-use Mvc\Helper\PathHelperAwareTrait;
-use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
-use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareTrait;
-use NiceshopsDev\Bean\BeanInterface;
-use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
-use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
-use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
-use NiceshopsDev\NiceCore\Option\OptionTrait;
+use Niceshops\Bean\Converter\BeanConverterAwareInterface;
+use Niceshops\Bean\Converter\BeanConverterAwareTrait;
+use Niceshops\Bean\Type\Base\BeanInterface;
+use Niceshops\Core\Attribute\AttributeAwareInterface;
+use Niceshops\Core\Attribute\AttributeAwareTrait;
+use Niceshops\Core\Option\OptionAwareInterface;
+use Niceshops\Core\Option\OptionAwareTrait;
+use Pars\Mvc\Helper\PathHelperAwareInterface;
+use Pars\Mvc\Helper\PathHelperAwareTrait;
+
 
 /**
  * Class AbstractField
- * @package Mvc\View\Components\Base
+ * @package Pars\Mvc\View\Components\Base
  */
-abstract class AbstractField implements OptionAwareInterface, AttributeAwareInterface, BeanFormatterAwareInterface, PathHelperAwareInterface, LinkAwareInterface
+abstract class AbstractField implements
+    OptionAwareInterface,
+    AttributeAwareInterface,
+    BeanConverterAwareInterface,
+    PathHelperAwareInterface,
+    LinkAwareInterface
 {
-    use OptionTrait;
-    use AttributeTrait;
-    use BeanFormatterAwareTrait;
+    use OptionAwareTrait;
+    use AttributeAwareTrait;
+    use BeanConverterAwareTrait;
     use PathHelperAwareTrait;
     use LinkAwareTrait;
 
@@ -40,7 +46,7 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     /**
      * @var string
      */
-    private ?string $title = null;
+    private ?string $title;
 
     /**
      * @var string
@@ -96,26 +102,26 @@ abstract class AbstractField implements OptionAwareInterface, AttributeAwareInte
     protected function replacePlaceholders(string $input, BeanInterface $bean)
     {
         $output = $input;
-        $formatter = null;
-        if ($this->hasBeanFormatter()) {
-            $formatter = $this->getBeanFormatter()->format($bean);
+        $converter = null;
+        if ($this->hasBeanConverter()) {
+            $converter = $this->getBeanConverter()->convert($bean);
         }
         foreach ($bean as $key => $item) {
             $placeholder = "{{$key}}";
             if (strpos($input, $placeholder) !== false) {
-                if (null === $formatter) {
+                if (null === $converter) {
                     $value = $item;
                 } else {
-                    $value = $formatter->getValue($key);
+                    $value = $converter->getData($key);
                 }
                 $output = str_replace($placeholder, $value, $output);
             }
             $placeholderEncoded = urlencode($placeholder);
             if (strpos($input, $placeholderEncoded) !== false) {
-                if (null === $formatter) {
+                if (null === $converter) {
                     $value = $item;
                 } else {
-                    $value = $formatter->getValue($key);
+                    $value = $converter->getData($key);
                 }
                 $output = str_replace($placeholderEncoded, $value, $output);
             }

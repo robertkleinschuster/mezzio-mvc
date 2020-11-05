@@ -2,11 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Detail;
+namespace Pars\Mvc\View\Components\Detail;
 
-use Mvc\View\Components\Base\AbstractComponent;
-use NiceshopsDev\Bean\BeanInterface;
+use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Mvc\View\Components\Base\AbstractComponent;
 
+/**
+ * Class Detail
+ * @package Pars\Mvc\View\Components\Detail
+ */
 class Detail extends AbstractComponent
 {
     /**
@@ -36,7 +40,8 @@ class Detail extends AbstractComponent
      * @param string $falseValue
      * @return Fields\Badge
      */
-    public function addBadgeBoolean(string $key, ?string $title, string $trueValue, string $falseValue) {
+    public function addBadgeBoolean(string $key, ?string $title, string $trueValue, string $falseValue)
+    {
         return $this->addBadgeState(
             $key,
             $title,
@@ -52,9 +57,10 @@ class Detail extends AbstractComponent
      * @param array|null $styleMap
      * @return Fields\Badge
      */
-    public function addBadgeState(string $key, ?string $title, array $stateMap, array $styleMap = null) {
+    public function addBadgeState(string $key, ?string $title, array $stateMap, array $styleMap = null)
+    {
         $badge = $this->addBadge($key, $title);
-        $badge->setFormat(function(BeanInterface $bean, Fields\Badge $badge) use ($key, $stateMap, $styleMap) {
+        $badge->setFormat(function (BeanInterface $bean, Fields\Badge $badge) use ($key, $stateMap, $styleMap) {
             if (null !== $styleMap && isset($styleMap[$bean->getData($key)])) {
                 $badge->setStyle($styleMap[$bean->getData($key)]);
             }

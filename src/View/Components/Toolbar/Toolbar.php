@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Toolbar;
+namespace Pars\Mvc\View\Components\Toolbar;
 
-use Mvc\View\Components\Base\AbstractComponent;
+use Pars\Mvc\View\Components\Base\AbstractComponent;
 
+/**
+ * Class Toolbar
+ * @package Pars\Mvc\View\Components\Toolbar
+ */
 class Toolbar extends AbstractComponent
 {
     /**

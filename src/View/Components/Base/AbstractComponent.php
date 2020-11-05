@@ -2,37 +2,37 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base;
+namespace Pars\Mvc\View\Components\Base;
 
-use Mvc\Helper\ValidationHelperAwareInterface;
-use Mvc\Helper\ValidationHelperAwareTrait;
-use Mvc\View\ComponentDataBean;
-use Mvc\View\ComponentDataBeanList;
-use Mvc\View\ViewException;
-use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
-use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareTrait;
-use NiceshopsDev\Bean\BeanInterface;
-use NiceshopsDev\Bean\BeanList\BeanListAwareInterface;
-use NiceshopsDev\Bean\BeanList\BeanListAwareTrait;
-use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
-use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
-use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
-use NiceshopsDev\NiceCore\Option\OptionTrait;
+use Niceshops\Bean\Converter\BeanConverterAwareInterface;
+use Niceshops\Bean\Converter\BeanConverterAwareTrait;
+use Niceshops\Bean\Type\Base\BeanInterface;
+use Niceshops\Bean\Type\Base\BeanListAwareInterface;
+use Niceshops\Bean\Type\Base\BeanListAwareTrait;
+use Niceshops\Core\Attribute\AttributeAwareInterface;
+use Niceshops\Core\Attribute\AttributeAwareTrait;
+use Niceshops\Core\Option\OptionAwareInterface;
+use Niceshops\Core\Option\OptionAwareTrait;
+use Pars\Mvc\Helper\ValidationHelperAwareInterface;
+use Pars\Mvc\Helper\ValidationHelperAwareTrait;
+use Pars\Mvc\View\ComponentDataBean;
+use Pars\Mvc\View\ComponentDataBeanList;
+use Pars\Mvc\View\ViewException;
 
 /**
  * Class AbstractComponent
- * @package Mvc\View\Components\Base
+ * @package Pars\Mvc\View\Components\Base
  */
 abstract class AbstractComponent implements
     OptionAwareInterface,
     AttributeAwareInterface,
-    BeanFormatterAwareInterface,
+    BeanConverterAwareInterface,
     ValidationHelperAwareInterface,
     BeanListAwareInterface
 {
-    use OptionTrait;
-    use AttributeTrait;
-    use BeanFormatterAwareTrait;
+    use OptionAwareTrait;
+    use AttributeAwareTrait;
+    use BeanConverterAwareTrait;
     use ValidationHelperAwareTrait;
     use BeanListAwareTrait;
 
@@ -93,7 +93,6 @@ abstract class AbstractComponent implements
     /**
      * @param BeanInterface $bean
      * @return $this
-     * @throws ViewException
      */
     public function setBean(BeanInterface $bean)
     {
@@ -171,8 +170,8 @@ abstract class AbstractComponent implements
             || !$field->hasPermission()
             || in_array($field->getPermission(), $this->getPermissionList())
         ) {
-            if ($this->hasBeanFormatter()) {
-                $field->setBeanFormatter($this->getBeanFormatter());
+            if ($this->hasBeanConverter()) {
+                $field->setBeanConverter($this->getBeanConverter());
             }
             $this->field_List[] = $field;
         }

@@ -2,9 +2,12 @@
 declare(strict_types=1);
 
 
-namespace Mvc\View\Components\Base;
+namespace Pars\Mvc\View\Components\Base;
 
-
+/**
+ * Interface IconAwareInterface
+ * @package Pars\Mvc\View\Components\Base
+ */
 interface IconAwareInterface
 {
     public const ICON_ACTIVITY = 'activity';

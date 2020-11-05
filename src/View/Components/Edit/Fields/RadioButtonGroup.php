@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Edit\Fields;
+namespace Pars\Mvc\View\Components\Edit\Fields;
 
-use Mvc\View\Components\Base\Fields\AbstractRadioButtonGroup;
+use Pars\Mvc\View\Components\Base\Fields\AbstractRadioButtonGroup;
 
+/**
+ * Class RadioButtonGroup
+ * @package Pars\Mvc\View\Components\Edit\Fields
+ */
 class RadioButtonGroup extends AbstractRadioButtonGroup
 {
 

@@ -1,11 +1,12 @@
 <?php
 declare(strict_types=1);
 
+namespace Pars\Mvc\View\Components\Base;
 
-namespace Mvc\View\Components\Base;
-
-
-
+/**
+ * Trait LinkAwareTrait
+ * @package Pars\Mvc\View\Components\Base
+ */
 trait LinkAwareTrait
 {
     /**

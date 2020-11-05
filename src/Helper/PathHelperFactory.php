@@ -2,12 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Helper;
+namespace Pars\Mvc\Helper;
 
 use Mezzio\Helper\ServerUrlHelper;
 use Mezzio\Helper\UrlHelper;
 use Psr\Container\ContainerInterface;
 
+/**
+ * Class PathHelperFactory
+ * @package Pars\Mvc\Helper
+ */
 class PathHelperFactory
 {
     /**

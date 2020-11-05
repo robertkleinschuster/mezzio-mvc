@@ -2,9 +2,12 @@
 declare(strict_types=1);
 
 
-namespace Mvc\Helper;
+namespace Pars\Mvc\Helper;
 
-
+/**
+ * Interface PathHelperAwareInterface
+ * @package Pars\Mvc\Helper
+ */
 interface PathHelperAwareInterface
 {
     /**

@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View;
+namespace Pars\Mvc\View;
 
 use Mezzio\Template\TemplateRendererInterface;
 
+/**
+ * Class ViewRenderer
+ * @package Pars\Mvc\View
+ */
 class ViewRenderer
 {
     /**

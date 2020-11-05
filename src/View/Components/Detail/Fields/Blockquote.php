@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Detail\Fields;
+namespace Pars\Mvc\View\Components\Detail\Fields;
 
-use Mvc\View\Components\Base\Fields\AbstractBlockquote;
+use Pars\Mvc\View\Components\Base\Fields\AbstractBlockquote;
 
+/**
+ * Class Blockquote
+ * @package Pars\Mvc\View\Components\Detail\Fields
+ */
 class Blockquote extends AbstractBlockquote
 {
 

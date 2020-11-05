@@ -2,11 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Edit;
+namespace Pars\Mvc\View\Components\Edit;
 
-use Mvc\Controller\ControllerRequest;
-use Mvc\View\Components\Base\AbstractComponent;
+use Pars\Mvc\Controller\ControllerRequest;
+use Pars\Mvc\View\Components\Base\AbstractComponent;
 
+/**
+ * Class Edit
+ * @package Pars\Mvc\View\Components\Edit
+ */
 class Edit extends AbstractComponent
 {
     /**
@@ -85,8 +89,53 @@ class Edit extends AbstractComponent
     public function addText(string $key, string $title): Fields\Text
     {
         $text = new Fields\Text($key, $title);
+        $text->setType(Fields\Text::TYPE_TEXT);
         $this->addField($text);
         return $text;
+    }
+
+    /**
+     * @param string $key
+     * @param string $title
+     * @param bool $new
+     * @return Fields\Text
+     */
+    public function addPassword(string $key, string $title, bool $new = false): Fields\Text
+    {
+        $password = $this->addText($key, $title);
+        $password->setType(Fields\Text::TYPE_PASSWORD);
+        if ($new) {
+            $password->setAutocomplete(Fields\Text::AUTOCOMPLETE_NEW_PASSWORD);
+        } else {
+            $password->setAutocomplete(Fields\Text::AUTOCOMPLETE_CURRENT_PASSWORD);
+        }
+        return $password;
+    }
+
+    /**
+     * @param string $key
+     * @param string $title
+     * @return Fields\Text
+     */
+    public function addEmail(string $key, string $title): Fields\Text
+    {
+        $password = $this->addText($key, $title);
+        $password->setType(Fields\Text::TYPE_EMAIL);
+        $password->setAutocomplete(Fields\Text::AUTOCOMPLETE_EMAIL);
+        return $password;
+    }
+
+    /**
+     * @param string $key
+     * @param string $title
+     * @return Fields\Text
+     */
+    public function addUsername(string $key, string $title): Fields\Text
+    {
+        $password = $this->addText($key, $title);
+        $password->setType(Fields\Text::TYPE_TEXT);
+        $password->setAutocomplete(Fields\Text::AUTOCOMPLETE_USERNAME);
+        return $password;
     }
 
     /**

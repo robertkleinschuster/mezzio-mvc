@@ -12,7 +12,7 @@ This library is not affiliated with Mezzio or Laminas in any way.
 Run the following to install this library:
 
 ```bash
-$ composer require robertkleinschuster/mvc
+$ composer require pars/mvc
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ $app->any(MvcHandler::getRoute(), [MvcHandler::class], 'mvc');
 Extend your `IndexController` class from `AbstractController` and 
 implement yout first action `indexAction`.
 For this action there has to be a template in the mvc template path 'index/index'.
-See `Mvc\ConfigProvider` for configuration format.
+See `Pars\Mvc\ConfigProvider` for configuration format.
 
 ```php
 $this->setTemplateVariable('title', 'Hello world!');
@@ -37,7 +37,7 @@ $this->setTemplateVariable('title', 'Hello world!');
 This Mvc also includes a view abstraction.
 Assign a view object in your controller with:
 ```php
-$this->setView(new View('Hello world!', new ViewModel()));
+$this->setView(new View('Hello world!'));
 $this->getView()->setLayout('layout/dashboard');
 $navigation = new Navigation('System');
 

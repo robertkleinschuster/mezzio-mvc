@@ -1,10 +1,12 @@
 <?php
 declare(strict_types=1);
 
+namespace Pars\Mvc\View\Components\Base;
 
-namespace Mvc\View\Components\Base;
-
-
+/**
+ * Interface LinkAwareInterface
+ * @package Pars\Mvc\View\Components\Base
+ */
 interface LinkAwareInterface
 {
     public const TARGET_BLANK = '_blank';

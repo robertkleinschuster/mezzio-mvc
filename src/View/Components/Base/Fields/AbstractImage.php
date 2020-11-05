@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
 abstract class AbstractImage extends AbstractText
 {
@@ -14,12 +14,12 @@ abstract class AbstractImage extends AbstractText
     /**
      * @var string
      */
-    private $source;
+    private ?string $source = null;
 
     /**
-     * @var
+     * @var string
      */
-    private $size;
+    private ?string $size = null;
 
     /**
      * @return string

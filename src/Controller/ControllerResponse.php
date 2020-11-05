@@ -2,19 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Controller;
+namespace Pars\Mvc\Controller;
 
-use Mvc\Exception\MvcException;
-use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
-use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
-use NiceshopsDev\NiceCore\Exception;
-use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
-use NiceshopsDev\NiceCore\Option\OptionTrait;
+use Pars\Mvc\Exception\MvcException;
+use Niceshops\Core\Attribute\AttributeAwareInterface;
+use Niceshops\Core\Attribute\AttributeAwareTrait;
+use Niceshops\Core\Mode\ModeAwareInterface;
+use Niceshops\Core\Mode\ModeAwareTrait;
+use Niceshops\Core\Option\OptionAwareInterface;
+use Niceshops\Core\Option\OptionAwareTrait;
 
-class ControllerResponse implements OptionAwareInterface, AttributeAwareInterface
+/**
+ * Class ControllerResponse
+ * @package Pars\Mvc\Controller
+ */
+class ControllerResponse implements OptionAwareInterface, AttributeAwareInterface, ModeAwareInterface
 {
-    use OptionTrait;
-    use AttributeTrait;
+    use OptionAwareTrait;
+    use AttributeAwareTrait;
+    use ModeAwareTrait;
 
     public const MODE_HTML = 'html';
     public const MODE_JSON = 'json';
@@ -26,11 +32,6 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
 
     public const STATUS_NOT_FOUND = 404;
     public const STATUS_FOUND = 200;
-
-    /**
-     * @var string
-     */
-    private $mode;
 
     /**
      * @var string
@@ -65,30 +66,12 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
     }
 
     /**
-     * @return string
-     */
-    public function getMode(): string
-    {
-        return $this->mode;
-    }
-
-    /**
-     * @param string $mode
-     * @return ControllerResponse
-     */
-    public function setMode(string $mode): self
-    {
-        $this->mode = $mode;
-        return $this;
-    }
-
-    /**
      * @param string $mode
      * @return bool
      */
     public function isMode(string $mode): bool
     {
-        return $this->getMode() === $mode;
+        return $this->hasMode() && $this->getMode() === $mode;
     }
 
     /**
@@ -197,7 +180,6 @@ class ControllerResponse implements OptionAwareInterface, AttributeAwareInterfac
     /**
      * @param string $uri
      * @return bool
-     * @throws Exception
      */
     public function setRedirect(string $uri): bool
     {

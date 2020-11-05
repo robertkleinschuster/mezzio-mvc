@@ -2,12 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Handler;
+namespace Pars\Mvc\Handler;
 
 use Mezzio\Template\TemplateRendererInterface;
-use Mvc\Factory\ControllerFactory;
+use Pars\Mvc\Factory\ControllerFactory;
 use Psr\Container\ContainerInterface;
 
+/**
+ * Class MvcHandlerFactory
+ * @package Pars\Mvc\Handler
+ */
 class MvcHandlerFactory
 {
     /**

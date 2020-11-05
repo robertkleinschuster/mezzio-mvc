@@ -2,8 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Helper;
+namespace Pars\Mvc\Helper;
 
+/**
+ * Trait ValidationHelperAwareTrait
+ * @package Pars\Mvc\Helper
+ */
 trait ValidationHelperAwareTrait
 {
 

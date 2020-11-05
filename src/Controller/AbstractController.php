@@ -2,15 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Controller;
+namespace Pars\Mvc\Controller;
 
-use Mvc\Helper\PathHelper;
-use Mvc\Helper\ValidationHelper;
-use Mvc\Model\ModelInterface;
-use Mvc\View\View;
-use NiceshopsDev\Bean\BeanException;
-use NiceshopsDev\NiceCore\Exception;
+use Pars\Mvc\Helper\PathHelper;
+use Pars\Mvc\Helper\ValidationHelper;
+use Pars\Mvc\Model\ModelInterface;
+use Pars\Mvc\View\View;
 
+/**
+ * Class AbstractController
+ * @package Pars\Mvc\Controller
+ */
 abstract class AbstractController implements ControllerInterface
 {
 
@@ -65,7 +67,6 @@ abstract class AbstractController implements ControllerInterface
 
     /**
      * @return mixed|void
-     * @throws Exception
      */
     public function init()
     {
@@ -275,7 +276,6 @@ abstract class AbstractController implements ControllerInterface
      * @param string $key
      * @param $value
      * @return AbstractController
-     * @throws BeanException
      */
     protected function setTemplateVariable(string $key, $value)
     {

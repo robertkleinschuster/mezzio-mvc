@@ -2,22 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Factory;
+namespace Pars\Mvc\Factory;
 
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Diactoros\UriFactory;
-use Mvc\Controller\ControllerResponse;
-use Mvc\Exception\MvcException;
-use NiceshopsDev\NiceCore\Exception;
+use Pars\Mvc\Controller\ControllerResponse;
+use Pars\Mvc\Exception\MvcException;
 
+/**
+ * Class ServerResponseFactory
+ * @package Pars\Mvc\Factory
+ */
 class ServerResponseFactory
 {
     /**
      * @param ControllerResponse $controllerResponse
      * @return HtmlResponse|JsonResponse|RedirectResponse
-     * @throws Exception
+     * @throws MvcException
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
      */
     public function __invoke(ControllerResponse $controllerResponse)
     {
@@ -42,6 +46,6 @@ class ServerResponseFactory
                     )
                 );
         }
-        throw new MvcException('Invalid Mode set in ControlerResponse.');
+        throw new MvcException("Invalid Mode '{$controllerResponse->getMode()}' set in ControlerResponse.");
     }
 }

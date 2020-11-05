@@ -2,11 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Exception;
+namespace Pars\Mvc\Exception;
 
-use Exception;
+use Niceshops\Core\Exception\CoreException;
 
-class MvcException extends Exception
+/**
+ * Class MvcException
+ * @package Pars\Mvc\Exception
+ */
+class MvcException extends CoreException
 {
 
 }

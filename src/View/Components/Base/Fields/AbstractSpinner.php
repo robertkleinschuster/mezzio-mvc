@@ -2,8 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
+/**
+ * Class AbstractSpinner
+ * @package Pars\Mvc\View\Components\Base\Fields
+ */
 abstract class AbstractSpinner extends AbstractText
 {
     public const TYPE_BORDER = 'border';
@@ -12,12 +16,12 @@ abstract class AbstractSpinner extends AbstractText
     /**
      * @var string
      */
-    private $type;
+    private ?string $type = null;
 
     /**
      * @var string
      */
-    private $style;
+    private ?string $style = null;
 
     /**
      * @return string

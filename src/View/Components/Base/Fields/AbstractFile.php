@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
+use Pars\Mvc\View\Components\Base\AbstractField;
 
-use Mvc\View\Components\Base\AbstractField;
-
+/**
+ * Class AbstractFile
+ * @package Pars\Mvc\View\Components\Base\Fields
+ */
 abstract class AbstractFile extends AbstractField
 {
     public const ACCEPT_IMAGE = 'image/*';
@@ -21,8 +25,14 @@ abstract class AbstractFile extends AbstractField
      */
     private ?array $accept = null;
 
+    /**
+     * @var bool|null
+     */
     private ?bool $multiple = null;
 
+    /**
+     * @var string|null
+     */
     private ?string $capture = null;
 
     public function getTemplate()

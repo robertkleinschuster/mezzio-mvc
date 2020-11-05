@@ -1,10 +1,12 @@
 <?php
 declare(strict_types=1);
 
+namespace Pars\Mvc\Helper;
 
-namespace Mvc\Helper;
-
-
+/**
+ * Trait PathHelperAwareTrait
+ * @package Pars\Mvc\Helper
+ */
 trait PathHelperAwareTrait
 {
     private ?PathHelper $pathHelper = null;

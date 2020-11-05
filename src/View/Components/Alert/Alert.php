@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Alert;
+namespace Pars\Mvc\View\Components\Alert;
 
-use Mvc\View\Components\Base\AbstractComponent;
+use Pars\Mvc\View\Components\Base\AbstractComponent;
 
+/**
+ * Class Alert
+ * @package Pars\Mvc\View\Components\Alert
+ */
 class Alert extends AbstractComponent
 {
 
@@ -21,12 +25,12 @@ class Alert extends AbstractComponent
     /**
      * @var string
      */
-    private $style;
+    private ?string $style = null;
 
     /**
      * @var string
      */
-    private $heading;
+    private ?string $heading = null;
 
     /**
      * @return string

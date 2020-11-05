@@ -2,26 +2,30 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Base\Fields;
+namespace Pars\Mvc\View\Components\Base\Fields;
 
-use Mvc\View\Components\Base\AbstractField;
+use Pars\Mvc\View\Components\Base\AbstractField;
 
+/**
+ * Class AbstractNumber
+ * @package Pars\Mvc\View\Components\Base\Fields
+ */
 abstract class AbstractNumber extends AbstractField
 {
     /**
      * @var int
      */
-    private $decimals;
+    private ?int $decimals = null;
 
     /**
      * @var string
      */
-    private $thousandsSeparator;
+    private ?string $thousandsSeparator = null;
 
     /**
      * @var string
      */
-    private $decimalPoint;
+    private ?string $decimalPoint = null;
 
     /**
      * @return string

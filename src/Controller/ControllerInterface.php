@@ -2,13 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Controller;
+namespace Pars\Mvc\Controller;
 
-use Mvc\Helper\PathHelper;
-use Mvc\Model\ModelInterface;
-use Mvc\View\View;
+use Pars\Mvc\Helper\PathHelper;
+use Pars\Mvc\Model\ModelInterface;
+use Pars\Mvc\View\View;
 use Throwable;
 
+/**
+ * Interface ControllerInterface
+ * @package Pars\Mvc\Controller
+ */
 interface ControllerInterface
 {
 

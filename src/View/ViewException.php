@@ -2,11 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View;
+namespace Pars\Mvc\View;
 
-use Exception;
+use Pars\Mvc\Exception\MvcException;
 
-class ViewException extends Exception
+/**
+ * Class ViewException
+ * @package Pars\Mvc\View
+ */
+class ViewException extends MvcException
 {
 
 }

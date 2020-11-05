@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Toolbar\Fields;
+namespace Pars\Mvc\View\Components\Toolbar\Fields;
 
-use Mvc\View\Components\Base\Fields\AbstractLink;
+use Pars\Mvc\View\Components\Base\Fields\AbstractLink;
 
+/**
+ * Class Link
+ * @package Pars\Mvc\View\Components\Toolbar\Fields
+ */
 class Link extends AbstractLink
 {
 

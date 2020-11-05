@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View;
+namespace Pars\Mvc\View;
 
-use Mvc\Bean\TemplateDataBean;
-use Mvc\View\Components\Base\AbstractComponent;
-use Mvc\View\Components\Toolbar\Toolbar;
-use Mvc\View\Navigation\Navigation;
-use NiceshopsDev\Bean\BeanException;
-use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareInterface;
-use NiceshopsDev\Bean\BeanFormatter\BeanFormatterAwareTrait;
-use NiceshopsDev\NiceCore\Attribute\AttributeAwareInterface;
-use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
-use NiceshopsDev\NiceCore\Option\OptionAwareInterface;
-use NiceshopsDev\NiceCore\Option\OptionTrait;
+use Niceshops\Bean\Converter\BeanConverterAwareInterface;
+use Niceshops\Bean\Converter\BeanConverterAwareTrait;
+use Niceshops\Bean\Type\Base\BeanException;
+use Niceshops\Core\Attribute\AttributeAwareInterface;
+use Niceshops\Core\Attribute\AttributeAwareTrait;
+use Niceshops\Core\Option\OptionAwareInterface;
+use Niceshops\Core\Option\OptionAwareTrait;
+use Pars\Mvc\Bean\TemplateDataBean;
+use Pars\Mvc\View\Components\Base\AbstractComponent;
+use Pars\Mvc\View\Components\Toolbar\Toolbar;
+use Pars\Mvc\View\Navigation\Navigation;
 
 /**
  * Class View
- * @package Mvc\View
+ * @package Pars\Mvc\View
  */
-class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatterAwareInterface
+class View implements OptionAwareInterface, AttributeAwareInterface, BeanConverterAwareInterface
 {
-    use OptionTrait;
-    use AttributeTrait;
-    use BeanFormatterAwareTrait;
+    use OptionAwareTrait;
+    use AttributeAwareTrait;
+    use BeanConverterAwareTrait;
 
     /**
      * @var string
@@ -197,7 +197,8 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanFormatt
     {
         if ($this->hasPermissionList()) {
             return array_values(array_filter($this->navigation_List, function ($navigation) use ($position) {
-                return $navigation->getPosition() === $position && (!$navigation->hasPermission() || in_array($navigation->getPermission(), $this->getPermissionList()));
+                return $navigation->getPosition() === $position
+                    && (!$navigation->hasPermission() || in_array($navigation->getPermission(), $this->getPermissionList()));
             }));
         }
         return array_values(array_filter($this->navigation_List, function ($navigation) use ($position) {

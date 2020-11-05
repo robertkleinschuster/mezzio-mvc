@@ -2,13 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Navigation;
+namespace Pars\Mvc\View\Navigation;
 
-use Mvc\Helper\PathHelperAwareInterface;
-use Mvc\Helper\PathHelperAwareTrait;
-use Mvc\View\Components\Base\IconAwareInterface;
-use Mvc\View\Components\Base\IconAwareTrait;
+use Pars\Mvc\Helper\PathHelperAwareInterface;
+use Pars\Mvc\Helper\PathHelperAwareTrait;
+use Pars\Mvc\View\Components\Base\IconAwareInterface;
+use Pars\Mvc\View\Components\Base\IconAwareTrait;
 
+/**
+ * Class Action
+ * @package Pars\Mvc\View\Navigation
+ */
 class Action implements PathHelperAwareInterface, IconAwareInterface
 {
     use PathHelperAwareTrait;

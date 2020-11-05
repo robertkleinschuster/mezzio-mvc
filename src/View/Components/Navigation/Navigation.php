@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Navigation;
+namespace Pars\Mvc\View\Components\Navigation;
 
-use Mvc\View\Components\Base\AbstractComponent;
+use Pars\Mvc\View\Components\Base\AbstractComponent;
 
+/**
+ * Class Navigation
+ * @package Pars\Mvc\View\Components\Navigation
+ */
 class Navigation extends AbstractComponent
 {
 
@@ -15,17 +19,17 @@ class Navigation extends AbstractComponent
     /**
      * @var array
      */
-    private $component_List = [];
+    private array $component_List = [];
 
     /**
      * @var string
      */
-    private $type;
+    private ?string $type = null;
 
     /**
      * @var int
      */
-    private $active;
+    private ?int $active = null;
 
 
     /**
@@ -58,7 +62,8 @@ class Navigation extends AbstractComponent
         if ($this->hasPermissionList()) {
             $componentList = $this->component_List;
             return array_values(array_filter($componentList, function ($component) {
-                return !$component->hasPermission() || in_array($component->getPermission(), $this->getPermissionList());
+                return !$component->hasPermission()
+                    || in_array($component->getPermission(), $this->getPermissionList());
             }));
         }
         return $this->component_List;

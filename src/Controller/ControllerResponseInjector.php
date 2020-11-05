@@ -2,13 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Mvc\Controller;
+namespace Pars\Mvc\Controller;
 
+/**
+ * Class ControllerResponseInjector
+ * @package Pars\Mvc\Controller
+ */
 class ControllerResponseInjector
 {
-    public const POSITION_BEFORE = 'before';
-    public const POSITION_REPLACE = 'replace';
-    public const POSITION_AFTER = 'after';
+
+    public const MODE_PREPEND = 'prepend';
+    public const MODE_REPLACE = 'replace';
+    public const MODE_APPEND = 'append';
 
     /**
      * @var array
@@ -38,28 +43,28 @@ class ControllerResponseInjector
     /**
      * @param string $html
      * @param string $selector
-     * @param string $position
+     * @param string $mode
      */
-    public function addHtml(string $html, string $selector, string $position)
+    public function addHtml(string $html, string $selector, string $mode)
     {
         $this->html[] = [
             'html' => $html,
             'selector' => $selector,
-            'position' => $position
+            'mode' => $mode
         ];
     }
 
     /**
      * @param string $template
      * @param string $selector
-     * @param string $position
+     * @param string $mode
      */
-    public function addTemplate(string $template, string $selector, string $position)
+    public function addTemplate(string $template, string $selector, string $mode)
     {
         $this->template[] = [
             'template' => $template,
             'selector' => $selector,
-            'position' => $position
+            'mode' => $mode
         ];
     }
 

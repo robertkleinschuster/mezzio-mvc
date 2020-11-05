@@ -1,10 +1,12 @@
 <?php
 declare(strict_types=1);
 
+namespace Pars\Mvc\View\Components\Base;
 
-namespace Mvc\View\Components\Base;
-
-
+/**
+ * Trait IconAwareTrait
+ * @package Pars\Mvc\View\Components\Base
+ */
 trait IconAwareTrait
 {
     private ?string $icon = null;

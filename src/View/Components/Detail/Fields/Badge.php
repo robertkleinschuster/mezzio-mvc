@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mvc\View\Components\Detail\Fields;
+namespace Pars\Mvc\View\Components\Detail\Fields;
 
-use Mvc\View\Components\Base\Fields\AbstractBadge;
+use Pars\Mvc\View\Components\Base\Fields\AbstractBadge;
 
+/**
+ * Class Badge
+ * @package Pars\Mvc\View\Components\Detail\Fields
+ */
 class Badge extends AbstractBadge
 {
 

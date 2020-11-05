@@ -1,11 +1,13 @@
 <?php
 
+namespace Pars\Mvc\View\Components\Edit\Fields;
 
-namespace Mvc\View\Components\Edit\Fields;
+use Pars\Mvc\View\Components\Base\Fields\AbstractWysiwyg;
 
-
-use Mvc\View\Components\Base\Fields\AbstractWysiwyg;
-
+/**
+ * Class Wysiwyg
+ * @package Pars\Mvc\View\Components\Edit\Fields
+ */
 class Wysiwyg extends AbstractWysiwyg
 {
 
