@@ -9,7 +9,7 @@
     "support": {
         "issues": "https://github.com/robertkleinschuster/mvc/issues",
         "source": "https://github.com/robertkleinschuster/mvc",
-        "rss": "https://github.com/robertkleinschuster/mvc/releases.atom",
+        "rss": "https://github.com/robertkleinschuster/mvc/releases.atom"
     },
     "repositories": [
 
@@ -51,6 +51,10 @@
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
-        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "check": [
+            "@cs-check",
+            "@test"
+        ]
     }
 }
