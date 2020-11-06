@@ -129,6 +129,11 @@ abstract class AbstractController implements ControllerInterface
 
         if ($this->getControllerRequest()->hasMove()) {
             $this->getModel()->handleMove($this->getControllerRequest()->getMove());
+            $path = $this->getPathHelper();
+            if ($this->getControllerRequest()->hasId()) {
+                $path->setId($this->getControllerRequest()->getId());
+            }
+            $this->getControllerResponse()->setRedirect($path->getPath());
         }
     }
 
