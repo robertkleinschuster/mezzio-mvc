@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Pars\Mvc\View\Components\Edit;
 
 use Pars\Mvc\Controller\ControllerRequest;
+use Pars\Mvc\Parameter\RedirectParameter;
+use Pars\Mvc\Parameter\SubmitParameter;
 use Pars\Mvc\View\Components\Base\AbstractComponent;
 
 /**
@@ -188,28 +190,34 @@ class Edit extends AbstractComponent
     }
 
     /**
-     * @param string $link
+     * @param RedirectParameter $redirectParameter
      * @return Fields\Text
      */
-    public function addSubmitRedirect(string $link): Fields\Text
+    public function addSubmitRedirect(RedirectParameter $redirectParameter): Fields\Text
     {
-        return $this->addSubmitAttribute(ControllerRequest::ATTRIBUTE_REDIRECT, $link);
+        return $this->addSubmitAttribute(
+            ControllerRequest::ATTRIBUTE_REDIRECT,
+            $redirectParameter->__toString()
+        );
     }
 
     /**
-     * @param string $mode
+     * @param SubmitParameter $submitParameter
      * @param string $title
-     * @param string|null $redirect
+     * @param RedirectParameter|null $redirectParameter
      * @return Fields\Button
      */
-    public function addSubmit(string $mode, string $title, string $redirect = null): Fields\Button
-    {
+    public function addSubmit(
+        SubmitParameter $submitParameter,
+        string $title,
+        RedirectParameter $redirectParameter = null
+    ): Fields\Button {
         $result = $this->addButton(ControllerRequest::ATTRIBUTE_SUBMIT, $title)
-            ->setValue($mode)
+            ->setValue($submitParameter->__toString())
             ->setType(Fields\Button::TYPE_SUBMIT);
 
-        if (null !== $redirect) {
-            $this->addSubmitRedirect($redirect)->setAppendToColumnPrevious(true);
+        if (null !== $redirectParameter) {
+            $this->addSubmitRedirect($redirectParameter)->setAppendToColumnPrevious(true);
         }
         return $result;
     }
@@ -231,31 +239,37 @@ class Edit extends AbstractComponent
 
     /**
      * @param string $title
-     * @param string $redirect
+     * @param RedirectParameter $redirectParameter
      * @return Fields\Button
+     * @throws \Niceshops\Core\Exception\AttributeExistsException
+     * @throws \Niceshops\Core\Exception\AttributeLockException
      */
-    public function addSubmitDelete(string $title, string $redirect): Fields\Button
+    public function addSubmitDelete(string $title, RedirectParameter $redirectParameter): Fields\Button
     {
-        return $this->addSubmit(ControllerRequest::SUBMIT_MODE_DELETE, $title, $redirect);
+        return $this->addSubmit((new SubmitParameter())->setDelete(), $title, $redirectParameter);
     }
 
     /**
      * @param string $title
-     * @param string $redirect
+     * @param RedirectParameter $redirectParameter
      * @return Fields\Button
+     * @throws \Niceshops\Core\Exception\AttributeExistsException
+     * @throws \Niceshops\Core\Exception\AttributeLockException
      */
-    public function addSubmitCreate(string $title, string $redirect): Fields\Button
+    public function addSubmitCreate(string $title, RedirectParameter $redirectParameter): Fields\Button
     {
-        return $this->addSubmit(ControllerRequest::SUBMIT_MODE_CREATE, $title, $redirect);
+        return $this->addSubmit((new SubmitParameter())->setCreate(), $title, $redirectParameter);
     }
 
     /**
      * @param string $title
-     * @param string $redirect
+     * @param RedirectParameter $redirectParameter
      * @return Fields\Button
+     * @throws \Niceshops\Core\Exception\AttributeExistsException
+     * @throws \Niceshops\Core\Exception\AttributeLockException
      */
-    public function addSubmitSave(string $title, string $redirect): Fields\Button
+    public function addSubmitSave(string $title, RedirectParameter $redirectParameter): Fields\Button
     {
-        return $this->addSubmit(ControllerRequest::SUBMIT_MODE_SAVE, $title, $redirect);
+        return $this->addSubmit((new SubmitParameter())->setSave(), $title, $redirectParameter);
     }
 }
