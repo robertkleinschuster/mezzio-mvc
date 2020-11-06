@@ -6,6 +6,12 @@ namespace Pars\Mvc\Model;
 
 use Pars\Mvc\Bean\TemplateDataBean;
 use Pars\Mvc\Helper\ValidationHelper;
+use Pars\Mvc\Parameter\IdParameter;
+use Pars\Mvc\Parameter\MoveParameter;
+use Pars\Mvc\Parameter\OrderParameter;
+use Pars\Mvc\Parameter\PaginationParameter;
+use Pars\Mvc\Parameter\SearchParameter;
+use Pars\Mvc\Parameter\SubmitParameter;
 
 /**
  * Interface ModelInterface
@@ -24,48 +30,46 @@ interface ModelInterface
     public function getValidationHelper(): ValidationHelper;
 
     /**
-     * Initialize data source in model
+     * initialize data source in model
      */
     public function init();
 
     /**
-     * Set limit and current page (starting with 1) from request params
-     *
-     * @param int $limit
-     * @param int $page
-     */
-    public function handleLimit(int $limit, int $page);
-
-    /**
-     * @param string $search
-     */
-    public function handleSearch(string $search);
-
-    /**
-     * @param string $order
+     * @param PaginationParameter $paginationParameter
      * @return mixed
      */
-    public function handleOrder(string $order);
+    public function handlePagination(PaginationParameter $paginationParameter);
 
     /**
-
-     *
-     * @param array $viewIdMap
+     * @param SearchParameter $searchParameter
+     * @return mixed
      */
-    public function handleViewIdMap(array $viewIdMap);
+    public function handleSearch(SearchParameter $searchParameter);
 
     /**
-     * Preload data for given ids
-     * Load all data with set limit if ids are empty
+     * @param OrderParameter $orderParameter
+     * @return mixed
      */
-    public function load();
+    public function handleOrder(OrderParameter $orderParameter);
+
+    /**
+     * @param IdParameter $idParameter
+     * @return mixed
+     */
+    public function handleId(IdParameter $idParameter);
+
+    /**
+     * @param MoveParameter $moveParameter
+     * @return mixed
+     */
+    public function handleMove(MoveParameter $moveParameter);
 
     /**
      * Handle form submit
      *
-     * @param string $submitMode
-     * @param array $viewIdMap
-     * @param array $attributes
+     * @param SubmitParameter $submitParameter
+     * @param IdParameter $idParamter
+     * @param array $attribute_List
      */
-    public function submit(string $submitMode, array $viewIdMap, array $attributes);
+    public function submit(SubmitParameter $submitParameter, IdParameter $idParamter, array $attribute_List);
 }

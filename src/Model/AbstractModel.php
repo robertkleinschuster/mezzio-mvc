@@ -4,19 +4,42 @@ declare(strict_types=1);
 
 namespace Pars\Mvc\Model;
 
-use Pars\Mvc\Bean\TemplateDataBean;
+use Niceshops\Bean\Converter\BeanConverterAwareInterface;
+use Niceshops\Bean\Converter\BeanConverterAwareTrait;
+use Niceshops\Bean\Factory\BeanFactoryAwareInterface;
+use Niceshops\Bean\Finder\BeanFinderAwareInterface;
+use Niceshops\Bean\Finder\BeanFinderAwareTrait;
+use Niceshops\Bean\Processor\BeanProcessorAwareInterface;
+use Niceshops\Bean\Processor\BeanProcessorAwareTrait;
+use Niceshops\Bean\Type\Base\BeanListAwareInterface;
 use Niceshops\Core\Option\OptionAwareInterface;
 use Niceshops\Core\Option\OptionAwareTrait;
-use Pars\Mvc\Controller\ControllerRequest;
-use Pars\Mvc\Helper\ValidationHelper;
+use Pars\Mvc\Bean\TemplateDataBean;
+use Pars\Mvc\Helper\ValidationHelperAwareInterface;
+use Pars\Mvc\Helper\ValidationHelperAwareTrait;
+use Pars\Mvc\Parameter\IdParameter;
+use Pars\Mvc\Parameter\OrderParameter;
+use Pars\Mvc\Parameter\PaginationParameter;
+use Pars\Mvc\Parameter\SearchParameter;
+use Pars\Mvc\Parameter\SubmitParameter;
 
 /**
  * Class AbstractModel
  * @package Pars\Mvc\Model
  */
-abstract class AbstractModel implements ModelInterface, OptionAwareInterface
+abstract class AbstractModel implements
+    ModelInterface,
+    OptionAwareInterface,
+    BeanFinderAwareInterface,
+    BeanProcessorAwareInterface,
+    BeanConverterAwareInterface,
+    ValidationHelperAwareInterface
 {
     use OptionAwareTrait;
+    use BeanFinderAwareTrait;
+    use BeanProcessorAwareTrait;
+    use BeanConverterAwareTrait;
+    use ValidationHelperAwareTrait;
 
     public const OPTION_CREATE_ALLOWED = 'create_allowed';
     public const OPTION_EDIT_ALLOWED = 'edit_allowed';
@@ -26,11 +49,6 @@ abstract class AbstractModel implements ModelInterface, OptionAwareInterface
      * @var TemplateDataBean
      */
     private ?TemplateDataBean $templateData = null;
-
-    /**
-     * @var ValidationHelper
-     */
-    private ?ValidationHelper $validationHelper = null;
 
     /**
      * @return TemplateDataBean
@@ -44,41 +62,79 @@ abstract class AbstractModel implements ModelInterface, OptionAwareInterface
     }
 
     /**
-     * @return ValidationHelper
+     * @param PaginationParameter $paginationParameter
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
      */
-    public function getValidationHelper(): ValidationHelper
+    public function handlePagination(PaginationParameter $paginationParameter)
     {
-        if (null == $this->validationHelper) {
-            $this->validationHelper = new ValidationHelper();
+        if ($this->hasBeanFinder()) {
+            $limit = $paginationParameter->getLimit();
+            $page = $paginationParameter->getPage();
+            if ($limit > 0 && $page > 0) {
+                $this->getBeanFinder()->limit($limit, $limit * ($page - 1));
+            }
         }
-        return $this->validationHelper;
     }
 
     /**
-     * @param string $submitMode
-     * @param array $viewIdMap
-     * @param array $attributes
+     * @param SearchParameter $searchParameter
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
      */
-    public function submit(string $submitMode, array $viewIdMap, array $attributes)
+    public function handleSearch(SearchParameter $searchParameter)
     {
-        switch ($submitMode) {
-            case ControllerRequest::SUBMIT_MODE_SAVE:
+        if ($this->hasBeanFinder()) {
+            $this->getBeanFinder()->search($searchParameter->getText());
+        }
+    }
+
+    /**
+     * @param OrderParameter $orderParameter
+     * @return mixed|void
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     */
+    public function handleOrder(OrderParameter $orderParameter)
+    {
+        if ($this->hasBeanFinder()) {
+            $this->getBeanFinder()->order([$orderParameter->getField() => $orderParameter->getMode()]);
+        }
+    }
+
+    /**
+     * @param IdParameter $idParameter
+     */
+    public function handleId(IdParameter $idParameter)
+    {
+        if ($this->hasBeanFinder()) {
+            $this->getBeanFinder()->filter($idParameter->getAttribute_List());
+        }
+    }
+
+    /**
+     * @param SubmitParameter $submitParameter
+     * @param IdParameter $idParameter
+     * @param array $attribute_List
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     */
+    public function submit(SubmitParameter $submitParameter, IdParameter $idParameter, array $attribute_List)
+    {
+        switch ($submitParameter->getMode()) {
+            case SubmitParameter::MODE_SAVE:
                 if ($this->hasOption(self::OPTION_EDIT_ALLOWED)) {
-                    $this->save($attributes);
+                    $this->save($attribute_List);
                 } else {
                     $this->handlePermissionDenied();
                 }
                 break;
-            case ControllerRequest::SUBMIT_MODE_CREATE:
+            case SubmitParameter::MODE_CREATE:
                 if ($this->hasOption(self::OPTION_CREATE_ALLOWED)) {
-                    $this->create($viewIdMap, $attributes);
+                    $this->create($idParameter, $attribute_List);
                 } else {
                     $this->handlePermissionDenied();
                 }
                 break;
-            case ControllerRequest::SUBMIT_MODE_DELETE:
+            case SubmitParameter::MODE_DELETE:
                 if ($this->hasOption(self::OPTION_DELETE_ALLOWED)) {
-                    $this->delete($viewIdMap);
+                    $this->delete($idParameter);
                 } else {
                     $this->handlePermissionDenied();
                 }
@@ -89,21 +145,89 @@ abstract class AbstractModel implements ModelInterface, OptionAwareInterface
     abstract protected function handlePermissionDenied();
 
     /**
-     * @param array $viewIdMap
+     * @param IdParameter $idParameter
      * @param array $attributes
-     * @return mixed
      */
-    abstract protected function create(array $viewIdMap, array $attributes);
+    protected function create(IdParameter $idParameter, array $attributes): void
+    {
+        if ($this->hasBeanFinder() && $this->hasBeanProcessor()) {
+            $finder = $this->getBeanFinder();
+            if ($finder instanceof BeanFactoryAwareInterface) {
+                $data = array_replace($attributes, $idParameter->getAttribute_List());
+                $factory = $finder->getBeanFactory();
+                $bean = $factory->getEmptyBean($data);
+                if ($this->hasBeanConverter()) {
+                    $converter = $this->getBeanConverter();
+                    $bean = $converter->convert($bean, $data)->toBean();
+                }
+                $beanList = $factory->getEmptyBeanList();
+                $beanList->addBean($bean);
+                $processor = $this->getBeanProcessor();
+                if ($processor instanceof BeanListAwareInterface) {
+                    $processor->setBeanList($beanList);
+                }
+                $processor->save();
+                if ($processor instanceof ValidationHelperAwareInterface) {
+                    $this->getValidationHelper()->addErrorFieldMap(
+                        $processor->getValidationHelper()->getErrorFieldMap()
+                    );
+                }
+            }
+        }
+    }
+
 
     /**
-     * @param array $viewIdMap
-     * @return mixed
+     * @param array $attributes
      */
-    abstract protected function delete(array $viewIdMap);
+    protected function save(array $attributes): void
+    {
+        if ($this->hasBeanFinder() && $this->hasBeanProcessor()) {
+            $finder = $this->getBeanFinder();
+            if ($finder instanceof BeanFactoryAwareInterface) {
+                $factory = $finder->getBeanFactory();
+                $data = $attributes;
+                $bean = $this->getBeanFinder()->getBean(true);
+                if ($this->hasBeanConverter()) {
+                    $converter = $this->getBeanConverter();
+                    $bean = $converter->convert($bean, $data)->toBean();
+                }
+                $beanList = $factory->getEmptyBeanList();
+                $beanList->addBean($bean);
+                $processor = $this->getBeanProcessor();
+                if ($processor instanceof BeanListAwareInterface) {
+                    $processor->setBeanList($beanList);
+                }
+                $processor->save();
+                if ($processor instanceof ValidationHelperAwareInterface) {
+                    $this->getValidationHelper()->addErrorFieldMap(
+                        $processor->getValidationHelper()->getErrorFieldMap()
+                    );
+                }
+            }
+        }
+    }
 
     /**
-     * @param array $attributes
-     * @return mixed
+     * @param IdParameter $idParameter
      */
-    abstract protected function save(array $attributes);
+    protected function delete(IdParameter $idParameter): void
+    {
+        if ($this->hasBeanFinder() && $this->getBeanProcessor()) {
+            $finder = $this->getBeanFinder();
+            $processor = $this->getBeanProcessor();
+            if ($processor instanceof BeanListAwareInterface) {
+                if ($finder->count() == 1) {
+                    $beanList = $finder->getBeanList(true);
+                    $processor->setBeanList($beanList);
+                }
+            }
+            $processor->delete();
+            if ($processor instanceof ValidationHelperAwareInterface) {
+                $this->getValidationHelper()->addErrorFieldMap(
+                    $processor->getValidationHelper()->getErrorFieldMap()
+                );
+            }
+        }
+    }
 }

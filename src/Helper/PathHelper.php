@@ -8,6 +8,8 @@ use Mezzio\Helper\ServerUrlHelper;
 use Mezzio\Helper\UrlHelper;
 use Pars\Mvc\Controller\ControllerRequest;
 use Pars\Mvc\Handler\MvcHandler;
+use Pars\Mvc\Parameter\AbstractParameter;
+use Pars\Mvc\Parameter\IdParameter;
 
 /**
  * Class PathHelper
@@ -27,45 +29,35 @@ class PathHelper
     private $serverUrlHelper;
 
     /**
-     * @var ViewIdHelper
+     * @var string
      */
-    private $viewIdHelper;
-
-    /**
-     * @var array
-     */
-    private $viewId_Map;
-
-    /**
-     * @var array
-     */
-    private $params;
+    private ?string $controller = null;
 
     /**
      * @var string
      */
-    private $controller;
+    private ?string $action = null;
 
     /**
      * @var string
      */
-    private $action;
+    private ?string $routeName = null;
 
     /**
-     * @var string
+     * @var AbstractParameter[]
      */
-    private $routeName;
+    private array $parameter_List = [];
 
     /**
      * Path constructor.
      * @param UrlHelper $urlHelper
      * @param ServerUrlHelper $serverUrlHelper
-     * @param ViewIdHelper $viewIdHelper
      */
-    public function __construct(UrlHelper $urlHelper, ServerUrlHelper $serverUrlHelper, ViewIdHelper $viewIdHelper)
-    {
+    public function __construct(
+        UrlHelper $urlHelper,
+        ServerUrlHelper $serverUrlHelper
+    ) {
         $this->urlHelper = $urlHelper;
-        $this->viewIdHelper = $viewIdHelper;
         $this->serverUrlHelper = $serverUrlHelper;
     }
 
@@ -83,54 +75,6 @@ class PathHelper
     public function getServerUrlHelper(): ServerUrlHelper
     {
         return $this->serverUrlHelper;
-    }
-
-    /**
-     * @return ViewIdHelper
-     */
-    public function getViewIdHelper(): ViewIdHelper
-    {
-        return $this->viewIdHelper;
-    }
-
-    /**
-     * @return array
-     */
-    public function getViewIdMap(): array
-    {
-        return $this->viewId_Map;
-    }
-
-    /**
-     * @param array $viewId_Map
-     *
-     * @return $this
-     */
-    public function setViewIdMap(array $viewId_Map): self
-    {
-        $this->viewId_Map = $viewId_Map;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasViewIdMap(): bool
-    {
-        return $this->viewId_Map !== null;
-    }
-
-    /**
-     * @param string $key
-     * @param null $value
-     */
-    public function addViewId(string $key, $value = null)
-    {
-        if (null === $value) {
-            $value = "{{$key}}";
-        }
-        $this->viewId_Map[$key] = $value;
-        return $this;
     }
 
     /**
@@ -188,89 +132,6 @@ class PathHelper
     }
 
     /**
-     * @return array
-     */
-    public function getParams(): array
-    {
-        return $this->params;
-    }
-
-    /**
-     * @param array $params
-     *
-     * @return $this
-     */
-    public function setParams(array $params): self
-    {
-        $this->params = $params;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasParams(): bool
-    {
-        return $this->params !== null;
-    }
-
-    /**
-     * @param string $key
-     * @param $value
-     * @return PathHelper
-     */
-    public function addParam(string $key, $value = null)
-    {
-        if ($value === null) {
-            $value = "{{$key}}";
-        }
-        $this->params[$key] = $value;
-        return $this;
-    }
-
-    /**
-     * @param string $id
-     * @param int $index
-     * @return $this
-     */
-    public function setNavState(string $id, int $index)
-    {
-        $this->addParam(ControllerRequest::ATTRIBUTE_NAV_ID, $id);
-        $this->addParam(ControllerRequest::ATTRIBUTE_NAV_INDEX, $index);
-        return $this;
-    }
-
-    /**
-     * @param int $limit
-     * @param int $page
-     * @return $this
-     */
-    public function setLimit(int $limit, int $page)
-    {
-        $this->addParam(ControllerRequest::ATTRIBUTE_LIMIT, $limit);
-        $this->addParam(ControllerRequest::ATTRIBUTE_PAGE, $page);
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function setOrderDown()
-    {
-        $this->addParam(ControllerRequest::ATTRIBUTE_ORDER, ControllerRequest::ORDER_MODE_DOWN);
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function setOrderUp()
-    {
-        $this->addParam(ControllerRequest::ATTRIBUTE_ORDER, ControllerRequest::ORDER_MODE_UP);
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getRouteName(): string
@@ -295,6 +156,55 @@ class PathHelper
     public function hasRouteName(): bool
     {
         return $this->routeName !== null;
+    }
+
+    /**
+     * @param AbstractParameter $parameter
+     * @return PathHelper
+     */
+    public function addParameter(AbstractParameter $parameter)
+    {
+        $this->parameter_List[$parameter->getParamterKey()] = $parameter;
+        return $this;
+    }
+
+    /**
+     * @return AbstractParameter[]
+     */
+    public function getParameterList(): array
+    {
+        return $this->parameter_List;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasParameterList(): bool
+    {
+        return count($this->parameter_List) > 0;
+    }
+
+    /**
+     * @param IdParameter $idParameter
+     * @return $this
+     */
+    public function setIdParamter(IdParameter $idParameter)
+    {
+        if (count($idParameter->getAttribute_List())) {
+            $this->addParameter($idParameter);
+        }
+        return $this;
+    }
+
+    /**
+     * @return IdParameter
+     */
+    public function getIdParamter(): IdParameter
+    {
+        if (!$this->hasParameterList() || !isset($this->parameter_List[ControllerRequest::ATTRIBUTE_ID])) {
+            $this->parameter_List[ControllerRequest::ATTRIBUTE_ID] = new IdParameter();
+        }
+        return $this->parameter_List[ControllerRequest::ATTRIBUTE_ID];
     }
 
     /**
@@ -323,18 +233,19 @@ class PathHelper
         if ($this->hasController()) {
             $routeParams[MvcHandler::CONTROLLER_ATTRIBUTE] = $this->getController();
         }
-        if ($this->hasParams()) {
-            $params = $this->getParams();
-        } else {
-            $params = [];
-        }
         if ($this->hasRouteName()) {
             $routeName = $this->getRouteName();
         } else {
             $routeName = null;
         }
-        if ($this->hasViewIdMap()) {
-            $params[ViewIdHelper::VIEWID_ATTRIBUTE] = $this->getViewIdHelper()->generateViewId($this->getViewIdMap());
+        $params = [];
+        if ($this->hasParameterList()) {
+            foreach ($this->getParameterList() as $parameter) {
+                $value = $parameter->__toString();
+                if (strlen(trim($value))) {
+                    $params[$parameter->getParamterKey()] = $value;
+                }
+            }
         }
         $path = $this->getUrlHelper()->generate($routeName, $routeParams, $params);
         if ($reset) {

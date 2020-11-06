@@ -1,27 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Pars\Mvc\Helper;
 
-/**
- * Class ViewIdHelper
- * @package Pars\Mvc\Helper
- */
-class ViewIdHelper
+class ParameterMapHelper
 {
-
-    public const VIEWID_ATTRIBUTE = 'viewid';
-
-
     /**
-     * @param string $viewID
+     * @param string $parameter
      * @return array
      */
-    public function parseViewId(string $viewID): array
+    public function parseParameter(string $parameter): array
     {
         $result = [];
-        $key_List = explode(';', $viewID);
+        $key_List = explode(';', $parameter);
         foreach ($key_List as $item) {
             $split = explode('=', $item);
             $result[$split[0]] = $split[1];
@@ -30,13 +20,13 @@ class ViewIdHelper
     }
 
     /**
-     * @param array $id_Map
+     * @param array $data_Map
      * @return string
      */
-    public function generateViewId(array $id_Map): string
+    public function generateParameter(array $data_Map): string
     {
         $result = [];
-        foreach ($id_Map as $key => $value) {
+        foreach ($data_Map as $key => $value) {
             $result[] = "$key=$value";
         }
         return implode(';', $result);

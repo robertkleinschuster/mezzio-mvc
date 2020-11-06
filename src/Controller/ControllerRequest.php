@@ -5,11 +5,18 @@ declare(strict_types=1);
 namespace Pars\Mvc\Controller;
 
 use Mezzio\Router\RouteResult;
-use Pars\Mvc\Helper\ViewIdHelper;
 use Niceshops\Core\Attribute\AttributeAwareInterface;
 use Niceshops\Core\Attribute\AttributeAwareTrait;
 use Niceshops\Core\Option\OptionAwareInterface;
 use Niceshops\Core\Option\OptionAwareTrait;
+use Pars\Mvc\Parameter\IdParameter;
+use Pars\Mvc\Parameter\MoveParameter;
+use Pars\Mvc\Parameter\NavParameter;
+use Pars\Mvc\Parameter\OrderParameter;
+use Pars\Mvc\Parameter\PaginationParameter;
+use Pars\Mvc\Parameter\RedirectParameter;
+use Pars\Mvc\Parameter\SearchParameter;
+use Pars\Mvc\Parameter\SubmitParameter;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -22,30 +29,24 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     use AttributeAwareTrait;
 
     public const ATTRIBUTE_SUBMIT = 'submit';
+    public const ATTRIBUTE_ID = 'id';
     public const ATTRIBUTE_REDIRECT = 'redirect';
-    public const ATTRIBUTE_NAV_ID = 'navid';
-    public const ATTRIBUTE_NAV_INDEX = 'navindex';
-    public const ATTRIBUTE_LIMIT = 'limit';
-    public const ATTRIBUTE_PAGE = 'page';
+    public const ATTRIBUTE_NAV = 'nav';
+    public const ATTRIBUTE_PAGINATION = 'pagination';
     public const ATTRIBUTE_SEARCH = 'search';
     public const ATTRIBUTE_ORDER = 'order';
+    public const ATTRIBUTE_MOVE = 'move';
 
-    public const ORDER_MODE_UP = 'up';
-    public const ORDER_MODE_DOWN = 'down';
-
-    public const SUBMIT_MODE_CREATE = 'create';
-    public const SUBMIT_MODE_SAVE = 'save';
-    public const SUBMIT_MODE_DELETE = 'delete';
 
     /**
      * @var ServerRequestInterface
      */
-    private $serverRequest;
+    private ServerRequestInterface $serverRequest;
 
     /**
      * @var RouteResult
      */
-    private $routeResult;
+    private RouteResult $routeResult;
 
     /**
      * ControllerRequestProperties constructor.
@@ -62,7 +63,7 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
 
         // GET Params
         foreach ($serverRequest->getQueryParams() as $key => $value) {
-            $this->setAttribute($key, $value);
+            $this->setAttribute($key, urldecode($value));
         }
 
         foreach ($serverRequest->getUploadedFiles() as $key => $value) {
@@ -89,23 +90,22 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     /**
      * @return bool
      */
-    public function hasViewIdMap(): bool
+    public function hasId(): bool
     {
-        return $this->hasAttribute(ViewIdHelper::VIEWID_ATTRIBUTE)
-            && null != $this->getAttribute(ViewIdHelper::VIEWID_ATTRIBUTE);
+        return $this->hasAttribute(self::ATTRIBUTE_ID);
     }
 
     /**
-     * @return array
+     * @return IdParameter
+     * @throws \Niceshops\Core\Exception\AttributeExistsException
+     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
      */
-    public function getViewIdMap(): array
+    public function getId(): IdParameter
     {
-        $viewId = $this->getAttribute(ViewIdHelper::VIEWID_ATTRIBUTE);
-        if (null !== $viewId) {
-            return (new ViewIdHelper())->parseViewId(urldecode($viewId));
-        } else {
-            return [];
-        }
+        $idParameter = new IdParameter();
+        $idParameter->fromString($this->getAttribute(self::ATTRIBUTE_ID));
+        return $idParameter;
     }
 
     /**
@@ -117,11 +117,13 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     }
 
     /**
-     * @return string
+     * @return RedirectParameter
      */
-    public function getRedirect(): string
+    public function getRedirect(): RedirectParameter
     {
-        return $this->getAttribute(self::ATTRIBUTE_REDIRECT);
+        $redirectParameter = new RedirectParameter();
+        $redirectParameter->fromString($this->getAttribute(self::ATTRIBUTE_REDIRECT));
+        return $redirectParameter;
     }
 
     /**
@@ -133,75 +135,52 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     }
 
     /**
-     * @return string
+     * @return SubmitParameter
      */
-    public function getSubmit(): string
+    public function getSubmit(): SubmitParameter
     {
-        return $this->getAttribute(self::ATTRIBUTE_SUBMIT);
+        $submitParameter = new SubmitParameter();
+        $submitParameter->fromString($this->getAttribute(self::ATTRIBUTE_SUBMIT));
+        return $submitParameter;
     }
 
     /**
      * @return bool
      */
-    public function hasNavId(): bool
+    public function hasNav(): bool
     {
-        return $this->hasAttribute(self::ATTRIBUTE_NAV_ID);
+        return $this->hasAttribute(self::ATTRIBUTE_NAV);
+    }
+
+    /**
+     * @return NavParameter
+     */
+    public function getNav(): NavParameter
+    {
+        $navParameter = new NavParameter();
+        $navParameter->fromString($this->getAttribute(self::ATTRIBUTE_NAV));
+        return $navParameter;
     }
 
     /**
      * @return bool
      */
-    public function hasNavIndex(): bool
+    public function hasPagingation(): bool
     {
-        return $this->hasAttribute(self::ATTRIBUTE_NAV_INDEX);
+        return $this->hasAttribute(self::ATTRIBUTE_PAGINATION);
     }
 
     /**
-     * @return string
+     * @return PaginationParameter
+     * @throws \Niceshops\Core\Exception\AttributeExistsException
+     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
      */
-    public function getNavId(): string
+    public function getPagination(): PaginationParameter
     {
-        return $this->getAttribute(self::ATTRIBUTE_NAV_ID);
-    }
-
-    /**
-     * @return int
-     */
-    public function getNavIndex(): int
-    {
-        return intval($this->getAttribute(self::ATTRIBUTE_NAV_INDEX));
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasLimit(): bool
-    {
-        return $this->hasAttribute(self::ATTRIBUTE_LIMIT);
-    }
-
-    /**
-     * @return int
-     */
-    public function getLimit(): int
-    {
-        return intval($this->getAttribute(self::ATTRIBUTE_LIMIT));
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasPage(): bool
-    {
-        return $this->hasAttribute(self::ATTRIBUTE_PAGE);
-    }
-
-    /**
-     * @return int
-     */
-    public function getPage(): int
-    {
-        return intval($this->getAttribute(self::ATTRIBUTE_PAGE));
+        $paginationParameter = new PaginationParameter();
+        $paginationParameter->fromString($this->getAttribute(self::ATTRIBUTE_PAGINATION));
+        return $paginationParameter;
     }
 
     /**
@@ -213,11 +192,13 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     }
 
     /**
-     * @return string
+     * @return SearchParameter
      */
-    public function getSearch(): string
+    public function getSearch(): SearchParameter
     {
-        return $this->getAttribute(self::ATTRIBUTE_SEARCH);
+        $searchParamter = new SearchParameter();
+        $searchParamter->fromString($this->getAttribute(self::ATTRIBUTE_SEARCH));
+        return $searchParamter;
     }
 
     /**
@@ -229,11 +210,31 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     }
 
     /**
-     * @return string
+     * @return OrderParameter
      */
-    public function getOrder(): string
+    public function getOrder(): OrderParameter
     {
-        return $this->getAttribute(self::ATTRIBUTE_ORDER);
+        $orderParameter = new OrderParameter();
+        $orderParameter->fromString($this->getAttribute(self::ATTRIBUTE_ORDER));
+        return $orderParameter;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasMove(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_MOVE);
+    }
+
+    /**
+     * @return MoveParameter
+     */
+    public function getMove(): MoveParameter
+    {
+        $moveParameter = new MoveParameter();
+        $moveParameter->fromString($this->getAttribute(self::ATTRIBUTE_MOVE));
+        return $moveParameter;
     }
 
     /**

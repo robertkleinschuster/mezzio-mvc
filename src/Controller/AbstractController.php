@@ -7,6 +7,7 @@ namespace Pars\Mvc\Controller;
 use Pars\Mvc\Helper\PathHelper;
 use Pars\Mvc\Helper\ValidationHelper;
 use Pars\Mvc\Model\ModelInterface;
+use Pars\Mvc\Parameter\PaginationParameter;
 use Pars\Mvc\View\View;
 
 /**
@@ -73,7 +74,6 @@ abstract class AbstractController implements ControllerInterface
         $this->initView();
         $this->initModel();
         $this->handleParameter();
-        $this->loadData();
         $this->handleSubmit();
     }
 
@@ -88,59 +88,76 @@ abstract class AbstractController implements ControllerInterface
     abstract protected function initModel();
 
     /**
-     *
+     * @throws \Niceshops\Core\Exception\AttributeExistsException
+     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
      */
-    protected function loadData()
-    {
-        $this->getModel()->load();
-    }
-
     protected function handleParameter()
     {
         if ($this->getControllerRequest()->isAjax()) {
             $this->getControllerResponse()->setMode(ControllerResponse::MODE_JSON);
         }
 
-        if ($this->getControllerRequest()->hasNavId() && $this->getControllerRequest()->hasNavIndex()) {
+        if ($this->getControllerRequest()->hasNav()) {
+            $nav = $this->getControllerRequest()->getNav();
             $this->handleNavigationState(
-                $this->getControllerRequest()->getNavId(),
-                $this->getControllerRequest()->getNavIndex()
+                $nav->getId(),
+                $nav->getIndex()
             );
         }
 
-        if ($this->getControllerRequest()->hasSearch() && !empty($this->getControllerRequest()->getSearch())) {
+        if ($this->getControllerRequest()->hasSearch()) {
             $this->getModel()->handleSearch($this->getControllerRequest()->getSearch());
         }
 
-        if ($this->getControllerRequest()->hasOrder() && !empty($this->getControllerRequest()->getOrder())) {
+        if ($this->getControllerRequest()->hasOrder()) {
             $this->getModel()->handleOrder($this->getControllerRequest()->getOrder());
         }
 
-        if ($this->getControllerRequest()->hasLimit() && $this->getControllerRequest()->hasPage()) {
-            $this->getModel()->handleLimit(
-                $this->getControllerRequest()->getLimit(),
-                $this->getControllerRequest()->getPage()
-            );
+        if ($this->getControllerRequest()->hasPagingation()) {
+            $pagination = $this->getControllerRequest()->getPagination();
+            $this->getModel()->handlePagination($pagination);
+        } elseif ($this->getDefaultLimit() > 0) {
+            $pagination = new PaginationParameter();
+            $pagination->setLimit($this->getDefaultLimit())->setPage(0);
+            $this->getModel()->handlePagination($pagination);
         }
 
-        if ($this->getControllerRequest()->hasViewIdMap()) {
-            $this->getModel()->handleViewIdMap($this->getControllerRequest()->getViewIdMap());
+        if ($this->getControllerRequest()->hasId()) {
+            $this->getModel()->handleId($this->getControllerRequest()->getId());
+        }
+
+        if ($this->getControllerRequest()->hasMove()) {
+            $this->getModel()->handleMove($this->getControllerRequest()->getMove());
         }
     }
 
+    /**
+     * @return int
+     */
+    protected function getDefaultLimit(): int
+    {
+        return 0;
+    }
+
+    /**
+     * @throws \Niceshops\Core\Exception\AttributeExistsException
+     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     */
     protected function handleSubmit()
     {
         if ($this->getControllerRequest()->hasSubmit()) {
             $path = $this->getPathHelper();
-            if ($this->getControllerRequest()->hasViewIdMap()) {
-                $path->setViewIdMap($this->getControllerRequest()->getViewIdMap());
+            if ($this->getControllerRequest()->hasId()) {
+                $path->setIdParamter($this->getControllerRequest()->getId());
             }
             $pathUrl = $path->getPath();
             if ($this->handleSubmitSecurity()) {
                 $this->getModel()->submit(
                     $this->getControllerRequest()->getSubmit(),
-                    $this->getControllerRequest()->getViewIdMap(),
-                    $this->getControllerRequest()->getAttributes()
+                    $this->getControllerRequest()->getId(),
+                    $this->getControllerRequest()->getAttribute_List()
                 );
                 if ($this->getModel()->getValidationHelper()->hasError()) {
                     $this->handleValidationError($this->getModel()->getValidationHelper());
@@ -276,6 +293,7 @@ abstract class AbstractController implements ControllerInterface
      * @param string $key
      * @param $value
      * @return AbstractController
+     * @throws \Niceshops\Bean\Type\Base\BeanException
      */
     protected function setTemplateVariable(string $key, $value)
     {

@@ -114,8 +114,8 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanConvert
                 return;
             }
         }
-        if ($this->hasBeanFormatter()) {
-            $component->setBeanFormatter($this->getBeanFormatter());
+        if ($this->hasBeanConverter()) {
+            $component->setBeanConverter($this->getBeanConverter());
         }
         if ($prepend) {
             array_unshift($this->component_List, $component);
@@ -198,7 +198,12 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanConvert
         if ($this->hasPermissionList()) {
             return array_values(array_filter($this->navigation_List, function ($navigation) use ($position) {
                 return $navigation->getPosition() === $position
-                    && (!$navigation->hasPermission() || in_array($navigation->getPermission(), $this->getPermissionList()));
+                    && (
+                        !$navigation->hasPermission() || in_array(
+                            $navigation->getPermission(),
+                            $this->getPermissionList()
+                        )
+                    );
             }));
         }
         return array_values(array_filter($this->navigation_List, function ($navigation) use ($position) {

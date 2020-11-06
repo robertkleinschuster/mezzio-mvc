@@ -22,8 +22,7 @@ class PathHelperFactory
     {
         return new PathHelper(
             $container->get(UrlHelper::class),
-            $container->get(ServerUrlHelper::class),
-            new ViewIdHelper()
+            $container->get(ServerUrlHelper::class)
         );
     }
 }

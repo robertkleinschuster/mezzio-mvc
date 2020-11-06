@@ -183,7 +183,7 @@ class Overview extends AbstractComponent
             ->setChapter('actions');
     }
 
-    public function addOrderUpIcon(string $link)
+    public function addMoveUpIcon(string $link)
     {
         return $this->addLink('', '')
             ->setLink($link)
@@ -197,7 +197,7 @@ class Overview extends AbstractComponent
             ->setChapter('order');
     }
 
-    public function addOrderDownIcon(string $link)
+    public function addMoveDownIcon(string $link)
     {
         return $this->addLink('', '')
             ->setLink($link)
