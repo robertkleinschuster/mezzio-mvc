@@ -26,6 +26,7 @@ class IdParameter extends AbstractParameter
         } elseif (is_bool($value)) {
             $this->setAttribute($field, strval($value));
         }
+        return $this;
     }
 
     public function getParamterKey(): string
