@@ -49,6 +49,11 @@ class PathHelper
     private array $parameter_List = [];
 
     /**
+     * @var array
+     */
+    private array $routeParam_List = [];
+
+    /**
      * Path constructor.
      * @param UrlHelper $urlHelper
      * @param ServerUrlHelper $serverUrlHelper
@@ -208,15 +213,26 @@ class PathHelper
     }
 
     /**
+     * @param string $key
+     * @param string $value
+     * @return $this
+     */
+    public function addRouteParameter(string $key, string $value)
+    {
+        $this->routeParam_List[$key] = $value;
+        return $this;
+    }
+
+    /**
      * @return $this
      */
     public function reset(): self
     {
-        $this->params = null;
         $this->routeName = null;
         $this->controller = null;
         $this->action = null;
-        $this->viewId_Map = null;
+        $this->routeParam_List = [];
+        $this->parameter_List = [];
         return $this;
     }
 
@@ -226,7 +242,7 @@ class PathHelper
      */
     public function getPath(bool $reset = true): string
     {
-        $routeParams = [];
+        $routeParams = $this->routeParam_List;
         if ($this->hasAction()) {
             $routeParams[MvcHandler::ACTION_ATTRIBUTE] = $this->getAction();
         }
