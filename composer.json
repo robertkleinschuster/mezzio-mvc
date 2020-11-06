@@ -10,7 +10,6 @@
         "issues": "https://github.com/robertkleinschuster/mvc/issues",
         "source": "https://github.com/robertkleinschuster/mvc",
         "rss": "https://github.com/robertkleinschuster/mvc/releases.atom",
-        "forum": "https://discourse.laminas.dev/"
     },
     "repositories": [
 
