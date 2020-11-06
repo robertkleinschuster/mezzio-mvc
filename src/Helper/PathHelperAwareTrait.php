@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Pars\Mvc\Helper;
@@ -37,5 +38,4 @@ trait PathHelperAwareTrait
     {
         return $this->pathHelper !== null;
     }
-
 }

@@ -14,7 +14,6 @@ use Niceshops\Core\Option\OptionAwareTrait;
 use Pars\Mvc\Helper\PathHelperAwareInterface;
 use Pars\Mvc\Helper\PathHelperAwareTrait;
 
-
 /**
  * Class AbstractField
  * @package Pars\Mvc\View\Components\Base

@@ -88,5 +88,4 @@ interface ControllerInterface
      * @return bool
      */
     public function isAuthorized(): bool;
-
 }
