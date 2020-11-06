@@ -194,7 +194,7 @@ class Overview extends AbstractComponent
             ->addOption(Fields\Link::OPTION_TEXT_DECORATION_NONE)
             ->addOption(Fields\Link::OPTION_BUTTON_STYLE)
             ->setSize(Fields\Link::SIZE_SMALL)
-            ->setChapter('order');
+            ->setChapter('move');
     }
 
     public function addMoveDownIcon(string $link)
@@ -208,6 +208,6 @@ class Overview extends AbstractComponent
             ->addOption(Fields\Link::OPTION_TEXT_DECORATION_NONE)
             ->addOption(Fields\Link::OPTION_BUTTON_STYLE)
             ->setSize(Fields\Link::SIZE_SMALL)
-            ->setChapter('order');
+            ->setChapter('move');
     }
 }
