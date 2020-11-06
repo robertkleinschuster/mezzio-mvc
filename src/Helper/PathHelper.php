@@ -193,7 +193,7 @@ class PathHelper
      * @param IdParameter $idParameter
      * @return $this
      */
-    public function setIdParamter(IdParameter $idParameter)
+    public function setId(IdParameter $idParameter)
     {
         if (count($idParameter->getAttribute_List())) {
             $this->addParameter($idParameter);
@@ -204,7 +204,7 @@ class PathHelper
     /**
      * @return IdParameter
      */
-    public function getIdParamter(): IdParameter
+    public function getId(): IdParameter
     {
         if (!$this->hasParameterList() || !isset($this->parameter_List[ControllerRequest::ATTRIBUTE_ID])) {
             $this->parameter_List[ControllerRequest::ATTRIBUTE_ID] = new IdParameter();

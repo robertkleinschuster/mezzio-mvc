@@ -150,7 +150,7 @@ abstract class AbstractController implements ControllerInterface
         if ($this->getControllerRequest()->hasSubmit()) {
             $path = $this->getPathHelper();
             if ($this->getControllerRequest()->hasId()) {
-                $path->setIdParamter($this->getControllerRequest()->getId());
+                $path->setId($this->getControllerRequest()->getId());
             }
             $pathUrl = $path->getPath();
             if ($this->handleSubmitSecurity()) {
