@@ -13,6 +13,7 @@ use Niceshops\Bean\Processor\BeanProcessorAwareInterface;
 use Niceshops\Bean\Processor\BeanProcessorAwareTrait;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Niceshops\Bean\Type\Base\BeanListAwareInterface;
+use Niceshops\Bean\Type\Base\BeanListInterface;
 use Niceshops\Core\Option\OptionAwareInterface;
 use Niceshops\Core\Option\OptionAwareTrait;
 use Pars\Mvc\Bean\TemplateDataBean;
@@ -267,5 +268,29 @@ abstract class AbstractModel implements
             }
         }
         throw new MvcException('Could not create empty bean!');
+    }
+
+    /**
+     * @return BeanInterface
+     * @throws MvcException
+     */
+    public function getBean(): BeanInterface
+    {
+        if ($this->hasBeanFinder()) {
+            return $this->getBeanFinder()->getBean();
+        }
+        throw new MvcException('Could not get bean!');
+    }
+
+    /**
+     * @return BeanListInterface
+     * @throws MvcException
+     */
+    public function getBeanList(): BeanListInterface
+    {
+        if ($this->hasBeanFinder()) {
+            return $this->getBeanFinder()->getBeanListDecorator();
+        }
+        throw new MvcException('Could not get bean list!');
     }
 }
