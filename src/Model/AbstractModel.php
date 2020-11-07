@@ -11,10 +11,12 @@ use Niceshops\Bean\Finder\BeanFinderAwareInterface;
 use Niceshops\Bean\Finder\BeanFinderAwareTrait;
 use Niceshops\Bean\Processor\BeanProcessorAwareInterface;
 use Niceshops\Bean\Processor\BeanProcessorAwareTrait;
+use Niceshops\Bean\Type\Base\BeanInterface;
 use Niceshops\Bean\Type\Base\BeanListAwareInterface;
 use Niceshops\Core\Option\OptionAwareInterface;
 use Niceshops\Core\Option\OptionAwareTrait;
 use Pars\Mvc\Bean\TemplateDataBean;
+use Pars\Mvc\Exception\MvcException;
 use Pars\Mvc\Helper\ValidationHelperAwareInterface;
 use Pars\Mvc\Helper\ValidationHelperAwareTrait;
 use Pars\Mvc\Parameter\IdParameter;
@@ -249,5 +251,21 @@ abstract class AbstractModel implements
                 );
             }
         }
+    }
+
+    /**
+     * @param array $data
+     * @return BeanInterface
+     * @throws MvcException
+     */
+    public function getEmptyBean(array $data): BeanInterface
+    {
+        if ($this->hasBeanFinder()) {
+            $finder = $this->getBeanFinder();
+            if ($finder instanceof BeanFactoryAwareInterface) {
+                return $finder->getBeanFactory()->getEmptyBean($data);
+            }
+        }
+        throw new MvcException('Could not create empty bean!');
     }
 }
