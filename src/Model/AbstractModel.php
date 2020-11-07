@@ -18,6 +18,7 @@ use Pars\Mvc\Bean\TemplateDataBean;
 use Pars\Mvc\Helper\ValidationHelperAwareInterface;
 use Pars\Mvc\Helper\ValidationHelperAwareTrait;
 use Pars\Mvc\Parameter\IdParameter;
+use Pars\Mvc\Parameter\MoveParameter;
 use Pars\Mvc\Parameter\OrderParameter;
 use Pars\Mvc\Parameter\PaginationParameter;
 use Pars\Mvc\Parameter\SearchParameter;
@@ -106,6 +107,25 @@ abstract class AbstractModel implements
     {
         if ($this->hasBeanFinder()) {
             $this->getBeanFinder()->filter($idParameter->getAttribute_List());
+        }
+    }
+
+    /**
+     * @param MoveParameter $moveParameter
+     * @return mixed|void
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     */
+    public function handleMove(MoveParameter $moveParameter)
+    {
+        if ($this->hasBeanProcessor() && $this->hasBeanFinder()) {
+            $this->getBeanProcessor()->move(
+                $this->getBeanFinder(),
+                $this->getBeanFinder()->getBean(),
+                $moveParameter->getField(),
+                $moveParameter->getSteps(),
+                $moveParameter->getReferenceField(),
+                $moveParameter->getReferenceValue()
+            );
         }
     }
 
