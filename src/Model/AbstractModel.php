@@ -258,7 +258,7 @@ abstract class AbstractModel implements
      * @return BeanInterface
      * @throws MvcException
      */
-    public function getEmptyBean(array $data): BeanInterface
+    public function getEmptyBean(array $data = []): BeanInterface
     {
         if ($this->hasBeanFinder()) {
             $finder = $this->getBeanFinder();
