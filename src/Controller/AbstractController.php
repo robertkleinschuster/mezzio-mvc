@@ -83,7 +83,7 @@ abstract class AbstractController implements ControllerInterface
         $model = $this->getModel();
         if ($model instanceof ValidationHelperAwareInterface && $model->getValidationHelper()->hasError()) {
             $this->handleValidationError($model->getValidationHelper());
-            $this->getControllerResponse()->setRedirect($this->getPathHelper()->getPath());
+            $this->getControllerResponse()->setRedirect($this->getPathHelper(true)->getPath());
         }
     }
 
@@ -136,19 +136,16 @@ abstract class AbstractController implements ControllerInterface
 
         if ($this->getControllerRequest()->hasSearch()) {
             $searchParameter = $this->getControllerRequest()->getSearch();
-            $this->pathHelper->addParameter($searchParameter);
             $this->getModel()->handleSearch($searchParameter);
         }
 
         if ($this->getControllerRequest()->hasOrder()) {
             $orderParameter = $this->getControllerRequest()->getOrder();
-            $this->pathHelper->addParameter($orderParameter);
             $this->getModel()->handleOrder($orderParameter);
         }
 
         if ($this->getControllerRequest()->hasPagingation()) {
             $paginationParameter = $this->getControllerRequest()->getPagination();
-            $this->pathHelper->addParameter($paginationParameter);
             $this->getModel()->handlePagination($paginationParameter);
         } elseif ($this->getDefaultLimit() > 0) {
             $paginationParameter = new PaginationParameter();
@@ -157,7 +154,6 @@ abstract class AbstractController implements ControllerInterface
         }
 
         if ($this->getControllerRequest()->hasId()) {
-            $this->pathHelper->setId($this->getControllerRequest()->getId());
             $this->getModel()->handleId($this->getControllerRequest()->getId());
         }
 
@@ -230,12 +226,30 @@ abstract class AbstractController implements ControllerInterface
     }
 
     /**
-     * @param bool $reset
-     * @param bool $clone
+     * @param bool $setParameter
      * @return PathHelper
+     * @throws \Niceshops\Core\Exception\AttributeExistsException
+     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
      */
-    public function getPathHelper(): PathHelper
+    public function getPathHelper(bool $setParameter = false): PathHelper
     {
+        if ($setParameter) {
+            $this->pathHelper->reset();
+            if ($this->getControllerRequest()->hasId()) {
+                $this->pathHelper->setId($this->getControllerRequest()->getId());
+            }
+            if ($this->getControllerRequest()->hasPagingation()) {
+                $this->pathHelper->addParameter($this->getControllerRequest()->getPagination());
+            }
+            if ($this->getControllerRequest()->hasOrder()) {
+                $this->pathHelper->addParameter($this->getControllerRequest()->getOrder());
+            }
+            if ($this->getControllerRequest()->hasSearch()) {
+                $this->pathHelper->addParameter($this->getControllerRequest()->getSearch());
+            }
+            return $this->pathHelper;
+        }
         return $this->pathHelper->reset();
     }
 
