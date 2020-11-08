@@ -65,6 +65,12 @@ abstract class AbstractModel implements
         return $this->templateData;
     }
 
+    public function initialize()
+    {
+
+    }
+
+
     /**
      * @param PaginationParameter $paginationParameter
      * @throws \Niceshops\Core\Exception\AttributeNotFoundException
