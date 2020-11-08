@@ -135,19 +135,19 @@ abstract class AbstractController implements ControllerInterface
 
         if ($this->getControllerRequest()->hasSearch()) {
             $searchParameter = $this->getControllerRequest()->getSearch();
-            $this->getPathHelper(false, false)->addParameter($searchParameter);
+            $this->pathHelper->addParameter($searchParameter);
             $this->getModel()->handleSearch($searchParameter);
         }
 
         if ($this->getControllerRequest()->hasOrder()) {
             $orderParameter = $this->getControllerRequest()->getOrder();
-            $this->getPathHelper(false, false)->addParameter($orderParameter);
+            $this->pathHelper->addParameter($orderParameter);
             $this->getModel()->handleOrder($orderParameter);
         }
 
         if ($this->getControllerRequest()->hasPagingation()) {
             $paginationParameter = $this->getControllerRequest()->getPagination();
-            $this->getPathHelper(false, false)->addParameter($paginationParameter);
+            $this->pathHelper->addParameter($paginationParameter);
             $this->getModel()->handlePagination($paginationParameter);
         } elseif ($this->getDefaultLimit() > 0) {
             $paginationParameter = new PaginationParameter();
@@ -156,7 +156,7 @@ abstract class AbstractController implements ControllerInterface
         }
 
         if ($this->getControllerRequest()->hasId()) {
-            $this->getPathHelper(false, false)->setId($this->getControllerRequest()->getId());
+            $this->pathHelper->setId($this->getControllerRequest()->getId());
             $this->getModel()->handleId($this->getControllerRequest()->getId());
         }
 
@@ -233,15 +233,9 @@ abstract class AbstractController implements ControllerInterface
      * @param bool $clone
      * @return PathHelper
      */
-    public function getPathHelper(bool $reset = false, bool $clone = true): PathHelper
+    public function getPathHelper(): PathHelper
     {
-        if ($reset) {
-            return (clone $this->pathHelper)->reset();
-        }
-        if ($clone) {
-            return clone $this->pathHelper;
-        }
-        return $this->pathHelper;
+        return $this->pathHelper->reset();
     }
 
     /**

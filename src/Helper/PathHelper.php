@@ -213,6 +213,15 @@ class PathHelper
     }
 
     /**
+     * @return $this
+     */
+    public function resetId()
+    {
+        unset($this->parameter_List[ControllerRequest::ATTRIBUTE_ID]);
+        return $this;
+    }
+
+    /**
      * @param string $key
      * @param string $value
      * @return $this
