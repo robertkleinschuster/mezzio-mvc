@@ -19,12 +19,12 @@ interface ControllerInterface
     /**
      * @return mixed
      */
-    public function init();
+    public function initialize();
 
     /**
      * @return mixed
      */
-    public function end();
+    public function finalize();
 
     /**
      * @param Throwable $exception

@@ -6,9 +6,11 @@ namespace Pars\Mvc\Controller;
 
 use Pars\Mvc\Helper\PathHelper;
 use Pars\Mvc\Helper\ValidationHelper;
+use Pars\Mvc\Helper\ValidationHelperAwareInterface;
 use Pars\Mvc\Model\ModelInterface;
 use Pars\Mvc\Parameter\PaginationParameter;
 use Pars\Mvc\View\View;
+use Throwable;
 
 /**
  * Class AbstractController
@@ -69,13 +71,38 @@ abstract class AbstractController implements ControllerInterface
     /**
      * @return mixed|void
      */
-    public function init()
+    public function initialize()
     {
         $this->initView();
         $this->initModel();
         $this->handleParameter();
-        $this->handleSubmit();
     }
+
+    public function finalize()
+    {
+        $model = $this->getModel();
+        if ($model instanceof ValidationHelperAwareInterface && $model->getValidationHelper()->hasError()) {
+            $this->handleValidationError($model->getValidationHelper());
+        }
+    }
+
+    /**
+     * @param Throwable $exception
+     * @return mixed|void
+     */
+    public function error(Throwable $exception)
+    {
+        $this->getControllerResponse()->setBody("<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>Error</title><meta name=\"author\" content=\"\"><meta name=\"description\" content=\"\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"></head><body><h1>Error</h1><p>{$exception->getMessage()}</p></body></html>");
+    }
+
+    /**
+     * @return mixed|void
+     */
+    public function unauthorized()
+    {
+        $this->getControllerResponse()->setBody("<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>Unauthorized</title><meta name=\"author\" content=\"\"><meta name=\"description\" content=\"\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"></head><body><h1>Unauthorized</h1><p>Permission to requested ressource was denied!</p></body></html>");
+    }
+
 
     /**
      * @return mixed
@@ -99,41 +126,56 @@ abstract class AbstractController implements ControllerInterface
         }
 
         if ($this->getControllerRequest()->hasNav()) {
-            $nav = $this->getControllerRequest()->getNav();
+            $navParameter = $this->getControllerRequest()->getNav();
             $this->handleNavigationState(
-                $nav->getId(),
-                $nav->getIndex()
+                $navParameter->getId(),
+                $navParameter->getIndex()
             );
         }
 
         if ($this->getControllerRequest()->hasSearch()) {
-            $this->getModel()->handleSearch($this->getControllerRequest()->getSearch());
+            $searchParameter = $this->getControllerRequest()->getSearch();
+            $this->getPathHelper()->addParameter($searchParameter);
+            $this->getModel()->handleSearch($searchParameter);
         }
 
         if ($this->getControllerRequest()->hasOrder()) {
-            $this->getModel()->handleOrder($this->getControllerRequest()->getOrder());
+            $orderParameter = $this->getControllerRequest()->getOrder();
+            $this->getPathHelper()->addParameter($orderParameter);
+            $this->getModel()->handleOrder($orderParameter);
         }
 
         if ($this->getControllerRequest()->hasPagingation()) {
-            $pagination = $this->getControllerRequest()->getPagination();
-            $this->getModel()->handlePagination($pagination);
+            $paginationParameter = $this->getControllerRequest()->getPagination();
+            $this->getPathHelper()->addParameter($paginationParameter);
+            $this->getModel()->handlePagination($paginationParameter);
         } elseif ($this->getDefaultLimit() > 0) {
-            $pagination = new PaginationParameter();
-            $pagination->setLimit($this->getDefaultLimit())->setPage(0);
-            $this->getModel()->handlePagination($pagination);
+            $paginationParameter = new PaginationParameter();
+            $paginationParameter->setLimit($this->getDefaultLimit())->setPage(0);
+            $this->getModel()->handlePagination($paginationParameter);
         }
 
         if ($this->getControllerRequest()->hasId()) {
+            $this->getPathHelper()->setId($this->getControllerRequest()->getId());
             $this->getModel()->handleId($this->getControllerRequest()->getId());
         }
 
         if ($this->getControllerRequest()->hasMove()) {
             $this->getModel()->handleMove($this->getControllerRequest()->getMove());
-            $path = $this->getPathHelper();
-            if ($this->getControllerRequest()->hasId()) {
-                $path->setId($this->getControllerRequest()->getId());
+        }
+
+        if ($this->getControllerRequest()->hasSubmit()) {
+            if ($this->handleSubmitSecurity()) {
+                $this->getModel()->handleSubmit(
+                    $this->getControllerRequest()->getSubmit(),
+                    $this->getControllerRequest()->getId(),
+                    $this->getControllerRequest()->getAttribute_List()
+                );
             }
-            $this->getControllerResponse()->setRedirect($path->getPath());
+        }
+
+        if ($this->getControllerRequest()->hasRedirect()) {
+            $this->getControllerResponse()->setRedirect($this->getControllerRequest()->getRedirect()->getLink());
         }
     }
 
@@ -146,43 +188,14 @@ abstract class AbstractController implements ControllerInterface
     }
 
     /**
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
-     */
-    protected function handleSubmit()
-    {
-        if ($this->getControllerRequest()->hasSubmit()) {
-            $path = $this->getPathHelper();
-            if ($this->getControllerRequest()->hasId()) {
-                $path->setId($this->getControllerRequest()->getId());
-            }
-            $pathUrl = $path->getPath();
-            if ($this->handleSubmitSecurity()) {
-                $this->getModel()->submit(
-                    $this->getControllerRequest()->getSubmit(),
-                    $this->getControllerRequest()->getId(),
-                    $this->getControllerRequest()->getAttribute_List()
-                );
-                if ($this->getModel()->getValidationHelper()->hasError()) {
-                    $this->handleValidationError($this->getModel()->getValidationHelper());
-                } elseif ($this->getControllerRequest()->hasRedirect()) {
-                    $pathUrl = $this->getControllerRequest()->getRedirect();
-                }
-            }
-            $this->getControllerResponse()->setRedirect($pathUrl);
-        }
-    }
-
-    /**
-     * Handle security checks e.g. csrf token before executing submit in model
+     * handle security checks e.g. csrf token before executing submit in model
      *
      * @return bool
      */
     abstract protected function handleSubmitSecurity(): bool;
 
     /**
-     * Handle validation errors from model after submit
+     * gandle validation errors from model after submit
      * e.g. set to flash messanger to display them after redirect
      *
      * @param ValidationHelper $validationHelper
@@ -191,18 +204,12 @@ abstract class AbstractController implements ControllerInterface
     abstract protected function handleValidationError(ValidationHelper $validationHelper);
 
     /**
-     * Persist naviations states in Session
+     * persist naviation states in session
      * @param string $id
      * @param int $index
      * @return mixed
      */
     abstract protected function handleNavigationState(string $id, int $index);
-
-    /**
-     * @param string $id
-     * @return int
-     */
-    abstract protected function getNavigationState(string $id): int;
 
     /**
      * @return ControllerRequest
@@ -222,11 +229,15 @@ abstract class AbstractController implements ControllerInterface
     }
 
     /**
+     * @param bool $reset
      * @return PathHelper
      */
-    public function getPathHelper(): PathHelper
+    public function getPathHelper(bool $reset = false): PathHelper
     {
-        return $this->pathHelper->reset();
+        if ($reset) {
+            return (clone $this->pathHelper)->reset();
+        }
+        return $this->pathHelper;
     }
 
     /**

@@ -111,14 +111,14 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
         $controller = null;
         try {
             $controller = ($this->controllerFactory)($controllerCode, $request, $config);
-            $controller->init();
+            $controller->initialize();
             if ($controller->isAuthorized()) {
                 $this->executeControllerAction($controller, $actionMethod);
             } else {
                 $controller->getControllerResponse()->setStatusCode(401);
                 $controller->unauthorized();
             }
-            $controller->end();
+            $controller->finalize();
         } catch (NotFoundException $exception) {
             return (new Response\HtmlResponse($exception->getMessage(), 404));
         } catch (Throwable $exception) {

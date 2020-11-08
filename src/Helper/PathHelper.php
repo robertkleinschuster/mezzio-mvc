@@ -240,7 +240,7 @@ class PathHelper
      * @param bool $reset
      * @return string
      */
-    public function getPath(bool $reset = true): string
+    public function getPath(bool $reset = false): string
     {
         $routeParams = $this->routeParam_List;
         if ($this->hasAction()) {

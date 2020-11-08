@@ -14,7 +14,7 @@ trait ValidationHelperAwareTrait
     /**
      * @var ValidationHelper
      */
-    private $validationHelper;
+    private ?ValidationHelper $validationHelper = null;
 
     /**
      * @return ValidationHelper

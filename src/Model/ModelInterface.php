@@ -25,14 +25,9 @@ interface ModelInterface
     public function getTemplateData(): TemplateDataBean;
 
     /**
-     * @return ValidationHelper
-     */
-    public function getValidationHelper(): ValidationHelper;
-
-    /**
      * initialize data source in model
      */
-    public function init();
+    public function initialize();
 
     /**
      * @param PaginationParameter $paginationParameter
@@ -71,5 +66,5 @@ interface ModelInterface
      * @param IdParameter $idParamter
      * @param array $attribute_List
      */
-    public function submit(SubmitParameter $submitParameter, IdParameter $idParamter, array $attribute_List);
+    public function handleSubmit(SubmitParameter $submitParameter, IdParameter $idParamter, array $attribute_List);
 }

@@ -138,7 +138,7 @@ abstract class AbstractModel implements
      * @param array $attribute_List
      * @throws \Niceshops\Core\Exception\AttributeNotFoundException
      */
-    public function submit(SubmitParameter $submitParameter, IdParameter $idParameter, array $attribute_List)
+    public function handleSubmit(SubmitParameter $submitParameter, IdParameter $idParameter, array $attribute_List)
     {
         switch ($submitParameter->getMode()) {
             case SubmitParameter::MODE_SAVE:
