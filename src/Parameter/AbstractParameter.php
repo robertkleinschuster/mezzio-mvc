@@ -13,7 +13,7 @@ abstract class AbstractParameter implements AttributeAwareInterface
     /**
      * @var ParameterMapHelper
      */
-    private ParameterMapHelper $parameterMapHelper;
+    private ?ParameterMapHelper $parameterMapHelper = null;
 
     /**
      * @return ParameterMapHelper
