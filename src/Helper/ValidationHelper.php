@@ -80,6 +80,15 @@ class ValidationHelper
     }
 
     /**
+     * @param ValidationHelper $validationHelper
+     * @return $this
+     */
+    public function merge(ValidationHelper $validationHelper)
+    {
+        $this->addErrorFieldMap($validationHelper->getErrorFieldMap());
+        return $this;
+    }
+    /**
      * @return string
      */
     public function __toString(): string
