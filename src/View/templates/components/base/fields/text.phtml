@@ -8,7 +8,7 @@
     <a href="<?= $field->getLink($bean) ?>" <?= $field->hasTarget() ? " target=\"{$field->getTarget()}\"" : '' ?>>
 <?php endif; ?>
     <div class="<?= $field->hasAlign() ? ' text-' . $field->getAlign() : '' ?>">
-        <span class="<?= implode(' ', $field->getOptions()) ?>"><?= $field->getValue($bean) ?></span>
+        <span class="<?= implode(' ', $field->getOption_List()) ?>"><?= $field->getValue($bean) ?></span>
     </div>
 <?php if ($field->hasLink()): ?>
     </a>
