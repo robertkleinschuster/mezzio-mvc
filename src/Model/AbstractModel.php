@@ -127,8 +127,10 @@ abstract class AbstractModel implements
     public function handleMove(MoveParameter $moveParameter)
     {
         if ($this->hasBeanProcessor() && $this->hasBeanFinder()) {
+            $model = clone $this;
+            $model->initialize();
             $this->getBeanProcessor()->move(
-                $this->getBeanFinder(),
+                $model->getBeanFinder(),
                 $this->getBeanFinder()->getBean(),
                 $moveParameter->getField(),
                 $moveParameter->getSteps(),
