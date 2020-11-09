@@ -23,7 +23,7 @@ class RedirectParameter extends AbstractParameter
      */
     public function setLink(string $link)
     {
-        $this->setAttribute(self::ATTRIBUTE_LINK, $link);
+        $this->setAttribute(self::ATTRIBUTE_LINK, urlencode($link));
         return $this;
     }
 
@@ -33,6 +33,6 @@ class RedirectParameter extends AbstractParameter
      */
     public function getLink(): string
     {
-        return $this->getAttribute(self::ATTRIBUTE_LINK);
+        return urldecode($this->getAttribute(self::ATTRIBUTE_LINK));
     }
 }
