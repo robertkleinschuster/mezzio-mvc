@@ -69,6 +69,37 @@ abstract class AbstractController implements ControllerInterface
     }
 
     /**
+     * @var array
+     */
+    private array $subController_Map = [];
+
+    /**
+     * @param string $controllerCode
+     * @param string $actionCode
+     */
+    protected function addSubController(string $controllerCode, string $actionCode)
+    {
+        $this->subController_Map[$controllerCode] = $actionCode;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSubControllerMap(): array
+    {
+        return $this->subController_Map;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasSubControllerMap(): bool
+    {
+        return count($this->subController_Map) > 0;
+    }
+
+
+    /**
      * @return mixed|void
      */
     public function initialize()

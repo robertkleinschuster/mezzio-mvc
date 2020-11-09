@@ -83,6 +83,10 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
     /**
      * @param ServerRequestInterface $request
      * @return ResponseInterface
+     * @throws ControllerNotFoundException
+     * @throws \Niceshops\Bean\Type\Base\BeanException
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Mvc\Exception\MvcException
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
@@ -101,7 +105,25 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
         } else {
             $config = $this->config;
         }
+        $controller = $this->renderControllerAction($controllerCode, $actionCode, $config, $request);
+        return (new ServerResponseFactory())($controller->getControllerResponse());
+    }
 
+    /**
+     * @param string $controllerCode
+     * @param string $actionCode
+     * @param array $config
+     * @param ServerRequestInterface $request
+     * @return ControllerInterface
+     * @throws ControllerNotFoundException
+     * @throws \Niceshops\Bean\Type\Base\BeanException
+     */
+    protected function renderControllerAction(
+        string $controllerCode,
+        string $actionCode,
+        array $config,
+        ServerRequestInterface $request
+    ): ControllerInterface {
         $mvcTemplateFolder = $config['template_folder'];
         $errorController = $config['error_controller'];
         $actionSuffix = $config['action']['suffix'] ?? '';
@@ -119,14 +141,27 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
                 $controller->unauthorized();
             }
             $controller->finalize();
-        } catch (NotFoundException $exception) {
-            return (new Response\HtmlResponse($exception->getMessage(), 404));
         } catch (Throwable $exception) {
             $controller = $this->getErrorController($controller, $errorController, $request, $config);
             $controller->error($exception);
         }
         if ($controller->getControllerResponse()->hasOption(ControllerResponse::OPTION_RENDER_RESPONSE)) {
             $templateData = $controller->getModel()->getTemplateData();
+            if ($controller->hasSubControllerMap()) {
+                foreach ($controller->getSubControllerMap() as $c => $a) {
+                    $subController = $this->renderControllerAction($c, $a, $config, $request);
+                    if ($subController->hasView() && $controller->hasView()) {
+                        $components = $subController->getView()->getComponentList();
+                        foreach ($components as $component) {
+                            $controller->getView()->addComponent($component);
+                        }
+                    }
+                    $templateData->setData(
+                        "subcontroller.$c.$a",
+                        (new ServerResponseFactory())($controller->getControllerResponse())->getBody()
+                    );
+                }
+            }
             if ($controller->hasView()) {
                 $viewRenderer = new ViewRenderer($this->renderer, $viewTemplateFolder);
                 $view = $controller->getView();
@@ -145,9 +180,8 @@ class MvcHandler implements RequestHandlerInterface, MiddlewareInterface
             }
             $controller->getControllerResponse()->setBody(TinyMinify::html($renderedOutput));
         }
-        return (new ServerResponseFactory())($controller->getControllerResponse());
+        return $controller;
     }
-
 
     /**
      * @param ServerRequestInterface $request

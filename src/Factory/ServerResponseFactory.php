@@ -42,7 +42,7 @@ class ServerResponseFactory
             case ControllerResponse::MODE_REDIRECT:
                 return new RedirectResponse(
                     (new UriFactory())->createUri(
-                        $controllerResponse->getAttribute(ControllerResponse::ATTRIBUTE_REDIRECT_URI)
+                        $controllerResponse->getAttribute(ControllerResponse::ATTRIBUTE_REDIRECT_URI, true, '')
                     )
                 );
         }
