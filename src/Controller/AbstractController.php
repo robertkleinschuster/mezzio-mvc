@@ -167,6 +167,7 @@ abstract class AbstractController implements ControllerInterface
 
         if ($this->getControllerRequest()->hasSearch()) {
             $searchParameter = $this->getControllerRequest()->getSearch();
+            $this->getControllerResponse()->setRedirect($this->getPathHelper(true)->getPath());
             $this->getModel()->handleSearch($searchParameter);
         }
 
