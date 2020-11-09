@@ -8,11 +8,19 @@ class SearchParameter extends AbstractParameter
 {
     public const ATTRIBUTE_TEXT = 'text';
 
-    public function getParamterKey(): string
+    public static function getParamterKey(): string
     {
         return ControllerRequest::ATTRIBUTE_SEARCH;
     }
 
+
+    /**
+     * @return string
+     */
+    public static function getFormKeyText()
+    {
+        return self::getFormKey(self::ATTRIBUTE_TEXT);
+    }
 
     /**
      * @param string $text

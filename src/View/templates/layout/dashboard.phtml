@@ -161,7 +161,7 @@
         </button>
     <?php endif ?>
     <form class="w-100" method="post">
-        <input name="<?= \Pars\Mvc\Controller\ControllerRequest::ATTRIBUTE_SEARCH ?>"
+        <input name="<?= \Pars\Mvc\Parameter\SearchParameter::getFormKeyText() ?>"
                class="form-control form-control-dark w-100" type="text" placeholder="" aria-label="">
     </form>
     <?php if ($view->hasNavigation(\Pars\Mvc\View\Navigation\Navigation::POSITION_HEADER)): ?>

@@ -16,7 +16,7 @@ class MoveParameter extends AbstractParameter
     public const ATTRIBUTE_REFERENCE_VALUE = 'referenceValue';
 
 
-    public function getParamterKey(): string
+    public static function getParamterKey(): string
     {
         return ControllerRequest::ATTRIBUTE_MOVE;
     }

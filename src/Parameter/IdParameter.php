@@ -29,7 +29,7 @@ class IdParameter extends AbstractParameter
         return $this;
     }
 
-    public function getParamterKey(): string
+    public static function getParamterKey(): string
     {
         return ControllerRequest::ATTRIBUTE_ID;
     }

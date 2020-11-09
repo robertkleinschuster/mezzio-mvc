@@ -13,7 +13,7 @@ class NavParameter extends AbstractParameter
     public const ATTRIBUTE_INDEX = 'index';
     public const ATTRIBUTE_ID = 'id';
 
-    public function getParamterKey(): string
+    public static function getParamterKey(): string
     {
         return ControllerRequest::ATTRIBUTE_NAV;
     }

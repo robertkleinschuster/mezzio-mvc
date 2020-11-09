@@ -11,7 +11,7 @@ class PaginationParameter extends AbstractParameter
     public const ATTRIBUTE_LIMIT = 'limit';
 
 
-    public function getParamterKey(): string
+    public static function getParamterKey(): string
     {
         return ControllerRequest::ATTRIBUTE_PAGINATION;
     }

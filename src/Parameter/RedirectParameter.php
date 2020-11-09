@@ -9,7 +9,7 @@ class RedirectParameter extends AbstractParameter
     public const ATTRIBUTE_LINK = 'link';
 
 
-    public function getParamterKey(): string
+    public static function getParamterKey(): string
     {
         return ControllerRequest::ATTRIBUTE_REDIRECT;
     }

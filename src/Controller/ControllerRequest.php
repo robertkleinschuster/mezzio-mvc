@@ -104,9 +104,7 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public function getId(): IdParameter
     {
         $idParameter = new IdParameter();
-        if ($this->hasId()) {
-            $idParameter->fromString($this->getAttribute(self::ATTRIBUTE_ID));
-        }
+        $idParameter->fromRequest($this);
         return $idParameter;
     }
 
@@ -124,9 +122,7 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public function getRedirect(): RedirectParameter
     {
         $redirectParameter = new RedirectParameter();
-        if ($this->hasRedirect()) {
-            $redirectParameter->fromString($this->getAttribute(self::ATTRIBUTE_REDIRECT));
-        }
+        $redirectParameter->fromRequest($this);
         return $redirectParameter;
     }
 
@@ -144,9 +140,7 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public function getSubmit(): SubmitParameter
     {
         $submitParameter = new SubmitParameter();
-        if ($this->hasSubmit()) {
-            $submitParameter->fromString($this->getAttribute(self::ATTRIBUTE_SUBMIT));
-        }
+        $submitParameter->fromRequest($this);
         return $submitParameter;
     }
 
@@ -164,9 +158,7 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public function getNav(): NavParameter
     {
         $navParameter = new NavParameter();
-        if ($this->hasNav()) {
-            $navParameter->fromString($this->getAttribute(self::ATTRIBUTE_NAV));
-        }
+        $navParameter->fromRequest($this);
         return $navParameter;
     }
 
@@ -187,9 +179,7 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public function getPagination(): PaginationParameter
     {
         $paginationParameter = new PaginationParameter();
-        if ($this->hasPagingation()) {
-            $paginationParameter->fromString($this->getAttribute(self::ATTRIBUTE_PAGINATION));
-        }
+        $paginationParameter->fromRequest($this);
         return $paginationParameter;
     }
 
@@ -207,9 +197,7 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public function getSearch(): SearchParameter
     {
         $searchParamter = new SearchParameter();
-        if ($this->hasSearch()) {
-            $searchParamter->fromString($this->getAttribute(self::ATTRIBUTE_SEARCH));
-        }
+        $searchParamter->fromRequest($this);
         return $searchParamter;
     }
 
@@ -227,9 +215,7 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public function getOrder(): OrderParameter
     {
         $orderParameter = new OrderParameter();
-        if ($this->hasOrder()) {
-            $orderParameter->fromString($this->getAttribute(self::ATTRIBUTE_ORDER));
-        }
+        $orderParameter->fromRequest($this);
         return $orderParameter;
     }
 
@@ -247,9 +233,7 @@ class ControllerRequest implements OptionAwareInterface, AttributeAwareInterface
     public function getMove(): MoveParameter
     {
         $moveParameter = new MoveParameter();
-        if ($this->hasMove()) {
-            $moveParameter->fromString($this->getAttribute(self::ATTRIBUTE_MOVE));
-        }
+        $moveParameter->fromRequest($this);
         return $moveParameter;
     }
 

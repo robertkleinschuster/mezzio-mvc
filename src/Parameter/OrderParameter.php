@@ -16,7 +16,7 @@ class OrderParameter extends AbstractParameter
     public const MODE_ASC = 'asc';
     public const MODE_DESC = 'desc';
 
-    public function getParamterKey(): string
+    public static function getParamterKey(): string
     {
         return ControllerRequest::ATTRIBUTE_ORDER;
     }

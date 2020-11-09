@@ -11,7 +11,7 @@ class SubmitParameter extends AbstractParameter
     public const MODE_SAVE = 'save';
     public const MODE_DELETE = 'delete';
 
-    public function getParamterKey(): string
+    public static function getParamterKey(): string
     {
         return ControllerRequest::ATTRIBUTE_SUBMIT;
     }
