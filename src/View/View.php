@@ -116,6 +116,11 @@ class View implements OptionAwareInterface, AttributeAwareInterface, BeanConvert
         }
         if ($this->hasBeanConverter()) {
             $component->setBeanConverter($this->getBeanConverter());
+            foreach ($component->getFieldList() as $field) {
+                if (!$field->hasBeanConverter()) {
+                    $field->setBeanConverter($this->getBeanConverter());
+                }
+            }
         }
         if ($prepend) {
             array_unshift($this->component_List, $component);
