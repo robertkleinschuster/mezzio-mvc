@@ -36,6 +36,11 @@ class Element implements PathHelperAwareInterface
     private ?string $permission = null;
 
     /**
+     * @var int
+     */
+    private int $index = 0;
+
+    /**
      * Element constructor.
      * @param string $name
      * @param string $link
@@ -46,6 +51,23 @@ class Element implements PathHelperAwareInterface
         $this->link = $link;
     }
 
+    /**
+     * @return int
+     */
+    public function getIndex(): int
+    {
+        return $this->index;
+    }
+
+    /**
+     * @param int $index
+     * @return Element
+     */
+    public function setIndex(int $index)
+    {
+        $this->index = $index;
+        return $this;
+    }
 
     /**
      * @return string

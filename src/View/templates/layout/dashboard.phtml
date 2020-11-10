@@ -207,7 +207,7 @@
                                             <span data-feather="<?= $element->getIcon() ?>"></span>
                                         <?php endif ?>
                                         <?= $element->getName() ?>
-                                        <?php if ($navigation->hasActive() && $navigation->getActive() == $key): ?>
+                                        <?php if ($navigation->hasActive() && $navigation->getActive() == $element->getIndex()): ?>
                                             <span class="sr-only">(current)</span>
                                         <?php endif ?>
                                     </a>
