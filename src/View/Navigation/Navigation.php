@@ -242,4 +242,14 @@ class Navigation
     {
         return $this->id;
     }
+
+    /**
+     * @param string $id
+     * @return $this
+     */
+    public function setId(string $id)
+    {
+        $this->id = $id;
+        return $this;
+    }
 }
